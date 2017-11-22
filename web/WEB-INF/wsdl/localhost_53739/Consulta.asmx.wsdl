@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://autenticar.etb.net.co" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://autenticar.etb.net.co" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://autenticar.etb.net.co">
+      <s:element name="AuthADETB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pwd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthADETBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AuthADETBResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindADETB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindADETBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FindADETBResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultarParametroETB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parametro" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultarParametroETBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultarParametroETBResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AuthADETBSoapIn">
+    <wsdl:part name="parameters" element="tns:AuthADETB" />
+  </wsdl:message>
+  <wsdl:message name="AuthADETBSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthADETBResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindADETBSoapIn">
+    <wsdl:part name="parameters" element="tns:FindADETB" />
+  </wsdl:message>
+  <wsdl:message name="FindADETBSoapOut">
+    <wsdl:part name="parameters" element="tns:FindADETBResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarParametroETBSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultarParametroETB" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarParametroETBSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultarParametroETBResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ConsultaSoap">
+    <wsdl:operation name="AuthADETB">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Dado un login y una clave valida el ingreso de un usuario contra el Directorio Corporativo.</wsdl:documentation>
+      <wsdl:input message="tns:AuthADETBSoapIn" />
+      <wsdl:output message="tns:AuthADETBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindADETB">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Buscar usuarios en el AD ETB.</wsdl:documentation>
+      <wsdl:input message="tns:FindADETBSoapIn" />
+      <wsdl:output message="tns:FindADETBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarParametroETB">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Dado un login y un parametro retorna el valor del parametro del Directorio Corporativo.</wsdl:documentation>
+      <wsdl:input message="tns:ConsultarParametroETBSoapIn" />
+      <wsdl:output message="tns:ConsultarParametroETBSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ConsultaSoap" type="tns:ConsultaSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AuthADETB">
+      <soap:operation soapAction="http://autenticar.etb.net.co/AuthADETB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindADETB">
+      <soap:operation soapAction="http://autenticar.etb.net.co/FindADETB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarParametroETB">
+      <soap:operation soapAction="http://autenticar.etb.net.co/ConsultarParametroETB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ConsultaSoap12" type="tns:ConsultaSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AuthADETB">
+      <soap12:operation soapAction="http://autenticar.etb.net.co/AuthADETB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindADETB">
+      <soap12:operation soapAction="http://autenticar.etb.net.co/FindADETB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarParametroETB">
+      <soap12:operation soapAction="http://autenticar.etb.net.co/ConsultarParametroETB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Consulta">
+    <wsdl:port name="ConsultaSoap" binding="tns:ConsultaSoap">
+      <soap:address location="http://localhost:53739/Consulta.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ConsultaSoap12" binding="tns:ConsultaSoap12">
+      <soap12:address location="http://localhost:53739/Consulta.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
