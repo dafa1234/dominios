@@ -15,8 +15,7 @@
         </br></br>      
          <div class="flex-caption">
                 <h3>tabla de contratos</h3> 
-
-            </div>
+         </div>
                                           <%
             String m = (String)request.getAttribute("m");
     
