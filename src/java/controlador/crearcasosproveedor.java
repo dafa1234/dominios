@@ -7,6 +7,7 @@ package controlador;
 
 
 import java.sql.Date;
+import java.util.List;
 import modelo.ServicioException;
 import modelo.iniciosecion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import tablas.EtbInvCasosProv;
 
 
 /**
@@ -50,7 +52,8 @@ public class crearcasosproveedor {
     
                
                dao.creaproveedor(caspProv,caspServ,caspFechaApe,caspFechaCie,caspNumero,caspIm,caspEstado);   
-
+List<EtbInvCasosProv> Listaproveedor  = dao.Listaproveedor();
+        model.addAttribute("Listaproveedor", Listaproveedor);
                 return "user/casosproveedor";
 
     }

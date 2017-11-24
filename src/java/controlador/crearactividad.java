@@ -7,6 +7,7 @@ package controlador;
 
 
 import java.sql.Date;
+import java.util.List;
 import modelo.ServicioException;
 import modelo.iniciosecion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import tablas.EtbInvActividad;
 
 
 /**
@@ -41,8 +43,8 @@ public class crearactividad {
                       @RequestParam("desc") String actDescripcion,
                       @RequestParam("sol") String actSolicita,
                       @RequestParam("tipo") Integer actTipo,
-                      @RequestParam("fini") Date actFechaIni,
-                      @RequestParam("ffin") Date actFechaFin  
+                      @RequestParam("fini") String actFechaIni,
+                      @RequestParam("ffin") String actFechaFin  
                       , Model model ) throws ServicioException{
           
     
@@ -51,7 +53,8 @@ public class crearactividad {
     
                
                dao.creact( actServ,  actEjecuta,  actTarea,  actDescripcion,  actSolicita, actTipo,actFechaFin,actFechaIni );   
-
+List<EtbInvActividad> ListaActividad  = dao.ListaActividad();                  
+          model.addAttribute("listaActividad", ListaActividad); 
                 return "user/actividades";
 
     }

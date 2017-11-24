@@ -48,10 +48,10 @@ public class EtbInvCasosProv implements Serializable {
     @Size(max = 255)
     @Column(name = "CASP_SERV")
     private String caspServ;
-    @Size(max = 20)
+    @Size(max = 30)
     @Column(name = "CASP_FECHA_APE")
     private String caspFechaApe;
-    @Size(max = 20)
+    @Size(max = 30)
     @Column(name = "CASP_FECHA_CIE")
     private String caspFechaCie;
     @Size(max = 255)
@@ -83,6 +83,7 @@ public class EtbInvCasosProv implements Serializable {
         this.caspEstado = caspEstado;
    
     }
+
     public void setCaspId(Integer caspId) {
         this.caspId = caspId;
     }

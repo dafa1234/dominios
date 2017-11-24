@@ -6,7 +6,7 @@
 package controlador;
 
 
-
+import java.util.Calendar;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,7 +33,8 @@ public class inicio {
     private iniciosecion dao;
     
     
-    
+           
+
     @RequestMapping(method = RequestMethod.GET)
     public String mostrarAlumno(){     
         return "index";   
@@ -45,7 +46,9 @@ public class inicio {
             Model model ,HttpServletRequest request, HttpServletResponse response){            
             if (email.trim().equals("")||pass.trim().equals("")) {
                 return "error";
-            }           
+            }       
+           
+           
             EtbInvUsuarioAp a = dao.readByRutJPQL(email);     
             HttpSession sesion = request.getSession(true);
 
@@ -53,15 +56,23 @@ public class inicio {
                 sesion.setAttribute("error", "hay espacios bacios");
                 return "error";
             }   
-            
+          Calendar fechaActual = Calendar.getInstance();
+            String cadenaFecha = String.format("%04d-%02d-%02d",
+              fechaActual.get(Calendar.YEAR),
+              fechaActual.get(Calendar.MONTH)+1,
+              fechaActual.get(Calendar.DAY_OF_MONTH));
+             
+
             //http session
             if(  a.getUsuEtb().equals(email)){
                 String parametro_Correo = "mail";
                 sesion.setAttribute("usuario", email);               
-                sesion.setAttribute("correo", a.getUsuCorreo());              
+                sesion.setAttribute("correo", a.getUsuCorreo());
+                sesion.setAttribute("usuetb", a.getUsuEtb());
                 sesion.setAttribute("apell", a.getUsuApell());
                 sesion.setAttribute("name", a.getUsuNombre());
                 sesion.setAttribute("ID", a.getUsuIdPer());
+                sesion.setAttribute("fecha", cadenaFecha);  
 
                 if (findADETB(email) && authADETB(email, pass)){
 
@@ -107,6 +118,8 @@ public class inicio {
         co.net.etb.autenticar.ConsultaSoap port = service.getConsultaSoap();
         return port.authADETB(username, pwd);
     }
+
+  
 
    
  

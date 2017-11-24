@@ -6,7 +6,6 @@
 package tablas;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -45,9 +42,9 @@ public class EtbInvCamusuServ implements Serializable {
     private String usuCambio;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "usu_fec_cambio")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date usuFecCambio;
+    private String usuFecCambio;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
@@ -69,16 +66,18 @@ public class EtbInvCamusuServ implements Serializable {
         this.ususId = ususId;
     }
 
-    public EtbInvCamusuServ(Integer ususId, Date usuFecCambio, String usuTarCambio) {
+    public EtbInvCamusuServ(Integer ususId, String usuFecCambio, String usuTarCambio) {
         this.ususId = ususId;
         this.usuFecCambio = usuFecCambio;
         this.usuTarCambio = usuTarCambio;
     }
-    public EtbInvCamusuServ(String ususLogin, String tCambio, EtbInvUsuEstado ususEstado) {
+    public EtbInvCamusuServ(String Fecha, String ususLogin, String tCambio, EtbInvUsuEstado ususEstado) {
+        this.usuFecCambio = Fecha;
         this.usuCambio = ususLogin;
         this.usuTarCambio = tCambio;
         this.ususEstado = ususEstado;
     }
+
     public String getUsuCambio() {
         return usuCambio;
     }
@@ -87,11 +86,11 @@ public class EtbInvCamusuServ implements Serializable {
         this.usuCambio = usuCambio;
     }
 
-    public Date getUsuFecCambio() {
+    public String getUsuFecCambio() {
         return usuFecCambio;
     }
 
-    public void setUsuFecCambio(Date usuFecCambio) {
+    public void setUsuFecCambio(String usuFecCambio) {
         this.usuFecCambio = usuFecCambio;
     }
 

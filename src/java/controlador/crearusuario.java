@@ -6,6 +6,7 @@
 package controlador;
 
 
+import java.util.Calendar;
 import modelo.iniciosecion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import tablas.EtbInvServidor;
 import tablas.EtbInvUsuEstado;
+import java.util.List;
 
 
 /**
@@ -36,9 +39,16 @@ public class crearusuario {
                         @RequestParam("serv") String ususServ,Model model)
    {
          int ususEstad = 1;
+           Calendar fechaActual = Calendar.getInstance();
+            String Fecha = String.format("%04d-%02d-%02d",
+              fechaActual.get(Calendar.YEAR),
+              fechaActual.get(Calendar.MONTH)+1,
+              fechaActual.get(Calendar.DAY_OF_MONTH));
      EtbInvUsuEstado ususEstado = new EtbInvUsuEstado(ususEstad);
       dao.crearususerv(ususLogin,ususNombre,ususServ,ususEstado);
-      dao.crearcambioususerv(ususLogin,tCambio,ususEstado);
+      dao.crearcambioususerv(Fecha,ususLogin,tCambio,ususEstado);
+       List<EtbInvServidor> Listaserver  = dao.Listaserver();           
+          model.addAttribute("Listaserver", Listaserver); 
        return "user/usuarioservidor";
    }
     

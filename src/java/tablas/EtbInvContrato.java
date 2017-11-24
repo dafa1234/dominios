@@ -6,7 +6,6 @@
 package tablas;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +16,6 @@ import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -54,14 +51,14 @@ public class EtbInvContrato implements Serializable {
     private Integer contTipo;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "CONT_FECHA_INI")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date contFechaIni;
+    private String contFechaIni;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "CONT_FECHA_FIN")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date contFechaFin;
+    private String contFechaFin;
     @Size(max = 255)
     @Column(name = "CONT_NUM")
     private String contNum;
@@ -82,12 +79,12 @@ public class EtbInvContrato implements Serializable {
         this.contId = contId;
     }
 
-    public EtbInvContrato(Integer contId, Date contFechaIni, Date contFechaFin) {
+    public EtbInvContrato(Integer contId, String contFechaIni, String contFechaFin) {
         this.contId = contId;
         this.contFechaIni = contFechaIni;
         this.contFechaFin = contFechaFin;
     }
-    public EtbInvContrato(Integer contProv, Integer contTipo, Date contFechaIni, Date contFechaFin, String contNum, Integer contEstado, String contLogin, String contDescrip) {
+    public EtbInvContrato(Integer contProv, Integer contTipo, String contFechaIni, String contFechaFin, String contNum, Integer contEstado, String contLogin, String contDescrip) {
         
         this.contProv = contProv;
         this.contTipo = contTipo;
@@ -99,6 +96,7 @@ public class EtbInvContrato implements Serializable {
         this.contLogin = contLogin;
         
     }
+
     public Integer getContId() {
         return contId;
     }
@@ -123,19 +121,19 @@ public class EtbInvContrato implements Serializable {
         this.contTipo = contTipo;
     }
 
-    public Date getContFechaIni() {
+    public String getContFechaIni() {
         return contFechaIni;
     }
 
-    public void setContFechaIni(Date contFechaIni) {
+    public void setContFechaIni(String contFechaIni) {
         this.contFechaIni = contFechaIni;
     }
 
-    public Date getContFechaFin() {
+    public String getContFechaFin() {
         return contFechaFin;
     }
 
-    public void setContFechaFin(Date contFechaFin) {
+    public void setContFechaFin(String contFechaFin) {
         this.contFechaFin = contFechaFin;
     }
 

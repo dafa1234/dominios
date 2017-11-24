@@ -5,6 +5,8 @@
  */
 package controlador;
 
+import java.util.List;
+import java.util.Calendar;
 import modelo.ServicioException;
 import modelo.iniciosecion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import tablas.EtbInvEstado;
 import tablas.EtbInvGrupo;
 import tablas.EtbInvMarca;
+import tablas.EtbInvServidor;
 import tablas.EtbInvSisOperativo;
 /**
  *
@@ -60,17 +63,21 @@ public class crearserver {
                       @RequestParam("tarea") String serTIngreso                
                       , Model model ) throws ServicioException{
           
-    
+           Calendar fechaActual = Calendar.getInstance();
+            String Fecha = String.format("%04d-%02d-%02d",
+              fechaActual.get(Calendar.YEAR),
+              fechaActual.get(Calendar.MONTH)+1,
+              fechaActual.get(Calendar.DAY_OF_MONTH));
             
             //base de datos
              
                EtbInvEstado estIdEstado = new EtbInvEstado( estIdEstad);
                EtbInvSisOperativo sisIdSisOperativo = new EtbInvSisOperativo(sisoperativo);
                EtbInvGrupo gruIdGrupo = new EtbInvGrupo(grupo);
-               EtbInvMarca marIdMarca = new EtbInvMarca(marIdMarc);
-            
-               dao.create(serSerial,serHostname,marIdMarca,modIdModelo,serConexion,cenIdCentral,salIdSalon,cliIdCliente,rolIdRolServ,plaIdPlataforma,serForAdCompartida,serAdministrado,serCores,serTIngreso,serUnidad,serProyecto,serRack,serNoProcFisico,estIdEstado,sisIdSisOperativo,gruIdGrupo);   
-
+               EtbInvMarca marIdMarca = new EtbInvMarca(marIdMarc);           
+               dao.create(Fecha,serSerial,serHostname,marIdMarca,modIdModelo,serConexion,cenIdCentral,salIdSalon,cliIdCliente,rolIdRolServ,plaIdPlataforma,serForAdCompartida,serAdministrado,serCores,serTIngreso,serUnidad,serProyecto,serRack,serNoProcFisico,estIdEstado,sisIdSisOperativo,gruIdGrupo);   
+ List<EtbInvServidor> Listaserver  = dao.Listaserver();                       
+          model.addAttribute("listaServer", Listaserver);   
                 return "user/servers";
 
     }

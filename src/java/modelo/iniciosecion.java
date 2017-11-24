@@ -15,6 +15,7 @@ import tablas.EtbInvUsuarioAp;
 import tablas.EtbInvActividad;
 import tablas.EtbInvServidor;
 import org.springframework.transaction.annotation.Transactional;
+import tablas.EtbInvAccesoProhibido;
 import tablas.EtbInvAseguramiento;
 import tablas.EtbInvCamusuServ;
 import tablas.EtbInvCasosProv;
@@ -231,21 +232,21 @@ public class iniciosecion {
     //INSERTAR SERVIDOR
     
     @Transactional(rollbackFor = {ServicioException.class})
-    public void create(String serSerial, String serHostname, EtbInvMarca marIdMarca, int modIdModelo, String serConexion, int cenIdCentral, int salIdSalon, int cliIdCliente, int rolIdRolServ, int plaIdPlataforma, String serForAdCompartida, String serAdministrado, String serCores, String serTIngreso, String serUnidad, String serProyecto,String serRack, Integer serNoProcFisico, EtbInvEstado estIdEstado, EtbInvSisOperativo sisIdSisOperativo, EtbInvGrupo gruIdGrupo) {
-        EtbInvServidor Alumnos = new EtbInvServidor(serSerial,serHostname,marIdMarca,modIdModelo,serConexion,cenIdCentral,salIdSalon,cliIdCliente,rolIdRolServ,plaIdPlataforma,serForAdCompartida,serAdministrado,serCores,serTIngreso,serUnidad,serProyecto,serRack,serNoProcFisico,estIdEstado,sisIdSisOperativo,gruIdGrupo);
+    public void create(String Fecha,String serSerial, String serHostname, EtbInvMarca marIdMarca, int modIdModelo, String serConexion, int cenIdCentral, int salIdSalon, int cliIdCliente, int rolIdRolServ, int plaIdPlataforma, String serForAdCompartida, String serAdministrado, String serCores, String serTIngreso, String serUnidad, String serProyecto,String serRack, Integer serNoProcFisico, EtbInvEstado estIdEstado, EtbInvSisOperativo sisIdSisOperativo, EtbInvGrupo gruIdGrupo) {
+        EtbInvServidor Alumnos = new EtbInvServidor(Fecha,serSerial,serHostname,marIdMarca,modIdModelo,serConexion,cenIdCentral,salIdSalon,cliIdCliente,rolIdRolServ,plaIdPlataforma,serForAdCompartida,serAdministrado,serCores,serTIngreso,serUnidad,serProyecto,serRack,serNoProcFisico,estIdEstado,sisIdSisOperativo,gruIdGrupo);
         
        em.persist(Alumnos);
     }
     //INSERTAR ACTIVIDAD
      @Transactional(rollbackFor = {ServicioException.class})
-    public void creact( String actServ, String actEjecuta, String actTarea, String actDescripcion, String actSolicita,Integer actTipo, Date actFechaFin, Date actFechaIni) {
+    public void creact( String actServ, String actEjecuta, String actTarea, String actDescripcion, String actSolicita,Integer actTipo, String actFechaFin, String actFechaIni) {
         EtbInvActividad Alumnos = new EtbInvActividad(actServ,actEjecuta,actTarea,  actDescripcion,  actSolicita, actTipo,actFechaFin,actFechaIni);
         
        em.persist(Alumnos);
     }
       //INSERTAR ASEGURAMIENTO
      @Transactional(rollbackFor = {ServicioException.class})
-    public void crease(String aseTarea, String aseServidor, String aseEjecuta,Date aseFecha) {
+    public void crease(String aseTarea, String aseServidor, String aseEjecuta,String aseFecha) {
       
         EtbInvAseguramiento Alumnos = new EtbInvAseguramiento(aseTarea,aseServidor,aseEjecuta,aseFecha);
         
@@ -253,7 +254,7 @@ public class iniciosecion {
     }
      //INSERTAR CONTRATO
     @Transactional(rollbackFor = {ServicioException.class})
-    public void creacont(Integer contProv, Integer contTipo, Date contFechaIni, Date contFechaFin, String contNum, Integer contEstado, String contLogin, String contDescrip) {
+    public void creacont(Integer contProv, Integer contTipo, String contFechaIni, String contFechaFin, String contNum, Integer contEstado, String contLogin, String contDescrip) {
         
         EtbInvContrato Alumnos = new EtbInvContrato(contProv,contTipo,contFechaIni,contFechaFin,contNum,contEstado,contLogin,contDescrip); 
      
@@ -261,7 +262,7 @@ public class iniciosecion {
     }
     //INSERTAR CRONOGRAMA
       @Transactional(rollbackFor = {ServicioException.class})
-    public void creacrono(Integer croProyecto, Date croFechaIni, String croSerial, String croEjecuta,String croCambioFin,Integer croEstado ) {
+    public void creacrono(Integer croProyecto, String croFechaIni, String croSerial, String croEjecuta,String croCambioFin,Integer croEstado ) {
       
         EtbInvCronogramaMto Alumnos = new EtbInvCronogramaMto( croProyecto, croFechaIni, croSerial, croEjecuta,croCambioFin, croEstado );
         
@@ -283,11 +284,19 @@ public class iniciosecion {
         
        em.persist(Alumnos);
     }
+    //INSERTAR ACCESO PROJIBIDO
+        @Transactional(rollbackFor = {ServicioException.class})
+    public void ACCPROI(String Fecha,String usuetb, String ip, String url,String acc) {
+      
+        EtbInvAccesoProhibido Alumnos = new EtbInvAccesoProhibido(Fecha,usuetb,ip, url,acc);
+        
+       em.persist(Alumnos);
+    }
        //INSERTAR USUARIO SERVIDOR
       @Transactional(rollbackFor = {ServicioException.class})
-    public void crearcambioususerv(String ususLogin, String tCambio, EtbInvUsuEstado ususEstado) {
+    public void crearcambioususerv(String Fecha,String ususLogin, String tCambio, EtbInvUsuEstado ususEstado) {
       
-        EtbInvCamusuServ Alumnos = new EtbInvCamusuServ(ususLogin,tCambio,ususEstado);
+        EtbInvCamusuServ Alumnos = new EtbInvCamusuServ(Fecha,ususLogin,tCambio,ususEstado);
         
        em.persist(Alumnos);
     }
@@ -300,48 +309,16 @@ public class iniciosecion {
        em.persist(Alumnos);
     }
 
-    //actualizar servidor
+    //actualizar usuario servidor
     
-  
-    public EtbInvServidor updates(String serSerial, String serHostname, EtbInvMarca marIdMarca, int modIdModelo, String serConexion, int cenIdCentral, int salIdSalon, int cliIdCliente, int rolIdRolServ, int plaIdPlataforma, String serForAdCompartida, String serAdministrado, String serCores, String serTIngreso, String serUnidad, String serProyecto,String serRack, Integer serNoProcFisico, EtbInvEstado estIdEstado, EtbInvSisOperativo sisIdSisOperativo, EtbInvGrupo gruIdGrupo)
-    {
-        String sql=" update EtbInvServidor set  serSerial=:serSerial,serHostname=:serHostname,marIdMarca=:marIdMarca,modIdModelo=:modIdModelo,serConexion=:serConexion,cenIdCentral=:cenIdCentral,salIdSalon=:salIdSalon,cliIdCliente=:cliIdCliente,rolIdRolServ=:rolIdRolServ,plaIdPlataforma=:plaIdPlataforma,serForAdCompartida=:serForAdCompartida,serAdministrado=:serAdministrado,serCores=:serCores,serTIngreso=:serTIngreso,serUnidad=:serUnidad,serProyecto=:serProyecto,serRack=:serRack,serNoProcFisico=:serNoProcFisico,estIdEstado=:estIdEstado,sisIdSisOperativo=:sisIdSisOperativo,gruIdGrupo=:gruIdGrupo where serSerial=:serSerial";
-         Query q=em.createQuery(sql);
-         q.setParameter("serSerial", serSerial);
-         q.setParameter("serHostname", serHostname);
-         q.setParameter("marIdMarca", marIdMarca);
-         q.setParameter("modIdModelo", modIdModelo);
-         q.setParameter("serConexion", serConexion);
-         q.setParameter("serConexion", serConexion);
-         q.setParameter("cenIdCentral", cenIdCentral);
-         q.setParameter("salIdSalon", salIdSalon);
-         q.setParameter("cliIdCliente", cliIdCliente);
-         q.setParameter("rolIdRolServ", rolIdRolServ);
-         q.setParameter("plaIdPlataforma", plaIdPlataforma);
-         q.setParameter("serForAdCompartida", serForAdCompartida);
-         q.setParameter("serAdministrado", serAdministrado);
-         q.setParameter("serCores", serCores);      
-         q.setParameter("serTIngreso", serTIngreso);
-         q.setParameter("serUnidad", serUnidad);
-         q.setParameter("serProyecto", serProyecto);
-         q.setParameter("serRack", serRack);
-         q.setParameter("serNoProcFisico", serNoProcFisico);
-         q.setParameter("estIdEstado", estIdEstado);
-         q.setParameter("sisIdSisOperativo", sisIdSisOperativo);
-         q.setParameter("gruIdGrupo", gruIdGrupo);
-           try {
-           return (EtbInvServidor)q.getSingleResult();
-        } catch (Exception  e) {
-            return null;
-       }
-    }
+
         @Transactional(rollbackFor = {ServicioException.class})
     public EtbInvUsuServ update(Integer email, EtbInvUsuEstado ususEstado, String ususLogin, String nombre, String servidor, Integer admin) {
           EtbInvUsuServ Alumnos = new EtbInvUsuServ(ususEstado,email,ususLogin,nombre,servidor,admin);
       return em.merge(Alumnos);
     }
 
-   
+  
 
     
 

@@ -6,7 +6,7 @@
 package controlador;
 
 
-import java.sql.Date;
+import java.util.List;
 import modelo.ServicioException;
 import modelo.iniciosecion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import tablas.EtbInvCronogramaMto;
 
 
 /**
@@ -34,13 +35,16 @@ public class crearcronograma {
    public String createcronograma(                   
                       @RequestParam("proyecto") Integer croProyecto,
                       @RequestParam("servidor") String croSerial,
-                      @RequestParam("fini") Date croFechaIni,                   
+                      @RequestParam("fini") String croFechaIni,                   
                       @RequestParam("estini") Integer croEstado,
                       @RequestParam("ejecuta") String croEjecuta,
                       @RequestParam("cambio") String croCambioFin                     
                       , Model model ) throws ServicioException{
 
                dao.creacrono(croProyecto,croFechaIni,croSerial,croEjecuta,croCambioFin,croEstado);   
+               
+               List<EtbInvCronogramaMto> ListaCrono  = dao.ListaCrono();           
+          model.addAttribute("listaCrono", ListaCrono); 
                 return "user/cronograma";
 
     }

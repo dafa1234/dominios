@@ -6,7 +6,6 @@
 package tablas;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +16,6 @@ import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -62,9 +59,9 @@ public class EtbInvActividad implements Serializable {
     private String actEjecuta;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "ACT_FECHA_INI")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date actFechaIni;
+    private String actFechaIni;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -78,9 +75,9 @@ public class EtbInvActividad implements Serializable {
     private String actDescripcion;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "ACT_FECHA_FIN")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date actFechaFin;
+    private String actFechaFin;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -94,7 +91,7 @@ public class EtbInvActividad implements Serializable {
         this.actId = actId;
     }
 
-    public EtbInvActividad(Integer actId, String actServ, String actEjecuta, Date actFechaIni, String actTarea, String actDescripcion, Date actFechaFin, String actSolicita) {
+    public EtbInvActividad(Integer actId, String actServ, String actEjecuta, String actFechaIni, String actTarea, String actDescripcion, String actFechaFin, String actSolicita) {
         this.actId = actId;
         this.actServ = actServ;
         this.actEjecuta = actEjecuta;
@@ -104,7 +101,7 @@ public class EtbInvActividad implements Serializable {
         this.actFechaFin = actFechaFin;
         this.actSolicita = actSolicita;
     }
-    public EtbInvActividad( String actServ, String actEjecuta, String actTarea, String actDescripcion, String actSolicita,Integer actTipo,Date actFechaFin, Date actFechaIni) {
+    public EtbInvActividad( String actServ, String actEjecuta, String actTarea, String actDescripcion, String actSolicita,Integer actTipo,String actFechaFin, String actFechaIni) {
        
         this.actTipo = actTipo;
         this.actServ = actServ;
@@ -115,6 +112,7 @@ public class EtbInvActividad implements Serializable {
         this.actFechaFin = actFechaFin;
         this.actFechaIni = actFechaIni;
     }
+
     public Integer getActId() {
         return actId;
     }
@@ -147,11 +145,11 @@ public class EtbInvActividad implements Serializable {
         this.actEjecuta = actEjecuta;
     }
 
-    public Date getActFechaIni() {
+    public String getActFechaIni() {
         return actFechaIni;
     }
 
-    public void setActFechaIni(Date actFechaIni) {
+    public void setActFechaIni(String actFechaIni) {
         this.actFechaIni = actFechaIni;
     }
 
@@ -171,11 +169,11 @@ public class EtbInvActividad implements Serializable {
         this.actDescripcion = actDescripcion;
     }
 
-    public Date getActFechaFin() {
+    public String getActFechaFin() {
         return actFechaFin;
     }
 
-    public void setActFechaFin(Date actFechaFin) {
+    public void setActFechaFin(String actFechaFin) {
         this.actFechaFin = actFechaFin;
     }
 

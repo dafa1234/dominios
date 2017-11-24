@@ -63,10 +63,6 @@ public class EtbInvUsuServ implements Serializable {
     public EtbInvUsuServ(Integer ususId) {
         this.ususId = ususId;
     }
-
-    public Integer getUsusId() {
-        return ususId;
-    }
     public EtbInvUsuServ(String ususLogin, String ususNombre, String ususServ, EtbInvUsuEstado ususEstado) {
         this.ususLogin = ususLogin;
         this.ususNombre = ususNombre;
@@ -83,6 +79,11 @@ public class EtbInvUsuServ implements Serializable {
          this.ususServ = servidor;
         this.ususAdm = admin;
     }
+
+    public Integer getUsusId() {
+        return ususId;
+    }
+
     public void setUsusId(Integer ususId) {
         this.ususId = ususId;
     }

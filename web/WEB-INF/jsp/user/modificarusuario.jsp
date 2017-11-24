@@ -9,11 +9,10 @@
 <!DOCTYPE html>
 <html>
     <%@include file="/WEB-INF/plantilla/head.jsp" %>
-       <%
-         String error = (String)request.getAttribute("error");
-     %>
+   
     <body>
-    
+                             <%
+            String error = (String)request.getAttribute("error");%>
         <%@include file="/WEB-INF/plantilla/header.jsp" %>
         <div class="content-wrapper">
             </br></br>
@@ -27,7 +26,7 @@
             </form>
             <%if(error!=null){%>
             error <%=error%>
-            <%}%>
+          <%}%>
         </div>
        <%@include file="/WEB-INF/plantilla/foter.jsp" %>
     </body>

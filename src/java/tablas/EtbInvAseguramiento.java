@@ -6,7 +6,6 @@
 package tablas;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -46,9 +43,9 @@ public class EtbInvAseguramiento implements Serializable {
     private Integer aseId;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "ASE_FECHA")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date aseFecha;
+    private String aseFecha;
     @Size(max = 255)
     @Column(name = "ASE_TAREA")
     private String aseTarea;
@@ -66,16 +63,17 @@ public class EtbInvAseguramiento implements Serializable {
         this.aseId = aseId;
     }
 
-    public EtbInvAseguramiento(Integer aseId, Date aseFecha) {
+    public EtbInvAseguramiento(Integer aseId, String aseFecha) {
         this.aseId = aseId;
         this.aseFecha = aseFecha;
     }
-    public EtbInvAseguramiento(String aseTarea, String aseServidor, String aseEjecuta,Date aseFecha) {
+    public EtbInvAseguramiento(String aseTarea, String aseServidor, String aseEjecuta,String aseFecha) {
         this.aseFecha = aseFecha;
         this.aseTarea = aseTarea;
         this.aseServidor = aseServidor;
         this.aseEjecuta = aseEjecuta;
     }
+
     public Integer getAseId() {
         return aseId;
     }
@@ -84,11 +82,11 @@ public class EtbInvAseguramiento implements Serializable {
         this.aseId = aseId;
     }
 
-    public Date getAseFecha() {
+    public String getAseFecha() {
         return aseFecha;
     }
 
-    public void setAseFecha(Date aseFecha) {
+    public void setAseFecha(String aseFecha) {
         this.aseFecha = aseFecha;
     }
 

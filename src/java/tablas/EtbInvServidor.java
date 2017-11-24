@@ -6,7 +6,6 @@
 package tablas;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -109,9 +106,11 @@ public class EtbInvServidor implements Serializable {
     @NotNull
     @Column(name = "PLA_ID_PLATAFORMA")
     private int plaIdPlataforma;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "SER_F_INGRESO")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date serFIngreso;
+    private String serFIngreso;
     @Size(max = 30)
     @Column(name = "SER_T_INGRESO")
     private String serTIngreso;
@@ -153,7 +152,7 @@ public class EtbInvServidor implements Serializable {
         this.serServer = serServer;
     }
 
-    public EtbInvServidor(Integer serServer, String serSerial, String serHostname, int modIdModelo, String serConexion, int cenIdCentral, int salIdSalon, int cliIdCliente, int rolIdRolServ, int plaIdPlataforma, String serForAdCompartida, String serAdministrado) {
+    public EtbInvServidor(Integer serServer, String serSerial, String serHostname, int modIdModelo, String serConexion, int cenIdCentral, int salIdSalon, int cliIdCliente, int rolIdRolServ, int plaIdPlataforma, String serFIngreso, String serForAdCompartida, String serAdministrado) {
         this.serServer = serServer;
         this.serSerial = serSerial;
         this.serHostname = serHostname;
@@ -164,11 +163,12 @@ public class EtbInvServidor implements Serializable {
         this.cliIdCliente = cliIdCliente;
         this.rolIdRolServ = rolIdRolServ;
         this.plaIdPlataforma = plaIdPlataforma;
+        this.serFIngreso = serFIngreso;
         this.serForAdCompartida = serForAdCompartida;
         this.serAdministrado = serAdministrado;
     }
-    public EtbInvServidor( String serSerial, String serHostname, EtbInvMarca marIdMarca, int modIdModelo, String serConexion, int cenIdCentral, int salIdSalon, int cliIdCliente, int rolIdRolServ, int plaIdPlataforma, String serForAdCompartida, String serAdministrado,String serCores,String serTIngreso,String serUnidad,String serProyecto,String serRack,Integer serNoProcFisico,EtbInvEstado estIdEstado,EtbInvSisOperativo sisIdSisOperativo,EtbInvGrupo gruIdGrupo) {
-        
+    public EtbInvServidor(String Fecha, String serSerial, String serHostname, EtbInvMarca marIdMarca, int modIdModelo, String serConexion, int cenIdCentral, int salIdSalon, int cliIdCliente, int rolIdRolServ, int plaIdPlataforma, String serForAdCompartida, String serAdministrado,String serCores,String serTIngreso,String serUnidad,String serProyecto,String serRack,Integer serNoProcFisico,EtbInvEstado estIdEstado,EtbInvSisOperativo sisIdSisOperativo,EtbInvGrupo gruIdGrupo) {
+        this.serFIngreso = Fecha;
         this.serSerial = serSerial;
         this.serHostname = serHostname;
         this.marIdMarca = marIdMarca;
@@ -191,6 +191,7 @@ public class EtbInvServidor implements Serializable {
         this.sisIdSisOperativo = sisIdSisOperativo;
         this.serRack = serRack;
     }
+
     public Integer getSerServer() {
         return serServer;
     }
@@ -295,11 +296,11 @@ public class EtbInvServidor implements Serializable {
         this.plaIdPlataforma = plaIdPlataforma;
     }
 
-    public Date getSerFIngreso() {
+    public String getSerFIngreso() {
         return serFIngreso;
     }
 
-    public void setSerFIngreso(Date serFIngreso) {
+    public void setSerFIngreso(String serFIngreso) {
         this.serFIngreso = serFIngreso;
     }
 

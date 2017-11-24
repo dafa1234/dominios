@@ -6,6 +6,7 @@
 package controlador;
 
 import java.sql.Date;
+import java.util.List;
 import modelo.ServicioException;
 import modelo.iniciosecion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import tablas.EtbInvAseguramiento;
 
 
 /**
@@ -36,12 +38,13 @@ public class crearaseguramiento {
                       @RequestParam("tarea") String aseTarea,                   
                       @RequestParam("serial") String actSolicita,
                       @RequestParam("plantilla") Integer actTipo,
-                      @RequestParam("fini") Date aseFecha
+                      @RequestParam("fini") String aseFecha
                       , Model model ) throws ServicioException{
           
 
                dao.crease(aseTarea,aseServidor,aseEjecuta,aseFecha);   
-
+List<EtbInvAseguramiento> ListaAsegu  = dao.ListaAsegu();    
+          model.addAttribute("listaAsegu", ListaAsegu);    
                 return "user/aseguramiento";
 
     }

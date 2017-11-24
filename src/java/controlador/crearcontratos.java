@@ -7,6 +7,7 @@ package controlador;
 
 
 import java.sql.Date;
+import java.util.List;
 import modelo.ServicioException;
 import modelo.iniciosecion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import tablas.EtbInvContrato;
 
 /**
  *
@@ -34,8 +36,8 @@ public class crearcontratos {
    public String create(                   
                       @RequestParam("proveedor") Integer contProv,
                       @RequestParam("ticon") Integer contTipo,
-                      @RequestParam("fini") Date contFechaIni,                   
-                      @RequestParam("ffin") Date contFechaFin,
+                      @RequestParam("fini") String contFechaIni,                   
+                      @RequestParam("ffin") String contFechaFin,
                       @RequestParam("nocon") String contNum,
                       @RequestParam("estado") Integer contEstado,
                       @RequestParam("login") String contLogin,
@@ -43,7 +45,8 @@ public class crearcontratos {
                       , Model model) throws ServicioException{
 
                dao.creacont(contProv,contTipo,contFechaIni,contFechaFin,contNum,contEstado,contLogin,contDescrip);   
-
+List<EtbInvContrato> ListaContra  = dao.ListaContra();   
+          model.addAttribute("listaContra", ListaContra);
                 return "user/contratos";
 
     }

@@ -4,8 +4,9 @@
     Author     : diegfraa
 --%>
 
-
-
+<%
+   Integer id = (Integer)request.getSession().getAttribute("ID");
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page session="true"%>
@@ -51,8 +52,11 @@
             <li><a href="<c:url value="/aseguramiento.htm"/>">Aseguramiento</a></li>        
             <li><a href="<c:url value="/casosproveedor.htm"/>">Casos Proveedor</a></li>                     
             <li><a href="<c:url value="/usuarioservidor.htm"/>">Usuarios</a></li>
-            <li><a href="<c:url value="/modificarusuario.htm"/>">Rutas Estaticas</a></li>
-            
+            <li><a href="<c:url value="#"/>">Rutas Estaticas</a></li>
+            <% 
+            if(id==1){   %>
+            <li><a href="<c:url value="/modificarusuario.htm"/>">Crear Usuario</a></li>
+            <%}%>
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title=" Gestion">
@@ -104,6 +108,9 @@
             </li>
             <li>
                 <p>numero: ${ID}</p>
+            </li>
+            <li>
+                <p>fecha: ${fecha}</p>
             </li>
               </ul>
             </li>

@@ -6,7 +6,10 @@
 <%@include file="/WEB-INF/plantilla/header.jsp" %>
 <div class="content-wrapper">
         </br></br>
-        
+        <div class="flex-caption">
+                <h3>tabla de casos proveedor</h3> 
+   
+            </div>
                                            <%
             String m = (String)request.getAttribute("m");
     

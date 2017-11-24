@@ -13,7 +13,10 @@
         <%@include file="/WEB-INF/plantilla/header.jsp" %>
               <div class="content-wrapper">
         </br></br>      
-   
+         <div class="flex-caption">
+                <h3>tabla de contratos</h3> 
+
+            </div>
                                           <%
             String m = (String)request.getAttribute("m");
     
@@ -43,7 +46,7 @@
                               </select><br/><br/>                              
                               <input  name="fini" type="text" id="Fecha_Inicio" class="form-control" placeholder="fecha inicial" ><br/><br/>                              
                               <input  name="ffin" type="text" id="Fecha_Fin" class="form-control" placeholder="fecha fin" ><br/><br/>                              
-                              <input  name="nocon" type="text"   id="inputPassword" class="form-control" placeholder="no.contrato" ></br><br/>                              
+                              <input  name="nocon" type="text"   id="inputPassword" class="form-control" placeholder="no.contrato" ></br><br/>  
                               <select name="estado" class="form-control">
                                         <option value="">estado</option>
                                         <c:forEach var="f" items="${requestScope.ListaEstado}">

@@ -6,7 +6,6 @@
 package tablas;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +16,6 @@ import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -56,15 +53,15 @@ public class EtbInvCronogramaMto implements Serializable {
     private Integer croProyecto;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "CRO_FECHA_INI")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date croFechaIni;
+    private String croFechaIni;
+    @Size(max = 30)
     @Column(name = "CRO_FECHA_PROX")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date croFechaProx;
+    private String croFechaProx;
+    @Size(max = 30)
     @Column(name = "CRO_FECHA_FIN")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date croFechaFin;
+    private String croFechaFin;
     @Size(max = 255)
     @Column(name = "CRO_CAMBIO_FIN")
     private String croCambioFin;
@@ -85,11 +82,11 @@ public class EtbInvCronogramaMto implements Serializable {
         this.croId = croId;
     }
 
-    public EtbInvCronogramaMto(Integer croId, Date croFechaIni) {
+    public EtbInvCronogramaMto(Integer croId, String croFechaIni) {
         this.croId = croId;
         this.croFechaIni = croFechaIni;
     }
-    public EtbInvCronogramaMto(Integer croProyecto, Date croFechaIni, String croSerial, String croEjecuta,String croCambioFin,Integer croEstado) {
+    public EtbInvCronogramaMto(Integer croProyecto, String croFechaIni, String croSerial, String croEjecuta,String croCambioFin,Integer croEstado) {
         this.croProyecto = croProyecto;
         this.croFechaIni = croFechaIni;
         this.croSerial = croSerial;
@@ -97,6 +94,7 @@ public class EtbInvCronogramaMto implements Serializable {
         this.croCambioFin = croCambioFin;
         this.croEstado = croEstado;
     }
+
     public Integer getCroId() {
         return croId;
     }
@@ -121,27 +119,27 @@ public class EtbInvCronogramaMto implements Serializable {
         this.croProyecto = croProyecto;
     }
 
-    public Date getCroFechaIni() {
+    public String getCroFechaIni() {
         return croFechaIni;
     }
 
-    public void setCroFechaIni(Date croFechaIni) {
+    public void setCroFechaIni(String croFechaIni) {
         this.croFechaIni = croFechaIni;
     }
 
-    public Date getCroFechaProx() {
+    public String getCroFechaProx() {
         return croFechaProx;
     }
 
-    public void setCroFechaProx(Date croFechaProx) {
+    public void setCroFechaProx(String croFechaProx) {
         this.croFechaProx = croFechaProx;
     }
 
-    public Date getCroFechaFin() {
+    public String getCroFechaFin() {
         return croFechaFin;
     }
 
-    public void setCroFechaFin(Date croFechaFin) {
+    public void setCroFechaFin(String croFechaFin) {
         this.croFechaFin = croFechaFin;
     }
 
