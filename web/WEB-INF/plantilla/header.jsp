@@ -21,8 +21,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav bg-info" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Inicio">
-          <a class="nav-link" href="<c:url value="/buscar.htm"/>">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Inicio">      
+                 <% 
+            if(id==1){   %>
+            <a class="nav-link" href="<c:url value="/fono.htm"/>">
+            <%}else{%>
+               <a class="nav-link" href="<c:url value="/buscar.htm"/>">
+            <%}%>
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Inicio</span>
           </a>
