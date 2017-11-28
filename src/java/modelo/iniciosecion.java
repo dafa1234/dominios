@@ -318,14 +318,6 @@ public class iniciosecion {
       return em.merge(Alumnos);
     }
 
-  
-
-    
-
-   
-
-  
-
 }
 
   

@@ -89,7 +89,7 @@
                 <th>FECHA COMBIO FIN</th>
                 <th>EJECUTA</th>
                 <th>ESTADO</th>
-                <th>OBSERVACIONES</th>
+                <th>OBSERVACION</th>
             </tr>
             </thead>
               
@@ -104,7 +104,7 @@
                 <th>FECHA COMBIO FIN</th>
                 <th>EJECUTA</th>
                 <th>ESTADO</th>
-                <th>OBSERVACIONES</th>
+                <th>OBSERVACION</th>
             </tr>
             </tfoot>
             <tbody>        
