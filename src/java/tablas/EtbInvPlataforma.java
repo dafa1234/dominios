@@ -51,6 +51,11 @@ public class EtbInvPlataforma implements Serializable {
         this.plaIdPlataforma = plaIdPlataforma;
     }
 
+    public EtbInvPlataforma(int aplataforma, String nplataforma) {
+       this.plaNomPlataforma = nplataforma;
+       this.plaAdmPlataforma = aplataforma;
+    }
+
     public Integer getPlaIdPlataforma() {
         return plaIdPlataforma;
     }

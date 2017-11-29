@@ -104,7 +104,7 @@
                                                 </select><br/><br/>
                                             </td>
                                             <td> 
-                                                   <select name="dc" class="form-control">
+                                                   <select name="data center o salon" class="form-control">
                                                     <option value="">dc</option>
                                                     <c:forEach var="f" items="${requestScope.listaSalon}">
                                                         <option value="${f.salIdSalon}">${f.salNombre}</option>

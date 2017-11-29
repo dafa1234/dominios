@@ -82,6 +82,13 @@ public class EtbInvMarca implements Serializable {
         this.marInterventor = marInterventor;
     }
 
+    public EtbInvMarca(String nmarca, String usoporte, String tsoporte, String minterventor) {
+        this.marNomMarca = nmarca;
+        this.marUrlSoporte = usoporte;
+        this.marTelSoporte = tsoporte;
+        this.marInterventor = minterventor;
+    }
+
     public Integer getMarIdMarca() {
         return marIdMarca;
     }

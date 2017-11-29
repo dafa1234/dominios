@@ -32,7 +32,27 @@
             <span class="nav-link-text">Inicio</span>
           </a>
         </li>
- 
+         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="nuevos objetos">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponent" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-area-chart"></i>
+            <span class="nav-link-text">nuevos objetos</span>
+          </a>
+              <ul class="sidenav-second-level collapse" id="collapseComponent">
+                    
+            <li><a href="<c:url value="/nCentral.htm"/>">Agregar Central</a></li>
+            <li><a href="<c:url value="/nGrupo.htm"/>">Agregar Grupo</a></li>
+            <li><a href="<c:url value="/nMarca.htm"/>">Agregar Marca</a></li>        
+            <li><a href="<c:url value="/nPlataforma.htm"/>">Agregar Plataforma</a></li>                     
+            <li><a href="<c:url value="/nRolserv.htm"/>">Agregar Rol Servidor</a></li>
+            <li><a href="<c:url value="/nSisopera.htm"/>">Agregar Sistema Operativo</a></li>
+          </ul>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="#">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Tables</span>
+          </a>
+        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Actividades Operativas">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-wrench"></i>
@@ -64,7 +84,7 @@
       
           </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="usuarios">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-sitemap"></i>
             <span class="nav-link-text">usuario</span>

@@ -47,6 +47,9 @@ public class EtbInvCentral implements Serializable {
     public EtbInvCentral(Integer cenIdCentral) {
         this.cenIdCentral = cenIdCentral;
     }
+    public EtbInvCentral(String Central) {
+        this.cenNombre = Central;
+    }
 
     public Integer getCenIdCentral() {
         return cenIdCentral;

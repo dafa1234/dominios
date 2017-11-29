@@ -310,12 +310,46 @@ public class iniciosecion {
     }
 
     //actualizar usuario servidor
-    
-
         @Transactional(rollbackFor = {ServicioException.class})
     public EtbInvUsuServ update(Integer email, EtbInvUsuEstado ususEstado, String ususLogin, String nombre, String servidor, Integer admin) {
           EtbInvUsuServ Alumnos = new EtbInvUsuServ(ususEstado,email,ususLogin,nombre,servidor,admin);
       return em.merge(Alumnos);
+    }
+    //insertar central
+        @Transactional(rollbackFor = {ServicioException.class})
+    public void newcentral(String Central) {
+          EtbInvCentral Alumnos = new EtbInvCentral(Central);
+      em.persist(Alumnos);
+    }
+    //insertar grupo
+        @Transactional(rollbackFor = {ServicioException.class})
+    public void newgrupo(String Ngrupo, String Tgrupo) {
+          EtbInvGrupo Alumnos = new EtbInvGrupo(Ngrupo,Tgrupo);
+    em.persist(Alumnos);
+    }
+    //insertar marca
+        @Transactional(rollbackFor = {ServicioException.class})
+    public void newmarca(String nmarca, String usoporte, String tsoporte, String minterventor) {
+          EtbInvMarca Alumnos = new EtbInvMarca(nmarca,usoporte,tsoporte,minterventor);
+      em.persist(Alumnos);
+    }
+    //insertar plataforma
+        @Transactional(rollbackFor = {ServicioException.class})
+    public void newplataforma(String nplataforma,int aplataforma) {
+          EtbInvPlataforma Alumnos = new EtbInvPlataforma(aplataforma,nplataforma);
+      em.persist(Alumnos);
+    }
+     //insertar rol
+        @Transactional(rollbackFor = {ServicioException.class})
+    public void newrol(String nrol) {
+          EtbInvRolServidor Alumnos = new EtbInvRolServidor(nrol);
+      em.persist(Alumnos);
+    }
+    //insertar sisoperativo
+        @Transactional(rollbackFor = {ServicioException.class})
+    public void newsisoperativo(int sisdis, String nsis) {
+          EtbInvSisOperativo Alumnos = new EtbInvSisOperativo(sisdis,nsis);
+      em.persist(Alumnos);
     }
 
 }
