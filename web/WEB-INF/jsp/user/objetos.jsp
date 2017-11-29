@@ -15,8 +15,12 @@
       
                                <%
             Integer s = (Integer)request.getAttribute("s");
-    
-         if(s!=null){
+            Integer c = (Integer)request.getAttribute("c");
+            Integer m = (Integer)request.getAttribute("m");
+            Integer g = (Integer)request.getAttribute("g");
+            Integer r = (Integer)request.getAttribute("r");
+            Integer p = (Integer)request.getAttribute("p");  
+         if(c!=1){
             %>
              <div class="flex-caption">
             <h3>Nueva Central</h3>              
@@ -27,7 +31,7 @@
                 </div>
             <center>
                            <!-- Begin # Login Form -->
-                        <form  action="creat.htm" method="Post">                            
+                        <form  action="Central.htm" method="Post">                            
                             <div id="div-login-msg">                                                              
                                 <table>
                                         <tr>
@@ -48,14 +52,14 @@
                            <!-- End # DIV Form -->                   
                 </center>
                                                <%
-    
-         if(s!=null){
+    }
+         if(g!=2){
             %>
               <div class="flex-caption">
             <h3>Nuevo Grupo</h3>              
         </div>             
             <div class="box-bottom">
-                    <a  role="button" href="<c:url value="/servers.htm"/>">volver</a> 
+                    <a  role="button" href="<c:url value="/Grupo.htm"/>">volver</a> 
                     
                 </div>
             <center>
@@ -83,14 +87,14 @@
                            <!-- End # DIV Form -->                   
                 </center>
                                                                <%
-    
-         if(s!=null){
+    }
+         if(m!=3){
             %>
               <div class="flex-caption">
             <h3>Nueva Marca</h3>              
         </div>          
             <div class="box-bottom">
-                    <a  role="button" href="<c:url value="/servers.htm"/>">volver</a> 
+                    <a  role="button" href="<c:url value="/Marca.htm"/>">volver</a> 
                     
                 </div>
             <center>
@@ -124,14 +128,14 @@
                            <!-- End # DIV Form -->                   
                 </center>
                                                                <%
-    
-         if(s!=null){
+    }
+         if(p!=4){
             %>
               <div class="flex-caption">
             <h3>Nueva plataforma</h3>              
         </div>           
             <div class="box-bottom">
-                    <a  role="button" href="<c:url value="/servers.htm"/>">volver</a> 
+                    <a  role="button" href="<c:url value="/Plataforma.htm"/>">volver</a> 
                     
                 </div>
             <center>
@@ -159,14 +163,14 @@
                            <!-- End # DIV Form -->                   
                 </center>
                                                                <%
-    
-         if(s!=null){
+    }
+         if(r!=5){
             %>
               <div class="flex-caption">
             <h3>Nuevo Rol Servidor</h3>              
         </div>             
             <div class="box-bottom">
-                    <a  role="button" href="<c:url value="/servers.htm"/>">volver</a> 
+                    <a  role="button" href="<c:url value="/Rolserv.htm"/>">volver</a> 
                     
                 </div>
             <center>
@@ -192,16 +196,15 @@
                            <!-- End # DIV Form -->                   
                 </center>
                                                                                   <%
-    
-         if(s!=null){
+    }
+         if(s!=6){
             %>
-              <div class="flex-caption">
+        <div class="flex-caption">
             <h3>Nuevo Sistema Operativo</h3>              
         </div>             
             <div class="box-bottom">
-                    <a  role="button" href="<c:url value="/servers.htm"/>">volver</a> 
-                    
-                </div>
+                    <a  role="button" href="<c:url value="/Sisopera.htm"/>">volver</a>                
+            </div>
             <center>
                            <!-- Begin # Login Form -->
                         <form  action="creat.htm" method="Post">                            
@@ -227,67 +230,8 @@
                            <!-- End # DIV Form -->                   
                 </center>
             <%}
-else{
             %>
-              <div class="flex-caption">
-            <h3>tabla de servidores</h3>              
-        </div>
-            <div class="box-bottom">
-                    <a  role="button" href="<c:url value="/aserver.htm"/>">agregar</a> 
-                    
-                </div>
-            <div class="card mb-3">
-                <div class="card-header">
-                  <i class="fa fa-table"></i> Data Table servidores</div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">            
-                        <thead>
-                         <tr>
-                            <th>TblServSerial</th>
-                            <th>TblServHostName</th>
-                            <th>TblMarcaMarca</th>
-                            <th>TblModeloModelo</th>
-                            <th>TblClienteNombre</th>
-                            <th>TblSoNombre</th>
-                            <th>TblGrupoNombre</th>
-                            <th>TblEstadoEstado</th>
-                         </tr>
-                        </thead>
-                        <tfoot>
-                         <tr>
-                            <th>TblServSerial</th>
-                            <th>TblServHostName</th>
-                            <th>TblMarcaMarca</th>
-                            <th>TblModeloModelo</th>
-                            <th>TblClienteNombre</th>
-                            <th>TblSoNombre</th>
-                            <th>TblGrupoNombre</th>
-                            <th>TblEstadoEstado</th>
-                         </tr>
-                        </tfoot>
-                        <tbody>        
-                         <c:forEach var="f" items="${requestScope.listaServer}">
-                         <tr>
-                                <td>${f.serSerial}</td>
-                                <td>${f.serHostname}</td>
-                                <td>${f.marIdMarca.marNomMarca}</td>
-                                <td>${f.modIdModelo}</td>
-                                <td>${f.cenIdCentral}</td>
-                                <td>${f.sisIdSisOperativo.sisNombre}</td>
-                                <td>${f.gruIdGrupo.gruNomGrupo}</td>
-                                <td>${f.estIdEstado.estEstado}</td>              
-                         </tr>
-                         </c:forEach>               
-                        </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-            </div>
-            <!-- fin de tabla-->                   
-            <!-- Begin # DIV Form -->
- <%}%>
+ 
     </div>       
    <%@include file="/WEB-INF/plantilla/foter.jsp" %>
 </body>

@@ -205,13 +205,13 @@ public class controljsp {
         ModelAndView maw= new ModelAndView();
         int c = 1;
         model.addAttribute("c",c );
-        maw.setViewName("obgetos");             
+        maw.setViewName("objetos");             
         return maw;
     }
     @RequestMapping("Central.htm")
     public ModelAndView Central (@RequestParam("central") String Central,Model model){
         ModelAndView maw= new ModelAndView();
-        maw.setViewName("obgetos");
+        maw.setViewName("objetos");
         dao.newcentral(Central);              
         return maw;
     }
@@ -219,15 +219,15 @@ public class controljsp {
      @RequestMapping("nGrupo.htm")
     public ModelAndView nGrupo (Model model){
         ModelAndView maw= new ModelAndView();
-        int g = 1;
+        int g = 2;
         model.addAttribute("g",g );
-        maw.setViewName("obgetos");             
+        maw.setViewName("objetos");             
         return maw;
     }
      @RequestMapping("Grupo.htm")
     public ModelAndView Grupo (@RequestParam("ngrupo") String Ngrupo,@RequestParam("tgrupo") String Tgrupo,Model model){
         ModelAndView maw= new ModelAndView();
-        maw.setViewName("obgetos");
+        maw.setViewName("objetos");
         dao.newgrupo(Ngrupo,Tgrupo);              
         return maw;
     }
@@ -235,16 +235,16 @@ public class controljsp {
       @RequestMapping("nMarca.htm")
     public ModelAndView nmarca (Model model){
         ModelAndView maw= new ModelAndView();
-        int m = 1;
+        int m = 3;
         model.addAttribute("m",m );
-        maw.setViewName("obgetos");
+        maw.setViewName("objetos");
         return maw;
     }
      @RequestMapping("Marca.htm")
     public ModelAndView marca (@RequestParam("nmarca") String nmarca,@RequestParam("usoporte") String usoporte,
                                @RequestParam("tsoporte") String tsoporte,@RequestParam("minterventor") String minterventor,Model model){
         ModelAndView maw= new ModelAndView();
-        maw.setViewName("obgetos");
+        maw.setViewName("objetos");
         dao.newmarca(nmarca,usoporte,tsoporte,minterventor);               
         return maw;
     }
@@ -252,16 +252,16 @@ public class controljsp {
       @RequestMapping("nPlataforma.htm")
     public ModelAndView nplataforma (Model model){
         ModelAndView maw= new ModelAndView();
-        int p = 1;
+        int p = 4;
         model.addAttribute("p",p );
-        maw.setViewName("obgetos");           
+        maw.setViewName("objetos");           
         return maw;
     }
      @RequestMapping("Plataforma.htm")
     public ModelAndView plataforma (@RequestParam("nplataforma") String nplataforma,@RequestParam("aplataforma") int aplataforma,Model model)
     {
         ModelAndView maw= new ModelAndView();
-        maw.setViewName("obgetos");
+        maw.setViewName("objetos");
         dao.newplataforma(nplataforma,aplataforma);           
         return maw;
     }
@@ -269,15 +269,15 @@ public class controljsp {
      @RequestMapping("nRolserv.htm")
     public ModelAndView nrolserv (Model model){
         ModelAndView maw= new ModelAndView();
-        int r = 1;
+        int r = 5;
         model.addAttribute("r",r );
-        maw.setViewName("obgetos");           
+        maw.setViewName("objetos");           
         return maw;
     }
      @RequestMapping("Rolserv.htm")
     public ModelAndView rolserv (@RequestParam("nrol") String nrol,Model model){
         ModelAndView maw= new ModelAndView();
-        maw.setViewName("obgetos");
+        maw.setViewName("objetos");
         dao.newrol(nrol);             
         return maw;
     }
@@ -285,15 +285,15 @@ public class controljsp {
      @RequestMapping("nSisopera.htm")
     public ModelAndView nsisoper (Model model){ 
         ModelAndView maw= new ModelAndView();
-        int s = 1;
+        int s = 6;
         model.addAttribute("s",s );
-        maw.setViewName("obgetos");            
+        maw.setViewName("objetos");            
         return maw;
     }
      @RequestMapping("Sisopera.htm")
     public ModelAndView sisoper (@RequestParam("sisdid") int sisdis,@RequestParam("nsis") String nsis,Model model){ 
         ModelAndView maw= new ModelAndView();
-        maw.setViewName("obgetos");
+        maw.setViewName("objetos");
         dao.newsisoperativo(sisdis,nsis);              
         return maw;
     }

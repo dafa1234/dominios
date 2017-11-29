@@ -37,8 +37,7 @@
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">nuevos objetos</span>
           </a>
-              <ul class="sidenav-second-level collapse" id="collapseComponent">
-                    
+          <ul class="sidenav-second-level collapse" id="collapseComponent">          
             <li><a href="<c:url value="/nCentral.htm"/>">Agregar Central</a></li>
             <li><a href="<c:url value="/nGrupo.htm"/>">Agregar Grupo</a></li>
             <li><a href="<c:url value="/nMarca.htm"/>">Agregar Marca</a></li>        
