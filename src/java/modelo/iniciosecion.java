@@ -5,7 +5,7 @@
  */
 package modelo;
 
-import java.sql.Date;
+
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,16 +20,22 @@ import tablas.EtbInvAseguramiento;
 import tablas.EtbInvCamusuServ;
 import tablas.EtbInvCasosProv;
 import tablas.EtbInvCentral;
+import tablas.EtbInvCliente;
 import tablas.EtbInvContrato;
 import tablas.EtbInvCronogramaMto;
 import tablas.EtbInvEstado;
+import tablas.EtbInvEstadoCasos;
+import tablas.EtbInvEstadoCont;
+import tablas.EtbInvEstadoMto;
 import tablas.EtbInvGrupo;
 import tablas.EtbInvMarca;
+import tablas.EtbInvModelo;
 import tablas.EtbInvPlataforma;
 import tablas.EtbInvProyecto;
 import tablas.EtbInvRolServidor;
 import tablas.EtbInvSalon;
 import tablas.EtbInvSisOperativo;
+import tablas.EtbInvTipoActividad;
 import tablas.EtbInvTipoCont;
 import tablas.EtbInvUsuEstado;
 import tablas.EtbInvUsuServ;
@@ -59,7 +65,21 @@ public class iniciosecion {
         }
  
      }
+      @Transactional(rollbackFor = {ServicioException.class})
+      public EtbInvServidor readid(int ususidSer) throws SecurityException{ 
+        String sql="select aa from EtbInvServidor aa where  aa.serServer = :ususidSer ";
+  
+        Query q=em.createQuery(sql);
+        q.setParameter("ususidSer", ususidSer);
       
+
+        try {
+            return (EtbInvServidor)q.getSingleResult();
+        } catch (Exception  e) {
+            return null;
+        }
+ 
+     }
 @Transactional(rollbackFor = {ServicioException.class})
       public EtbInvUsuServ buscarususerv(Integer email) throws SecurityException{ 
         String sql="select a from EtbInvUsuServ a where  a.ususId = :email ";
@@ -95,7 +115,6 @@ public class iniciosecion {
         Query q=em.createQuery(sql);          
         return q.getResultList();
     }
-         
     
        public List<EtbInvCamusuServ> ListaDetalle(String usu) { 
         
@@ -116,6 +135,20 @@ public class iniciosecion {
        public List<EtbInvEstado>  ListaEstado() { 
         
         String sql="Select n from EtbInvEstado n";
+  
+        Query q=em.createQuery(sql);          
+        return q.getResultList();
+    }
+       public List<EtbInvModelo>  ListaModelo() { 
+        
+        String sql="Select n from EtbInvModelo n";
+  
+        Query q=em.createQuery(sql);          
+        return q.getResultList();
+    }
+       public List<EtbInvCliente>  ListaCliente() { 
+        
+        String sql="Select n from EtbInvCliente n";
   
         Query q=em.createQuery(sql);          
         return q.getResultList();
@@ -232,21 +265,21 @@ public class iniciosecion {
     //INSERTAR SERVIDOR
     
     @Transactional(rollbackFor = {ServicioException.class})
-    public void create(String Fecha,String serSerial, String serHostname, EtbInvMarca marIdMarca, int modIdModelo, String serConexion, int cenIdCentral, int salIdSalon, int cliIdCliente, int rolIdRolServ, int plaIdPlataforma, String serForAdCompartida, String serAdministrado, String serCores, String serTIngreso, String serUnidad, String serProyecto,String serRack, Integer serNoProcFisico, EtbInvEstado estIdEstado, EtbInvSisOperativo sisIdSisOperativo, EtbInvGrupo gruIdGrupo) {
+    public void create(String Fecha, String serSerial, String serHostname, EtbInvMarca marIdMarca, EtbInvModelo modIdModelo, String serConexion, EtbInvCentral cenIdCentral, EtbInvSalon salIdSalon, EtbInvCliente cliIdCliente, EtbInvRolServidor rolIdRolServ, EtbInvPlataforma plaIdPlataforma, String serForAdCompartida, String serAdministrado,String serCores,String serTIngreso,String serUnidad,String serProyecto,String serRack,Integer serNoProcFisico,EtbInvEstado estIdEstado,EtbInvSisOperativo sisIdSisOperativo,EtbInvGrupo gruIdGrupo) {
         EtbInvServidor Alumnos = new EtbInvServidor(Fecha,serSerial,serHostname,marIdMarca,modIdModelo,serConexion,cenIdCentral,salIdSalon,cliIdCliente,rolIdRolServ,plaIdPlataforma,serForAdCompartida,serAdministrado,serCores,serTIngreso,serUnidad,serProyecto,serRack,serNoProcFisico,estIdEstado,sisIdSisOperativo,gruIdGrupo);
         
        em.persist(Alumnos);
     }
     //INSERTAR ACTIVIDAD
      @Transactional(rollbackFor = {ServicioException.class})
-    public void creact( String actServ, String actEjecuta, String actTarea, String actDescripcion, String actSolicita,Integer actTipo, String actFechaFin, String actFechaIni) {
+    public void creact( String actServ, String actEjecuta, String actTarea, String actDescripcion, String actSolicita,EtbInvTipoActividad actTipo,String actFechaFin, String actFechaIni) {
         EtbInvActividad Alumnos = new EtbInvActividad(actServ,actEjecuta,actTarea,  actDescripcion,  actSolicita, actTipo,actFechaFin,actFechaIni);
         
        em.persist(Alumnos);
     }
       //INSERTAR ASEGURAMIENTO
      @Transactional(rollbackFor = {ServicioException.class})
-    public void crease(String aseTarea, String aseServidor, String aseEjecuta,String aseFecha) {
+    public void crease(String aseTarea, EtbInvServidor aseServidor, String aseEjecuta,String aseFecha) {
       
         EtbInvAseguramiento Alumnos = new EtbInvAseguramiento(aseTarea,aseServidor,aseEjecuta,aseFecha);
         
@@ -254,7 +287,7 @@ public class iniciosecion {
     }
      //INSERTAR CONTRATO
     @Transactional(rollbackFor = {ServicioException.class})
-    public void creacont(Integer contProv, Integer contTipo, String contFechaIni, String contFechaFin, String contNum, Integer contEstado, String contLogin, String contDescrip) {
+    public void creacont(EtbInvMarca contProv, EtbInvTipoCont contTipo, String contFechaIni, String contFechaFin, String contNum, EtbInvEstadoCont contEstado, String contLogin, String contDescrip) {
         
         EtbInvContrato Alumnos = new EtbInvContrato(contProv,contTipo,contFechaIni,contFechaFin,contNum,contEstado,contLogin,contDescrip); 
      
@@ -262,7 +295,7 @@ public class iniciosecion {
     }
     //INSERTAR CRONOGRAMA
       @Transactional(rollbackFor = {ServicioException.class})
-    public void creacrono(Integer croProyecto, String croFechaIni, String croSerial, String croEjecuta,String croCambioFin,Integer croEstado ) {
+    public void creacrono(EtbInvProyecto croProyecto, String croFechaIni, String croSerial, String croEjecuta,String croCambioFin,EtbInvEstadoMto croEstado) {
       
         EtbInvCronogramaMto Alumnos = new EtbInvCronogramaMto( croProyecto, croFechaIni, croSerial, croEjecuta,croCambioFin, croEstado );
         
@@ -270,7 +303,7 @@ public class iniciosecion {
     }
     //INSERTAR CASOSPROVEEDOR
       @Transactional(rollbackFor = {ServicioException.class})
-    public void creaproveedor(Integer caspProv, String caspServ, String caspFechaApe,String caspFechaCie, String caspNumero,String caspIm,Integer caspEstado) {
+    public void creaproveedor(EtbInvMarca caspProv, String caspServ, String caspFechaApe, String caspFechaCie, String caspNumero, String caspIm, EtbInvEstadoCasos caspEstado) {
       
         EtbInvCasosProv Alumnos = new EtbInvCasosProv(caspProv,caspServ,caspFechaApe,caspFechaCie,caspNumero,caspIm,caspEstado);
         
@@ -278,9 +311,9 @@ public class iniciosecion {
     }
       //INSERTAR USUARIO SERVIDOR
       @Transactional(rollbackFor = {ServicioException.class})
-    public void crearususerv(String ususLogin, String ususNombre, String ususServ, EtbInvUsuEstado ususEstado) {
+    public void crearususerv(String ususLogin, String ususNombre, String ususServ, EtbInvUsuEstado ususEstado,EtbInvServidor ususidServ) {
       
-        EtbInvUsuServ Alumnos = new EtbInvUsuServ(ususLogin,ususNombre,ususServ, ususEstado);
+        EtbInvUsuServ Alumnos = new EtbInvUsuServ(ususLogin,ususNombre,ususServ, ususEstado,ususidServ);
         
        em.persist(Alumnos);
     }
@@ -351,8 +384,28 @@ public class iniciosecion {
           EtbInvSisOperativo Alumnos = new EtbInvSisOperativo(sisdis,nsis);
       em.persist(Alumnos);
     }
-
+    //insertar sisoperativo
+        @Transactional(rollbackFor = {ServicioException.class})
+    public void newestado(String nest) {
+          EtbInvEstado Alumnos = new EtbInvEstado(nest);
+      em.persist(Alumnos);
+    }
+    //insertar sisoperativo
+        @Transactional(rollbackFor = {ServicioException.class})
+    public void newsalon(int scen, String nsal) {
+          EtbInvSalon Alumnos = new EtbInvSalon(scen,nsal);
+      em.persist(Alumnos);
+    }
+    //insertar sisoperativo
+        @Transactional(rollbackFor = {ServicioException.class})
+    public void newmodelo(int nmar,String nmod) {
+          EtbInvModelo Alumnos = new EtbInvModelo(nmar,nmod);
+      em.persist(Alumnos);
+    }
+    //insertar sisoperativo
+        @Transactional(rollbackFor = {ServicioException.class})
+    public void newcliente(String ncli, String ccli) {
+          EtbInvCliente Alumnos = new EtbInvCliente(ncli,ccli);
+      em.persist(Alumnos);
+    }
 }
-
-  
-  

@@ -12,7 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -31,13 +33,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "EtbInvCronogramaMto.findAll", query = "SELECT e FROM EtbInvCronogramaMto e")
     , @NamedQuery(name = "EtbInvCronogramaMto.findByCroId", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croId = :croId")
     , @NamedQuery(name = "EtbInvCronogramaMto.findByCroSerial", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croSerial = :croSerial")
-    , @NamedQuery(name = "EtbInvCronogramaMto.findByCroProyecto", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croProyecto = :croProyecto")
     , @NamedQuery(name = "EtbInvCronogramaMto.findByCroFechaIni", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croFechaIni = :croFechaIni")
     , @NamedQuery(name = "EtbInvCronogramaMto.findByCroFechaProx", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croFechaProx = :croFechaProx")
     , @NamedQuery(name = "EtbInvCronogramaMto.findByCroFechaFin", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croFechaFin = :croFechaFin")
     , @NamedQuery(name = "EtbInvCronogramaMto.findByCroCambioFin", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croCambioFin = :croCambioFin")
-    , @NamedQuery(name = "EtbInvCronogramaMto.findByCroEjecuta", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croEjecuta = :croEjecuta")
-    , @NamedQuery(name = "EtbInvCronogramaMto.findByCroEstado", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croEstado = :croEstado")})
+    , @NamedQuery(name = "EtbInvCronogramaMto.findByCroEjecuta", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croEjecuta = :croEjecuta")})
 public class EtbInvCronogramaMto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,8 +49,6 @@ public class EtbInvCronogramaMto implements Serializable {
     @Size(max = 255)
     @Column(name = "CRO_SERIAL")
     private String croSerial;
-    @Column(name = "CRO_PROYECTO")
-    private Integer croProyecto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -68,12 +66,16 @@ public class EtbInvCronogramaMto implements Serializable {
     @Size(max = 255)
     @Column(name = "CRO_EJECUTA")
     private String croEjecuta;
-    @Column(name = "CRO_ESTADO")
-    private Integer croEstado;
     @Lob
     @Size(max = 16777215)
     @Column(name = "CRO_OBSERVACION")
     private String croObservacion;
+    @JoinColumn(name = "CRO_PROYECTO", referencedColumnName = "PRO_ID")
+    @ManyToOne
+    private EtbInvProyecto croProyecto;
+    @JoinColumn(name = "CRO_ESTADO", referencedColumnName = "ESTM_ID")
+    @ManyToOne
+    private EtbInvEstadoMto croEstado;
 
     public EtbInvCronogramaMto() {
     }
@@ -86,7 +88,7 @@ public class EtbInvCronogramaMto implements Serializable {
         this.croId = croId;
         this.croFechaIni = croFechaIni;
     }
-    public EtbInvCronogramaMto(Integer croProyecto, String croFechaIni, String croSerial, String croEjecuta,String croCambioFin,Integer croEstado) {
+    public EtbInvCronogramaMto(EtbInvProyecto croProyecto, String croFechaIni, String croSerial, String croEjecuta,String croCambioFin,EtbInvEstadoMto croEstado) {
         this.croProyecto = croProyecto;
         this.croFechaIni = croFechaIni;
         this.croSerial = croSerial;
@@ -109,14 +111,6 @@ public class EtbInvCronogramaMto implements Serializable {
 
     public void setCroSerial(String croSerial) {
         this.croSerial = croSerial;
-    }
-
-    public Integer getCroProyecto() {
-        return croProyecto;
-    }
-
-    public void setCroProyecto(Integer croProyecto) {
-        this.croProyecto = croProyecto;
     }
 
     public String getCroFechaIni() {
@@ -159,20 +153,28 @@ public class EtbInvCronogramaMto implements Serializable {
         this.croEjecuta = croEjecuta;
     }
 
-    public Integer getCroEstado() {
-        return croEstado;
-    }
-
-    public void setCroEstado(Integer croEstado) {
-        this.croEstado = croEstado;
-    }
-
     public String getCroObservacion() {
         return croObservacion;
     }
 
     public void setCroObservacion(String croObservacion) {
         this.croObservacion = croObservacion;
+    }
+
+    public EtbInvProyecto getCroProyecto() {
+        return croProyecto;
+    }
+
+    public void setCroProyecto(EtbInvProyecto croProyecto) {
+        this.croProyecto = croProyecto;
+    }
+
+    public EtbInvEstadoMto getCroEstado() {
+        return croEstado;
+    }
+
+    public void setCroEstado(EtbInvEstadoMto croEstado) {
+        this.croEstado = croEstado;
     }
 
     @Override

@@ -15,9 +15,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import tablas.EtbInvCentral;
+import tablas.EtbInvCliente;
 import tablas.EtbInvEstado;
 import tablas.EtbInvGrupo;
 import tablas.EtbInvMarca;
+import tablas.EtbInvModelo;
+import tablas.EtbInvPlataforma;
+import tablas.EtbInvRolServidor;
+import tablas.EtbInvSalon;
 import tablas.EtbInvServidor;
 import tablas.EtbInvSisOperativo;
 /**
@@ -45,20 +51,20 @@ public class crearserver {
                       @RequestParam("estado") int estIdEstad,
                       @RequestParam("sisoperativo") int sisoperativo,
                       @RequestParam("hostname") String serHostname,
-                      @RequestParam("modelo") int modIdModelo ,
+                      @RequestParam("modelo") int modIdModel ,
                       @RequestParam("grupo") int grupo,
                       @RequestParam("prosesos") Integer serNoProcFisico,
                       @RequestParam("cores") String serCores ,
                       @RequestParam("conexion") String serConexion,
-                      @RequestParam("central") int cenIdCentral,
-                      @RequestParam("dc") int salIdSalon,
+                      @RequestParam("central") int cenIdCentra,
+                      @RequestParam("dc") int salIdSalo,
                       @RequestParam("rack") String serRack,
                       @RequestParam("unidad") String serUnidad,
-                      @RequestParam("plataforma") int plaIdPlataforma,
+                      @RequestParam("plataforma") int plaIdPlataform,
                       @RequestParam("proyecto") String serProyecto,
-                      @RequestParam("cliente") int cliIdCliente,
+                      @RequestParam("cliente") int cliIdClient,
                       @RequestParam("adplataforma") String serAdministrado,
-                      @RequestParam("rol") int rolIdRolServ,
+                      @RequestParam("rol") int rolIdRolSer,
                       @RequestParam("addominios") String serForAdCompartida,
                       @RequestParam("tarea") String serTIngreso                
                       , Model model ) throws ServicioException{
@@ -74,7 +80,13 @@ public class crearserver {
                EtbInvEstado estIdEstado = new EtbInvEstado( estIdEstad);
                EtbInvSisOperativo sisIdSisOperativo = new EtbInvSisOperativo(sisoperativo);
                EtbInvGrupo gruIdGrupo = new EtbInvGrupo(grupo);
-               EtbInvMarca marIdMarca = new EtbInvMarca(marIdMarc);           
+               EtbInvMarca marIdMarca = new EtbInvMarca(marIdMarc);       
+               EtbInvModelo modIdModelo = new EtbInvModelo(modIdModel);
+               EtbInvCliente cliIdCliente = new EtbInvCliente(cliIdClient); 
+               EtbInvSalon salIdSalon = new EtbInvSalon(salIdSalo); 
+               EtbInvRolServidor rolIdRolServ = new EtbInvRolServidor(rolIdRolSer);
+               EtbInvCentral cenIdCentral = new EtbInvCentral(cenIdCentra); 
+               EtbInvPlataforma plaIdPlataforma = new EtbInvPlataforma(plaIdPlataform);
                dao.create(Fecha,serSerial,serHostname,marIdMarca,modIdModelo,serConexion,cenIdCentral,salIdSalon,cliIdCliente,rolIdRolServ,plaIdPlataforma,serForAdCompartida,serAdministrado,serCores,serTIngreso,serUnidad,serProyecto,serRack,serNoProcFisico,estIdEstado,sisIdSisOperativo,gruIdGrupo);   
  List<EtbInvServidor> Listaserver  = dao.Listaserver();                       
           model.addAttribute("listaServer", Listaserver);   

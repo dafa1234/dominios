@@ -26,47 +26,47 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author diegfraa
  */
 @Entity
-@Table(name = "etb_inv_tipo_cont")
+@Table(name = "etb_inv_estado_cont")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "EtbInvTipoCont.findAll", query = "SELECT e FROM EtbInvTipoCont e")
-    , @NamedQuery(name = "EtbInvTipoCont.findByTopcId", query = "SELECT e FROM EtbInvTipoCont e WHERE e.topcId = :topcId")
-    , @NamedQuery(name = "EtbInvTipoCont.findByTipcDescrip", query = "SELECT e FROM EtbInvTipoCont e WHERE e.tipcDescrip = :tipcDescrip")})
-public class EtbInvTipoCont implements Serializable {
+    @NamedQuery(name = "EtbInvEstadoCont.findAll", query = "SELECT e FROM EtbInvEstadoCont e")
+    , @NamedQuery(name = "EtbInvEstadoCont.findByEstcoId", query = "SELECT e FROM EtbInvEstadoCont e WHERE e.estcoId = :estcoId")
+    , @NamedQuery(name = "EtbInvEstadoCont.findByEstcoDescrip", query = "SELECT e FROM EtbInvEstadoCont e WHERE e.estcoDescrip = :estcoDescrip")})
+public class EtbInvEstadoCont implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "TOPC_ID")
-    private Integer topcId;
+    @Column(name = "ESTCO_ID")
+    private Integer estcoId;
     @Size(max = 255)
-    @Column(name = "TIPC_DESCRIP")
-    private String tipcDescrip;
-    @OneToMany(mappedBy = "contTipo")
+    @Column(name = "ESTCO_DESCRIP")
+    private String estcoDescrip;
+    @OneToMany(mappedBy = "contEstado")
     private Collection<EtbInvContrato> etbInvContratoCollection;
 
-    public EtbInvTipoCont() {
+    public EtbInvEstadoCont() {
     }
 
-    public EtbInvTipoCont(Integer topcId) {
-        this.topcId = topcId;
+    public EtbInvEstadoCont(Integer estcoId) {
+        this.estcoId = estcoId;
     }
 
-    public Integer getTopcId() {
-        return topcId;
+    public Integer getEstcoId() {
+        return estcoId;
     }
 
-    public void setTopcId(Integer topcId) {
-        this.topcId = topcId;
+    public void setEstcoId(Integer estcoId) {
+        this.estcoId = estcoId;
     }
 
-    public String getTipcDescrip() {
-        return tipcDescrip;
+    public String getEstcoDescrip() {
+        return estcoDescrip;
     }
 
-    public void setTipcDescrip(String tipcDescrip) {
-        this.tipcDescrip = tipcDescrip;
+    public void setEstcoDescrip(String estcoDescrip) {
+        this.estcoDescrip = estcoDescrip;
     }
 
     @XmlTransient
@@ -81,18 +81,18 @@ public class EtbInvTipoCont implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (topcId != null ? topcId.hashCode() : 0);
+        hash += (estcoId != null ? estcoId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof EtbInvTipoCont)) {
+        if (!(object instanceof EtbInvEstadoCont)) {
             return false;
         }
-        EtbInvTipoCont other = (EtbInvTipoCont) object;
-        if ((this.topcId == null && other.topcId != null) || (this.topcId != null && !this.topcId.equals(other.topcId))) {
+        EtbInvEstadoCont other = (EtbInvEstadoCont) object;
+        if ((this.estcoId == null && other.estcoId != null) || (this.estcoId != null && !this.estcoId.equals(other.estcoId))) {
             return false;
         }
         return true;
@@ -100,7 +100,7 @@ public class EtbInvTipoCont implements Serializable {
 
     @Override
     public String toString() {
-        return "tablas.EtbInvTipoCont[ topcId=" + topcId + " ]";
+        return "tablas.EtbInvEstadoCont[ estcoId=" + estcoId + " ]";
     }
     
 }

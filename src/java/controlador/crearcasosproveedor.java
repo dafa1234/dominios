@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import tablas.EtbInvCasosProv;
+import tablas.EtbInvEstadoCasos;
+import tablas.EtbInvMarca;
 
 
 /**
@@ -37,11 +39,11 @@ public class crearcasosproveedor {
     }
    @RequestMapping(method = RequestMethod.POST)    
    public String create(                   
-                      @RequestParam("proveedor") Integer caspProv,
+                      @RequestParam("proveedor") Integer caspPro,
                       @RequestParam("servidor") String caspServ,
                       @RequestParam("fini") String caspFechaApe,
                       @RequestParam("fcie") String caspFechaCie,
-                      @RequestParam("estini") Integer caspEstado,
+                      @RequestParam("estini") Integer caspEstad,
                       @RequestParam("numcas") String caspNumero,
                       @RequestParam("im") String caspIm                     
                       , Model model ) throws ServicioException{
@@ -49,8 +51,8 @@ public class crearcasosproveedor {
     
             
             //base de datos
-    
-               
+               EtbInvEstadoCasos caspEstado = new EtbInvEstadoCasos(caspEstad);
+               EtbInvMarca caspProv = new EtbInvMarca(caspPro);
                dao.creaproveedor(caspProv,caspServ,caspFechaApe,caspFechaCie,caspNumero,caspIm,caspEstado);   
 List<EtbInvCasosProv> Listaproveedor  = dao.Listaproveedor();
         model.addAttribute("Listaproveedor", Listaproveedor);

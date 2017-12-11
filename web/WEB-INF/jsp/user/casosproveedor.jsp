@@ -113,13 +113,13 @@
             <c:forEach var="f" items="${requestScope.Listaproveedor}">
             <tr>
                     <td>${f.caspId}</td>
-                    <td>${f.caspProv}</td>
+                    <td>${f.caspProv.marNomMarca}</td>
                     <td>${f.caspServ}</td>
                     <td>${f.caspFechaApe}</td>
                     <td>${f.caspFechaCie}</td>
                     <td>${f.caspNumero}</td>
                     <td>${f.caspIm}</td>
-                    <td>${f.caspEstado}</td>
+                    <td>${f.caspEstado.estcEstado}</td>
                    
                   
                 

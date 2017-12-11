@@ -107,7 +107,7 @@
             <tr>
                     <td>${f.actId}</td>
                     <td>${f.actEjecuta}</td>
-                    <td>${f.actTipo}</td>
+                    <td>${f.actTipo.tipaNombre}</td>
                     <td>${f.actTarea}</td>
                     <td>${f.actFechaIni}</td>
                     <td>${f.actFechaFin}</td>

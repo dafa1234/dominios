@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -28,13 +30,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "EtbInvCasosProv.findAll", query = "SELECT e FROM EtbInvCasosProv e")
     , @NamedQuery(name = "EtbInvCasosProv.findByCaspId", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspId = :caspId")
-    , @NamedQuery(name = "EtbInvCasosProv.findByCaspProv", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspProv = :caspProv")
     , @NamedQuery(name = "EtbInvCasosProv.findByCaspServ", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspServ = :caspServ")
     , @NamedQuery(name = "EtbInvCasosProv.findByCaspFechaApe", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspFechaApe = :caspFechaApe")
     , @NamedQuery(name = "EtbInvCasosProv.findByCaspFechaCie", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspFechaCie = :caspFechaCie")
     , @NamedQuery(name = "EtbInvCasosProv.findByCaspNumero", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspNumero = :caspNumero")
-    , @NamedQuery(name = "EtbInvCasosProv.findByCaspIm", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspIm = :caspIm")
-    , @NamedQuery(name = "EtbInvCasosProv.findByCaspEstado", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspEstado = :caspEstado")})
+    , @NamedQuery(name = "EtbInvCasosProv.findByCaspIm", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspIm = :caspIm")})
 public class EtbInvCasosProv implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,15 +43,13 @@ public class EtbInvCasosProv implements Serializable {
     @Basic(optional = false)
     @Column(name = "CASP_ID")
     private Integer caspId;
-    @Column(name = "CASP_PROV")
-    private Integer caspProv;
     @Size(max = 255)
     @Column(name = "CASP_SERV")
     private String caspServ;
-    @Size(max = 30)
+    @Size(max = 20)
     @Column(name = "CASP_FECHA_APE")
     private String caspFechaApe;
-    @Size(max = 30)
+    @Size(max = 20)
     @Column(name = "CASP_FECHA_CIE")
     private String caspFechaCie;
     @Size(max = 255)
@@ -60,8 +58,12 @@ public class EtbInvCasosProv implements Serializable {
     @Size(max = 255)
     @Column(name = "CASP_IM")
     private String caspIm;
-    @Column(name = "CASP_ESTADO")
-    private Integer caspEstado;
+    @JoinColumn(name = "CASP_PROV", referencedColumnName = "MAR_ID_MARCA")
+    @ManyToOne
+    private EtbInvMarca caspProv;
+    @JoinColumn(name = "CASP_ESTADO", referencedColumnName = "ESTC_ID")
+    @ManyToOne
+    private EtbInvEstadoCasos caspEstado;
 
     public EtbInvCasosProv() {
     }
@@ -73,8 +75,8 @@ public class EtbInvCasosProv implements Serializable {
     public Integer getCaspId() {
         return caspId;
     }
-    public EtbInvCasosProv(Integer caspProv, String caspServ, String caspFechaApe, String caspFechaCie, String caspNumero, String caspIm, Integer caspEstado) {
-         this.caspProv = caspProv;
+    public EtbInvCasosProv(EtbInvMarca caspProv, String caspServ, String caspFechaApe, String caspFechaCie, String caspNumero, String caspIm, EtbInvEstadoCasos caspEstado) {
+        this.caspProv = caspProv;
         this.caspServ = caspServ;
         this.caspFechaApe = caspFechaApe;
         this.caspFechaCie = caspFechaCie;
@@ -86,14 +88,6 @@ public class EtbInvCasosProv implements Serializable {
 
     public void setCaspId(Integer caspId) {
         this.caspId = caspId;
-    }
-
-    public Integer getCaspProv() {
-        return caspProv;
-    }
-
-    public void setCaspProv(Integer caspProv) {
-        this.caspProv = caspProv;
     }
 
     public String getCaspServ() {
@@ -136,11 +130,19 @@ public class EtbInvCasosProv implements Serializable {
         this.caspIm = caspIm;
     }
 
-    public Integer getCaspEstado() {
+    public EtbInvMarca getCaspProv() {
+        return caspProv;
+    }
+
+    public void setCaspProv(EtbInvMarca caspProv) {
+        this.caspProv = caspProv;
+    }
+
+    public EtbInvEstadoCasos getCaspEstado() {
         return caspEstado;
     }
 
-    public void setCaspEstado(Integer caspEstado) {
+    public void setCaspEstado(EtbInvEstadoCasos caspEstado) {
         this.caspEstado = caspEstado;
     }
 

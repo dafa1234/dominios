@@ -6,6 +6,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%          Integer noj = (Integer)request.getAttribute("noj");
+            %>
 <html>
    <%@include file="/WEB-INF/plantilla/head.jsp" %>
 <body>
@@ -13,47 +15,33 @@
     <div class="content-wrapper">
         </br></br>
       
-                               <%
-            Integer s = (Integer)request.getAttribute("s");
-            Integer c = (Integer)request.getAttribute("c");
-            Integer m = (Integer)request.getAttribute("m");
-            Integer g = (Integer)request.getAttribute("g");
-            Integer r = (Integer)request.getAttribute("r");
-            Integer p = (Integer)request.getAttribute("p");  
-         if(c!=1){
+                               <% 
+         if(noj==1){
             %>
-             <div class="flex-caption">
-            <h3>Nueva Central</h3>              
-        </div>
-            <div class="box-bottom">
-                    <a  role="button" href="<c:url value="/servers.htm"/>">volver</a> 
-                    
-                </div>
+            <div class="flex-caption">
+               <h3>Nueva Central</h3>              
+            </div>       
             <center>
                            <!-- Begin # Login Form -->
-                        <form  action="Central.htm" method="Post">                            
+                        <form  action="central.htm" method="Post">                            
                             <div id="div-login-msg">                                                              
                                 <table>
                                         <tr>
                                             <td> 
-                                                <input   name="central" type="text" id="inputEmail" class="form-control" placeholder="Central" required autofocus class="nav nav-pills nav-stacked"><br/><br/>
+                                                <input name="central" type="text"  class="form-control" placeholder="Central" required autofocus ><br/><br/>
                                             </td>
-                                    
-                                        </tr>
-                       
+                                        </tr>                      
                                 </table>
-                            </div>
-                               
+                            </div>                               
                                     <div>
                                         <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: red">INGRESAR</button>
-                                    </div>
-                              
+                                    </div>                             
                         </form>
                            <!-- End # DIV Form -->                   
                 </center>
                                                <%
     }
-         if(g!=2){
+         if(noj==2){
             %>
               <div class="flex-caption">
             <h3>Nuevo Grupo</h3>              
@@ -64,7 +52,7 @@
                 </div>
             <center>
                            <!-- Begin # Login Form -->
-                        <form  action="creat.htm" method="Post">                            
+                        <form  action="grupo.htm" method="Post">                            
                             <div id="div-login-msg">                                                              
                                 <table>
                                         <tr>
@@ -88,7 +76,7 @@
                 </center>
                                                                <%
     }
-         if(m!=3){
+         if(noj==3){
             %>
               <div class="flex-caption">
             <h3>Nueva Marca</h3>              
@@ -99,7 +87,7 @@
                 </div>
             <center>
                            <!-- Begin # Login Form -->
-                        <form  action="creat.htm" method="Post">                            
+                        <form  action="marca.htm" method="Post">                            
                             <div id="div-login-msg">                                                              
                                 <table>
                                         <tr>
@@ -129,7 +117,7 @@
                 </center>
                                                                <%
     }
-         if(p!=4){
+         if(noj==4){
             %>
               <div class="flex-caption">
             <h3>Nueva plataforma</h3>              
@@ -140,7 +128,7 @@
                 </div>
             <center>
                            <!-- Begin # Login Form -->
-                        <form  action="creat.htm" method="Post">                            
+                        <form  action="plataforma.htm" method="Post">                            
                             <div id="div-login-msg">                                                              
                                 <table>
                                         <tr>
@@ -164,7 +152,7 @@
                 </center>
                                                                <%
     }
-         if(r!=5){
+         if(noj==5){
             %>
               <div class="flex-caption">
             <h3>Nuevo Rol Servidor</h3>              
@@ -175,7 +163,7 @@
                 </div>
             <center>
                            <!-- Begin # Login Form -->
-                        <form  action="creat.htm" method="Post">                            
+                        <form  action="rolserv.htm" method="Post">                            
                             <div id="div-login-msg">                                                              
                                 <table>
                                         <tr>
@@ -195,9 +183,9 @@
                         </form>
                            <!-- End # DIV Form -->                   
                 </center>
-                                                                                  <%
+   <%
     }
-         if(s!=6){
+         if(noj==6){
             %>
         <div class="flex-caption">
             <h3>Nuevo Sistema Operativo</h3>              
@@ -207,7 +195,7 @@
             </div>
             <center>
                            <!-- Begin # Login Form -->
-                        <form  action="creat.htm" method="Post">                            
+                        <form  action="sisopera.htm" method="Post">                            
                             <div id="div-login-msg">                                                              
                                 <table>
                                         <tr>
@@ -216,6 +204,150 @@
                                             </td>
                                             <td> 
                                                 <input   name="nsis" type="text" id="inputEmail" class="form-control" placeholder="Nombre Sistema" required autofocus class="nav nav-pills nav-stacked"><br/><br/>
+                                            </td>
+                                        </tr>
+                       
+                                </table>
+                            </div>
+                               
+                                    <div>
+                                        <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: red">INGRESAR</button>
+                                    </div>
+                              
+                        </form>
+                           <!-- End # DIV Form -->                   
+                </center>
+             <%
+    }
+         if(noj==7){
+            %>
+        <div class="flex-caption">
+            <h3>Nuevo Estado</h3>              
+        </div>             
+            <div class="box-bottom">
+                    <a  role="button" href="<c:url value="/Sisopera.htm"/>">volver</a>                
+            </div>
+            <center>
+                           <!-- Begin # Login Form -->
+                        <form  action="estado.htm" method="Post">                            
+                            <div id="div-login-msg">                                                              
+                                <table>
+                                        <tr>
+                                            <td> 
+                                                <input   name="nest" type="text" id="inputEmail" class="form-control" placeholder="Estado" required autofocus class="nav nav-pills nav-stacked"><br/><br/>
+                                            </td>
+                                           
+                                        </tr>
+                       
+                                </table>
+                            </div>
+                               
+                                    <div>
+                                        <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: red">INGRESAR</button>
+                                    </div>
+                              
+                        </form>
+                           <!-- End # DIV Form -->                   
+                </center>
+             <%
+    }
+         if(noj==8){
+            %>
+        <div class="flex-caption">
+            <h3>Nuevo Salon o DataCenter</h3>              
+        </div>             
+            <div class="box-bottom">
+                    <a  role="button" href="<c:url value="/Sisopera.htm"/>">volver</a>                
+            </div>
+            <center>
+                           <!-- Begin # Login Form -->
+                        <form  action="salon.htm" method="Post">                            
+                            <div id="div-login-msg">                                                              
+                                <table>
+                                        <tr>
+                                            <td> 
+                                             <select name="scen" class="form-control">
+                                                    <option value="">central</option>
+                                                    <c:forEach var="f" items="${requestScope.listaCentral}">
+                                                        <option value="${f.cenIdCentral}">${f.cenNombre}</option>
+                                                    </c:forEach>
+                                                </select><br/><br/>
+                                            </td>
+                                            <td> 
+                                                <input   name="nsal" type="text" id="inputEmail" class="form-control" placeholder="Nombre Salon" required autofocus class="nav nav-pills nav-stacked"><br/><br/>
+                                            </td>
+                                        </tr>
+                       
+                                </table>
+                            </div>
+                               
+                                    <div>
+                                        <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: red">INGRESAR</button>
+                                    </div>
+                              
+                        </form>
+                           <!-- End # DIV Form -->                   
+                </center>
+                        <%
+    }
+         if(noj==9){
+            %>
+        <div class="flex-caption">
+            <h3>Nuevo modelo</h3>              
+        </div>             
+            <div class="box-bottom">
+                    <a  role="button" href="<c:url value="/modelo.htm"/>">volver</a>                
+            </div>
+            <center>
+                           <!-- Begin # Login Form -->
+                        <form  action="modelo.htm" method="Post">                            
+                            <div id="div-login-msg">                                                              
+                                <table>
+                                        <tr>
+                                            <td> 
+                                             <select name="nmar" class="form-control">
+                                                    <option value="">marca</option>
+                                                    <c:forEach var="f" items="${requestScope.listaMarca}">
+                                                        <option value="${f.marIdMarca}">${f.marNomMarca}</option>
+                                                    </c:forEach>
+                                                </select><br/><br/>
+                                            </td>
+                                            <td> 
+                                                <input   name="nmod" type="text" id="inputEmail" class="form-control" placeholder="Nombre modelo" required autofocus class="nav nav-pills nav-stacked"><br/><br/>
+                                            </td>
+                                        </tr>
+                       
+                                </table>
+                            </div>
+                               
+                                    <div>
+                                        <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: red">INGRESAR</button>
+                                    </div>
+                              
+                        </form>
+                           <!-- End # DIV Form -->                   
+                </center>
+                        <%
+    }
+         if(noj==10){
+            %>
+        <div class="flex-caption">
+            <h3>Nuevo Cliente</h3>              
+        </div>             
+            <div class="box-bottom">
+                    <a  role="button" href="<c:url value="/Cliente.htm"/>">volver</a>                
+            </div>
+            <center>
+                           <!-- Begin # Login Form -->
+                        <form  action="cliente.htm" method="Post">                            
+                            <div id="div-login-msg">                                                              
+                                <table>
+                                        <tr>
+                                            <td> 
+                                            <input   name="ncli" type="text" id="inputEmail" class="form-control" placeholder="Nombre Cliente" required autofocus class="nav nav-pills nav-stacked"><br/><br/>
+                                            </td>
+                                            <td> 
+                                                <input   name="ccli" type="text" id="inputEmail" class="form-control" placeholder="Contacto Cliente" required autofocus class="nav nav-pills nav-stacked"><br/><br/>
                                             </td>
                                         </tr>
                        

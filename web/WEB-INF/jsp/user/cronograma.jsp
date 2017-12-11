@@ -112,13 +112,13 @@
             <tr>
                     <td>${f.croId}</td>
                     <td>${f.croSerial}</td>
-                    <td>${f.croProyecto}</td>
+                    <td>${f.croProyecto.proTitulo}</td>
                     <td>${f.croFechaIni}</td>
                     <td>${f.croFechaProx}</td>
                     <td>${f.croFechaFin}</td>
                     <td>${f.croCambioFin}</td>
                     <td>${f.croEjecuta}</td>
-                    <td>${f.croEstado}</td>
+                    <td>${f.croEstado.estmEstado}</td>
                     <td>${f.croObservacion}</td>
                   
                 

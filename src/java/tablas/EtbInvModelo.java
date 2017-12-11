@@ -6,7 +6,9 @@
 package tablas;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,9 +16,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -43,12 +47,18 @@ public class EtbInvModelo implements Serializable {
     @Size(max = 25)
     @Column(name = "MOD_NOM_MODELO")
     private String modNomModelo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "modIdModelo")
+    private Collection<EtbInvServidor> etbInvServidorCollection;
 
     public EtbInvModelo() {
     }
 
     public EtbInvModelo(Integer modIdModelo) {
         this.modIdModelo = modIdModelo;
+    }
+    public EtbInvModelo(int nmar, String nmod) {
+        this.modNomModelo = nmod;
+        this.marIdMarca = nmar;
     }
 
     public Integer getModIdModelo() {
@@ -73,6 +83,15 @@ public class EtbInvModelo implements Serializable {
 
     public void setModNomModelo(String modNomModelo) {
         this.modNomModelo = modNomModelo;
+    }
+
+    @XmlTransient
+    public Collection<EtbInvServidor> getEtbInvServidorCollection() {
+        return etbInvServidorCollection;
+    }
+
+    public void setEtbInvServidorCollection(Collection<EtbInvServidor> etbInvServidorCollection) {
+        this.etbInvServidorCollection = etbInvServidorCollection;
     }
 
     @Override

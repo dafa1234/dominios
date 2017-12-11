@@ -6,7 +6,9 @@
 package tablas;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,9 +16,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -43,6 +47,8 @@ public class EtbInvPlataforma implements Serializable {
     private String plaNomPlataforma;
     @Column(name = "PLA_ADM_PLATAFORMA")
     private Integer plaAdmPlataforma;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "plaIdPlataforma")
+    private Collection<EtbInvServidor> etbInvServidorCollection;
 
     public EtbInvPlataforma() {
     }
@@ -50,10 +56,9 @@ public class EtbInvPlataforma implements Serializable {
     public EtbInvPlataforma(Integer plaIdPlataforma) {
         this.plaIdPlataforma = plaIdPlataforma;
     }
-
     public EtbInvPlataforma(int aplataforma, String nplataforma) {
-       this.plaNomPlataforma = nplataforma;
-       this.plaAdmPlataforma = aplataforma;
+        this.plaAdmPlataforma = aplataforma;
+        this.plaNomPlataforma = nplataforma;
     }
 
     public Integer getPlaIdPlataforma() {
@@ -78,6 +83,15 @@ public class EtbInvPlataforma implements Serializable {
 
     public void setPlaAdmPlataforma(Integer plaAdmPlataforma) {
         this.plaAdmPlataforma = plaAdmPlataforma;
+    }
+
+    @XmlTransient
+    public Collection<EtbInvServidor> getEtbInvServidorCollection() {
+        return etbInvServidorCollection;
+    }
+
+    public void setEtbInvServidorCollection(Collection<EtbInvServidor> etbInvServidorCollection) {
+        this.etbInvServidorCollection = etbInvServidorCollection;
     }
 
     @Override

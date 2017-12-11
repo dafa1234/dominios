@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import tablas.EtbInvCronogramaMto;
+import tablas.EtbInvEstadoMto;
+import tablas.EtbInvProyecto;
 
 
 /**
@@ -33,14 +35,15 @@ public class crearcronograma {
     }
    @RequestMapping(method = RequestMethod.POST)  
    public String createcronograma(                   
-                      @RequestParam("proyecto") Integer croProyecto,
+                      @RequestParam("proyecto") Integer croProyect,
                       @RequestParam("servidor") String croSerial,
                       @RequestParam("fini") String croFechaIni,                   
-                      @RequestParam("estini") Integer croEstado,
+                      @RequestParam("estini") Integer croEstad,
                       @RequestParam("ejecuta") String croEjecuta,
                       @RequestParam("cambio") String croCambioFin                     
                       , Model model ) throws ServicioException{
-
+               EtbInvProyecto croProyecto = new EtbInvProyecto(croProyect);
+               EtbInvEstadoMto croEstado = new EtbInvEstadoMto(croEstad);
                dao.creacrono(croProyecto,croFechaIni,croSerial,croEjecuta,croCambioFin,croEstado);   
                
                List<EtbInvCronogramaMto> ListaCrono  = dao.ListaCrono();           

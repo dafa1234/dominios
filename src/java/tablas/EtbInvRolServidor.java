@@ -6,7 +6,9 @@
 package tablas;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,9 +16,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,6 +44,8 @@ public class EtbInvRolServidor implements Serializable {
     @Size(max = 25)
     @Column(name = "ROL_NOM_ROL_SERV")
     private String rolNomRolServ;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rolIdRolServ")
+    private Collection<EtbInvServidor> etbInvServidorCollection;
 
     public EtbInvRolServidor() {
     }
@@ -50,6 +56,7 @@ public class EtbInvRolServidor implements Serializable {
     public EtbInvRolServidor(String nrol) {
         this.rolNomRolServ = nrol;
     }
+
     public Integer getRolIdRolServ() {
         return rolIdRolServ;
     }
@@ -64,6 +71,15 @@ public class EtbInvRolServidor implements Serializable {
 
     public void setRolNomRolServ(String rolNomRolServ) {
         this.rolNomRolServ = rolNomRolServ;
+    }
+
+    @XmlTransient
+    public Collection<EtbInvServidor> getEtbInvServidorCollection() {
+        return etbInvServidorCollection;
+    }
+
+    public void setEtbInvServidorCollection(Collection<EtbInvServidor> etbInvServidorCollection) {
+        this.etbInvServidorCollection = etbInvServidorCollection;
     }
 
     @Override

@@ -67,9 +67,8 @@ public class EtbInvSisOperativo implements Serializable {
         this.sisDistribucion = sisDistribucion;
         this.sisNombre = sisNombre;
     }
-
     public EtbInvSisOperativo(int sisdis, String nsis) {
-        this.sisDistribucion = sisdis;
+         this.sisDistribucion = sisdis;
         this.sisNombre = nsis;
     }
 

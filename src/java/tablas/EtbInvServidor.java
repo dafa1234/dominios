@@ -6,7 +6,9 @@
 package tablas;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,10 +18,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,16 +37,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "EtbInvServidor.findBySerServer", query = "SELECT e FROM EtbInvServidor e WHERE e.serServer = :serServer")
     , @NamedQuery(name = "EtbInvServidor.findBySerSerial", query = "SELECT e FROM EtbInvServidor e WHERE e.serSerial = :serSerial")
     , @NamedQuery(name = "EtbInvServidor.findBySerHostname", query = "SELECT e FROM EtbInvServidor e WHERE e.serHostname = :serHostname")
-    , @NamedQuery(name = "EtbInvServidor.findByModIdModelo", query = "SELECT e FROM EtbInvServidor e WHERE e.modIdModelo = :modIdModelo")
     , @NamedQuery(name = "EtbInvServidor.findBySerConexion", query = "SELECT e FROM EtbInvServidor e WHERE e.serConexion = :serConexion")
-    , @NamedQuery(name = "EtbInvServidor.findByCenIdCentral", query = "SELECT e FROM EtbInvServidor e WHERE e.cenIdCentral = :cenIdCentral")
-    , @NamedQuery(name = "EtbInvServidor.findBySalIdSalon", query = "SELECT e FROM EtbInvServidor e WHERE e.salIdSalon = :salIdSalon")
     , @NamedQuery(name = "EtbInvServidor.findBySerRack", query = "SELECT e FROM EtbInvServidor e WHERE e.serRack = :serRack")
     , @NamedQuery(name = "EtbInvServidor.findBySerUnidad", query = "SELECT e FROM EtbInvServidor e WHERE e.serUnidad = :serUnidad")
-    , @NamedQuery(name = "EtbInvServidor.findByCliIdCliente", query = "SELECT e FROM EtbInvServidor e WHERE e.cliIdCliente = :cliIdCliente")
     , @NamedQuery(name = "EtbInvServidor.findBySerProyecto", query = "SELECT e FROM EtbInvServidor e WHERE e.serProyecto = :serProyecto")
-    , @NamedQuery(name = "EtbInvServidor.findByRolIdRolServ", query = "SELECT e FROM EtbInvServidor e WHERE e.rolIdRolServ = :rolIdRolServ")
-    , @NamedQuery(name = "EtbInvServidor.findByPlaIdPlataforma", query = "SELECT e FROM EtbInvServidor e WHERE e.plaIdPlataforma = :plaIdPlataforma")
     , @NamedQuery(name = "EtbInvServidor.findBySerFIngreso", query = "SELECT e FROM EtbInvServidor e WHERE e.serFIngreso = :serFIngreso")
     , @NamedQuery(name = "EtbInvServidor.findBySerTIngreso", query = "SELECT e FROM EtbInvServidor e WHERE e.serTIngreso = :serTIngreso")
     , @NamedQuery(name = "EtbInvServidor.findBySerNoProcFisico", query = "SELECT e FROM EtbInvServidor e WHERE e.serNoProcFisico = :serNoProcFisico")
@@ -70,45 +68,19 @@ public class EtbInvServidor implements Serializable {
     private String serHostname;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "MOD_ID_MODELO")
-    private int modIdModelo;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "SER_CONEXION")
     private String serConexion;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "CEN_ID_CENTRAL")
-    private int cenIdCentral;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "SAL_ID_SALON")
-    private int salIdSalon;
     @Size(max = 30)
     @Column(name = "SER_RACK")
     private String serRack;
     @Size(max = 30)
     @Column(name = "SER_UNIDAD")
     private String serUnidad;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "CLI_ID_CLIENTE")
-    private int cliIdCliente;
     @Size(max = 50)
     @Column(name = "SER_PROYECTO")
     private String serProyecto;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ROL_ID_ROL_SERV")
-    private int rolIdRolServ;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "PLA_ID_PLATAFORMA")
-    private int plaIdPlataforma;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
+    @Size(max = 30)
     @Column(name = "SER_F_INGRESO")
     private String serFIngreso;
     @Size(max = 30)
@@ -132,9 +104,16 @@ public class EtbInvServidor implements Serializable {
     @Size(max = 30)
     @Column(name = "SER_CORES")
     private String serCores;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSer")
+    private Collection<EtbInvDireccionamiento> etbInvDireccionamientoCollection;
+    @OneToMany(mappedBy = "aseServidor")
+    private Collection<EtbInvAseguramiento> etbInvAseguramientoCollection;
     @JoinColumn(name = "SIS_ID_SIS_OPERATIVO", referencedColumnName = "SIS_ID_SIS_OPERATIVO")
     @ManyToOne(optional = false)
     private EtbInvSisOperativo sisIdSisOperativo;
+    @JoinColumn(name = "ROL_ID_ROL_SERV", referencedColumnName = "ROL_ID_ROL_SERV")
+    @ManyToOne(optional = false)
+    private EtbInvRolServidor rolIdRolServ;
     @JoinColumn(name = "EST_ID_ESTADO", referencedColumnName = "EST_ID_ESTADO")
     @ManyToOne(optional = false)
     private EtbInvEstado estIdEstado;
@@ -144,6 +123,23 @@ public class EtbInvServidor implements Serializable {
     @JoinColumn(name = "MAR_ID_MARCA", referencedColumnName = "MAR_ID_MARCA")
     @ManyToOne
     private EtbInvMarca marIdMarca;
+    @JoinColumn(name = "MOD_ID_MODELO", referencedColumnName = "MOD_ID_MODELO")
+    @ManyToOne(optional = false)
+    private EtbInvModelo modIdModelo;
+    @JoinColumn(name = "CLI_ID_CLIENTE", referencedColumnName = "CLI_ID_CLIENTE")
+    @ManyToOne(optional = false)
+    private EtbInvCliente cliIdCliente;
+    @JoinColumn(name = "CEN_ID_CENTRAL", referencedColumnName = "CEN_ID_CENTRAL")
+    @ManyToOne(optional = false)
+    private EtbInvCentral cenIdCentral;
+    @JoinColumn(name = "SAL_ID_SALON", referencedColumnName = "SAL_ID_SALON")
+    @ManyToOne(optional = false)
+    private EtbInvSalon salIdSalon;
+    @JoinColumn(name = "PLA_ID_PLATAFORMA", referencedColumnName = "PLA_ID_PLATAFORMA")
+    @ManyToOne(optional = false)
+    private EtbInvPlataforma plaIdPlataforma;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSerServidor")
+    private Collection<EtbInvUsuServ> etbInvUsuServCollection;
 
     public EtbInvServidor() {
     }
@@ -152,22 +148,15 @@ public class EtbInvServidor implements Serializable {
         this.serServer = serServer;
     }
 
-    public EtbInvServidor(Integer serServer, String serSerial, String serHostname, int modIdModelo, String serConexion, int cenIdCentral, int salIdSalon, int cliIdCliente, int rolIdRolServ, int plaIdPlataforma, String serFIngreso, String serForAdCompartida, String serAdministrado) {
+    public EtbInvServidor(Integer serServer, String serSerial, String serHostname, String serConexion, String serForAdCompartida, String serAdministrado) {
         this.serServer = serServer;
         this.serSerial = serSerial;
         this.serHostname = serHostname;
-        this.modIdModelo = modIdModelo;
         this.serConexion = serConexion;
-        this.cenIdCentral = cenIdCentral;
-        this.salIdSalon = salIdSalon;
-        this.cliIdCliente = cliIdCliente;
-        this.rolIdRolServ = rolIdRolServ;
-        this.plaIdPlataforma = plaIdPlataforma;
-        this.serFIngreso = serFIngreso;
         this.serForAdCompartida = serForAdCompartida;
         this.serAdministrado = serAdministrado;
     }
-    public EtbInvServidor(String Fecha, String serSerial, String serHostname, EtbInvMarca marIdMarca, int modIdModelo, String serConexion, int cenIdCentral, int salIdSalon, int cliIdCliente, int rolIdRolServ, int plaIdPlataforma, String serForAdCompartida, String serAdministrado,String serCores,String serTIngreso,String serUnidad,String serProyecto,String serRack,Integer serNoProcFisico,EtbInvEstado estIdEstado,EtbInvSisOperativo sisIdSisOperativo,EtbInvGrupo gruIdGrupo) {
+    public EtbInvServidor(String Fecha, String serSerial, String serHostname, EtbInvMarca marIdMarca, EtbInvModelo modIdModelo, String serConexion, EtbInvCentral cenIdCentral, EtbInvSalon salIdSalon, EtbInvCliente cliIdCliente, EtbInvRolServidor rolIdRolServ, EtbInvPlataforma plaIdPlataforma, String serForAdCompartida, String serAdministrado,String serCores,String serTIngreso,String serUnidad,String serProyecto,String serRack,Integer serNoProcFisico,EtbInvEstado estIdEstado,EtbInvSisOperativo sisIdSisOperativo,EtbInvGrupo gruIdGrupo) {
         this.serFIngreso = Fecha;
         this.serSerial = serSerial;
         this.serHostname = serHostname;
@@ -216,36 +205,12 @@ public class EtbInvServidor implements Serializable {
         this.serHostname = serHostname;
     }
 
-    public int getModIdModelo() {
-        return modIdModelo;
-    }
-
-    public void setModIdModelo(int modIdModelo) {
-        this.modIdModelo = modIdModelo;
-    }
-
     public String getSerConexion() {
         return serConexion;
     }
 
     public void setSerConexion(String serConexion) {
         this.serConexion = serConexion;
-    }
-
-    public int getCenIdCentral() {
-        return cenIdCentral;
-    }
-
-    public void setCenIdCentral(int cenIdCentral) {
-        this.cenIdCentral = cenIdCentral;
-    }
-
-    public int getSalIdSalon() {
-        return salIdSalon;
-    }
-
-    public void setSalIdSalon(int salIdSalon) {
-        this.salIdSalon = salIdSalon;
     }
 
     public String getSerRack() {
@@ -264,36 +229,12 @@ public class EtbInvServidor implements Serializable {
         this.serUnidad = serUnidad;
     }
 
-    public int getCliIdCliente() {
-        return cliIdCliente;
-    }
-
-    public void setCliIdCliente(int cliIdCliente) {
-        this.cliIdCliente = cliIdCliente;
-    }
-
     public String getSerProyecto() {
         return serProyecto;
     }
 
     public void setSerProyecto(String serProyecto) {
         this.serProyecto = serProyecto;
-    }
-
-    public int getRolIdRolServ() {
-        return rolIdRolServ;
-    }
-
-    public void setRolIdRolServ(int rolIdRolServ) {
-        this.rolIdRolServ = rolIdRolServ;
-    }
-
-    public int getPlaIdPlataforma() {
-        return plaIdPlataforma;
-    }
-
-    public void setPlaIdPlataforma(int plaIdPlataforma) {
-        this.plaIdPlataforma = plaIdPlataforma;
     }
 
     public String getSerFIngreso() {
@@ -352,12 +293,38 @@ public class EtbInvServidor implements Serializable {
         this.serCores = serCores;
     }
 
+    @XmlTransient
+    public Collection<EtbInvDireccionamiento> getEtbInvDireccionamientoCollection() {
+        return etbInvDireccionamientoCollection;
+    }
+
+    public void setEtbInvDireccionamientoCollection(Collection<EtbInvDireccionamiento> etbInvDireccionamientoCollection) {
+        this.etbInvDireccionamientoCollection = etbInvDireccionamientoCollection;
+    }
+
+    @XmlTransient
+    public Collection<EtbInvAseguramiento> getEtbInvAseguramientoCollection() {
+        return etbInvAseguramientoCollection;
+    }
+
+    public void setEtbInvAseguramientoCollection(Collection<EtbInvAseguramiento> etbInvAseguramientoCollection) {
+        this.etbInvAseguramientoCollection = etbInvAseguramientoCollection;
+    }
+
     public EtbInvSisOperativo getSisIdSisOperativo() {
         return sisIdSisOperativo;
     }
 
     public void setSisIdSisOperativo(EtbInvSisOperativo sisIdSisOperativo) {
         this.sisIdSisOperativo = sisIdSisOperativo;
+    }
+
+    public EtbInvRolServidor getRolIdRolServ() {
+        return rolIdRolServ;
+    }
+
+    public void setRolIdRolServ(EtbInvRolServidor rolIdRolServ) {
+        this.rolIdRolServ = rolIdRolServ;
     }
 
     public EtbInvEstado getEstIdEstado() {
@@ -382,6 +349,55 @@ public class EtbInvServidor implements Serializable {
 
     public void setMarIdMarca(EtbInvMarca marIdMarca) {
         this.marIdMarca = marIdMarca;
+    }
+
+    public EtbInvModelo getModIdModelo() {
+        return modIdModelo;
+    }
+
+    public void setModIdModelo(EtbInvModelo modIdModelo) {
+        this.modIdModelo = modIdModelo;
+    }
+
+    public EtbInvCliente getCliIdCliente() {
+        return cliIdCliente;
+    }
+
+    public void setCliIdCliente(EtbInvCliente cliIdCliente) {
+        this.cliIdCliente = cliIdCliente;
+    }
+
+    public EtbInvCentral getCenIdCentral() {
+        return cenIdCentral;
+    }
+
+    public void setCenIdCentral(EtbInvCentral cenIdCentral) {
+        this.cenIdCentral = cenIdCentral;
+    }
+
+    public EtbInvSalon getSalIdSalon() {
+        return salIdSalon;
+    }
+
+    public void setSalIdSalon(EtbInvSalon salIdSalon) {
+        this.salIdSalon = salIdSalon;
+    }
+
+    public EtbInvPlataforma getPlaIdPlataforma() {
+        return plaIdPlataforma;
+    }
+
+    public void setPlaIdPlataforma(EtbInvPlataforma plaIdPlataforma) {
+        this.plaIdPlataforma = plaIdPlataforma;
+    }
+
+    @XmlTransient
+    public Collection<EtbInvUsuServ> getEtbInvUsuServCollection() {
+        return etbInvUsuServCollection;
+    }
+
+    public void setEtbInvUsuServCollection(Collection<EtbInvUsuServ> etbInvUsuServCollection) {
+        this.etbInvUsuServCollection = etbInvUsuServCollection;
     }
 
     @Override

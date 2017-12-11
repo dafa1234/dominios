@@ -38,12 +38,16 @@
             <span class="nav-link-text">nuevos objetos</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponent">          
-            <li><a href="<c:url value="/nCentral.htm"/>">Agregar Central</a></li>
-            <li><a href="<c:url value="/nGrupo.htm"/>">Agregar Grupo</a></li>
-            <li><a href="<c:url value="/nMarca.htm"/>">Agregar Marca</a></li>        
-            <li><a href="<c:url value="/nPlataforma.htm"/>">Agregar Plataforma</a></li>                     
-            <li><a href="<c:url value="/nRolserv.htm"/>">Agregar Rol Servidor</a></li>
-            <li><a href="<c:url value="/nSisopera.htm"/>">Agregar Sistema Operativo</a></li>
+            <li><a href="<c:url value="/ncentral.htm"/>">Agregar Central</a></li>
+            <li><a href="<c:url value="/ngrupo.htm"/>">Agregar Grupo</a></li>
+            <li><a href="<c:url value="/nmarca.htm"/>">Agregar Marca</a></li>        
+            <li><a href="<c:url value="/nplataforma.htm"/>">Agregar Plataforma</a></li>                     
+            <li><a href="<c:url value="/nrolserv.htm"/>">Agregar Rol Servidor</a></li>
+            <li><a href="<c:url value="/nsisopera.htm"/>">Agregar Sistema Operativo</a></li>
+            <li><a href="<c:url value="/nestado.htm"/>">Agregar Estado</a></li>
+            <li><a href="<c:url value="/nsalon.htm"/>">Agregar Salon</a></li>
+            <li><a href="<c:url value="/nmodelo.htm"/>">Agregar Modelo</a></li>
+            <li><a href="<c:url value="/ncliente.htm"/>">Agregar Cliemte</a></li>
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">

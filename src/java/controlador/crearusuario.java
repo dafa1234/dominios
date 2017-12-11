@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import tablas.EtbInvServidor;
 import tablas.EtbInvUsuEstado;
 import java.util.List;
+import tablas.EtbInvUsuServ;
 
 
 /**
@@ -36,19 +37,22 @@ public class crearusuario {
    public String create(@RequestParam("login") String ususLogin,
                         @RequestParam("nombre") String ususNombre,
                         @RequestParam("tarea") String tCambio,
-                        @RequestParam("serv") String ususServ,Model model)
+                        @RequestParam("servid") int ususidSer,Model model)
    {
          int ususEstad = 1;
+         EtbInvServidor aa = dao.readid(ususidSer);
+         String ususServ =aa.getSerSerial();
            Calendar fechaActual = Calendar.getInstance();
             String Fecha = String.format("%04d-%02d-%02d",
               fechaActual.get(Calendar.YEAR),
               fechaActual.get(Calendar.MONTH)+1,
               fechaActual.get(Calendar.DAY_OF_MONTH));
      EtbInvUsuEstado ususEstado = new EtbInvUsuEstado(ususEstad);
-      dao.crearususerv(ususLogin,ususNombre,ususServ,ususEstado);
+     EtbInvServidor ususidServ = new EtbInvServidor(ususidSer);
+      dao.crearususerv(ususLogin,ususNombre,ususServ,ususEstado,ususidServ);
       dao.crearcambioususerv(Fecha,ususLogin,tCambio,ususEstado);
-       List<EtbInvServidor> Listaserver  = dao.Listaserver();           
-          model.addAttribute("Listaserver", Listaserver); 
+       List<EtbInvUsuServ> Listaususerv  = dao.Listaususerv();           
+          model.addAttribute("Listaususerv", Listaususerv); 
        return "user/usuarioservidor";
    }
     

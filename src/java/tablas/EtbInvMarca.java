@@ -64,8 +64,12 @@ public class EtbInvMarca implements Serializable {
     @Size(min = 1, max = 25)
     @Column(name = "MAR_INTERVENTOR")
     private String marInterventor;
+    @OneToMany(mappedBy = "contProv")
+    private Collection<EtbInvContrato> etbInvContratoCollection;
     @OneToMany(mappedBy = "marIdMarca")
     private Collection<EtbInvServidor> etbInvServidorCollection;
+    @OneToMany(mappedBy = "caspProv")
+    private Collection<EtbInvCasosProv> etbInvCasosProvCollection;
 
     public EtbInvMarca() {
     }
@@ -81,9 +85,8 @@ public class EtbInvMarca implements Serializable {
         this.marTelSoporte = marTelSoporte;
         this.marInterventor = marInterventor;
     }
-
     public EtbInvMarca(String nmarca, String usoporte, String tsoporte, String minterventor) {
-        this.marNomMarca = nmarca;
+       this.marNomMarca = nmarca;
         this.marUrlSoporte = usoporte;
         this.marTelSoporte = tsoporte;
         this.marInterventor = minterventor;
@@ -130,12 +133,30 @@ public class EtbInvMarca implements Serializable {
     }
 
     @XmlTransient
+    public Collection<EtbInvContrato> getEtbInvContratoCollection() {
+        return etbInvContratoCollection;
+    }
+
+    public void setEtbInvContratoCollection(Collection<EtbInvContrato> etbInvContratoCollection) {
+        this.etbInvContratoCollection = etbInvContratoCollection;
+    }
+
+    @XmlTransient
     public Collection<EtbInvServidor> getEtbInvServidorCollection() {
         return etbInvServidorCollection;
     }
 
     public void setEtbInvServidorCollection(Collection<EtbInvServidor> etbInvServidorCollection) {
         this.etbInvServidorCollection = etbInvServidorCollection;
+    }
+
+    @XmlTransient
+    public Collection<EtbInvCasosProv> getEtbInvCasosProvCollection() {
+        return etbInvCasosProvCollection;
+    }
+
+    public void setEtbInvCasosProvCollection(Collection<EtbInvCasosProv> etbInvCasosProvCollection) {
+        this.etbInvCasosProvCollection = etbInvCasosProvCollection;
     }
 
     @Override

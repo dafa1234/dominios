@@ -6,7 +6,6 @@
 package controlador;
 
 
-import java.sql.Date;
 import java.util.List;
 import modelo.ServicioException;
 import modelo.iniciosecion;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import tablas.EtbInvActividad;
+import tablas.EtbInvTipoActividad;
 
 
 /**
@@ -42,7 +42,7 @@ public class crearactividad {
                       @RequestParam("tarea") String actTarea,
                       @RequestParam("desc") String actDescripcion,
                       @RequestParam("sol") String actSolicita,
-                      @RequestParam("tipo") Integer actTipo,
+                      @RequestParam("tipo") Integer actTip,
                       @RequestParam("fini") String actFechaIni,
                       @RequestParam("ffin") String actFechaFin  
                       , Model model ) throws ServicioException{
@@ -50,7 +50,7 @@ public class crearactividad {
     
             
             //base de datos
-    
+     EtbInvTipoActividad actTipo = new EtbInvTipoActividad( actTip);
                
                dao.creact( actServ,  actEjecuta,  actTarea,  actDescripcion,  actSolicita, actTipo,actFechaFin,actFechaIni );   
 List<EtbInvActividad> ListaActividad  = dao.ListaActividad();                  

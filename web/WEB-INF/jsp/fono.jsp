@@ -46,8 +46,8 @@
                     <td>${f.serSerial}</td>
                     <td>${f.serHostname}</td>
                     <td>${f.marIdMarca.marNomMarca}</td>
-                    <td>${f.modIdModelo}</td>
-                    <td>${f.cenIdCentral}</td>
+                    <td>${f.modIdModelo.modNomModelo}</td>
+                    <td>${f.cliIdCliente.cliNombre}</td>
                     <td>${f.sisIdSisOperativo.sisNombre}</td>
                     <td>${f.gruIdGrupo.gruNomGrupo}</td>
                     <td>${f.estIdEstado.estEstado}</td>  

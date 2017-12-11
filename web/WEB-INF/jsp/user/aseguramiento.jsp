@@ -25,7 +25,14 @@
                 <form id="forminicio" action="aseg.htm" method="Post">
                     <table>
                         <tr>
-                            <td>  <input  name="serv" type="text" id="inputPassword" class="form-control" placeholder="SERVIDOR" ><br/><br/></td>
+                            <td>
+                                <select name="serv" class="form-control">
+                                    <option value="">servidor</option>
+                                    <c:forEach var="f" items="${requestScope.listaServer}">
+                                        <option value="${f.serServer}">${f.serSerial}__${f.serHostname}</option>
+                                    </c:forEach>
+                                </select><br/><br/>
+                            </td>
 
                             <td>  <input   name="tarea" type="text" id="inputEmail" class="form-control" placeholder="TAREA"  ><br/><br/></td>
                     </tr><tr>
@@ -33,8 +40,7 @@
                               
                         <td>  <input  name="fini" type="text"   id="Fecha_Inicio" class="form-control" placeholder="fecha inicio" ></br><br/></td>
          </tr><tr>
-             <td>    <input   name="serial" type="text" id="inputEmail" class="form-control" placeholder="SERIAL"  ><br/><br/></td>
-
+            
              <td>    <input   name="plantilla" type="text" id="inputEmail" class="form-control" placeholder="PLANTILLA"  ><br/><br/></td>
          </tr>
                     </table>
@@ -74,9 +80,9 @@
                 <th>FECHA</th>
                 <th>TAREA</th>
                 <th>SERVIDOR</th>
-                <th>SISTEMA OPERATIVO</th>
-          
-           
+                <th>SERIAL</th>
+                <th>EJECUTA</th>
+                <th>SIS OPERATIVO</th>          
             </tr>
             </thead>
               
@@ -86,9 +92,9 @@
                 <th>FECHA</th>
                 <th>TAREA</th>
                 <th>SERVIDOR</th>
-                <th>SISTEMA OPERATIVO</th>
-          
-           
+                <th>SERIAL</th>
+                <th>EJECUTA</th>
+                <th>SIS OPERATIVO</th>          
             </tr>
             </tfoot>
             <tbody>        
@@ -97,9 +103,10 @@
                     <td>${f.aseId}</td>
                     <td>${f.aseFecha}</td>
                     <td>${f.aseTarea}</td>
-                    <td>${f.aseServidor}</td>
+                    <td>${f.aseServidor.serHostname}</td>
+                    <td>${f.aseServidor.serSerial}</td>
                     <td>${f.aseEjecuta}</td>
-                  
+                    <td>${f.aseServidor.sisIdSisOperativo.sisNombre}</td>
                 
             </tr>
             </c:forEach>

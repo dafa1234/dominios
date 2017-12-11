@@ -61,6 +61,9 @@ public class EtbInvEstado implements Serializable {
         this.estIdEstado = estIdEstado;
         this.estEstado = estEstado;
     }
+    public EtbInvEstado(String nest) {
+       this.estEstado = nest;
+    }
 
     public Integer getEstIdEstado() {
         return estIdEstado;

@@ -33,9 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "EtbInvUsuarioAp.findByUsuApell", query = "SELECT e FROM EtbInvUsuarioAp e WHERE e.usuApell = :usuApell")
     , @NamedQuery(name = "EtbInvUsuarioAp.findByUsuIdPer", query = "SELECT e FROM EtbInvUsuarioAp e WHERE e.usuIdPer = :usuIdPer")
     , @NamedQuery(name = "EtbInvUsuarioAp.findByUsuCorreo", query = "SELECT e FROM EtbInvUsuarioAp e WHERE e.usuCorreo = :usuCorreo")
+    , @NamedQuery(name = "EtbInvUsuarioAp.findByUsuEtb", query = "SELECT e FROM EtbInvUsuarioAp e WHERE e.usuEtb = :usuEtb")
     , @NamedQuery(name = "EtbInvUsuarioAp.findByUsuEstado", query = "SELECT e FROM EtbInvUsuarioAp e WHERE e.usuEstado = :usuEstado")
     , @NamedQuery(name = "EtbInvUsuarioAp.findByUsuDominio", query = "SELECT e FROM EtbInvUsuarioAp e WHERE e.usuDominio = :usuDominio")
-    , @NamedQuery(name = "EtbInvUsuarioAp.findByUsuEtb", query = "SELECT e FROM EtbInvUsuarioAp e WHERE e.usuEtb = :usuEtb")
     , @NamedQuery(name = "EtbInvUsuarioAp.findByUsuCodEtb", query = "SELECT e FROM EtbInvUsuarioAp e WHERE e.usuCodEtb = :usuCodEtb")
     , @NamedQuery(name = "EtbInvUsuarioAp.findByUsuTelefono", query = "SELECT e FROM EtbInvUsuarioAp e WHERE e.usuTelefono = :usuTelefono")
     , @NamedQuery(name = "EtbInvUsuarioAp.findByUsuEmpresa", query = "SELECT e FROM EtbInvUsuarioAp e WHERE e.usuEmpresa = :usuEmpresa")
@@ -72,6 +72,11 @@ public class EtbInvUsuarioAp implements Serializable {
     private String usuCorreo;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "USU_ETB")
+    private String usuEtb;
+    @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "USU_ESTADO")
     private String usuEstado;
@@ -79,11 +84,6 @@ public class EtbInvUsuarioAp implements Serializable {
     @NotNull
     @Column(name = "USU_DOMINIO")
     private int usuDominio;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "USU_ETB")
-    private String usuEtb;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -127,15 +127,15 @@ public class EtbInvUsuarioAp implements Serializable {
         this.usuId = usuId;
     }
 
-    public EtbInvUsuarioAp(Integer usuId, String usuNombre, String usuApell, int usuIdPer, String usuCorreo, String usuEstado, int usuDominio, String usuEtb, String usuCodEtb, String usuTelefono, String usuEmpresa, String usuCargo, String usuDireccion, String usuCedula, String usuTelOficina) {
+    public EtbInvUsuarioAp(Integer usuId, String usuNombre, String usuApell, int usuIdPer, String usuCorreo, String usuEtb, String usuEstado, int usuDominio, String usuCodEtb, String usuTelefono, String usuEmpresa, String usuCargo, String usuDireccion, String usuCedula, String usuTelOficina) {
         this.usuId = usuId;
         this.usuNombre = usuNombre;
         this.usuApell = usuApell;
         this.usuIdPer = usuIdPer;
         this.usuCorreo = usuCorreo;
+        this.usuEtb = usuEtb;
         this.usuEstado = usuEstado;
         this.usuDominio = usuDominio;
-        this.usuEtb = usuEtb;
         this.usuCodEtb = usuCodEtb;
         this.usuTelefono = usuTelefono;
         this.usuEmpresa = usuEmpresa;
@@ -143,6 +143,14 @@ public class EtbInvUsuarioAp implements Serializable {
         this.usuDireccion = usuDireccion;
         this.usuCedula = usuCedula;
         this.usuTelOficina = usuTelOficina;
+    }
+
+    public Integer getUsuId() {
+        return usuId;
+    }
+
+    public void setUsuId(Integer usuId) {
+        this.usuId = usuId;
     }
     public EtbInvUsuarioAp(int per, String nombre_recibido, String apellido_recibido, String Correo_recibido, String estado, int dom, String Codigo_Etb_Recibido, String usuario_recibido, 
             String telefono_recibido, String Empresa_recibido, String Cargo_recibido, String Direccion_Recibido, String Cedula_Recibido, String telefono_ofici_recibido) {
@@ -160,14 +168,6 @@ public class EtbInvUsuarioAp implements Serializable {
         this.usuDireccion = Direccion_Recibido;
         this.usuCedula = Cedula_Recibido;
         this.usuTelOficina = telefono_ofici_recibido;
-    }
-
-    public Integer getUsuId() {
-        return usuId;
-    }
-
-    public void setUsuId(Integer usuId) {
-        this.usuId = usuId;
     }
 
     public String getUsuNombre() {
@@ -202,6 +202,14 @@ public class EtbInvUsuarioAp implements Serializable {
         this.usuCorreo = usuCorreo;
     }
 
+    public String getUsuEtb() {
+        return usuEtb;
+    }
+
+    public void setUsuEtb(String usuEtb) {
+        this.usuEtb = usuEtb;
+    }
+
     public String getUsuEstado() {
         return usuEstado;
     }
@@ -216,14 +224,6 @@ public class EtbInvUsuarioAp implements Serializable {
 
     public void setUsuDominio(int usuDominio) {
         this.usuDominio = usuDominio;
-    }
-
-    public String getUsuEtb() {
-        return usuEtb;
-    }
-
-    public void setUsuEtb(String usuEtb) {
-        this.usuEtb = usuEtb;
     }
 
     public String getUsuCodEtb() {

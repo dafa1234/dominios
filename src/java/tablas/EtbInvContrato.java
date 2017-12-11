@@ -12,7 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -30,12 +32,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "EtbInvContrato.findAll", query = "SELECT e FROM EtbInvContrato e")
     , @NamedQuery(name = "EtbInvContrato.findByContId", query = "SELECT e FROM EtbInvContrato e WHERE e.contId = :contId")
-    , @NamedQuery(name = "EtbInvContrato.findByContProv", query = "SELECT e FROM EtbInvContrato e WHERE e.contProv = :contProv")
-    , @NamedQuery(name = "EtbInvContrato.findByContTipo", query = "SELECT e FROM EtbInvContrato e WHERE e.contTipo = :contTipo")
     , @NamedQuery(name = "EtbInvContrato.findByContFechaIni", query = "SELECT e FROM EtbInvContrato e WHERE e.contFechaIni = :contFechaIni")
     , @NamedQuery(name = "EtbInvContrato.findByContFechaFin", query = "SELECT e FROM EtbInvContrato e WHERE e.contFechaFin = :contFechaFin")
     , @NamedQuery(name = "EtbInvContrato.findByContNum", query = "SELECT e FROM EtbInvContrato e WHERE e.contNum = :contNum")
-    , @NamedQuery(name = "EtbInvContrato.findByContEstado", query = "SELECT e FROM EtbInvContrato e WHERE e.contEstado = :contEstado")
     , @NamedQuery(name = "EtbInvContrato.findByContLogin", query = "SELECT e FROM EtbInvContrato e WHERE e.contLogin = :contLogin")})
 public class EtbInvContrato implements Serializable {
 
@@ -45,10 +44,6 @@ public class EtbInvContrato implements Serializable {
     @Basic(optional = false)
     @Column(name = "CONT_ID")
     private Integer contId;
-    @Column(name = "CONT_PROV")
-    private Integer contProv;
-    @Column(name = "CONT_TIPO")
-    private Integer contTipo;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -66,11 +61,18 @@ public class EtbInvContrato implements Serializable {
     @Size(max = 16777215)
     @Column(name = "CONT_DESCRIP")
     private String contDescrip;
-    @Column(name = "CONT_ESTADO")
-    private Integer contEstado;
     @Size(max = 255)
     @Column(name = "CONT_LOGIN")
     private String contLogin;
+    @JoinColumn(name = "CONT_TIPO", referencedColumnName = "TOPC_ID")
+    @ManyToOne
+    private EtbInvTipoCont contTipo;
+    @JoinColumn(name = "CONT_ESTADO", referencedColumnName = "ESTCO_ID")
+    @ManyToOne
+    private EtbInvEstadoCont contEstado;
+    @JoinColumn(name = "CONT_PROV", referencedColumnName = "MAR_ID_MARCA")
+    @ManyToOne
+    private EtbInvMarca contProv;
 
     public EtbInvContrato() {
     }
@@ -84,7 +86,7 @@ public class EtbInvContrato implements Serializable {
         this.contFechaIni = contFechaIni;
         this.contFechaFin = contFechaFin;
     }
-    public EtbInvContrato(Integer contProv, Integer contTipo, String contFechaIni, String contFechaFin, String contNum, Integer contEstado, String contLogin, String contDescrip) {
+    public EtbInvContrato(EtbInvMarca contProv, EtbInvTipoCont contTipo, String contFechaIni, String contFechaFin, String contNum, EtbInvEstadoCont contEstado, String contLogin, String contDescrip) {
         
         this.contProv = contProv;
         this.contTipo = contTipo;
@@ -103,22 +105,6 @@ public class EtbInvContrato implements Serializable {
 
     public void setContId(Integer contId) {
         this.contId = contId;
-    }
-
-    public Integer getContProv() {
-        return contProv;
-    }
-
-    public void setContProv(Integer contProv) {
-        this.contProv = contProv;
-    }
-
-    public Integer getContTipo() {
-        return contTipo;
-    }
-
-    public void setContTipo(Integer contTipo) {
-        this.contTipo = contTipo;
     }
 
     public String getContFechaIni() {
@@ -153,20 +139,36 @@ public class EtbInvContrato implements Serializable {
         this.contDescrip = contDescrip;
     }
 
-    public Integer getContEstado() {
-        return contEstado;
-    }
-
-    public void setContEstado(Integer contEstado) {
-        this.contEstado = contEstado;
-    }
-
     public String getContLogin() {
         return contLogin;
     }
 
     public void setContLogin(String contLogin) {
         this.contLogin = contLogin;
+    }
+
+    public EtbInvTipoCont getContTipo() {
+        return contTipo;
+    }
+
+    public void setContTipo(EtbInvTipoCont contTipo) {
+        this.contTipo = contTipo;
+    }
+
+    public EtbInvEstadoCont getContEstado() {
+        return contEstado;
+    }
+
+    public void setContEstado(EtbInvEstadoCont contEstado) {
+        this.contEstado = contEstado;
+    }
+
+    public EtbInvMarca getContProv() {
+        return contProv;
+    }
+
+    public void setContProv(EtbInvMarca contProv) {
+        this.contProv = contProv;
     }
 
     @Override

@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -30,7 +32,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "EtbInvDireccionamiento.findByDirId", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.dirId = :dirId")
     , @NamedQuery(name = "EtbInvDireccionamiento.findByDirDirServ", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.dirDirServ = :dirDirServ")
     , @NamedQuery(name = "EtbInvDireccionamiento.findByDirIp", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.dirIp = :dirIp")
-    , @NamedQuery(name = "EtbInvDireccionamiento.findByDirTipo", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.dirTipo = :dirTipo")
     , @NamedQuery(name = "EtbInvDireccionamiento.findByDirVlan", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.dirVlan = :dirVlan")
     , @NamedQuery(name = "EtbInvDireccionamiento.findByDirSwitch", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.dirSwitch = :dirSwitch")
     , @NamedQuery(name = "EtbInvDireccionamiento.findByDirPuerto", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.dirPuerto = :dirPuerto")})
@@ -48,8 +49,6 @@ public class EtbInvDireccionamiento implements Serializable {
     @Size(max = 255)
     @Column(name = "DIR_IP")
     private String dirIp;
-    @Column(name = "DIR_TIPO")
-    private Integer dirTipo;
     @Size(max = 255)
     @Column(name = "DIR_VLAN")
     private String dirVlan;
@@ -59,6 +58,12 @@ public class EtbInvDireccionamiento implements Serializable {
     @Size(max = 255)
     @Column(name = "DIR_PUERTO")
     private String dirPuerto;
+    @JoinColumn(name = "DIR_TIPO", referencedColumnName = "TIP_ID_IP")
+    @ManyToOne
+    private EtbInvTip dirTipo;
+    @JoinColumn(name = "ID_SER", referencedColumnName = "ser_server")
+    @ManyToOne(optional = false)
+    private EtbInvServidor idSer;
 
     public EtbInvDireccionamiento() {
     }
@@ -91,14 +96,6 @@ public class EtbInvDireccionamiento implements Serializable {
         this.dirIp = dirIp;
     }
 
-    public Integer getDirTipo() {
-        return dirTipo;
-    }
-
-    public void setDirTipo(Integer dirTipo) {
-        this.dirTipo = dirTipo;
-    }
-
     public String getDirVlan() {
         return dirVlan;
     }
@@ -121,6 +118,22 @@ public class EtbInvDireccionamiento implements Serializable {
 
     public void setDirPuerto(String dirPuerto) {
         this.dirPuerto = dirPuerto;
+    }
+
+    public EtbInvTip getDirTipo() {
+        return dirTipo;
+    }
+
+    public void setDirTipo(EtbInvTip dirTipo) {
+        this.dirTipo = dirTipo;
+    }
+
+    public EtbInvServidor getIdSer() {
+        return idSer;
+    }
+
+    public void setIdSer(EtbInvServidor idSer) {
+        this.idSer = idSer;
     }
 
     @Override

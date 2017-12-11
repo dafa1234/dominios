@@ -12,7 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -30,7 +32,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "EtbInvActividad.findAll", query = "SELECT e FROM EtbInvActividad e")
     , @NamedQuery(name = "EtbInvActividad.findByActId", query = "SELECT e FROM EtbInvActividad e WHERE e.actId = :actId")
-    , @NamedQuery(name = "EtbInvActividad.findByActTipo", query = "SELECT e FROM EtbInvActividad e WHERE e.actTipo = :actTipo")
     , @NamedQuery(name = "EtbInvActividad.findByActServ", query = "SELECT e FROM EtbInvActividad e WHERE e.actServ = :actServ")
     , @NamedQuery(name = "EtbInvActividad.findByActEjecuta", query = "SELECT e FROM EtbInvActividad e WHERE e.actEjecuta = :actEjecuta")
     , @NamedQuery(name = "EtbInvActividad.findByActFechaIni", query = "SELECT e FROM EtbInvActividad e WHERE e.actFechaIni = :actFechaIni")
@@ -45,8 +46,6 @@ public class EtbInvActividad implements Serializable {
     @Basic(optional = false)
     @Column(name = "ACT_ID")
     private Integer actId;
-    @Column(name = "ACT_TIPO")
-    private Integer actTipo;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -83,6 +82,9 @@ public class EtbInvActividad implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "ACT_SOLICITA")
     private String actSolicita;
+    @JoinColumn(name = "ACT_TIPO", referencedColumnName = "TIPA_ID")
+    @ManyToOne
+    private EtbInvTipoActividad actTipo;
 
     public EtbInvActividad() {
     }
@@ -101,7 +103,7 @@ public class EtbInvActividad implements Serializable {
         this.actFechaFin = actFechaFin;
         this.actSolicita = actSolicita;
     }
-    public EtbInvActividad( String actServ, String actEjecuta, String actTarea, String actDescripcion, String actSolicita,Integer actTipo,String actFechaFin, String actFechaIni) {
+    public EtbInvActividad( String actServ, String actEjecuta, String actTarea, String actDescripcion, String actSolicita,EtbInvTipoActividad actTipo,String actFechaFin, String actFechaIni) {
        
         this.actTipo = actTipo;
         this.actServ = actServ;
@@ -119,14 +121,6 @@ public class EtbInvActividad implements Serializable {
 
     public void setActId(Integer actId) {
         this.actId = actId;
-    }
-
-    public Integer getActTipo() {
-        return actTipo;
-    }
-
-    public void setActTipo(Integer actTipo) {
-        this.actTipo = actTipo;
     }
 
     public String getActServ() {
@@ -183,6 +177,14 @@ public class EtbInvActividad implements Serializable {
 
     public void setActSolicita(String actSolicita) {
         this.actSolicita = actSolicita;
+    }
+
+    public EtbInvTipoActividad getActTipo() {
+        return actTipo;
+    }
+
+    public void setActTipo(EtbInvTipoActividad actTipo) {
+        this.actTipo = actTipo;
     }
 
     @Override

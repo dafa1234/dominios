@@ -106,13 +106,13 @@
             <c:forEach var="f" items="${requestScope.listaContra}">
             <tr>
                     <td>${f.contId}</td>
-                    <td>${f.contProv}</td>
-                    <td>${f.contTipo}</td>
+                    <td>${f.contProv.marNomMarca}</td>
+                    <td>${f.contTipo.tipcDescrip}</td>
                     <td>${f.contFechaIni}</td>
                     <td>${f.contFechaFin}</td>
                     <td>${f.contNum}</td>
                     <td>${f.contDescrip}</td>
-                    <td>${f.contEstado}</td>
+                    <td>${f.contEstado.estcoDescrip}</td>
                     <td>${f.contLogin}</td>                                                     
             </tr>
             </c:forEach>               

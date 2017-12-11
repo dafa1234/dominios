@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import tablas.EtbInvAseguramiento;
+import tablas.EtbInvServidor;
 
 
 /**
@@ -33,15 +34,14 @@ public class crearaseguramiento {
     }
    @RequestMapping(method = RequestMethod.POST)  
    public String createaseguram(                   
-                      @RequestParam("serv") String aseServidor,
+                      @RequestParam("serv") int aseServido,
                       @RequestParam("eje") String aseEjecuta,
                       @RequestParam("tarea") String aseTarea,                   
-                      @RequestParam("serial") String actSolicita,
                       @RequestParam("plantilla") Integer actTipo,
                       @RequestParam("fini") String aseFecha
                       , Model model ) throws ServicioException{
           
-
+EtbInvServidor aseServidor = new EtbInvServidor(aseServido);
                dao.crease(aseTarea,aseServidor,aseEjecuta,aseFecha);   
 List<EtbInvAseguramiento> ListaAsegu  = dao.ListaAsegu();    
           model.addAttribute("listaAsegu", ListaAsegu);    

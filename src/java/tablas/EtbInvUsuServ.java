@@ -56,6 +56,9 @@ public class EtbInvUsuServ implements Serializable {
     @JoinColumn(name = "USUS_ESTADO", referencedColumnName = "USUS_ESTADO")
     @ManyToOne(optional = false)
     private EtbInvUsuEstado ususEstado;
+    @JoinColumn(name = "ID_SER_SERVIDOR", referencedColumnName = "ser_server")
+    @ManyToOne(optional = false)
+    private EtbInvServidor idSerServidor;
 
     public EtbInvUsuServ() {
     }
@@ -63,11 +66,12 @@ public class EtbInvUsuServ implements Serializable {
     public EtbInvUsuServ(Integer ususId) {
         this.ususId = ususId;
     }
-    public EtbInvUsuServ(String ususLogin, String ususNombre, String ususServ, EtbInvUsuEstado ususEstado) {
+    public EtbInvUsuServ(String ususLogin, String ususNombre, String ususServ, EtbInvUsuEstado ususEstado,EtbInvServidor ususidServ) {
         this.ususLogin = ususLogin;
         this.ususNombre = ususNombre;
         this.ususServ = ususServ;
-         this.ususEstado = ususEstado;
+        this.ususEstado = ususEstado;
+        this.idSerServidor = ususidServ;
     }
   
 
@@ -126,6 +130,14 @@ public class EtbInvUsuServ implements Serializable {
 
     public void setUsusEstado(EtbInvUsuEstado ususEstado) {
         this.ususEstado = ususEstado;
+    }
+
+    public EtbInvServidor getIdSerServidor() {
+        return idSerServidor;
+    }
+
+    public void setIdSerServidor(EtbInvServidor idSerServidor) {
+        this.idSerServidor = idSerServidor;
     }
 
     @Override

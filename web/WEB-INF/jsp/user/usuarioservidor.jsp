@@ -1,4 +1,3 @@
-<%@page import="tablas.EtbInvUsuEstado"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -8,14 +7,12 @@
         <%@include file="/WEB-INF/plantilla/header.jsp" %>
          <div class="content-wrapper">
              </br></br>
-             
-
      <%
          String ususLogin = (String)request.getAttribute("ususLogin");
          String ususNombre = (String)request.getAttribute("ususNombre");
          String ususServ = (String)request.getAttribute("ususServ");
          Integer ususAdm = (Integer)request.getAttribute("ususAdm");
-         EtbInvUsuEstado ususEstado = (EtbInvUsuEstado)request.getAttribute("ususEstado");
+         String ususEstado = (String)request.getAttribute("ususEstado");
          String getUsuApell = (String)request.getAttribute("getUsuApell");
          String getUsuCorreo = (String)request.getAttribute("getUsuCorreo");
          Integer email = (Integer)request.getAttribute("email");
@@ -32,40 +29,30 @@
                  <a  role="button" href="<c:url value="/usuarioservidor.htm"/>">volver</a>
               </div>
      <form id="forminicio" action="usuario.htm" method="Post">
-         
-                     <table class="table table-bordered" id="ataTable" width="100%" cellspacing="0">            
-                        
-                         <tr>
-                           
+                       <table class="table table-bordered" id="ataTable" width="100%" cellspacing="0">            
+                         <tr>                           
                             <th>login</th>
                             <th>nombre</th>
                             <th>tarea</th>
-                            <th>servidor</th>
-                            
-                            
+                            <th>servidor</th>                 
                          </tr>
-
                          <tr>
                              <td> <input  name="login" type="text"  id="inputPassword" class="form-control" placeholder="login" >  </td>
                              <td> <input  name="nombre" type="text"  id="inputPassword" class="form-control" placeholder="nombre usuario" >  </td>
                              <td> <input  name="tarea" type="text"  id="inputPassword" class="form-control" placeholder="tarea" >  </td>                            
                              <td>   
-                                    <select name="serv" class="form-control">
-                                                    <option value="">${getUsuDominio}</option>
-                                                    <c:forEach var="f" items="${requestScope.Listaserver}">
-                                                        <option value="${f.serSerial}">${f.serSerial}   -    ${f.serHostname}</option>
-                                                    </c:forEach>
+                                    <select name="servid" class="form-control">
+                                        <option value="">servidor</option>
+                                        <c:forEach var="f" items="${requestScope.Listaserver}">
+                                            <option value="${f.serServer}">${f.serSerial}   -    ${f.serHostname}</option>
+                                         </c:forEach>
                                     </select>
-                             </td> 
-                             
+                             </td>                            
                          </tr>
-
-                    </table> 
-                    
+                    </table>                     
                         <div>
                             <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: red">ingresar</button>
-                        </div>
-                    
+                        </div>                    
      </form>   
 
      <%   }
@@ -181,7 +168,8 @@ if(getUsuApell!=null){%>
                             <th>usuario login</th>
                             <th>usuario nombre</th>
                             <th>usuario estado</th>                        
-                            <th>usuario servidor</th>
+                            <th>usuario hostname</th>
+                            <th>usuario serial</th>
                             <th>usuario admin</th>
                             <th>modificar</th>
                             <th>detalle</th>
@@ -193,7 +181,8 @@ if(getUsuApell!=null){%>
                             <th>usuario login</th>
                             <th>usuario nombre</th>
                             <th>usuario estado</th>                         
-                            <th>usuario servidor</th>
+                            <th>usuario hostname</th>
+                            <th>usuario serial</th>
                             <th>usuario admin</th>
                             <th>modificar</th>
                             <th>detalle</th>
@@ -208,6 +197,7 @@ if(getUsuApell!=null){%>
                                 <td>${f.ususLogin}</td>
                                 <td>${f.ususNombre}</td>
                                 <td>${f.ususEstado.estuEstado}</td>
+                                <td>${f.idSerServidor.serHostname}</td>
                                 <td>${f.ususServ}</td>
                                 <td>${f.ususAdm}</td>
                                 <td> 

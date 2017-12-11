@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -31,7 +33,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "EtbInvAseguramiento.findByAseId", query = "SELECT e FROM EtbInvAseguramiento e WHERE e.aseId = :aseId")
     , @NamedQuery(name = "EtbInvAseguramiento.findByAseFecha", query = "SELECT e FROM EtbInvAseguramiento e WHERE e.aseFecha = :aseFecha")
     , @NamedQuery(name = "EtbInvAseguramiento.findByAseTarea", query = "SELECT e FROM EtbInvAseguramiento e WHERE e.aseTarea = :aseTarea")
-    , @NamedQuery(name = "EtbInvAseguramiento.findByAseServidor", query = "SELECT e FROM EtbInvAseguramiento e WHERE e.aseServidor = :aseServidor")
     , @NamedQuery(name = "EtbInvAseguramiento.findByAseEjecuta", query = "SELECT e FROM EtbInvAseguramiento e WHERE e.aseEjecuta = :aseEjecuta")})
 public class EtbInvAseguramiento implements Serializable {
 
@@ -50,11 +51,11 @@ public class EtbInvAseguramiento implements Serializable {
     @Column(name = "ASE_TAREA")
     private String aseTarea;
     @Size(max = 255)
-    @Column(name = "ASE_SERVIDOR")
-    private String aseServidor;
-    @Size(max = 255)
     @Column(name = "ASE_EJECUTA")
     private String aseEjecuta;
+    @JoinColumn(name = "ASE_SERVIDOR", referencedColumnName = "ser_server")
+    @ManyToOne
+    private EtbInvServidor aseServidor;
 
     public EtbInvAseguramiento() {
     }
@@ -67,7 +68,7 @@ public class EtbInvAseguramiento implements Serializable {
         this.aseId = aseId;
         this.aseFecha = aseFecha;
     }
-    public EtbInvAseguramiento(String aseTarea, String aseServidor, String aseEjecuta,String aseFecha) {
+    public EtbInvAseguramiento(String aseTarea, EtbInvServidor aseServidor, String aseEjecuta,String aseFecha) {
         this.aseFecha = aseFecha;
         this.aseTarea = aseTarea;
         this.aseServidor = aseServidor;
@@ -98,20 +99,20 @@ public class EtbInvAseguramiento implements Serializable {
         this.aseTarea = aseTarea;
     }
 
-    public String getAseServidor() {
-        return aseServidor;
-    }
-
-    public void setAseServidor(String aseServidor) {
-        this.aseServidor = aseServidor;
-    }
-
     public String getAseEjecuta() {
         return aseEjecuta;
     }
 
     public void setAseEjecuta(String aseEjecuta) {
         this.aseEjecuta = aseEjecuta;
+    }
+
+    public EtbInvServidor getAseServidor() {
+        return aseServidor;
+    }
+
+    public void setAseServidor(EtbInvServidor aseServidor) {
+        this.aseServidor = aseServidor;
     }
 
     @Override
