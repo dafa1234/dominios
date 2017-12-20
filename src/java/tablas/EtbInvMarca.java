@@ -91,7 +91,6 @@ public class EtbInvMarca implements Serializable {
         this.marTelSoporte = tsoporte;
         this.marInterventor = minterventor;
     }
-
     public Integer getMarIdMarca() {
         return marIdMarca;
     }

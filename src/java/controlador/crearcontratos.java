@@ -7,6 +7,7 @@ package controlador;
 
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 import modelo.ServicioException;
 import modelo.iniciosecion;
@@ -49,7 +50,14 @@ public class crearcontratos {
                EtbInvMarca contProv = new EtbInvMarca(contPro);
                EtbInvTipoCont contTipo = new EtbInvTipoCont(contTip);
                EtbInvEstadoCont contEstado = new EtbInvEstadoCont(contEstad);
-               dao.creacont(contProv,contTipo,contFechaIni,contFechaFin,contNum,contEstado,contLogin,contDescrip);   
+               Calendar fechaActual = Calendar.getInstance();
+            String Fecha = String.format("%04d-%02d-%02d",
+              fechaActual.get(Calendar.YEAR),
+              fechaActual.get(Calendar.MONTH)+1,
+              fechaActual.get(Calendar.DAY_OF_MONTH));
+            int m=2;
+            model.addAttribute("m", m); 
+               dao.creacont(Fecha,contProv,contTipo,contFechaIni,contFechaFin,contNum,contEstado,contLogin,contDescrip);   
 List<EtbInvContrato> ListaContra  = dao.ListaContra();   
           model.addAttribute("listaContra", ListaContra);
                 return "user/contratos";

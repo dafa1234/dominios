@@ -156,7 +156,8 @@ public class EtbInvServidor implements Serializable {
         this.serForAdCompartida = serForAdCompartida;
         this.serAdministrado = serAdministrado;
     }
-    public EtbInvServidor(String Fecha, String serSerial, String serHostname, EtbInvMarca marIdMarca, EtbInvModelo modIdModelo, String serConexion, EtbInvCentral cenIdCentral, EtbInvSalon salIdSalon, EtbInvCliente cliIdCliente, EtbInvRolServidor rolIdRolServ, EtbInvPlataforma plaIdPlataforma, String serForAdCompartida, String serAdministrado,String serCores,String serTIngreso,String serUnidad,String serProyecto,String serRack,Integer serNoProcFisico,EtbInvEstado estIdEstado,EtbInvSisOperativo sisIdSisOperativo,EtbInvGrupo gruIdGrupo) {
+
+    public EtbInvServidor(String Fecha, String serSerial, String serHostname, EtbInvMarca marIdMarca, EtbInvModelo modIdModelo, String serConexion, EtbInvCentral cenIdCentral, EtbInvSalon salIdSalon, EtbInvCliente cliIdCliente, EtbInvRolServidor rolIdRolServ, EtbInvPlataforma plaIdPlataforma, String serForAdCompartida, String serAdministrado, String serCores, String serTIngreso, String serUnidad, String serProyecto, String serRack, Integer serNoProcFisico, EtbInvEstado estIdEstado, EtbInvSisOperativo sisIdSisOperativo, EtbInvGrupo gruIdGrupo) {
         this.serFIngreso = Fecha;
         this.serSerial = serSerial;
         this.serHostname = serHostname;

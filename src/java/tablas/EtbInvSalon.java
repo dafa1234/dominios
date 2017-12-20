@@ -60,7 +60,6 @@ public class EtbInvSalon implements Serializable {
         this.salCentral = scen;
         this.salNombre = nsal;
     }
-
     public Integer getSalIdSalon() {
         return salIdSalon;
     }

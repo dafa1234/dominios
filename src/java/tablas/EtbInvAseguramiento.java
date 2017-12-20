@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "EtbInvAseguramiento.findByAseId", query = "SELECT e FROM EtbInvAseguramiento e WHERE e.aseId = :aseId")
     , @NamedQuery(name = "EtbInvAseguramiento.findByAseFecha", query = "SELECT e FROM EtbInvAseguramiento e WHERE e.aseFecha = :aseFecha")
     , @NamedQuery(name = "EtbInvAseguramiento.findByAseTarea", query = "SELECT e FROM EtbInvAseguramiento e WHERE e.aseTarea = :aseTarea")
-    , @NamedQuery(name = "EtbInvAseguramiento.findByAseEjecuta", query = "SELECT e FROM EtbInvAseguramiento e WHERE e.aseEjecuta = :aseEjecuta")})
+    , @NamedQuery(name = "EtbInvAseguramiento.findByAseEjecuta", query = "SELECT e FROM EtbInvAseguramiento e WHERE e.aseEjecuta = :aseEjecuta")
+    , @NamedQuery(name = "EtbInvAseguramiento.findByFCreacion", query = "SELECT e FROM EtbInvAseguramiento e WHERE e.fCreacion = :fCreacion")})
 public class EtbInvAseguramiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,6 +54,11 @@ public class EtbInvAseguramiento implements Serializable {
     @Size(max = 255)
     @Column(name = "ASE_EJECUTA")
     private String aseEjecuta;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "F_Creacion")
+    private String fCreacion;
     @JoinColumn(name = "ASE_SERVIDOR", referencedColumnName = "ser_server")
     @ManyToOne
     private EtbInvServidor aseServidor;
@@ -64,17 +70,18 @@ public class EtbInvAseguramiento implements Serializable {
         this.aseId = aseId;
     }
 
-    public EtbInvAseguramiento(Integer aseId, String aseFecha) {
+    public EtbInvAseguramiento(Integer aseId, String aseFecha, String fCreacion) {
         this.aseId = aseId;
         this.aseFecha = aseFecha;
+        this.fCreacion = fCreacion;
     }
-    public EtbInvAseguramiento(String aseTarea, EtbInvServidor aseServidor, String aseEjecuta,String aseFecha) {
+    public EtbInvAseguramiento(String Fecha,String aseTarea, EtbInvServidor aseServidor, String aseEjecuta,String aseFecha) {
         this.aseFecha = aseFecha;
         this.aseTarea = aseTarea;
         this.aseServidor = aseServidor;
         this.aseEjecuta = aseEjecuta;
+        this.fCreacion = Fecha;
     }
-
     public Integer getAseId() {
         return aseId;
     }
@@ -105,6 +112,14 @@ public class EtbInvAseguramiento implements Serializable {
 
     public void setAseEjecuta(String aseEjecuta) {
         this.aseEjecuta = aseEjecuta;
+    }
+
+    public String getFCreacion() {
+        return fCreacion;
+    }
+
+    public void setFCreacion(String fCreacion) {
+        this.fCreacion = fCreacion;
     }
 
     public EtbInvServidor getAseServidor() {

@@ -48,6 +48,7 @@
             <li><a href="<c:url value="/nsalon.htm"/>">Agregar Salon</a></li>
             <li><a href="<c:url value="/nmodelo.htm"/>">Agregar Modelo</a></li>
             <li><a href="<c:url value="/ncliente.htm"/>">Agregar Cliemte</a></li>
+            <li><a href="<c:url value="/proce1.htm"/>">proce</a></li>
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">

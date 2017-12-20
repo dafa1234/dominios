@@ -72,7 +72,6 @@ public class EtbInvCliente implements Serializable {
          this.cliNombre = ncli;
         this.cliContacto = ccli;
     }
-
     public Integer getCliIdCliente() {
         return cliIdCliente;
     }

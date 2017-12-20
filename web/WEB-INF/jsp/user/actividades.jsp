@@ -20,9 +20,9 @@
                 
             </div>
                                     <%
-            String m = (String)request.getAttribute("m");
+            Integer m = (Integer)request.getAttribute("m");
     
-         if(m!=null){
+         if(m==1){
             %>
               <div class="box-bottom">
                     <a  role="button" href="<c:url value="/actividades.htm"/>">volver</a> 
@@ -35,8 +35,15 @@
       
         <table>
         <tr>
-            <td>   <input  name="tipo" type="text" id="inputPassword" class="form-control" placeholder="tipo" required><br/><br/></td>
-
+            
+                                            <td>                              
+                                                <select name="tipo" class="form-control">
+                                                    <option value="">tipo</option>
+                                                    <c:forEach var="f" items="${requestScope.Listatipoactiv}">
+                                                        <option value="${f.tipaId}">${f.tipaNombre}</option>
+                                                    </c:forEach>
+                                                </select><br/><br/>
+                                            </td>
         <td>    <input   name="serv" type="text" id="inputEmail" class="form-control" placeholder="servidor" required autofocus class="nav nav-pills nav-stacked"><br/><br/></td>
         </tr>
         <tr>
@@ -67,9 +74,15 @@
  
                             
                             
-<%}else{%>
-    <div class="box-bottom">
+<%}if(m==2){%>
+                <div class="box-bottom">
                     <a  role="button" href="<c:url value="/newactiv.htm"/>">agregar</a> 
+                </div>
+                <div class="flex-caption">
+                    <h3>Bienvenido</h3> 
+                    <div class="box-bottom">
+                        <a  role="button" data-toggle="modal" data-target="#login-modal">REPORTE</a>
+                    </div>                          
                 </div>
        <div class="card mb-3">
         <div class="card-header">
@@ -122,12 +135,98 @@
         </div>
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
-                            <%}%>
-
-                        </div>
-
-
- 
+<%}if(m==3){%>
+    <div class="box-bottom">
+                    <a  role="button" href="<c:url value="/actividades.htm"/>">volver</a> 
+                </div>         
+       <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Actividades abiertas</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+             <tr>              
+                <th>ID</th>
+                <th>HOST</th>
+                <th>TIPO</th>
+                <th>TAREA</th>
+                <th>FECHA_INICIO</th>
+                <th>FECHA_FIN</th>
+                <th>DESCRIPCION</th>              
+                
+             </tr>
+            </thead>
+              
+            <tfoot>
+             <tr>
+                <th>ID</th>
+                <th>HOST</th>
+                <th>TIPO</th>
+                <th>TAREA</th>
+                <th>FECHA INICIO</th>
+                <th>FECHA FIN</th>
+                <th>DESCRIPCION</th>              
+        
+             </tr>
+            </tfoot>
+              <tbody>        
+            <c:forEach var="f" items="${requestScope.listaActividad}">
+            <tr>
+                    <td>${f.actId}</td>
+                    <td>${f.actEjecuta}</td>
+                    <td>${f.actTipo.tipaNombre}</td>
+                    <td>${f.actTarea}</td>
+                    <td>${f.actFechaIni}</td>
+                    <td>${f.actFechaFin}</td>
+                    <td>${f.actDescripcion}</td>
+                 
+            </tr>
+            </c:forEach>
+               
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+<%}%>
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal-dialog">
+    <div class="modal-content" style="background: #20a4cb">
+        <div class="modal-header" align="center">
+            <span>REPORTE</span>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+        </div>
+        <!-- Begin # DIV Form -->
+        <div id="div-forms" >
+            <!-- Begin # Login Form -->
+            <form id="forminicio" action="serversreport.htm" method="Post">
+                <div class="modal-body" style="background: #20a4cb"> 
+                    <div id="div-login-msg">
+                        <div  id="icon-login-msg" class="glyphicon glyphicon-user"></div>
+                    </div>
+                    <input id="login_username" class="form-control" type="text" name="F_Inicio" placeholder="Fecha Inicio" required="" autocomplete="off">
+                    <div id="div-login-msg">
+                        <div id="icon-login-msg" class="glyphicon glyphicon-minus-sign"></div>
+                    </div>
+                    <input id="login_password" class="form-control" type="text"  name="F_Fin" placeholder="Fecha Fin" required="">
+                    <input type="hidden"  name="F" value="6">
+                </div>
+                <div class="modal-footer" style="background:#ff5c39">
+                    <div>
+                        <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: #ffffff">INGRESAR</button>
+                    </div>
+                </div>
+            </form>
+            <!-- End # DIV Form -->
+        </div>
+    </div>
+</div>
+</div>
+    </div>
         <%@include file="/WEB-INF/plantilla/foter.jsp" %>
     </body>
 </html>

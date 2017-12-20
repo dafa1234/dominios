@@ -17,9 +17,9 @@
                 <h3>tabla de contratos</h3> 
          </div>
                                           <%
-            String m = (String)request.getAttribute("m");
+            Integer m = (Integer)request.getAttribute("m");
     
-         if(m!=null){
+         if(m==1){
             %>
 <!-- Begin # DIV Form -->
     <div class="box-bottom">
@@ -49,7 +49,7 @@
                               <select name="estado" class="form-control">
                                         <option value="">estado</option>
                                         <c:forEach var="f" items="${requestScope.ListaEstado}">
-                                            <option value="${f.estIdEstado}">${f.estEstado}</option>
+                                            <option value="${f.estcoId}">${f.estcoDescrip}</option>
                                         </c:forEach>
                               </select><br/><br/>
                               <input   name="login" type="text" id="inputEmail" class="form-control" placeholder="login"  ><br/><br/>                             
@@ -66,10 +66,16 @@
                 </center>
           
      
-<%}else{%>
-<div class="box-bottom">
-                    <a  role="button" href="<c:url value="/newcont.htm"/>">agregar</a> 
-                </div>
+<%}if(m==2){%>
+        <div class="box-bottom">
+             <a  role="button" href="<c:url value="/newcont.htm"/>">agregar</a> 
+        </div>
+        <div class="flex-caption">
+             <h3>Bienvenido</h3> 
+             <div class="box-bottom">
+               <a  role="button" data-toggle="modal" data-target="#login-modal">REPORTE</a>
+             </div>
+        </div>
          <div class="card mb-3">
         <div class="card-header">
           <i class="fa fa-table"></i> Data Table contratos</div>
@@ -123,7 +129,95 @@
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>  
     
+<%}if(m==3){%>
+         <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Data Table contratos</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">             
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>PROVEDOR</th>
+                <th>TIPO</th>
+                <th>FECHA INICIO</th>
+                <th>FECHA FIN</th>
+                <th>NUMERO</th>
+                <th>DESCRIPCION</th>
+                <th>ESTADO</th>
+                <th>LOGIN</th>
+            </tr>
+            </thead>              
+            <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>PROVEDOR</th>
+                <th>TIPO</th>
+                <th>FECHA INICIO</th>
+                <th>FECHA FIN</th>
+                <th>NUMERO</th>
+                <th>DESCRIPCION</th>
+                <th>ESTADO</th>
+                <th>LOGIN</th>
+            </tr>
+            </tfoot>
+            <tbody>        
+            <c:forEach var="f" items="${requestScope.listaContra}">
+            <tr>
+                    <td>${f.contId}</td>
+                    <td>${f.contProv.marNomMarca}</td>
+                    <td>${f.contTipo.tipcDescrip}</td>
+                    <td>${f.contFechaIni}</td>
+                    <td>${f.contFechaFin}</td>
+                    <td>${f.contNum}</td>
+                    <td>${f.contDescrip}</td>
+                    <td>${f.contEstado.estcoDescrip}</td>
+                    <td>${f.contLogin}</td>                                                     
+            </tr>
+            </c:forEach>               
+            </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>  
 <%}%>
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal-dialog">
+    <div class="modal-content" style="background: #20a4cb">
+        <div class="modal-header" align="center">
+            <span>REPORTE</span>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+        </div>
+        <!-- Begin # DIV Form -->
+        <div id="div-forms" >
+            <!-- Begin # Login Form -->
+            <form id="forminicio" action="serversreport.htm" method="Post">
+                <div class="modal-body" style="background: #20a4cb"> 
+                    <div id="div-login-msg">
+                        <div  id="icon-login-msg" class="glyphicon glyphicon-user"></div>
+                    </div>
+                    <input id="login_username" class="form-control" type="text" name="F_Inicio" placeholder="Fecha Inicio" required="" autocomplete="off">
+                    <div id="div-login-msg">
+                        <div id="icon-login-msg" class="glyphicon glyphicon-minus-sign"></div>
+                    </div>
+                    <input id="login_password" class="form-control" type="text"  name="F_Fin" placeholder="Fecha Fin" required="">
+                    <input type="hidden"  name="F" value="4">
+                </div>
+                <div class="modal-footer" style="background:#ff5c39">
+                    <div>
+                        <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: #ffffff">INGRESAR</button>
+                    </div>
+                </div>
+            </form>
+            <!-- End # DIV Form -->
+        </div>
+    </div>
+</div>
+</div>
 </div>
          <%@include file="/WEB-INF/plantilla/foter.jsp" %>
     </body>

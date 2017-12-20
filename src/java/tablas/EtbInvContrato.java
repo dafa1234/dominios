@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "EtbInvContrato.findByContFechaIni", query = "SELECT e FROM EtbInvContrato e WHERE e.contFechaIni = :contFechaIni")
     , @NamedQuery(name = "EtbInvContrato.findByContFechaFin", query = "SELECT e FROM EtbInvContrato e WHERE e.contFechaFin = :contFechaFin")
     , @NamedQuery(name = "EtbInvContrato.findByContNum", query = "SELECT e FROM EtbInvContrato e WHERE e.contNum = :contNum")
-    , @NamedQuery(name = "EtbInvContrato.findByContLogin", query = "SELECT e FROM EtbInvContrato e WHERE e.contLogin = :contLogin")})
+    , @NamedQuery(name = "EtbInvContrato.findByContLogin", query = "SELECT e FROM EtbInvContrato e WHERE e.contLogin = :contLogin")
+    , @NamedQuery(name = "EtbInvContrato.findByFCreacion", query = "SELECT e FROM EtbInvContrato e WHERE e.fCreacion = :fCreacion")})
 public class EtbInvContrato implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -64,6 +65,11 @@ public class EtbInvContrato implements Serializable {
     @Size(max = 255)
     @Column(name = "CONT_LOGIN")
     private String contLogin;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "F_Creacion")
+    private String fCreacion;
     @JoinColumn(name = "CONT_TIPO", referencedColumnName = "TOPC_ID")
     @ManyToOne
     private EtbInvTipoCont contTipo;
@@ -81,13 +87,14 @@ public class EtbInvContrato implements Serializable {
         this.contId = contId;
     }
 
-    public EtbInvContrato(Integer contId, String contFechaIni, String contFechaFin) {
+    public EtbInvContrato(Integer contId, String contFechaIni, String contFechaFin, String fCreacion) {
         this.contId = contId;
         this.contFechaIni = contFechaIni;
         this.contFechaFin = contFechaFin;
+        this.fCreacion = fCreacion;
     }
-    public EtbInvContrato(EtbInvMarca contProv, EtbInvTipoCont contTipo, String contFechaIni, String contFechaFin, String contNum, EtbInvEstadoCont contEstado, String contLogin, String contDescrip) {
-        
+    public EtbInvContrato(String Fecha,EtbInvMarca contProv, EtbInvTipoCont contTipo, String contFechaIni, String contFechaFin, String contNum, EtbInvEstadoCont contEstado, String contLogin, String contDescrip) {
+        this.fCreacion = Fecha;
         this.contProv = contProv;
         this.contTipo = contTipo;
         this.contFechaIni = contFechaIni;
@@ -98,7 +105,6 @@ public class EtbInvContrato implements Serializable {
         this.contLogin = contLogin;
         
     }
-
     public Integer getContId() {
         return contId;
     }
@@ -145,6 +151,14 @@ public class EtbInvContrato implements Serializable {
 
     public void setContLogin(String contLogin) {
         this.contLogin = contLogin;
+    }
+
+    public String getFCreacion() {
+        return fCreacion;
+    }
+
+    public void setFCreacion(String fCreacion) {
+        this.fCreacion = fCreacion;
     }
 
     public EtbInvTipoCont getContTipo() {

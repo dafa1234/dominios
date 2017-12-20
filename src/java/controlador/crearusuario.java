@@ -39,7 +39,9 @@ public class crearusuario {
                         @RequestParam("tarea") String tCambio,
                         @RequestParam("servid") int ususidSer,Model model)
    {
-         int ususEstad = 1;
+         
+         int m = 0;
+          model.addAttribute("m", m);
          EtbInvServidor aa = dao.readid(ususidSer);
          String ususServ =aa.getSerSerial();
            Calendar fechaActual = Calendar.getInstance();
@@ -47,11 +49,12 @@ public class crearusuario {
               fechaActual.get(Calendar.YEAR),
               fechaActual.get(Calendar.MONTH)+1,
               fechaActual.get(Calendar.DAY_OF_MONTH));
-     EtbInvUsuEstado ususEstado = new EtbInvUsuEstado(ususEstad);
+     EtbInvUsuEstado ususEstado = new EtbInvUsuEstado(1);
+     EtbInvUsuEstado ususEstadoa = new EtbInvUsuEstado(3);
      EtbInvServidor ususidServ = new EtbInvServidor(ususidSer);
-      dao.crearususerv(ususLogin,ususNombre,ususServ,ususEstado,ususidServ);
+      dao.crearususerv(Fecha,ususLogin,ususNombre,ususServ,ususEstadoa,ususidServ);
       dao.crearcambioususerv(Fecha,ususLogin,tCambio,ususEstado);
-       List<EtbInvUsuServ> Listaususerv  = dao.Listaususerv();           
+       List<EtbInvUsuServ> Listaususerv  = dao.Listaususerv(ususEstadoa);           
           model.addAttribute("Listaususerv", Listaususerv); 
        return "user/usuarioservidor";
    }

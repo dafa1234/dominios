@@ -299,8 +299,7 @@
                                 <td>${f.dirVlan}</td>
                                 <td>${f.dirSwitch}</td>
                                 <td>${f.dirPuerto}</td>
-                                
-                                                       
+                                              
                          </tr>
                          </c:forEach>               
                         </tbody>
@@ -319,6 +318,12 @@ if(m==0){
                     <a  role="button" href="<c:url value="/aserver.htm"/>">agregar</a> 
                     
                 </div>
+                    <div class="flex-caption">
+                                  <h3>Bienvenido</h3> 
+                                  <div class="box-bottom">
+                                      <a  role="button" data-toggle="modal" data-target="#login-modal">REPORTE</a>
+                                   </div>
+                    </div>
             <div class="card mb-3">
                 <div class="card-header">
                   <i class="fa fa-table"></i> Data Table servidores</div>
@@ -336,7 +341,7 @@ if(m==0){
                             <th>TblSoNombre</th>
                             <th>TblGrupoNombre</th>
                             <th>TblEstadoEstado</th>
-                            <th>TblEstadoEstado</th>
+                            <th>detalle</th>
                          </tr>
                         </thead>
                         <tfoot>
@@ -350,7 +355,7 @@ if(m==0){
                             <th>TblSoNombre</th>
                             <th>TblGrupoNombre</th>
                             <th>TblEstadoEstado</th>
-                            <th>TblEstadoEstado</th>
+                            <th>detalle</th>
                          </tr>
                         </tfoot>
                         <tbody>        
@@ -384,8 +389,109 @@ if(m==0){
             </div>
             <!-- fin de tabla-->                   
             <!-- Begin # DIV Form -->
+<%
+}
+if(m==3){
+            %>
+            <div class="box-bottom">
+                    <a  role="button" href="<c:url value="/servers.htm"/>">volver</a> 
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">
+                  <i class="fa fa-table"></i> Data Table servidores</div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">            
+                        <thead>
+                         <tr>
+                            <th>ID</th>
+                            <th>TblServSerial</th>
+                            <th>TblServHostName</th>
+                            <th>TblMarcaMarca</th>
+                            <th>TblModeloModelo</th>
+                            <th>TblClienteNombre</th>
+                            <th>TblSoNombre</th>
+                            <th>TblGrupoNombre</th>
+                            <th>TblEstadoEstado</th>
+                            <td>estIdEstadoestEstado</td>  
+                            
+                         </tr>
+                        </thead>
+                        <tfoot>
+                         <tr>
+                              <td>ID</td>
+                            <th>TblServSerial</th>
+                            <th>TblServHostName</th>
+                            <th>TblMarcaMarca</th>
+                            <th>TblModeloModelo</th>
+                            <th>TblClienteNombre</th>
+                            <th>TblSoNombre</th>
+                            <th>TblGrupoNombre</th>
+                            <th>TblEstadoEstado</th>
+                            <td>estIdEstadoestEstado</td>  
+                            
+                         </tr>
+                        </tfoot>
+                        <tbody>        
+                         <c:forEach var="f" items="${requestScope.listreporte}">
+                         <tr>
+                                <td>${f.serServer}</td>
+                                <td>${f.serSerial}</td>
+                                <td>${f.serHostname}</td>
+                                <td>${f.marIdMarca.marNomMarca}</td>
+                                <td>${f.modIdModelo.modNomModelo}</td>
+                                <td>${f.cliIdCliente.cliNombre}</td>
+                                <td>${f.sisIdSisOperativo.sisNombre}</td>
+                                <td>${f.gruIdGrupo.gruNomGrupo}</td>
+                                <td>${f.estIdEstado.estEstado}</td>  
+                                <td>${f.serFIngreso}</td>  
+                         </tr>
+                         </c:forEach>               
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+            </div>
+            <!-- fin de tabla-->                   
+            <!-- Begin # DIV Form -->
 <%}
 %>
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal-dialog">
+    <div class="modal-content" style="background: #20a4cb">
+        <div class="modal-header" align="center">
+            <span>REPORTE</span>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+        </div>
+        <!-- Begin # DIV Form -->
+        <div id="div-forms" >
+            <!-- Begin # Login Form -->
+            <form id="forminicio" action="serversreport.htm" method="Post">
+                <div class="modal-body" style="background: #20a4cb"> 
+                    <div id="div-login-msg">
+                        <div  id="icon-login-msg" class="glyphicon glyphicon-user"></div>
+                    </div>
+                    <input id="login_username" class="form-control" type="text" name="F_Inicio" placeholder="Fecha Inicio" required="" autocomplete="off">
+                    <div id="div-login-msg">
+                        <div id="icon-login-msg" class="glyphicon glyphicon-minus-sign"></div>
+                    </div>
+                    <input id="login_password" class="form-control" type="text"  name="F_Fin" placeholder="Fecha Fin" required="">
+                    <input type="hidden"  name="F" value="1">
+                </div>
+                <div class="modal-footer" style="background:#ff5c39">
+                    <div>
+                        <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: #ffffff">INGRESAR</button>
+                    </div>
+                </div>
+            </form>
+            <!-- End # DIV Form -->
+        </div>
+    </div>
+</div>
+</div>
     </div>       
    <%@include file="/WEB-INF/plantilla/foter.jsp" %>
 </body>

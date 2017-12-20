@@ -37,7 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "EtbInvCronogramaMto.findByCroFechaProx", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croFechaProx = :croFechaProx")
     , @NamedQuery(name = "EtbInvCronogramaMto.findByCroFechaFin", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croFechaFin = :croFechaFin")
     , @NamedQuery(name = "EtbInvCronogramaMto.findByCroCambioFin", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croCambioFin = :croCambioFin")
-    , @NamedQuery(name = "EtbInvCronogramaMto.findByCroEjecuta", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croEjecuta = :croEjecuta")})
+    , @NamedQuery(name = "EtbInvCronogramaMto.findByCroEjecuta", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croEjecuta = :croEjecuta")
+    , @NamedQuery(name = "EtbInvCronogramaMto.findByFCreacion", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.fCreacion = :fCreacion")})
 public class EtbInvCronogramaMto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,6 +71,11 @@ public class EtbInvCronogramaMto implements Serializable {
     @Size(max = 16777215)
     @Column(name = "CRO_OBSERVACION")
     private String croObservacion;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "F_Creacion")
+    private String fCreacion;
     @JoinColumn(name = "CRO_PROYECTO", referencedColumnName = "PRO_ID")
     @ManyToOne
     private EtbInvProyecto croProyecto;
@@ -84,19 +90,20 @@ public class EtbInvCronogramaMto implements Serializable {
         this.croId = croId;
     }
 
-    public EtbInvCronogramaMto(Integer croId, String croFechaIni) {
+    public EtbInvCronogramaMto(Integer croId, String croFechaIni, String fCreacion) {
         this.croId = croId;
         this.croFechaIni = croFechaIni;
+        this.fCreacion = fCreacion;
     }
-    public EtbInvCronogramaMto(EtbInvProyecto croProyecto, String croFechaIni, String croSerial, String croEjecuta,String croCambioFin,EtbInvEstadoMto croEstado) {
+    public EtbInvCronogramaMto(String Fecha,EtbInvProyecto croProyecto, String croFechaIni, String croSerial, String croEjecuta,String croCambioFin,EtbInvEstadoMto croEstado) {
         this.croProyecto = croProyecto;
         this.croFechaIni = croFechaIni;
         this.croSerial = croSerial;
         this.croEjecuta = croEjecuta;
         this.croCambioFin = croCambioFin;
         this.croEstado = croEstado;
+        this.fCreacion = Fecha;
     }
-
     public Integer getCroId() {
         return croId;
     }
@@ -159,6 +166,14 @@ public class EtbInvCronogramaMto implements Serializable {
 
     public void setCroObservacion(String croObservacion) {
         this.croObservacion = croObservacion;
+    }
+
+    public String getFCreacion() {
+        return fCreacion;
+    }
+
+    public void setFCreacion(String fCreacion) {
+        this.fCreacion = fCreacion;
     }
 
     public EtbInvProyecto getCroProyecto() {

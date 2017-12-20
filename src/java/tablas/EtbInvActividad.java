@@ -37,7 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "EtbInvActividad.findByActFechaIni", query = "SELECT e FROM EtbInvActividad e WHERE e.actFechaIni = :actFechaIni")
     , @NamedQuery(name = "EtbInvActividad.findByActTarea", query = "SELECT e FROM EtbInvActividad e WHERE e.actTarea = :actTarea")
     , @NamedQuery(name = "EtbInvActividad.findByActFechaFin", query = "SELECT e FROM EtbInvActividad e WHERE e.actFechaFin = :actFechaFin")
-    , @NamedQuery(name = "EtbInvActividad.findByActSolicita", query = "SELECT e FROM EtbInvActividad e WHERE e.actSolicita = :actSolicita")})
+    , @NamedQuery(name = "EtbInvActividad.findByActSolicita", query = "SELECT e FROM EtbInvActividad e WHERE e.actSolicita = :actSolicita")
+    , @NamedQuery(name = "EtbInvActividad.findByFCreacion", query = "SELECT e FROM EtbInvActividad e WHERE e.fCreacion = :fCreacion")})
 public class EtbInvActividad implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -82,6 +83,11 @@ public class EtbInvActividad implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "ACT_SOLICITA")
     private String actSolicita;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "F_Creacion")
+    private String fCreacion;
     @JoinColumn(name = "ACT_TIPO", referencedColumnName = "TIPA_ID")
     @ManyToOne
     private EtbInvTipoActividad actTipo;
@@ -93,7 +99,7 @@ public class EtbInvActividad implements Serializable {
         this.actId = actId;
     }
 
-    public EtbInvActividad(Integer actId, String actServ, String actEjecuta, String actFechaIni, String actTarea, String actDescripcion, String actFechaFin, String actSolicita) {
+    public EtbInvActividad(Integer actId, String actServ, String actEjecuta, String actFechaIni, String actTarea, String actDescripcion, String actFechaFin, String actSolicita, String fCreacion) {
         this.actId = actId;
         this.actServ = actServ;
         this.actEjecuta = actEjecuta;
@@ -102,9 +108,10 @@ public class EtbInvActividad implements Serializable {
         this.actDescripcion = actDescripcion;
         this.actFechaFin = actFechaFin;
         this.actSolicita = actSolicita;
+        this.fCreacion = fCreacion;
     }
-    public EtbInvActividad( String actServ, String actEjecuta, String actTarea, String actDescripcion, String actSolicita,EtbInvTipoActividad actTipo,String actFechaFin, String actFechaIni) {
-       
+    public EtbInvActividad(String Fecha, String actServ, String actEjecuta, String actTarea, String actDescripcion, String actSolicita,EtbInvTipoActividad actTipo,String actFechaFin, String actFechaIni) {      
+        this.fCreacion = Fecha;
         this.actTipo = actTipo;
         this.actServ = actServ;
         this.actEjecuta = actEjecuta;
@@ -114,7 +121,6 @@ public class EtbInvActividad implements Serializable {
         this.actFechaFin = actFechaFin;
         this.actFechaIni = actFechaIni;
     }
-
     public Integer getActId() {
         return actId;
     }
@@ -177,6 +183,14 @@ public class EtbInvActividad implements Serializable {
 
     public void setActSolicita(String actSolicita) {
         this.actSolicita = actSolicita;
+    }
+
+    public String getFCreacion() {
+        return fCreacion;
+    }
+
+    public void setFCreacion(String fCreacion) {
+        this.fCreacion = fCreacion;
     }
 
     public EtbInvTipoActividad getActTipo() {

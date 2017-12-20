@@ -72,7 +72,6 @@ public class EtbInvGrupo implements Serializable {
          this.gruNomGrupo = Ngrupo;
         this.gruTipoGrupo = Tgrupo;
     }
-
     public Integer getGruIdGrupo() {
         return gruIdGrupo;
     }

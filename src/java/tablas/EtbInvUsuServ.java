@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -33,7 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "EtbInvUsuServ.findByUsusLogin", query = "SELECT e FROM EtbInvUsuServ e WHERE e.ususLogin = :ususLogin")
     , @NamedQuery(name = "EtbInvUsuServ.findByUsusNombre", query = "SELECT e FROM EtbInvUsuServ e WHERE e.ususNombre = :ususNombre")
     , @NamedQuery(name = "EtbInvUsuServ.findByUsusServ", query = "SELECT e FROM EtbInvUsuServ e WHERE e.ususServ = :ususServ")
-    , @NamedQuery(name = "EtbInvUsuServ.findByUsusAdm", query = "SELECT e FROM EtbInvUsuServ e WHERE e.ususAdm = :ususAdm")})
+    , @NamedQuery(name = "EtbInvUsuServ.findByUsusAdm", query = "SELECT e FROM EtbInvUsuServ e WHERE e.ususAdm = :ususAdm")
+    , @NamedQuery(name = "EtbInvUsuServ.findByFCreacion", query = "SELECT e FROM EtbInvUsuServ e WHERE e.fCreacion = :fCreacion")})
 public class EtbInvUsuServ implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,6 +55,11 @@ public class EtbInvUsuServ implements Serializable {
     private String ususServ;
     @Column(name = "USUS_ADM")
     private Integer ususAdm;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "F_Creacion")
+    private String fCreacion;
     @JoinColumn(name = "USUS_ESTADO", referencedColumnName = "USUS_ESTADO")
     @ManyToOne(optional = false)
     private EtbInvUsuEstado ususEstado;
@@ -66,24 +73,29 @@ public class EtbInvUsuServ implements Serializable {
     public EtbInvUsuServ(Integer ususId) {
         this.ususId = ususId;
     }
-    public EtbInvUsuServ(String ususLogin, String ususNombre, String ususServ, EtbInvUsuEstado ususEstado,EtbInvServidor ususidServ) {
+
+    public EtbInvUsuServ(Integer ususId, String fCreacion) {
+        this.ususId = ususId;
+        this.fCreacion = fCreacion;
+    }
+    public EtbInvUsuServ(String Fecha,String ususLogin, String ususNombre, String ususServ, EtbInvUsuEstado ususEstadoa,EtbInvServidor ususidServ) {
+        this.fCreacion = Fecha;
         this.ususLogin = ususLogin;
         this.ususNombre = ususNombre;
         this.ususServ = ususServ;
-        this.ususEstado = ususEstado;
+        this.ususEstado = ususEstadoa;
         this.idSerServidor = ususidServ;
     }
-  
-
-    public EtbInvUsuServ(EtbInvUsuEstado ususEstado, Integer email, String ususLogin, String nombre, String servidor, Integer admin) {
+    public EtbInvUsuServ(String Fechas,EtbInvUsuEstado ususEstado, Integer email, String ususLogin, String nombre, String servidor, Integer admin,EtbInvServidor ususidServ) {
+        this.fCreacion = Fechas;
         this.ususId = email;
         this.ususEstado = ususEstado;
-         this.ususLogin = ususLogin;
+        this.ususLogin = ususLogin;
         this.ususNombre = nombre;
-         this.ususServ = servidor;
+        this.ususServ = servidor;
         this.ususAdm = admin;
+        this.idSerServidor = ususidServ;
     }
-
     public Integer getUsusId() {
         return ususId;
     }
@@ -122,6 +134,14 @@ public class EtbInvUsuServ implements Serializable {
 
     public void setUsusAdm(Integer ususAdm) {
         this.ususAdm = ususAdm;
+    }
+
+    public String getFCreacion() {
+        return fCreacion;
+    }
+
+    public void setFCreacion(String fCreacion) {
+        this.fCreacion = fCreacion;
     }
 
     public EtbInvUsuEstado getUsusEstado() {

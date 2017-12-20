@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -34,7 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "EtbInvCasosProv.findByCaspFechaApe", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspFechaApe = :caspFechaApe")
     , @NamedQuery(name = "EtbInvCasosProv.findByCaspFechaCie", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspFechaCie = :caspFechaCie")
     , @NamedQuery(name = "EtbInvCasosProv.findByCaspNumero", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspNumero = :caspNumero")
-    , @NamedQuery(name = "EtbInvCasosProv.findByCaspIm", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspIm = :caspIm")})
+    , @NamedQuery(name = "EtbInvCasosProv.findByCaspIm", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspIm = :caspIm")
+    , @NamedQuery(name = "EtbInvCasosProv.findByFCreacion", query = "SELECT e FROM EtbInvCasosProv e WHERE e.fCreacion = :fCreacion")})
 public class EtbInvCasosProv implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,6 +60,11 @@ public class EtbInvCasosProv implements Serializable {
     @Size(max = 255)
     @Column(name = "CASP_IM")
     private String caspIm;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "F_Creacion")
+    private String fCreacion;
     @JoinColumn(name = "CASP_PROV", referencedColumnName = "MAR_ID_MARCA")
     @ManyToOne
     private EtbInvMarca caspProv;
@@ -72,10 +79,11 @@ public class EtbInvCasosProv implements Serializable {
         this.caspId = caspId;
     }
 
-    public Integer getCaspId() {
-        return caspId;
+    public EtbInvCasosProv(Integer caspId, String fCreacion) {
+        this.caspId = caspId;
+        this.fCreacion = fCreacion;
     }
-    public EtbInvCasosProv(EtbInvMarca caspProv, String caspServ, String caspFechaApe, String caspFechaCie, String caspNumero, String caspIm, EtbInvEstadoCasos caspEstado) {
+    public EtbInvCasosProv(String Fecha,EtbInvMarca caspProv, String caspServ, String caspFechaApe, String caspFechaCie, String caspNumero, String caspIm, EtbInvEstadoCasos caspEstado) {
         this.caspProv = caspProv;
         this.caspServ = caspServ;
         this.caspFechaApe = caspFechaApe;
@@ -83,7 +91,10 @@ public class EtbInvCasosProv implements Serializable {
         this.caspNumero = caspNumero;
         this.caspIm = caspIm;
         this.caspEstado = caspEstado;
-   
+        this.fCreacion = Fecha;
+    }
+    public Integer getCaspId() {
+        return caspId;
     }
 
     public void setCaspId(Integer caspId) {
@@ -128,6 +139,14 @@ public class EtbInvCasosProv implements Serializable {
 
     public void setCaspIm(String caspIm) {
         this.caspIm = caspIm;
+    }
+
+    public String getFCreacion() {
+        return fCreacion;
+    }
+
+    public void setFCreacion(String fCreacion) {
+        this.fCreacion = fCreacion;
     }
 
     public EtbInvMarca getCaspProv() {

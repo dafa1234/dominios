@@ -71,7 +71,6 @@ public class EtbInvSisOperativo implements Serializable {
          this.sisDistribucion = sisdis;
         this.sisNombre = nsis;
     }
-
     public Integer getSisIdSisOperativo() {
         return sisIdSisOperativo;
     }

@@ -7,6 +7,7 @@ package controlador;
 
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 import modelo.ServicioException;
 import modelo.iniciosecion;
@@ -47,13 +48,18 @@ public class crearcasosproveedor {
                       @RequestParam("numcas") String caspNumero,
                       @RequestParam("im") String caspIm                     
                       , Model model ) throws ServicioException{
-          
-    
+          Calendar fechaActual = Calendar.getInstance();
+            String Fecha = String.format("%04d-%02d-%02d",
+              fechaActual.get(Calendar.YEAR),
+              fechaActual.get(Calendar.MONTH)+1,
+              fechaActual.get(Calendar.DAY_OF_MONTH));
+    int m=2;
+            model.addAttribute("m", m); 
             
             //base de datos
                EtbInvEstadoCasos caspEstado = new EtbInvEstadoCasos(caspEstad);
                EtbInvMarca caspProv = new EtbInvMarca(caspPro);
-               dao.creaproveedor(caspProv,caspServ,caspFechaApe,caspFechaCie,caspNumero,caspIm,caspEstado);   
+               dao.creaproveedor(Fecha,caspProv,caspServ,caspFechaApe,caspFechaCie,caspNumero,caspIm,caspEstado);   
 List<EtbInvCasosProv> Listaproveedor  = dao.Listaproveedor();
         model.addAttribute("Listaproveedor", Listaproveedor);
                 return "user/casosproveedor";

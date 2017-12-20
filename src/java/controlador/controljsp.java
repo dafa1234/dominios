@@ -7,8 +7,10 @@ package controlador;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import javax.persistence.StoredProcedureQuery;
 import javax.servlet.http.HttpServletRequest;
 import modelo.iniciosecion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ import tablas.EtbInvCliente;
 import tablas.EtbInvContrato;
 import tablas.EtbInvCronogramaMto;
 import tablas.EtbInvEstado;
+import tablas.EtbInvEstadoCasos;
+import tablas.EtbInvEstadoCont;
+import tablas.EtbInvEstadoMto;
 import tablas.EtbInvGrupo;
 import tablas.EtbInvMarca;
 import tablas.EtbInvModelo;
@@ -35,6 +40,7 @@ import tablas.EtbInvRolServidor;
 import tablas.EtbInvSalon;
 import tablas.EtbInvServidor;
 import tablas.EtbInvSisOperativo;
+import tablas.EtbInvTipoActividad;
 import tablas.EtbInvTipoCont;
 import tablas.EtbInvUsuEstado;
 import tablas.EtbInvUsuServ;
@@ -63,6 +69,8 @@ public class controljsp {
              maw.setViewName("index");   
                 return maw;
             } 
+        int m = 2;   
+      model.addAttribute("m", m); 
         List<EtbInvActividad> ListaActividad  = dao.ListaActividad();                  
           model.addAttribute("listaActividad", ListaActividad);                 
         return maw;
@@ -71,12 +79,14 @@ public class controljsp {
     public ModelAndView newactiv(Model model){
         ModelAndView maw= new ModelAndView();
         maw.setViewName("user/actividades");
+        List<EtbInvTipoActividad> Listatipoactiv  = dao.Listatipoactiv();
+      model.addAttribute("Listatipoactiv", Listatipoactiv);
          String id = (String)request.getSession().getAttribute("name");
         if (id==null) {
              maw.setViewName("index");   
                 return maw;
             } 
-           String m = "2";   
+           int m = 1;   
       model.addAttribute("m", m);  
         return maw;
     }
@@ -92,6 +102,8 @@ public class controljsp {
              maw.setViewName("index");   
                 return maw;
             } 
+        int m = 2;
+        model.addAttribute("m", m);  
         List<EtbInvCronogramaMto> ListaCrono  = dao.ListaCrono();           
           model.addAttribute("listaCrono", ListaCrono); 
        
@@ -106,15 +118,15 @@ public class controljsp {
              maw.setViewName("index");   
                 return maw;
             } 
-        String m = "2";
+        int m = 1;
         List<EtbInvProyecto> ListaProyecto  = dao.ListaProyecto(); 
         List<EtbInvServidor> Listaserver  = dao.Listaserver(); 
-        List<EtbInvEstado> ListaEstado  = dao.ListaEstado();
+        List<EtbInvEstadoMto> Listaestamto  = dao.Listaestamto();
         List<EtbInvMarca> ListaMarca  = dao.ListaMarca();
         List<EtbInvTipoCont> Listacont  = dao.Listacont();
       model.addAttribute("ListaProyecto", ListaProyecto);
       model.addAttribute("listaFonos", Listaserver);
-      model.addAttribute("listaEstado", ListaEstado);
+      model.addAttribute("listaEstado", Listaestamto);
       model.addAttribute("listamarcas", ListaMarca); 
       model.addAttribute("listacont", Listacont);     
       model.addAttribute("m", m);  
@@ -132,6 +144,8 @@ public class controljsp {
              maw.setViewName("index");   
                 return maw;
             } 
+          int m = 2;   
+      model.addAttribute("m", m);
         List<EtbInvAseguramiento> ListaAsegu  = dao.ListaAsegu();    
           model.addAttribute("listaAsegu", ListaAsegu);                
         return maw;
@@ -147,7 +161,7 @@ public class controljsp {
                 return maw;
             } 
         model.addAttribute("listaServer", Listaserver);
-           String m = "2";   
+           int m = 1;   
       model.addAttribute("m", m);  
         return maw;
     }
@@ -163,6 +177,8 @@ public class controljsp {
              maw.setViewName("index");   
                 return maw;
             } 
+         int m = 2; 
+         model.addAttribute("m", m); 
         List<EtbInvContrato> ListaContra  = dao.ListaContra();   
           model.addAttribute("listaContra", ListaContra);           
         
@@ -177,11 +193,11 @@ public class controljsp {
              maw.setViewName("index");   
                 return maw;
             } 
-        String m = "2";   
-        List<EtbInvEstado> ListaEstado  = dao.ListaEstado();
+        int m = 1;   
+        List<EtbInvEstadoCont> Listaestacont  = dao.Listaestacont();
         List<EtbInvMarca> ListaMarca  = dao.ListaMarca();
         List<EtbInvTipoCont> Listacont  = dao.Listacont();
-      model.addAttribute("ListaEstado", ListaEstado);
+      model.addAttribute("ListaEstado", Listaestacont);
       model.addAttribute("listamarcas", ListaMarca); 
       model.addAttribute("listacont", Listacont);     
       model.addAttribute("m", m);  
@@ -503,8 +519,6 @@ public class controljsp {
           model.addAttribute("Listaserver", Listaserver);  
         return maw;
     }
-    
-    
     //USUARIOS SERVIDOR
         @RequestMapping("usuarioservidor.htm")
     public ModelAndView usu(Model model){
@@ -515,12 +529,15 @@ public class controljsp {
              maw.setViewName("index");   
                 return maw;
             } 
+        int m =0;
+        EtbInvUsuEstado ususEstadoa = new EtbInvUsuEstado(3);
         List<EtbInvServidor> Listaserver  = dao.Listaserver();    
-        List<EtbInvUsuServ> Listaususerv  = dao.Listaususerv(); 
+        List<EtbInvUsuServ> Listaususerv  = dao.Listaususerv(ususEstadoa); 
         List<EtbInvUsuEstado> Listausuest  = dao.Listausuest();
           model.addAttribute("Listaserver", Listaserver);           
           model.addAttribute("Listaususerv", Listaususerv); 
           model.addAttribute("Listausuest", Listausuest); 
+          model.addAttribute("m", m); 
         return maw;
     }
            @RequestMapping("detalle.htm")
@@ -528,14 +545,12 @@ public class controljsp {
      
      List<EtbInvCamusuServ> ListaDetalle = dao.ListaDetalle(usu);     
      EtbInvUsuServ a = dao.buscarususerv(email);
-     String u = "hola";   
-     String m = "2";  
+        int m = 2;  
         model.addAttribute("ususLogin", a.getUsusLogin()); 
         model.addAttribute("ususNombre", a.getUsusNombre());
         model.addAttribute("ususServ", a.getUsusServ());   
         model.addAttribute("ususAdm", a.getUsusAdm()); 
         model.addAttribute("ususEstado", a.getUsusEstado().getEstuEstado()); 
-        model.addAttribute("u", u); 
         model.addAttribute("m", m);  
         model.addAttribute("ListaDetalle", ListaDetalle); 
         ModelAndView maw= new ModelAndView();
@@ -552,7 +567,7 @@ public class controljsp {
 
         EtbInvUsuServ a = dao.buscarususerv(email);
         List<EtbInvUsuEstado> Listausuest  = dao.Listausuest();                    
-        String m = "2";
+        int m = 4;
           model.addAttribute("email", email); 
           model.addAttribute("Listausuest", Listausuest); 
           model.addAttribute("getUsuApell", a.getUsusServ());
@@ -571,46 +586,52 @@ public class controljsp {
     public ModelAndView usuarios3(@RequestParam("id") Integer email,
                                   @RequestParam("tarea") String tCambio,
                                   @RequestParam("serv") Integer ususEstad,Model model){
+        ModelAndView maw= new ModelAndView();
+         String id = (String)request.getSession().getAttribute("name");
+        if (id==null) {
+             maw.setViewName("index");   
+                return maw;
+            } 
            EtbInvUsuEstado ususEstado = new EtbInvUsuEstado(ususEstad);
            EtbInvUsuServ a = dao.buscarususerv(email);
            String ususLogin= a.getUsusLogin();
            String nombre=a.getUsusNombre();
            String servidor=a.getUsusServ();
            Integer admin=a.getUsusAdm();
+           EtbInvServidor ususidServ=a.getIdSerServidor();
+           String Fechas =a.getFCreacion();
+           EtbInvUsuEstado ususEstadoa = new EtbInvUsuEstado(3);
               Calendar fechaActual = Calendar.getInstance();
             String Fecha = String.format("%04d-%02d-%02d",
               fechaActual.get(Calendar.YEAR),
               fechaActual.get(Calendar.MONTH)+1,
               fechaActual.get(Calendar.DAY_OF_MONTH));
-         dao.update(email,ususEstado,ususLogin,nombre,servidor,admin);
+            List<EtbInvUsuServ> Listaususerv  = dao.Listaususerv(ususEstadoa); 
+                model.addAttribute("Listaususerv", Listaususerv); 
+         dao.update(Fechas,email,ususEstado,ususLogin,nombre,servidor,admin,ususidServ);
          dao.crearcambioususerv(Fecha,ususLogin,tCambio,ususEstado);
-        ModelAndView maw= new ModelAndView();
+        int m = 0;
+          model.addAttribute("m", m);
         maw.setViewName("user/usuarioservidor");
-         String id = (String)request.getSession().getAttribute("name");
-        if (id==null) {
-             maw.setViewName("index");   
-                return maw;
-            } 
+        
         return maw;
     }
            @RequestMapping("usuarioos.htm")
     public ModelAndView usuarios2(Model model){
-
-        List<EtbInvUsuServ> Listaususerv  = dao.Listaususerv(); 
-        List<EtbInvServidor> Listaserver  = dao.Listaserver();    
-        String j= "3";
-         String m= "3";
-          model.addAttribute("Listaserver", Listaserver);
-          model.addAttribute("j", j);   
-          model.addAttribute("m", m);
-          model.addAttribute("Listaususerv", Listaususerv); 
         ModelAndView maw= new ModelAndView();
-        maw.setViewName("user/usuarioservidor");
          String id = (String)request.getSession().getAttribute("name");
         if (id==null) {
              maw.setViewName("index");   
                 return maw;
             } 
+        EtbInvUsuEstado ususEstadoa = new EtbInvUsuEstado(3);
+        List<EtbInvUsuServ> Listaususerv  = dao.Listaususerv(ususEstadoa); 
+        List<EtbInvServidor> Listaserver  = dao.Listaserver();            
+         int m= 1;
+          model.addAttribute("Listaserver", Listaserver);         
+          model.addAttribute("m", m);
+          model.addAttribute("Listaususerv", Listaususerv);         
+        maw.setViewName("user/usuarioservidor");       
         return maw;
     }
     
@@ -673,6 +694,8 @@ public class controljsp {
              maw.setViewName("index");   
                 return maw;
             } 
+        int m = 2;  
+          model.addAttribute("m", m);  
         List<EtbInvCasosProv> Listaproveedor  = dao.Listaproveedor();
         model.addAttribute("Listaproveedor", Listaproveedor);       
         return maw;
@@ -686,15 +709,15 @@ public class controljsp {
              maw.setViewName("index");   
                 return maw;
             } 
-        String m = "2";   
+        int m = 1;   
         List<EtbInvCasosProv> Listaproveedor  = dao.Listaproveedor();
         List<EtbInvMarca> ListaMarca  = dao.ListaMarca();
-        List<EtbInvEstado> ListaEstado  = dao.ListaEstado();
+        List<EtbInvEstadoCasos> Listaestacasos  = dao.Listaestacasos();
         List<EtbInvServidor> Listaserver  = dao.Listaserver();
            model.addAttribute("Listaproveedor", Listaproveedor);
            model.addAttribute("ListaMarca", ListaMarca);
            model.addAttribute("listaServer", Listaserver);                         
-           model.addAttribute("listaEstado", ListaEstado);
+           model.addAttribute("listaEstado", Listaestacasos);
            model.addAttribute("m", m);  
            return maw;
     }
@@ -758,8 +781,9 @@ public class controljsp {
              @RequestMapping("aserver.htm")
     public ModelAndView agser(Model model){
         ModelAndView maw= new ModelAndView();
-        List<EtbInvMarca> ListaMarca  = dao.ListaMarca();
         List<EtbInvServidor> Listaserver  = dao.Listaserver();
+        int m = 1;           
+         List<EtbInvMarca> ListaMarca  = dao.ListaMarca();
         List<EtbInvEstado> ListaEstado  = dao.ListaEstado();
         List<EtbInvSisOperativo> Listasisope  = dao.Listasisope();
         List<EtbInvGrupo> Listagrupo  = dao.Listagrupo();
@@ -768,8 +792,7 @@ public class controljsp {
         List<EtbInvRolServidor> ListaRolserver  = dao.ListaRolserver();
         List<EtbInvSalon> ListaSalom  = dao.ListaSalom();
         List<EtbInvModelo> ListaModelo  = dao.ListaModelo();
-        List<EtbInvCliente> ListaCliente  = dao.ListaCliente();
-        int m = 1;               
+        List<EtbInvCliente> ListaCliente  = dao.ListaCliente();         
           model.addAttribute("listaFonos", ListaMarca);                                
           model.addAttribute("listaServer", Listaserver);                         
           model.addAttribute("listaEstado", ListaEstado);                         
@@ -780,15 +803,99 @@ public class controljsp {
           model.addAttribute("listaRol", ListaRolserver);                         
           model.addAttribute("listaSalon", ListaSalom);  
           model.addAttribute("listaModelo", ListaModelo); 
-          model.addAttribute("listaCliente", ListaCliente); 
-          model.addAttribute("m", m);  
+          model.addAttribute("listaCliente", ListaCliente);
+        model.addAttribute("listaServer", Listaserver);                         
+        model.addAttribute("m", m);  
         maw.setViewName("user/servers");
-         String id = (String)request.getSession().getAttribute("name");
+        String id = (String)request.getSession().getAttribute("name");
         if (id==null) {
              maw.setViewName("index");   
                 return maw;
             } 
         return maw;
     }
-
+  //procedimine
+            @RequestMapping("proce.htm")
+    public ModelAndView prob(Model model){
+        ModelAndView maw= new ModelAndView();
+        maw.setViewName("user/newjsp");
+         String id = (String)request.getSession().getAttribute("name");
+        if (id==null) {
+             maw.setViewName("index");
+                return maw;
+            } int m = 0;
+        model.addAttribute("m", m);
+        List<EtbInvServidor> Listaserver  = dao.Listaserver();              
+          model.addAttribute("listaServer", Listaserver);                     
+          return maw;
+    }
+              @RequestMapping("proce1.htm")
+    public ModelAndView prob1(Model model){
+        ModelAndView maw= new ModelAndView();
+        maw.setViewName("user/newjsp");
+         String id = (String)request.getSession().getAttribute("name");
+        if (id==null) {
+             maw.setViewName("index");
+                return maw;
+            }
+         //String a =  dao.readByRu();
+         List aa =  dao.readByRutJ();
+         model.addAttribute("algo", aa);
+         //model.addAttribute("algo1", aa[1]);
+          return maw;
+    }
+                  @RequestMapping("serversreport.htm")
+    public ModelAndView serverreport(@RequestParam("F_Inicio") String F_Inicio,@RequestParam("F_Fin") String F_Fin,@RequestParam("F") int F,Model model){
+        ModelAndView maw= new ModelAndView();
+             
+         String id = (String)request.getSession().getAttribute("name");
+        if (id==null) {
+             maw.setViewName("index");   
+                return maw;
+            } int m = 3;
+        //    String tabla="EtbInvServidor";,tabla
+        if (F==1) {
+             maw.setViewName("user/servers");
+             model.addAttribute("m", m);
+             List nn  = dao.Lisreporte1(F_Inicio,F_Fin);                       
+             model.addAttribute("listreporte", nn);  
+            }
+        if (F==2) {
+             maw.setViewName("user/usuarioservidor");
+             model.addAttribute("m", m);
+             List nn  = dao.Lisreporte2(F_Inicio,F_Fin);                       
+             model.addAttribute("listreporte", nn);  
+            }
+        if (F==3) {
+             maw.setViewName("user/cronograma");
+             model.addAttribute("m", m);
+             List nn  = dao.Lisreporte3(F_Inicio,F_Fin);                       
+             model.addAttribute("listreporte", nn);  
+            }
+        if (F==4) {
+             maw.setViewName("user/contratos");
+             model.addAttribute("m", m);
+             List nn  = dao.Lisreporte4(F_Inicio,F_Fin);                       
+             model.addAttribute("listreporte", nn);  
+            }
+        if (F==5) {
+             maw.setViewName("user/aseguramiento");
+             model.addAttribute("m", m);
+             List nn  = dao.Lisreporte5(F_Inicio,F_Fin);                       
+             model.addAttribute("listreporte", nn);  
+            }
+        if (F==6) {
+             maw.setViewName("user/actividades");
+             model.addAttribute("m", m);
+             List nn  = dao.Lisreporte6(F_Inicio,F_Fin);                       
+             model.addAttribute("listreporte", nn);  
+            }
+        if (F==7) {
+             maw.setViewName("user/casosproveedor");
+             model.addAttribute("m", m);
+             List nn  = dao.Lisreporte7(F_Inicio,F_Fin);                       
+             model.addAttribute("listreporte", nn);  
+            }
+          return maw;
+    }
 }

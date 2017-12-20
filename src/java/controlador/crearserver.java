@@ -76,7 +76,8 @@ public class crearserver {
               fechaActual.get(Calendar.DAY_OF_MONTH));
             
             //base de datos
-             
+             int m=0;
+            model.addAttribute("m", m); 
                EtbInvEstado estIdEstado = new EtbInvEstado( estIdEstad);
                EtbInvSisOperativo sisIdSisOperativo = new EtbInvSisOperativo(sisoperativo);
                EtbInvGrupo gruIdGrupo = new EtbInvGrupo(grupo);

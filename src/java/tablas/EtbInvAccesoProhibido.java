@@ -90,7 +90,6 @@ public class EtbInvAccesoProhibido implements Serializable {
         this.usuAccOperacion = acc;
         this.usuAccIp = ip;
     }
-
     public Integer getUsuAccId() {
         return usuAccId;
     }

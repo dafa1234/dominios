@@ -6,6 +6,7 @@
 package controlador;
 
 
+import java.util.Calendar;
 import java.util.List;
 import modelo.ServicioException;
 import modelo.iniciosecion;
@@ -50,10 +51,16 @@ public class crearactividad {
     
             
             //base de datos
-     EtbInvTipoActividad actTipo = new EtbInvTipoActividad( actTip);
-               
-               dao.creact( actServ,  actEjecuta,  actTarea,  actDescripcion,  actSolicita, actTipo,actFechaFin,actFechaIni );   
-List<EtbInvActividad> ListaActividad  = dao.ListaActividad();                  
+          EtbInvTipoActividad actTipo = new EtbInvTipoActividad( actTip);
+          Calendar fechaActual = Calendar.getInstance();
+          String Fecha = String.format("%04d-%02d-%02d",
+          fechaActual.get(Calendar.YEAR),
+          fechaActual.get(Calendar.MONTH)+1,
+          fechaActual.get(Calendar.DAY_OF_MONTH));
+          int m=2;
+            model.addAttribute("m", m); 
+          dao.creact(Fecha, actServ,  actEjecuta,  actTarea,  actDescripcion,  actSolicita, actTipo,actFechaFin,actFechaIni );   
+          List<EtbInvActividad> ListaActividad  = dao.ListaActividad();                  
           model.addAttribute("listaActividad", ListaActividad); 
                 return "user/actividades";
 
