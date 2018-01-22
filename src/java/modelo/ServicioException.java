@@ -13,5 +13,5 @@ public class ServicioException extends Exception {
     ServicioException(String generalError, String message, RuntimeException e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

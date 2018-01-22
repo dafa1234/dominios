@@ -145,10 +145,10 @@
   </wsdl:binding>
   <wsdl:service name="Consulta">
     <wsdl:port name="ConsultaSoap" binding="tns:ConsultaSoap">
-      <soap:address location="http://localhost:53739/Consulta.asmx" />
+      <soap:address location="http://localhost:50298/Consulta.asmx" />
     </wsdl:port>
     <wsdl:port name="ConsultaSoap12" binding="tns:ConsultaSoap12">
-      <soap12:address location="http://localhost:53739/Consulta.asmx" />
+      <soap12:address location="http://localhost:50298/Consulta.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

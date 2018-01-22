@@ -56,10 +56,7 @@ public class EtbInvModelo implements Serializable {
     public EtbInvModelo(Integer modIdModelo) {
         this.modIdModelo = modIdModelo;
     }
-    public EtbInvModelo(int nmar, String nmod) {
-        this.modNomModelo = nmod;
-        this.marIdMarca = nmar;
-    }
+
     public Integer getModIdModelo() {
         return modIdModelo;
     }

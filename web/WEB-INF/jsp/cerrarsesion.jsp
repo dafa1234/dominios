@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <%@page session="true" import="java.util.*"%>
 <%
-HttpSession sesionCerrada = request.getSession();
-sesionCerrada.invalidate();
+    HttpSession sesionCerrada = request.getSession();
+    sesionCerrada.invalidate();
 %>
 <jsp:forward page="index.jsp"/>

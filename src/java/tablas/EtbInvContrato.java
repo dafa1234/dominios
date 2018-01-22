@@ -93,18 +93,7 @@ public class EtbInvContrato implements Serializable {
         this.contFechaFin = contFechaFin;
         this.fCreacion = fCreacion;
     }
-    public EtbInvContrato(String Fecha,EtbInvMarca contProv, EtbInvTipoCont contTipo, String contFechaIni, String contFechaFin, String contNum, EtbInvEstadoCont contEstado, String contLogin, String contDescrip) {
-        this.fCreacion = Fecha;
-        this.contProv = contProv;
-        this.contTipo = contTipo;
-        this.contFechaIni = contFechaIni;
-        this.contFechaFin = contFechaFin;
-        this.contNum = contNum;
-        this.contDescrip = contDescrip;
-        this.contEstado = contEstado;
-        this.contLogin = contLogin;
-        
-    }
+
     public Integer getContId() {
         return contId;
     }

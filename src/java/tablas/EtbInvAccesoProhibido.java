@@ -83,13 +83,7 @@ public class EtbInvAccesoProhibido implements Serializable {
         this.usuAccFecha = usuAccFecha;
         this.usuAccIp = usuAccIp;
     }
-    public EtbInvAccesoProhibido(String Fecha,String usuetb, String ip, String url, String acc) {
-        this.usuAccFecha = Fecha;
-        this.usuAccUsuario = usuetb;
-        this.usuAccUlr = url;
-        this.usuAccOperacion = acc;
-        this.usuAccIp = ip;
-    }
+
     public Integer getUsuAccId() {
         return usuAccId;
     }

@@ -144,23 +144,7 @@ public class EtbInvUsuarioAp implements Serializable {
         this.usuCedula = usuCedula;
         this.usuTelOficina = usuTelOficina;
     }
-    public EtbInvUsuarioAp(int per, String nombre_recibido, String apellido_recibido, String Correo_recibido, String estado, int dom, String Codigo_Etb_Recibido, String usuario_recibido, 
-            String telefono_recibido, String Empresa_recibido, String Cargo_recibido, String Direccion_Recibido, String Cedula_Recibido, String telefono_ofici_recibido) {
-         this.usuIdPer = per;
-        this.usuNombre = nombre_recibido;
-        this.usuApell = apellido_recibido;
-        this.usuCorreo = Correo_recibido;
-        this.usuEstado = estado;
-        this.usuDominio = dom;
-        this.usuCodEtb = Codigo_Etb_Recibido;
-        this.usuEtb = usuario_recibido;
-        this.usuTelefono = telefono_recibido;
-        this.usuEmpresa = Empresa_recibido;
-        this.usuCargo = Cargo_recibido;
-        this.usuDireccion = Direccion_Recibido;
-        this.usuCedula = Cedula_Recibido;
-        this.usuTelOficina = telefono_ofici_recibido;
-    }
+
     public Integer getUsuId() {
         return usuId;
     }

@@ -47,7 +47,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "EtbInvServidor.findBySerForAdCompartida", query = "SELECT e FROM EtbInvServidor e WHERE e.serForAdCompartida = :serForAdCompartida")
     , @NamedQuery(name = "EtbInvServidor.findBySerAdCompartida", query = "SELECT e FROM EtbInvServidor e WHERE e.serAdCompartida = :serAdCompartida")
     , @NamedQuery(name = "EtbInvServidor.findBySerAdministrado", query = "SELECT e FROM EtbInvServidor e WHERE e.serAdministrado = :serAdministrado")
-    , @NamedQuery(name = "EtbInvServidor.findBySerCores", query = "SELECT e FROM EtbInvServidor e WHERE e.serCores = :serCores")})
+    , @NamedQuery(name = "EtbInvServidor.findBySerCores", query = "SELECT e FROM EtbInvServidor e WHERE e.serCores = :serCores")
+    , @NamedQuery(name = "EtbInvServidor.findByServMem", query = "SELECT e FROM EtbInvServidor e WHERE e.servMem = :servMem")
+    , @NamedQuery(name = "EtbInvServidor.findByServDiscoC", query = "SELECT e FROM EtbInvServidor e WHERE e.servDiscoC = :servDiscoC")})
 public class EtbInvServidor implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,9 +68,7 @@ public class EtbInvServidor implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "SER_HOSTNAME")
     private String serHostname;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "SER_CONEXION")
     private String serConexion;
     @Size(max = 30)
@@ -104,6 +104,10 @@ public class EtbInvServidor implements Serializable {
     @Size(max = 30)
     @Column(name = "SER_CORES")
     private String serCores;
+    @Column(name = "SERV_MEM")
+    private Integer servMem;
+    @Column(name = "SERV_DISCO_C")
+    private Integer servDiscoC;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSer")
     private Collection<EtbInvDireccionamiento> etbInvDireccionamientoCollection;
     @OneToMany(mappedBy = "aseServidor")
@@ -148,38 +152,12 @@ public class EtbInvServidor implements Serializable {
         this.serServer = serServer;
     }
 
-    public EtbInvServidor(Integer serServer, String serSerial, String serHostname, String serConexion, String serForAdCompartida, String serAdministrado) {
+    public EtbInvServidor(Integer serServer, String serSerial, String serHostname, String serForAdCompartida, String serAdministrado) {
         this.serServer = serServer;
         this.serSerial = serSerial;
         this.serHostname = serHostname;
-        this.serConexion = serConexion;
         this.serForAdCompartida = serForAdCompartida;
         this.serAdministrado = serAdministrado;
-    }
-
-    public EtbInvServidor(String Fecha, String serSerial, String serHostname, EtbInvMarca marIdMarca, EtbInvModelo modIdModelo, String serConexion, EtbInvCentral cenIdCentral, EtbInvSalon salIdSalon, EtbInvCliente cliIdCliente, EtbInvRolServidor rolIdRolServ, EtbInvPlataforma plaIdPlataforma, String serForAdCompartida, String serAdministrado, String serCores, String serTIngreso, String serUnidad, String serProyecto, String serRack, Integer serNoProcFisico, EtbInvEstado estIdEstado, EtbInvSisOperativo sisIdSisOperativo, EtbInvGrupo gruIdGrupo) {
-        this.serFIngreso = Fecha;
-        this.serSerial = serSerial;
-        this.serHostname = serHostname;
-        this.marIdMarca = marIdMarca;
-        this.modIdModelo = modIdModelo;
-        this.serConexion = serConexion;
-        this.cenIdCentral = cenIdCentral;
-        this.salIdSalon = salIdSalon;
-        this.cliIdCliente = cliIdCliente;
-        this.rolIdRolServ = rolIdRolServ;
-        this.plaIdPlataforma = plaIdPlataforma;
-        this.serForAdCompartida = serForAdCompartida;
-        this.serAdministrado = serAdministrado;
-        this.serCores = serCores;
-        this.serTIngreso = serTIngreso;
-        this.serUnidad = serUnidad;
-        this.serProyecto = serProyecto;
-        this.serNoProcFisico = serNoProcFisico;
-        this.estIdEstado = estIdEstado;
-        this.gruIdGrupo = gruIdGrupo;
-        this.sisIdSisOperativo = sisIdSisOperativo;
-        this.serRack = serRack;
     }
 
     public Integer getSerServer() {
@@ -292,6 +270,22 @@ public class EtbInvServidor implements Serializable {
 
     public void setSerCores(String serCores) {
         this.serCores = serCores;
+    }
+
+    public Integer getServMem() {
+        return servMem;
+    }
+
+    public void setServMem(Integer servMem) {
+        this.servMem = servMem;
+    }
+
+    public Integer getServDiscoC() {
+        return servDiscoC;
+    }
+
+    public void setServDiscoC(Integer servDiscoC) {
+        this.servDiscoC = servDiscoC;
     }
 
     @XmlTransient

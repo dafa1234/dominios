@@ -18,16 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 
 public class cerrar {
+
     @RequestMapping("/cerrar.htm")
-    public String mostrarAlumno(HttpServletRequest request, HttpServletResponse response){
-    HttpSession sesionCerrada = request.getSession();
-    sesionCerrada.removeAttribute("usuario");
-    sesionCerrada.removeAttribute("pass");
-    sesionCerrada.removeAttribute("correo");
-    sesionCerrada.removeAttribute("passw");
-    sesionCerrada.removeAttribute("apell");
-    sesionCerrada.removeAttribute("name");
-    sesionCerrada.invalidate();
-    return "index";
+    public String mostrarAlumno(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession sesionCerrada = request.getSession();
+        sesionCerrada.removeAttribute("usuario");
+        sesionCerrada.removeAttribute("pass");
+        sesionCerrada.removeAttribute("correo");
+        sesionCerrada.removeAttribute("passw");
+        sesionCerrada.removeAttribute("apell");
+        sesionCerrada.removeAttribute("name");
+        sesionCerrada.invalidate();
+        return "index";
     }
 }

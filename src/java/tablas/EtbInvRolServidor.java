@@ -53,9 +53,7 @@ public class EtbInvRolServidor implements Serializable {
     public EtbInvRolServidor(Integer rolIdRolServ) {
         this.rolIdRolServ = rolIdRolServ;
     }
-    public EtbInvRolServidor(String nrol) {
-        this.rolNomRolServ = nrol;
-    }
+
     public Integer getRolIdRolServ() {
         return rolIdRolServ;
     }

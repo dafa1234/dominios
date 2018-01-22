@@ -71,12 +71,7 @@ public class EtbInvCamusuServ implements Serializable {
         this.usuFecCambio = usuFecCambio;
         this.usuTarCambio = usuTarCambio;
     }
-    public EtbInvCamusuServ(String Fecha, String ususLogin, String tCambio, EtbInvUsuEstado ususEstado) {
-        this.usuFecCambio = Fecha;
-        this.usuCambio = ususLogin;
-        this.usuTarCambio = tCambio;
-        this.ususEstado = ususEstado;
-    }
+
     public String getUsuCambio() {
         return usuCambio;
     }

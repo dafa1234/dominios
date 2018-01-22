@@ -75,13 +75,7 @@ public class EtbInvAseguramiento implements Serializable {
         this.aseFecha = aseFecha;
         this.fCreacion = fCreacion;
     }
-    public EtbInvAseguramiento(String Fecha,String aseTarea, EtbInvServidor aseServidor, String aseEjecuta,String aseFecha) {
-        this.aseFecha = aseFecha;
-        this.aseTarea = aseTarea;
-        this.aseServidor = aseServidor;
-        this.aseEjecuta = aseEjecuta;
-        this.fCreacion = Fecha;
-    }
+
     public Integer getAseId() {
         return aseId;
     }

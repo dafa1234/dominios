@@ -5,7 +5,6 @@
  */
 package controlador;
 
-
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
@@ -29,39 +28,41 @@ import tablas.EtbInvTipoCont;
 @Controller
 @RequestMapping("/contr.htm")
 public class crearcontratos {
-         @Autowired
+
+    @Autowired
     private iniciosecion dao;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String mostrarAlumno(){     
-        return "index";   
+    public String mostrarAlumno() {
+        return "index";
     }
-   @RequestMapping(method = RequestMethod.POST)    
-   public String create(                   
-                      @RequestParam("proveedor") Integer contPro,
-                      @RequestParam("ticon") Integer contTip,
-                      @RequestParam("fini") String contFechaIni,                   
-                      @RequestParam("ffin") String contFechaFin,
-                      @RequestParam("nocon") String contNum,
-                      @RequestParam("estado") Integer contEstad,
-                      @RequestParam("login") String contLogin,
-                      @RequestParam("descripcion") String contDescrip
-                      , Model model) throws ServicioException{
-               EtbInvMarca contProv = new EtbInvMarca(contPro);
-               EtbInvTipoCont contTipo = new EtbInvTipoCont(contTip);
-               EtbInvEstadoCont contEstado = new EtbInvEstadoCont(contEstad);
-               Calendar fechaActual = Calendar.getInstance();
-            String Fecha = String.format("%04d-%02d-%02d",
-              fechaActual.get(Calendar.YEAR),
-              fechaActual.get(Calendar.MONTH)+1,
-              fechaActual.get(Calendar.DAY_OF_MONTH));
-            int m=2;
-            model.addAttribute("m", m); 
-               dao.creacont(Fecha,contProv,contTipo,contFechaIni,contFechaFin,contNum,contEstado,contLogin,contDescrip);   
-List<EtbInvContrato> ListaContra  = dao.ListaContra();   
-          model.addAttribute("listaContra", ListaContra);
-                return "user/contratos";
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String create(
+            @RequestParam("proveedor") Integer contPro,
+            @RequestParam("ticon") Integer contTip,
+            @RequestParam("fini") String contFechaIni,
+            @RequestParam("ffin") String contFechaFin,
+            @RequestParam("nocon") String contNum,
+            @RequestParam("estado") Integer contEstad,
+            @RequestParam("login") String contLogin,
+            @RequestParam("descripcion") String contDescrip,
+             Model model) throws ServicioException {
+        EtbInvMarca contProv = new EtbInvMarca(contPro);
+        EtbInvTipoCont contTipo = new EtbInvTipoCont(contTip);
+        EtbInvEstadoCont contEstado = new EtbInvEstadoCont(contEstad);
+        Calendar fechaActual = Calendar.getInstance();
+        String Fecha = String.format("%04d-%02d-%02d",
+                fechaActual.get(Calendar.YEAR),
+                fechaActual.get(Calendar.MONTH) + 1,
+                fechaActual.get(Calendar.DAY_OF_MONTH));
+        int m = 2;
+        model.addAttribute("m", m);
+        dao.creacont(Fecha, contProv, contTipo, contFechaIni, contFechaFin, contNum, contEstado, contLogin, contDescrip);
+        List<EtbInvContrato> ListaContra = dao.ListaContra();
+        model.addAttribute("listaContra", ListaContra);
+        return "user/contratos";
 
     }
-    
+
 }

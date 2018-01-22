@@ -95,15 +95,7 @@ public class EtbInvCronogramaMto implements Serializable {
         this.croFechaIni = croFechaIni;
         this.fCreacion = fCreacion;
     }
-    public EtbInvCronogramaMto(String Fecha,EtbInvProyecto croProyecto, String croFechaIni, String croSerial, String croEjecuta,String croCambioFin,EtbInvEstadoMto croEstado) {
-        this.croProyecto = croProyecto;
-        this.croFechaIni = croFechaIni;
-        this.croSerial = croSerial;
-        this.croEjecuta = croEjecuta;
-        this.croCambioFin = croCambioFin;
-        this.croEstado = croEstado;
-        this.fCreacion = Fecha;
-    }
+
     public Integer getCroId() {
         return croId;
     }

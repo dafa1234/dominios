@@ -78,24 +78,7 @@ public class EtbInvUsuServ implements Serializable {
         this.ususId = ususId;
         this.fCreacion = fCreacion;
     }
-    public EtbInvUsuServ(String Fecha,String ususLogin, String ususNombre, String ususServ, EtbInvUsuEstado ususEstadoa,EtbInvServidor ususidServ) {
-        this.fCreacion = Fecha;
-        this.ususLogin = ususLogin;
-        this.ususNombre = ususNombre;
-        this.ususServ = ususServ;
-        this.ususEstado = ususEstadoa;
-        this.idSerServidor = ususidServ;
-    }
-    public EtbInvUsuServ(String Fechas,EtbInvUsuEstado ususEstado, Integer email, String ususLogin, String nombre, String servidor, Integer admin,EtbInvServidor ususidServ) {
-        this.fCreacion = Fechas;
-        this.ususId = email;
-        this.ususEstado = ususEstado;
-        this.ususLogin = ususLogin;
-        this.ususNombre = nombre;
-        this.ususServ = servidor;
-        this.ususAdm = admin;
-        this.idSerServidor = ususidServ;
-    }
+
     public Integer getUsusId() {
         return ususId;
     }

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:53739/Consulta.asmx?WSDL" uri="wsdl/localhost_53739/Consulta.asmx.wsdl"/>
+    <system systemId="http://localhost:50298/Consulta.asmx" uri="wsdl/localhost_50298/Consulta.asmx"/>
+    <system systemId="http://localhost:50298/Consulta.asmx?WSDL" uri="wsdl/localhost_50298/Consulta.asmx.wsdl"/>
 </catalog>

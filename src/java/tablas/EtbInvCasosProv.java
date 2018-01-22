@@ -83,16 +83,7 @@ public class EtbInvCasosProv implements Serializable {
         this.caspId = caspId;
         this.fCreacion = fCreacion;
     }
-    public EtbInvCasosProv(String Fecha,EtbInvMarca caspProv, String caspServ, String caspFechaApe, String caspFechaCie, String caspNumero, String caspIm, EtbInvEstadoCasos caspEstado) {
-        this.caspProv = caspProv;
-        this.caspServ = caspServ;
-        this.caspFechaApe = caspFechaApe;
-        this.caspFechaCie = caspFechaCie;
-        this.caspNumero = caspNumero;
-        this.caspIm = caspIm;
-        this.caspEstado = caspEstado;
-        this.fCreacion = Fecha;
-    }
+
     public Integer getCaspId() {
         return caspId;
     }

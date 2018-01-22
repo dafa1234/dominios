@@ -56,10 +56,7 @@ public class EtbInvSalon implements Serializable {
     public EtbInvSalon(Integer salIdSalon) {
         this.salIdSalon = salIdSalon;
     }
-    public EtbInvSalon(int scen, String nsal) {
-        this.salCentral = scen;
-        this.salNombre = nsal;
-    }
+
     public Integer getSalIdSalon() {
         return salIdSalon;
     }
