@@ -5,13 +5,17 @@
  */
 package controlador;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Calendar;
+import javax.servlet.http.HttpServletRequest;
 import modelo.iniciosecion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import tablas.EtbInvUsuarioAp;
 
 /**
@@ -19,18 +23,24 @@ import tablas.EtbInvUsuarioAp;
  * @author diegfraa
  */
 @Controller
-@RequestMapping("/newuser.htm")
 public class crear_usuario {
 
     @Autowired
     private iniciosecion dao;
+     @Autowired
+    private HttpServletRequest request;
+    Calendar fechaActual = Calendar.getInstance();
+    String Fecha = String.format("%04d-%02d-%02d",
+            fechaActual.get(Calendar.YEAR),
+            fechaActual.get(Calendar.MONTH) + 1,
+            fechaActual.get(Calendar.DAY_OF_MONTH));
+//    @RequestMapping(method = RequestMethod.GET)
+//    public String mostrarAlumno() {
+//        return "index";
+//    }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String mostrarAlumno() {
-        return "index";
-    }
-
-    @RequestMapping(method = RequestMethod.POST)
+   // @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping("/newuser.htm")
     public String create(
             @RequestParam("usu") String email,
             @RequestParam("per") int per,
@@ -67,6 +77,32 @@ public class crear_usuario {
         dao.crearusuarioapp(per, nombre_recibido, apellido_recibido, Correo_recibido, estado, dom, Codigo_Etb_Recibido, usuario_recibido, telefono_recibido, Empresa_recibido, Cargo_recibido, Direccion_Recibido, Cedula_Recibido, telefono_ofici_recibido);
         return "user/modificarusuario";
 
+    }
+   //MODIFICAR USUARIOS
+    @RequestMapping("modificarusuario.htm")
+    public ModelAndView mouser(Model model) throws UnknownHostException {
+
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("user/modificarusuario");
+        String id = (String) request.getSession().getAttribute("name");
+        String usuetb = (String) request.getSession().getAttribute("usuetb");
+        int per = (int) request.getSession().getAttribute("ID");
+        if (id == null) {
+            maw.setViewName("index");
+            return maw;
+        }
+
+        if (per != 1) {
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            String ip = inetAddress.getHostAddress();
+            String url = request.getRequestURL().toString();
+            String acc = "acceso proivido para el usuario" + usuetb + ".";
+            dao.ACCPROI(Fecha, usuetb, ip, url, acc);
+            model.addAttribute("errorr", acc);
+            maw.setViewName("error");
+            return maw;
+        }
+        return maw;
     }
 
     private static boolean findADETB(java.lang.String username) {

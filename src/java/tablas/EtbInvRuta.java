@@ -12,10 +12,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -30,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "EtbInvRuta.findAll", query = "SELECT e FROM EtbInvRuta e")
     , @NamedQuery(name = "EtbInvRuta.findByRutId", query = "SELECT e FROM EtbInvRuta e WHERE e.rutId = :rutId")
     , @NamedQuery(name = "EtbInvRuta.findByRutSerial", query = "SELECT e FROM EtbInvRuta e WHERE e.rutSerial = :rutSerial")
+    , @NamedQuery(name = "EtbInvRuta.findByRutRuta", query = "SELECT e FROM EtbInvRuta e WHERE e.rutRuta = :rutRuta")
     , @NamedQuery(name = "EtbInvRuta.findByRutFecha", query = "SELECT e FROM EtbInvRuta e WHERE e.rutFecha = :rutFecha")})
 public class EtbInvRuta implements Serializable {
 
@@ -39,22 +42,37 @@ public class EtbInvRuta implements Serializable {
     @Basic(optional = false)
     @Column(name = "RUT_ID")
     private Integer rutId;
-    @Size(max = 30)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "RUT_SERIAL")
     private String rutSerial;
-    @Lob
-    @Size(max = 16777215)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 8000)
     @Column(name = "RUT_RUTA")
     private String rutRuta;
-    @Size(max = 20)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "RUT_FECHA")
     private String rutFecha;
+    @JoinColumn(name = "RUT_SERIAL1", referencedColumnName = "ser_server")
+    @ManyToOne(optional = false)
+    private EtbInvServidor rutSerial1;
 
     public EtbInvRuta() {
     }
 
     public EtbInvRuta(Integer rutId) {
         this.rutId = rutId;
+    }
+
+    public EtbInvRuta(Integer rutId, String rutSerial, String rutRuta, String rutFecha) {
+        this.rutId = rutId;
+        this.rutSerial = rutSerial;
+        this.rutRuta = rutRuta;
+        this.rutFecha = rutFecha;
     }
 
     public Integer getRutId() {
@@ -87,6 +105,14 @@ public class EtbInvRuta implements Serializable {
 
     public void setRutFecha(String rutFecha) {
         this.rutFecha = rutFecha;
+    }
+
+    public EtbInvServidor getRutSerial1() {
+        return rutSerial1;
+    }
+
+    public void setRutSerial1(EtbInvServidor rutSerial1) {
+        this.rutSerial1 = rutSerial1;
     }
 
     @Override

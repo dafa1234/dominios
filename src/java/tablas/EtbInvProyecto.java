@@ -50,7 +50,7 @@ public class EtbInvProyecto implements Serializable {
     @Size(max = 16777215)
     @Column(name = "PRO_DESCRIP")
     private String proDescrip;
-    @Size(max = 80)
+    @Size(max = 30)
     @Column(name = "PRO_MANTE")
     private String proMante;
     @Column(name = "PRO_ESTADO")

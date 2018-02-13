@@ -3,8 +3,8 @@
   <services/>
   <clients>
     <client name="Consulta">
-      <wsdl-url>http://localhost:50298/Consulta.asmx?WSDL</wsdl-url>
-      <local-wsdl-file>localhost_50298/Consulta.asmx.wsdl</local-wsdl-file>
+      <wsdl-url>http://localhost:54559/Consulta.asmx?WSDL</wsdl-url>
+      <local-wsdl-file>localhost_54559/Consulta.asmx.wsdl</local-wsdl-file>
       <package-name>co.net.etb.autenticar</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
@@ -22,7 +22,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:50298/Consulta.asmx?WSDL</wsimport-option-value>
+          <wsimport-option-value>http://localhost:54559/Consulta.asmx?WSDL</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>

@@ -48,7 +48,9 @@ public class EtbInvCliente implements Serializable {
     @Size(min = 1, max = 25)
     @Column(name = "CLI_NOMBRE")
     private String cliNombre;
-    @Size(max = 25)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 25)
     @Column(name = "CLI_CONTACTO")
     private String cliContacto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliIdCliente")
@@ -61,9 +63,10 @@ public class EtbInvCliente implements Serializable {
         this.cliIdCliente = cliIdCliente;
     }
 
-    public EtbInvCliente(Integer cliIdCliente, String cliNombre) {
+    public EtbInvCliente(Integer cliIdCliente, String cliNombre, String cliContacto) {
         this.cliIdCliente = cliIdCliente;
         this.cliNombre = cliNombre;
+        this.cliContacto = cliContacto;
     }
 
     public Integer getCliIdCliente() {

@@ -53,7 +53,7 @@
                             </c:forEach>
                         </select><br/><br/>
                         <input   name="login" type="text" id="inputEmail" class="form-control" placeholder="login"  required><br/><br/>                             
-                        <input  name="descripcion" type="text" id="inputPassword" class="form-control" placeholder="descripcion" required><br/><br/>
+                        <textarea  name="descripcion" type="text" id="inputPassword" class="form-control" placeholder="descripcion" required></textarea><br/><br/>
 
 
                         <div>

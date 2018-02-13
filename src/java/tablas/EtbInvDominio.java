@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "EtbInvDominio.findAll", query = "SELECT e FROM EtbInvDominio e")
     , @NamedQuery(name = "EtbInvDominio.findByIdDominio", query = "SELECT e FROM EtbInvDominio e WHERE e.idDominio = :idDominio")
+    , @NamedQuery(name = "EtbInvDominio.findByDomId", query = "SELECT e FROM EtbInvDominio e WHERE e.domId = :domId")
     , @NamedQuery(name = "EtbInvDominio.findByDomDominio", query = "SELECT e FROM EtbInvDominio e WHERE e.domDominio = :domDominio")})
 public class EtbInvDominio implements Serializable {
 
@@ -37,6 +38,8 @@ public class EtbInvDominio implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_dominio")
     private Integer idDominio;
+    @Column(name = "DOM_ID")
+    private Integer domId;
     @Size(max = 40)
     @Column(name = "DOM_DOMINIO")
     private String domDominio;
@@ -54,6 +57,14 @@ public class EtbInvDominio implements Serializable {
 
     public void setIdDominio(Integer idDominio) {
         this.idDominio = idDominio;
+    }
+
+    public Integer getDomId() {
+        return domId;
+    }
+
+    public void setDomId(Integer domId) {
+        this.domId = domId;
     }
 
     public String getDomDominio() {

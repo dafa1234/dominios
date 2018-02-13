@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,8 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "EtbInvPlataforma.findAll", query = "SELECT e FROM EtbInvPlataforma e")
     , @NamedQuery(name = "EtbInvPlataforma.findByPlaIdPlataforma", query = "SELECT e FROM EtbInvPlataforma e WHERE e.plaIdPlataforma = :plaIdPlataforma")
-    , @NamedQuery(name = "EtbInvPlataforma.findByPlaNomPlataforma", query = "SELECT e FROM EtbInvPlataforma e WHERE e.plaNomPlataforma = :plaNomPlataforma")
-    , @NamedQuery(name = "EtbInvPlataforma.findByPlaAdmPlataforma", query = "SELECT e FROM EtbInvPlataforma e WHERE e.plaAdmPlataforma = :plaAdmPlataforma")})
+    , @NamedQuery(name = "EtbInvPlataforma.findByPlaNomPlataforma", query = "SELECT e FROM EtbInvPlataforma e WHERE e.plaNomPlataforma = :plaNomPlataforma")})
 public class EtbInvPlataforma implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,8 +46,9 @@ public class EtbInvPlataforma implements Serializable {
     @Size(max = 25)
     @Column(name = "PLA_NOM_PLATAFORMA")
     private String plaNomPlataforma;
-    @Column(name = "PLA_ADM_PLATAFORMA")
-    private Integer plaAdmPlataforma;
+    @JoinColumn(name = "PLA_ADM_PLATAFORMA", referencedColumnName = "ADM_ID")
+    @ManyToOne
+    private EtbInvAdmPlataforma plaAdmPlataforma;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "plaIdPlataforma")
     private Collection<EtbInvServidor> etbInvServidorCollection;
 
@@ -73,11 +75,11 @@ public class EtbInvPlataforma implements Serializable {
         this.plaNomPlataforma = plaNomPlataforma;
     }
 
-    public Integer getPlaAdmPlataforma() {
+    public EtbInvAdmPlataforma getPlaAdmPlataforma() {
         return plaAdmPlataforma;
     }
 
-    public void setPlaAdmPlataforma(Integer plaAdmPlataforma) {
+    public void setPlaAdmPlataforma(EtbInvAdmPlataforma plaAdmPlataforma) {
         this.plaAdmPlataforma = plaAdmPlataforma;
     }
 

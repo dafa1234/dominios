@@ -6,7 +6,9 @@
 package tablas;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +16,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -119,6 +123,8 @@ public class EtbInvUsuarioAp implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "USU_TEL_OFICINA")
     private String usuTelOficina;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuEtb")
+    private Collection<EtbInvCambioTabla> etbInvCambioTablaCollection;
 
     public EtbInvUsuarioAp() {
     }
@@ -263,6 +269,15 @@ public class EtbInvUsuarioAp implements Serializable {
 
     public void setUsuTelOficina(String usuTelOficina) {
         this.usuTelOficina = usuTelOficina;
+    }
+
+    @XmlTransient
+    public Collection<EtbInvCambioTabla> getEtbInvCambioTablaCollection() {
+        return etbInvCambioTablaCollection;
+    }
+
+    public void setEtbInvCambioTablaCollection(Collection<EtbInvCambioTabla> etbInvCambioTablaCollection) {
+        this.etbInvCambioTablaCollection = etbInvCambioTablaCollection;
     }
 
     @Override

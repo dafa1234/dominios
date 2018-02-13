@@ -67,6 +67,7 @@ public class inicio {
             sesion.setAttribute("name", a.getUsuNombre());
             sesion.setAttribute("ID", a.getUsuIdPer());
             sesion.setAttribute("fecha", cadenaFecha);
+            sesion.setAttribute("idusuap", a.getUsuId());
 
             if (findADETB(email) && authADETB(email, pass)) {
 

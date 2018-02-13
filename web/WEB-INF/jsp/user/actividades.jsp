@@ -44,9 +44,14 @@
                                     </c:forEach>
                                 </select><br/><br/>
                             </td>
-                            <td>    
-                                <input   name="serv" type="text" id="inputEmail" class="form-control" placeholder="servidor" required autofocus class="nav nav-pills nav-stacked"><br/><br/>
-                            </td>
+                            <td> 
+                                <select name="serv" class="form-control" required>
+                            <option value="">servidor</option>
+                            <c:forEach var="f" items="${requestScope.listaServer}">
+                                <option value="${f.serServer}">${f.serHostname}</option>
+                            </c:forEach>
+                        </select>
+                                 </td>
                         </tr>
                         <tr>
                             <td>
@@ -62,7 +67,7 @@
                                 <input   name="tarea" type="text" id="inputEmail" class="form-control" placeholder="tarea" required autofocus class="nav nav-pills nav-stacked"><br/><br/>
                             </td>
 
-                            <td>     <input  name="desc" type="text" id="inputPassword" class="form-control" placeholder="descripcion" required><br/><br/></td>
+                            <td>     <textarea  name="desc" type="text" id="inputPassword" class="form-control" placeholder="descripcion" required></textarea><br/><br/></td>
                         </tr>
                         <tr>
                             <td>     <input  name="ffin" type="text" id="Fecha_Fin" class="form-control" placeholder="fecha fin" required><br/><br/></td>
@@ -108,7 +113,7 @@
                                     <th>FECHA_INICIO</th>
                                     <th>FECHA_FIN</th>
                                     <th>DESCRIPCION</th>              
-
+                                    <th>servidor</th>              
                                 </tr>
                             </thead>
 
@@ -121,6 +126,7 @@
                                     <th>FECHA INICIO</th>
                                     <th>FECHA FIN</th>
                                     <th>DESCRIPCION</th>              
+                                    <th>servidor</th>              
 
                                 </tr>
                             </tfoot>
@@ -134,6 +140,7 @@
                                         <td>${f.actFechaIni}</td>
                                         <td>${f.actFechaFin}</td>
                                         <td>${f.actDescripcion}</td>
+                                        <td>${f.actServ}</td>
 
                                     </tr>
                                 </c:forEach>

@@ -58,12 +58,12 @@ public class EtbInvDireccionamiento implements Serializable {
     @Size(max = 255)
     @Column(name = "DIR_PUERTO")
     private String dirPuerto;
-    @JoinColumn(name = "ID_SER", referencedColumnName = "ser_server")
-    @ManyToOne(optional = false)
-    private EtbInvServidor idSer;
     @JoinColumn(name = "DIR_TIPO", referencedColumnName = "TIP_ID_IP")
     @ManyToOne
     private EtbInvTip dirTipo;
+    @JoinColumn(name = "ID_SER", referencedColumnName = "ser_server")
+    @ManyToOne(optional = false)
+    private EtbInvServidor idSer;
 
     public EtbInvDireccionamiento() {
     }
@@ -120,20 +120,20 @@ public class EtbInvDireccionamiento implements Serializable {
         this.dirPuerto = dirPuerto;
     }
 
-    public EtbInvServidor getIdSer() {
-        return idSer;
-    }
-
-    public void setIdSer(EtbInvServidor idSer) {
-        this.idSer = idSer;
-    }
-
     public EtbInvTip getDirTipo() {
         return dirTipo;
     }
 
     public void setDirTipo(EtbInvTip dirTipo) {
         this.dirTipo = dirTipo;
+    }
+
+    public EtbInvServidor getIdSer() {
+        return idSer;
+    }
+
+    public void setIdSer(EtbInvServidor idSer) {
+        this.idSer = idSer;
     }
 
     @Override

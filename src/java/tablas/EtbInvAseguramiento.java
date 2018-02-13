@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "EtbInvAseguramiento.findByAseFecha", query = "SELECT e FROM EtbInvAseguramiento e WHERE e.aseFecha = :aseFecha")
     , @NamedQuery(name = "EtbInvAseguramiento.findByAseTarea", query = "SELECT e FROM EtbInvAseguramiento e WHERE e.aseTarea = :aseTarea")
     , @NamedQuery(name = "EtbInvAseguramiento.findByAseEjecuta", query = "SELECT e FROM EtbInvAseguramiento e WHERE e.aseEjecuta = :aseEjecuta")
-    , @NamedQuery(name = "EtbInvAseguramiento.findByFCreacion", query = "SELECT e FROM EtbInvAseguramiento e WHERE e.fCreacion = :fCreacion")})
+    , @NamedQuery(name = "EtbInvAseguramiento.findByFCreacion", query = "SELECT e FROM EtbInvAseguramiento e WHERE e.fCreacion = :fCreacion")
+    , @NamedQuery(name = "EtbInvAseguramiento.findByAsePlantilla", query = "SELECT e FROM EtbInvAseguramiento e WHERE e.asePlantilla = :asePlantilla")})
 public class EtbInvAseguramiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,6 +60,10 @@ public class EtbInvAseguramiento implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "F_Creacion")
     private String fCreacion;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ase_plantilla")
+    private int asePlantilla;
     @JoinColumn(name = "ASE_SERVIDOR", referencedColumnName = "ser_server")
     @ManyToOne
     private EtbInvServidor aseServidor;
@@ -70,10 +75,11 @@ public class EtbInvAseguramiento implements Serializable {
         this.aseId = aseId;
     }
 
-    public EtbInvAseguramiento(Integer aseId, String aseFecha, String fCreacion) {
+    public EtbInvAseguramiento(Integer aseId, String aseFecha, String fCreacion, int asePlantilla) {
         this.aseId = aseId;
         this.aseFecha = aseFecha;
         this.fCreacion = fCreacion;
+        this.asePlantilla = asePlantilla;
     }
 
     public Integer getAseId() {
@@ -114,6 +120,14 @@ public class EtbInvAseguramiento implements Serializable {
 
     public void setFCreacion(String fCreacion) {
         this.fCreacion = fCreacion;
+    }
+
+    public int getAsePlantilla() {
+        return asePlantilla;
+    }
+
+    public void setAsePlantilla(int asePlantilla) {
+        this.asePlantilla = asePlantilla;
     }
 
     public EtbInvServidor getAseServidor() {

@@ -49,7 +49,7 @@
                         <input   name="numcas" type="text" id="inputEmail" class="form-control" placeholder="numero caso"  required><br/><br/>
 
                         <input   name="im" type="text" id="inputEmail" class="form-control" placeholder="im" required ><br/><br/>
-                </div>                  
+                  
                 <div>
                     <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: red">INGRESAR</button>
                 </div>                    
@@ -59,8 +59,6 @@
     </center>
 </div>
 
-</div>
-</div>
 <%}
     if (m == 2) {%>
 <div class="box-bottom">

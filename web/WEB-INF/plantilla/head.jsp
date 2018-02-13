@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="<c:url value="/sps/css/sb-admin.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/sps/css/default.date.css"/>" type="text/css"/>
     <link rel="stylesheet" href="<c:url value="/sps/css/default.css"/>" type="text/css"/>
-
+    <link href="sps/css/custom.css" rel="stylesheet" type="text/css"/>
+    <link href="sps/css/buts.css" rel="stylesheet" type="text/css"/>
+    <link href="sps/css/personas.css" rel="stylesheet" type="text/css"/>
     <title>etb dominios</title>
 
 </head>

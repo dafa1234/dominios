@@ -7,35 +7,42 @@ package controlador;
 
 import java.util.Calendar;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import modelo.ServicioException;
 import modelo.iniciosecion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import tablas.EtbInvCronogramaMto;
 import tablas.EtbInvEstadoMto;
+import tablas.EtbInvMarca;
 import tablas.EtbInvProyecto;
+import tablas.EtbInvServidor;
+import tablas.EtbInvTipoCont;
 
 /**
  *
  * @author diegfraa
  */
 @Controller
-@RequestMapping("/crono.htm")
+
 public class crearcronograma {
 
     @Autowired
     private iniciosecion dao;
+    @Autowired
+    private HttpServletRequest request;
+//
+//    @RequestMapping(method = RequestMethod.GET)
+//    public String mostrarAlumno() {
+//        return "index";
+//    }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String mostrarAlumno() {
-        return "index";
-    }
-
-    @RequestMapping(method = RequestMethod.POST)
+//    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping("/crono.htm")
     public String createcronograma(
             @RequestParam("proyecto") Integer croProyect,
             @RequestParam("servidor") String croSerial,
@@ -43,7 +50,7 @@ public class crearcronograma {
             @RequestParam("estini") Integer croEstad,
             @RequestParam("ejecuta") String croEjecuta,
             @RequestParam("cambio") String croCambioFin,
-             Model model) throws ServicioException {
+            Model model) throws ServicioException {
         Calendar fechaActual = Calendar.getInstance();
         String Fecha = String.format("%04d-%02d-%02d",
                 fechaActual.get(Calendar.YEAR),
@@ -58,6 +65,64 @@ public class crearcronograma {
         model.addAttribute("listaCrono", ListaCrono);
         return "user/cronograma";
 
+    }
+    //CRONOGRAMA
+
+    @RequestMapping("cronograma.htm")
+    public ModelAndView cro(Model model) {
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("user/cronograma");
+        String id = (String) request.getSession().getAttribute("name");
+        if (id == null) {
+            maw.setViewName("index");
+            return maw;
+        }
+        int m = 2;
+        model.addAttribute("m", m);
+        List<EtbInvCronogramaMto> ListaCrono = dao.ListaCrono();
+        model.addAttribute("listaCrono", ListaCrono);
+
+        return maw;
+    }
+
+    @RequestMapping("newcrono.htm")
+    public ModelAndView newcrono(Model model) {
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("user/cronograma");
+        String id = (String) request.getSession().getAttribute("name");
+        if (id == null) {
+            maw.setViewName("index");
+            return maw;
+        }
+        int m = 1;
+        List<EtbInvProyecto> ListaProyecto = dao.ListaProyecto();
+        List<EtbInvServidor> Listaserver = dao.Listaserver();
+        List<EtbInvEstadoMto> Listaestamto = dao.Listaestamto();
+        List<EtbInvMarca> ListaMarca = dao.ListaMarca();
+        List<EtbInvTipoCont> Listacont = dao.Listacont();
+        model.addAttribute("ListaProyecto", ListaProyecto);
+        model.addAttribute("listaFonos", Listaserver);
+        model.addAttribute("listaEstado", Listaestamto);
+        model.addAttribute("listamarcas", ListaMarca);
+        model.addAttribute("listacont", Listacont);
+        model.addAttribute("m", m);
+        return maw;
+    }
+
+    @RequestMapping("newaseg.htm")
+    public ModelAndView newaseg(Model model) {
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("user/aseguramiento");
+        List<EtbInvServidor> Listaserver = dao.Listaserver();
+        String id = (String) request.getSession().getAttribute("name");
+        if (id == null) {
+            maw.setViewName("index");
+            return maw;
+        }
+        model.addAttribute("listaServer", Listaserver);
+        int m = 1;
+        model.addAttribute("m", m);
+        return maw;
     }
 
 }

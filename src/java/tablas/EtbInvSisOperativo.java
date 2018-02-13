@@ -49,7 +49,7 @@ public class EtbInvSisOperativo implements Serializable {
     private int sisDistribucion;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 25)
     @Column(name = "SIS_NOMBRE")
     private String sisNombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sisIdSisOperativo")

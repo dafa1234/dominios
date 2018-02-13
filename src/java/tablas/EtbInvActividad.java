@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -46,40 +47,71 @@ public class EtbInvActividad implements Serializable {
     @Basic(optional = false)
     @Column(name = "ACT_ID")
     private Integer actId;
-    @Size(max = 255)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "ACT_SERV")
     private String actServ;
-    @Size(max = 255)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "ACT_EJECUTA")
     private String actEjecuta;
-    @Size(max = 30)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "ACT_FECHA_INI")
     private String actFechaIni;
-    @Size(max = 255)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "ACT_TAREA")
     private String actTarea;
+    @Basic(optional = false)
+    @NotNull
     @Lob
-    @Size(max = 16777215)
+    @Size(min = 1, max = 16777215)
     @Column(name = "ACT_DESCRIPCION")
     private String actDescripcion;
-    @Size(max = 30)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "ACT_FECHA_FIN")
     private String actFechaFin;
-    @Size(max = 255)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "ACT_SOLICITA")
     private String actSolicita;
-    @Size(max = 30)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "F_Creacion")
     private String fCreacion;
     @JoinColumn(name = "ACT_TIPO", referencedColumnName = "TIPA_ID")
     @ManyToOne
     private EtbInvTipoActividad actTipo;
+    @JoinColumn(name = "ACT_SERV1", referencedColumnName = "ser_server")
+    @ManyToOne(optional = false)
+    private EtbInvServidor actServ1;
 
     public EtbInvActividad() {
     }
 
     public EtbInvActividad(Integer actId) {
         this.actId = actId;
+    }
+
+    public EtbInvActividad(Integer actId, String actServ, String actEjecuta, String actFechaIni, String actTarea, String actDescripcion, String actFechaFin, String actSolicita, String fCreacion) {
+        this.actId = actId;
+        this.actServ = actServ;
+        this.actEjecuta = actEjecuta;
+        this.actFechaIni = actFechaIni;
+        this.actTarea = actTarea;
+        this.actDescripcion = actDescripcion;
+        this.actFechaFin = actFechaFin;
+        this.actSolicita = actSolicita;
+        this.fCreacion = fCreacion;
     }
 
     public Integer getActId() {
@@ -160,6 +192,14 @@ public class EtbInvActividad implements Serializable {
 
     public void setActTipo(EtbInvTipoActividad actTipo) {
         this.actTipo = actTipo;
+    }
+
+    public EtbInvServidor getActServ1() {
+        return actServ1;
+    }
+
+    public void setActServ1(EtbInvServidor actServ1) {
+        this.actServ1 = actServ1;
     }
 
     @Override

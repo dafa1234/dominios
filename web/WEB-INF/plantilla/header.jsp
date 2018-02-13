@@ -15,7 +15,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top" id="mainNav">
 
 
-    <a class="navbar-brand" href="https://etb.com/">soy etb</a>
+    <a class="navbar-brand" href="https://etb.com/"><img src="sps/fonts/ETB_BLUE_NEG1.png" alt=""/></a>
+
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -23,7 +24,7 @@
         <ul class="navbar-nav navbar-sidenav bg-info" id="exampleAccordion">
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Inicio">      
                 <%
-                     if (id == 1) {   %>
+                    if (id == 1) {   %>
                 <a class="nav-link" href="<c:url value="/fono.htm"/>">
                     <%} else {%>
                     <a class="nav-link" href="<c:url value="/buscar.htm"/>">
@@ -66,12 +67,12 @@
 
                     <li><a href="<c:url value="/servers.htm"/>">Inventario</a></li>
                     <li><a href="<c:url value="/actividades.htm"/>">Actividades</a></li>
-                    <li><a href="<c:url value="/aseguramiento.htm"/>">Aseguramiento</a></li>        
+                    <li><a href="<c:url value="/pruebas.htm"/>">pruebas</a></li>       
                     <li><a href="<c:url value="/casosproveedor.htm"/>">Casos Proveedor</a></li>                     
                     <li><a href="<c:url value="/usuarioservidor.htm"/>">Usuarios</a></li>
-                    <li><a href="<c:url value="#"/>">Rutas Estaticas</a></li>
+                    <li><a href="<c:url value="/prueb.htm"/>">Casfd</a></li>
                         <%
-                if (id == 1) {   %>
+                        if (id == 1) {   %>
                     <li><a href="<c:url value="/modificarusuario.htm"/>">Crear Usuario</a></li>
                         <%}%>
                 </ul>
@@ -82,7 +83,7 @@
                     <span class="nav-link-text">Gestion</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseExamplePages">
-                    <li><a href="#">Formatos</a></li>
+
                     <li><a href="<c:url value="/cronograma.htm"/>">Cronograma MTO</a></li> 
                     <li><a href="<c:url value="/contratos.htm"/>">Contratos Soporte</a></li>
 

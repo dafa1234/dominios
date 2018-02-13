@@ -6,6 +6,7 @@
 package tablas;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,9 +15,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -52,6 +55,8 @@ public class EtbInvAdmPlataforma implements Serializable {
     @Size(max = 255)
     @Column(name = "ADM_CORREO")
     private String admCorreo;
+    @OneToMany(mappedBy = "plaAdmPlataforma")
+    private Collection<EtbInvPlataforma> etbInvPlataformaCollection;
 
     public EtbInvAdmPlataforma() {
     }
@@ -98,6 +103,15 @@ public class EtbInvAdmPlataforma implements Serializable {
 
     public void setAdmCorreo(String admCorreo) {
         this.admCorreo = admCorreo;
+    }
+
+    @XmlTransient
+    public Collection<EtbInvPlataforma> getEtbInvPlataformaCollection() {
+        return etbInvPlataformaCollection;
+    }
+
+    public void setEtbInvPlataformaCollection(Collection<EtbInvPlataforma> etbInvPlataformaCollection) {
+        this.etbInvPlataformaCollection = etbInvPlataformaCollection;
     }
 
     @Override

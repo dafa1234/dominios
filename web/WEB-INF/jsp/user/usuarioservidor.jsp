@@ -27,6 +27,11 @@
                         <td> <input  name="login" type="text"  id="inputPassword" class="form-control" placeholder="login" required>  </td>
                         <td> <input  name="nombre" type="text"  id="inputPassword" class="form-control" placeholder="nombre usuario" required>  </td>
                         <td> <input  name="tarea" type="text"  id="inputPassword" class="form-control" placeholder="tarea" required>  </td>                            
+                        <td> <select name="administrado" class="form-control" required>
+                                    <option value="">Administracion </option>
+                                    <option value="1">SI</option> 
+                                    <option value="0">NO</option>                                                  
+                                </select>  </td> 
                         <td>   
                             <select name="servid" class="form-control" required>
                                 <option value="">servidor</option>

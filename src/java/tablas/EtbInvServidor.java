@@ -44,8 +44,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "EtbInvServidor.findBySerFIngreso", query = "SELECT e FROM EtbInvServidor e WHERE e.serFIngreso = :serFIngreso")
     , @NamedQuery(name = "EtbInvServidor.findBySerTIngreso", query = "SELECT e FROM EtbInvServidor e WHERE e.serTIngreso = :serTIngreso")
     , @NamedQuery(name = "EtbInvServidor.findBySerNoProcFisico", query = "SELECT e FROM EtbInvServidor e WHERE e.serNoProcFisico = :serNoProcFisico")
-    , @NamedQuery(name = "EtbInvServidor.findBySerForAdCompartida", query = "SELECT e FROM EtbInvServidor e WHERE e.serForAdCompartida = :serForAdCompartida")
     , @NamedQuery(name = "EtbInvServidor.findBySerAdCompartida", query = "SELECT e FROM EtbInvServidor e WHERE e.serAdCompartida = :serAdCompartida")
+    , @NamedQuery(name = "EtbInvServidor.findBySerTareaAdCompartida", query = "SELECT e FROM EtbInvServidor e WHERE e.serTareaAdCompartida = :serTareaAdCompartida")
     , @NamedQuery(name = "EtbInvServidor.findBySerAdministrado", query = "SELECT e FROM EtbInvServidor e WHERE e.serAdministrado = :serAdministrado")
     , @NamedQuery(name = "EtbInvServidor.findBySerCores", query = "SELECT e FROM EtbInvServidor e WHERE e.serCores = :serCores")
     , @NamedQuery(name = "EtbInvServidor.findByServMem", query = "SELECT e FROM EtbInvServidor e WHERE e.servMem = :servMem")
@@ -68,7 +68,9 @@ public class EtbInvServidor implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "SER_HOSTNAME")
     private String serHostname;
-    @Size(max = 50)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "SER_CONEXION")
     private String serConexion;
     @Size(max = 30)
@@ -90,20 +92,17 @@ public class EtbInvServidor implements Serializable {
     private Integer serNoProcFisico;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "SER_FOR_AD_COMPARTIDA")
-    private String serForAdCompartida;
-    @Size(max = 30)
     @Column(name = "SER_AD_COMPARTIDA")
-    private String serAdCompartida;
+    private int serAdCompartida;
+    @Size(max = 30)
+    @Column(name = "SER_TAREA_AD_COMPARTIDA")
+    private String serTareaAdCompartida;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
     @Column(name = "SER_ADMINISTRADO")
-    private String serAdministrado;
-    @Size(max = 30)
+    private int serAdministrado;
     @Column(name = "SER_CORES")
-    private String serCores;
+    private Integer serCores;
     @Column(name = "SERV_MEM")
     private Integer servMem;
     @Column(name = "SERV_DISCO_C")
@@ -112,6 +111,8 @@ public class EtbInvServidor implements Serializable {
     private Collection<EtbInvDireccionamiento> etbInvDireccionamientoCollection;
     @OneToMany(mappedBy = "aseServidor")
     private Collection<EtbInvAseguramiento> etbInvAseguramientoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "actServ1")
+    private Collection<EtbInvActividad> etbInvActividadCollection;
     @JoinColumn(name = "SIS_ID_SIS_OPERATIVO", referencedColumnName = "SIS_ID_SIS_OPERATIVO")
     @ManyToOne(optional = false)
     private EtbInvSisOperativo sisIdSisOperativo;
@@ -142,6 +143,10 @@ public class EtbInvServidor implements Serializable {
     @JoinColumn(name = "PLA_ID_PLATAFORMA", referencedColumnName = "PLA_ID_PLATAFORMA")
     @ManyToOne(optional = false)
     private EtbInvPlataforma plaIdPlataforma;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "caspServ1")
+    private Collection<EtbInvCasosProv> etbInvCasosProvCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rutSerial1")
+    private Collection<EtbInvRuta> etbInvRutaCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSerServidor")
     private Collection<EtbInvUsuServ> etbInvUsuServCollection;
 
@@ -152,11 +157,12 @@ public class EtbInvServidor implements Serializable {
         this.serServer = serServer;
     }
 
-    public EtbInvServidor(Integer serServer, String serSerial, String serHostname, String serForAdCompartida, String serAdministrado) {
+    public EtbInvServidor(Integer serServer, String serSerial, String serHostname, String serConexion, int serAdCompartida, int serAdministrado) {
         this.serServer = serServer;
         this.serSerial = serSerial;
         this.serHostname = serHostname;
-        this.serForAdCompartida = serForAdCompartida;
+        this.serConexion = serConexion;
+        this.serAdCompartida = serAdCompartida;
         this.serAdministrado = serAdministrado;
     }
 
@@ -240,35 +246,35 @@ public class EtbInvServidor implements Serializable {
         this.serNoProcFisico = serNoProcFisico;
     }
 
-    public String getSerForAdCompartida() {
-        return serForAdCompartida;
-    }
-
-    public void setSerForAdCompartida(String serForAdCompartida) {
-        this.serForAdCompartida = serForAdCompartida;
-    }
-
-    public String getSerAdCompartida() {
+    public int getSerAdCompartida() {
         return serAdCompartida;
     }
 
-    public void setSerAdCompartida(String serAdCompartida) {
+    public void setSerAdCompartida(int serAdCompartida) {
         this.serAdCompartida = serAdCompartida;
     }
 
-    public String getSerAdministrado() {
+    public String getSerTareaAdCompartida() {
+        return serTareaAdCompartida;
+    }
+
+    public void setSerTareaAdCompartida(String serTareaAdCompartida) {
+        this.serTareaAdCompartida = serTareaAdCompartida;
+    }
+
+    public int getSerAdministrado() {
         return serAdministrado;
     }
 
-    public void setSerAdministrado(String serAdministrado) {
+    public void setSerAdministrado(int serAdministrado) {
         this.serAdministrado = serAdministrado;
     }
 
-    public String getSerCores() {
+    public Integer getSerCores() {
         return serCores;
     }
 
-    public void setSerCores(String serCores) {
+    public void setSerCores(Integer serCores) {
         this.serCores = serCores;
     }
 
@@ -304,6 +310,15 @@ public class EtbInvServidor implements Serializable {
 
     public void setEtbInvAseguramientoCollection(Collection<EtbInvAseguramiento> etbInvAseguramientoCollection) {
         this.etbInvAseguramientoCollection = etbInvAseguramientoCollection;
+    }
+
+    @XmlTransient
+    public Collection<EtbInvActividad> getEtbInvActividadCollection() {
+        return etbInvActividadCollection;
+    }
+
+    public void setEtbInvActividadCollection(Collection<EtbInvActividad> etbInvActividadCollection) {
+        this.etbInvActividadCollection = etbInvActividadCollection;
     }
 
     public EtbInvSisOperativo getSisIdSisOperativo() {
@@ -384,6 +399,24 @@ public class EtbInvServidor implements Serializable {
 
     public void setPlaIdPlataforma(EtbInvPlataforma plaIdPlataforma) {
         this.plaIdPlataforma = plaIdPlataforma;
+    }
+
+    @XmlTransient
+    public Collection<EtbInvCasosProv> getEtbInvCasosProvCollection() {
+        return etbInvCasosProvCollection;
+    }
+
+    public void setEtbInvCasosProvCollection(Collection<EtbInvCasosProv> etbInvCasosProvCollection) {
+        this.etbInvCasosProvCollection = etbInvCasosProvCollection;
+    }
+
+    @XmlTransient
+    public Collection<EtbInvRuta> getEtbInvRutaCollection() {
+        return etbInvRutaCollection;
+    }
+
+    public void setEtbInvRutaCollection(Collection<EtbInvRuta> etbInvRutaCollection) {
+        this.etbInvRutaCollection = etbInvRutaCollection;
     }
 
     @XmlTransient

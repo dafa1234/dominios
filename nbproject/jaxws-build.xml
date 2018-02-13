@@ -28,8 +28,8 @@
     </target>
     <target name="wsimport-client-Consulta" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/Consulta"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/Consulta" destdir="${build.generated.dir}/jax-wsCache/Consulta" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/Consulta/wsdl/localhost_50298/Consulta.asmx.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:50298/Consulta.asmx?WSDL" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/Consulta/wsdl/localhost_50298/Consulta.asmx.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/Consulta" destdir="${build.generated.dir}/jax-wsCache/Consulta" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/Consulta/wsdl/localhost_54559/Consulta.asmx.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:54559/Consulta.asmx?WSDL" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/Consulta/wsdl/localhost_54559/Consulta.asmx.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/Consulta"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">

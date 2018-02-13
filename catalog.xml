@@ -3,4 +3,5 @@
     <system systemId="http://localhost:53739/Consulta.asmx?WSDL" uri="src/conf/xml-resources/web-service-references/Consulta/wsdl/localhost_53739/Consulta.asmx.wsdl"/>
     <system systemId="http://localhost:50298/Consulta.asmx" uri="src/conf/xml-resources/web-service-references/Consulta/wsdl/localhost_50298/Consulta.asmx"/>
     <system systemId="http://localhost:50298/Consulta.asmx?WSDL" uri="src/conf/xml-resources/web-service-references/Consulta/wsdl/localhost_50298/Consulta.asmx.wsdl"/>
+    <system systemId="http://localhost:54559/Consulta.asmx?WSDL" uri="src/conf/xml-resources/web-service-references/Consulta/wsdl/localhost_54559/Consulta.asmx.wsdl"/>
 </catalog>
