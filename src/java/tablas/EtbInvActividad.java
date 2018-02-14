@@ -32,7 +32,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "EtbInvActividad.findAll", query = "SELECT e FROM EtbInvActividad e")
     , @NamedQuery(name = "EtbInvActividad.findByActId", query = "SELECT e FROM EtbInvActividad e WHERE e.actId = :actId")
-    , @NamedQuery(name = "EtbInvActividad.findByActServ", query = "SELECT e FROM EtbInvActividad e WHERE e.actServ = :actServ")
     , @NamedQuery(name = "EtbInvActividad.findByActEjecuta", query = "SELECT e FROM EtbInvActividad e WHERE e.actEjecuta = :actEjecuta")
     , @NamedQuery(name = "EtbInvActividad.findByActFechaIni", query = "SELECT e FROM EtbInvActividad e WHERE e.actFechaIni = :actFechaIni")
     , @NamedQuery(name = "EtbInvActividad.findByActTarea", query = "SELECT e FROM EtbInvActividad e WHERE e.actTarea = :actTarea")
@@ -47,11 +46,6 @@ public class EtbInvActividad implements Serializable {
     @Basic(optional = false)
     @Column(name = "ACT_ID")
     private Integer actId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "ACT_SERV")
-    private String actServ;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -102,9 +96,8 @@ public class EtbInvActividad implements Serializable {
         this.actId = actId;
     }
 
-    public EtbInvActividad(Integer actId, String actServ, String actEjecuta, String actFechaIni, String actTarea, String actDescripcion, String actFechaFin, String actSolicita, String fCreacion) {
+    public EtbInvActividad(Integer actId, String actEjecuta, String actFechaIni, String actTarea, String actDescripcion, String actFechaFin, String actSolicita, String fCreacion) {
         this.actId = actId;
-        this.actServ = actServ;
         this.actEjecuta = actEjecuta;
         this.actFechaIni = actFechaIni;
         this.actTarea = actTarea;
@@ -120,14 +113,6 @@ public class EtbInvActividad implements Serializable {
 
     public void setActId(Integer actId) {
         this.actId = actId;
-    }
-
-    public String getActServ() {
-        return actServ;
-    }
-
-    public void setActServ(String actServ) {
-        this.actServ = actServ;
     }
 
     public String getActEjecuta() {

@@ -15,7 +15,8 @@
 
                 if (m == 1) {
             %>
-
+            <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>Editar Servidor</div>
             <!-- Begin # DIV Form -->
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/cronograma.htm"/>">volver</a> 
@@ -65,19 +66,29 @@
 
 
 
-
+            </div>
 
         <%}
     if (m == 2) {%>
-        <div class="box-bottom">
+                <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>Editar Servidor</div>  
+                 <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                       <div class="box-bottom">
             <a  role="button" href="<c:url value="/newcrono.htm"/>">agregar</a> 
         </div>
-        <div class="flex-caption">
-            <h3>Bienvenido</h3> 
-            <div class="box-bottom">
+                    </div>
+                    <div class="col-md-3">
+                        <div class="flex-caption">
+                             <div class="box-bottom">
                 <a  role="button" data-toggle="modal" data-target="#login-modal">REPORTE</a>
             </div>
-        </div>    
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+        
         <div class="card mb-3">
             <div class="card-header">
                 <i class="fa fa-table"></i> Data Table cronograma</div>
@@ -138,10 +149,12 @@
             </div>
             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
-
+                </div>
         <%}
     if (m == 3) {%>
-        <h3>REPORTE</h3>
+                <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>Editar Servidor</div>  
+    <h3>REPORTE</h3>
         <div class="box-bottom">
             <a  role="button" href="<c:url value="/cronograma.htm"/>">volver</a> 
         </div>
@@ -199,7 +212,9 @@
                 e.preventDefault();
             });
         </script>
-        <%}%>
+                </div>
+        <%}
+        %>
         <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog">
                 <div class="modal-content" style="background: #20a4cb">

@@ -69,30 +69,23 @@ public class crearcronograma {
     //CRONOGRAMA
 
     @RequestMapping("cronograma.htm")
-    public ModelAndView cro(Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/cronograma");
+    public String cro(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int m = 2;
         model.addAttribute("m", m);
         List<EtbInvCronogramaMto> ListaCrono = dao.ListaCrono();
         model.addAttribute("listaCrono", ListaCrono);
-
-        return maw;
+        return "user/cronograma";
     }
 
     @RequestMapping("newcrono.htm")
-    public ModelAndView newcrono(Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/cronograma");
+    public String newcrono(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int m = 1;
         List<EtbInvProyecto> ListaProyecto = dao.ListaProyecto();
@@ -106,23 +99,20 @@ public class crearcronograma {
         model.addAttribute("listamarcas", ListaMarca);
         model.addAttribute("listacont", Listacont);
         model.addAttribute("m", m);
-        return maw;
+        return "user/cronograma";
     }
 
     @RequestMapping("newaseg.htm")
-    public ModelAndView newaseg(Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/aseguramiento");
+    public String newaseg(Model model) {
         List<EtbInvServidor> Listaserver = dao.Listaserver();
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         model.addAttribute("listaServer", Listaserver);
         int m = 1;
         model.addAttribute("m", m);
-        return maw;
+        return "user/aseguramiento";
     }
 
 }

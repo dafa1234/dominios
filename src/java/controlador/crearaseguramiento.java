@@ -60,20 +60,14 @@ public class crearaseguramiento {
 
     //ASEGURAMIENTO servidor
     @RequestMapping("aseguramiento.htm")
-    public ModelAndView nuev(@RequestParam("idservase") int idservo, Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/cosasservidor");
+    public String nuev(@RequestParam("idservase") int idservo, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int m = 2;
-        EtbInvServidor idserv = new EtbInvServidor(idservo);
         model.addAttribute("m", m);
-        //  List<EtbInvAseguramiento> ListaAsegu = dao.ListaAsegu(idserv);
-        //  model.addAttribute("listaAsegu", ListaAsegu);
-        return maw;
+        return "user/cosasservidor";
     }
 
     @RequestMapping("aseg.htm")
@@ -158,13 +152,10 @@ public class crearaseguramiento {
 
     //usuario servior
     @RequestMapping("usuarioservidor2.htm")
-    public ModelAndView usupo(@RequestParam("tdserv") Integer email7, Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/cosasservidor");
+    public String usupo(@RequestParam("tdserv") Integer email7, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int m = 5;
         EtbInvServidor email = new EtbInvServidor(email7);
@@ -175,18 +166,15 @@ public class crearaseguramiento {
         model.addAttribute("Listaususerv", Listaususerv);
         model.addAttribute("Listausuest", Listausuest);
         model.addAttribute("m", m);
-        return maw;
+        return "user/cosasservidor";
     }
 
     //direccionamiento servidor
     @RequestMapping("direccionamiento.htm")
-    public ModelAndView direccionamiento(@RequestParam("serv") int serv, @RequestParam("servname") String servname, Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/cosasservidor");
+    public String direccionamiento(@RequestParam("serv") int serv, @RequestParam("servname") String servname, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         List<EtbInvTip> Listatipoip = dao.Listatipoip();
         int m = 1;
@@ -194,41 +182,35 @@ public class crearaseguramiento {
         model.addAttribute("servipname", servname);
         model.addAttribute("servip", serv);
         model.addAttribute("m", m);
-        return maw;
+        return "user/cosasservidor";
     }
 
     @RequestMapping("direccionamientoagregar.htm")
-    public ModelAndView direccionamientoingresar(@RequestParam("dirDirServ") String dirDirServ,
+    public String direccionamientoingresar(
             @RequestParam("dirIp") String dirIp,
             @RequestParam("dirVlan") String dirVlan,
             @RequestParam("dirSwitch") String dirSwitch,
             @RequestParam("dirPuerto") String dirPuerto,
             @RequestParam("idSer1") int idSer1,
             @RequestParam("dirTipo1") int dirTipo1, Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/servers");
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int m = 0;
         EtbInvServidor idSer = new EtbInvServidor(idSer1);
         EtbInvTip dirTipo = new EtbInvTip(dirTipo1);
-        dao.direccionamiento(dirDirServ, dirIp, dirVlan, dirSwitch, dirPuerto, idSer, dirTipo);
+        dao.direccionamiento(dirIp, dirVlan, dirSwitch, dirPuerto, idSer, dirTipo);
         model.addAttribute("m", m);
-        return maw;
+        return "user/servers";
     }
 
     //direccionamiento servidor
     @RequestMapping("direccionamientomod.htm")
-    public ModelAndView direccionamientomod(@RequestParam("serv") int IdIp, Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/cosasservidor");
+    public String direccionamientomod(@RequestParam("serv") int IdIp, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         EtbInvDireccionamiento dic = dao.ipmod(IdIp);
         List<EtbInvTip> Listatipoip = dao.Listatipoip();
@@ -236,27 +218,23 @@ public class crearaseguramiento {
         model.addAttribute("Listatipoip", Listatipoip);
         model.addAttribute("servip", dic);
         model.addAttribute("m", m);
-        return maw;
+        return "user/cosasservidor";
     }
 
     //modificaer direccionamiento 
     @RequestMapping("direccionamientomodificar.htm")
-    public ModelAndView direccionamientomodificar(
+    public String direccionamientomodificar(
             @RequestParam("tareacambio") String tareacambio,
             @RequestParam("iddirIp") int iddirIp,
-            @RequestParam("idSer1") int idSer1,
-            @RequestParam("dirDirServ") String dirDirServ,
+            @RequestParam("idSer1") int idSer1,           
             @RequestParam("dirIp") String dirIp,
             @RequestParam("dirVlan") String dirVlan,
             @RequestParam("dirSwitch") String dirSwitch,
             @RequestParam("dirPuerto") String dirPuerto,
             @RequestParam("dirTipo1") int dirTipo1, Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/servers");
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
 
         EtbInvTablaDominios tabladominios = new EtbInvTablaDominios(9);
@@ -304,20 +282,17 @@ public class crearaseguramiento {
         int m = 0;
         EtbInvServidor idSer = new EtbInvServidor(idSer1);
         EtbInvTip dirTipo = new EtbInvTip(dirTipo1);
-        dao.direccionamientoedite(iddirIp, dirDirServ, dirIp, dirVlan, dirSwitch, dirPuerto, idSer, dirTipo);
+        dao.direccionamientoedite(iddirIp, dirIp, dirVlan, dirSwitch, dirPuerto, idSer, dirTipo);
         model.addAttribute("m", m);
-        return maw;
+        return "user/servers";
     }
 
     //ruta servidor
     @RequestMapping("rutas.htm")
-    public ModelAndView rutas(@RequestParam("serv") int serv, @RequestParam("servname") String servname, Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/cosasservidor");
+    public String rutas(@RequestParam("serv") int serv, @RequestParam("servname") String servname, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         List<EtbInvTip> Listatipoip = dao.Listatipoip();
         int m = 4;
@@ -325,17 +300,14 @@ public class crearaseguramiento {
         model.addAttribute("servipname", servname);
         model.addAttribute("servip", serv);
         model.addAttribute("m", m);
-        return maw;
+        return "user/cosasservidor";
     }
 
     @RequestMapping("rutaagregar.htm")
-    public ModelAndView rutasagregar(@RequestParam("idSer1") int idSer1, @RequestParam("rutaser") String rutaser, @RequestParam("idSerna") String idSerna, Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/cosasservidor");
+    public String rutasagregar(@RequestParam("idSer1") int idSer1, @RequestParam("rutaser") String rutaser, @RequestParam("idSerna") String idSerna, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         EtbInvServidor idSer = new EtbInvServidor(idSer1);
 
@@ -344,41 +316,35 @@ public class crearaseguramiento {
         int m = 4;
 
         model.addAttribute("m", m);
-        return maw;
+        return "user/cosasservidor";
     }
     //mod servidor
 
     @RequestMapping("rutamod.htm")
-    public ModelAndView rutasmod(@RequestParam("serv") int serv,
+    public String rutasmod(@RequestParam("serv") int serv,
             Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/cosasservidor");
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         EtbInvRuta rutas = dao.rutas(serv);
         int m = 5;
         model.addAttribute("rutas", rutas);
         model.addAttribute("m", m);
-        return maw;
+        return "user/cosasservidor";
     }
     //modificar ruta servidor
 
     @RequestMapping("rutadificar.htm")
-    public ModelAndView rutasmod(@RequestParam("rutasId") int rutasId,
+    public String rutasmod(@RequestParam("rutasId") int rutasId,
             @RequestParam("rutaIdser") int rutaIdser,
             @RequestParam("rutahosser") String rutahosser,
             @RequestParam("rutaF") String rutaF,
             @RequestParam("tareacambio") String tareacambio,
             @RequestParam("rutaser") String rutaser, Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/cosasservidor");
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         EtbInvTablaDominios tabladominios = new EtbInvTablaDominios(25);
         EtbInvRuta rutas = dao.rutas(rutasId);
@@ -390,81 +356,69 @@ public class crearaseguramiento {
         dao.llenarbitacora(tabladominios, rutasId, usuarioetb, FechaH, tareacambio, cam_tab_descripcion_SM, cam_tab_solicitante_SM);
         EtbInvCambioTabla camt = dao.idcambiotabla(tabladominios, rutasId, usuarioetb, tareacambio);
         EtbInvCambioTabla CamIdtabla = new EtbInvCambioTabla(camt.getCamtabID());
-         if (!rutas.getRutRuta().equals(rutaser)) {
-        String CamColumna = "RUT_RUTA";
-        String CamNawValor = rutaser;
-        String CamValorIni = rutas.getRutRuta();
-        dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);}
+        if (!rutas.getRutRuta().equals(rutaser)) {
+            String CamColumna = "RUT_RUTA";
+            String CamNawValor = rutaser;
+            String CamValorIni = rutas.getRutRuta();
+            dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
+        }
         dao.editarrutas(rutasId, FechaH, rutaser, idSer, rutahosser);
         int m = 5;
         model.addAttribute("rutas", rutas);
         model.addAttribute("m", m);
-        return maw;
+        return "user/cosasservidor";
     }
 
     @RequestMapping("newcasosserv.htm")
-    public ModelAndView newcasosserv(@RequestParam("casosserv") int casosserv, Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/cosasservidor");
+    public String newcasosserv(@RequestParam("casosserv") int casosserv, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int m = 7;
-//        List<EtbInvCasosProv> Listaproveedor = dao.Listaproveedor();
-//        model.addAttribute("Listaproveedor", Listaproveedor);
-
         List<EtbInvMarca> ListaMarca = dao.ListaMarca();
         List<EtbInvEstadoCasos> Listaestacasos = dao.Listaestacasos();
         model.addAttribute("ListaMarca", ListaMarca);
         model.addAttribute("casosserv", casosserv);
         model.addAttribute("listaEstado", Listaestacasos);
         model.addAttribute("m", m);
-        return maw;
+        return "user/cosasservidor";
     }
-  @RequestMapping("casosmod.htm")
-    public ModelAndView newcasosserv1(@RequestParam("caspId") int casosserv, Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/cosasservidor");
+
+    @RequestMapping("casosmod.htm")
+    public String newcasosserv1(@RequestParam("caspId") int casosserv, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int m = 8;
-       EtbInvCasosProv cas = dao.casosprove(casosserv);
-       
-
+        EtbInvCasosProv cas = dao.casosprove(casosserv);
         List<EtbInvMarca> ListaMarca = dao.ListaMarca();
         List<EtbInvEstadoCasos> Listaestacasos = dao.Listaestacasos();
         model.addAttribute("ListaMarca", ListaMarca);
         model.addAttribute("cas", cas);
         model.addAttribute("listaEstado", Listaestacasos);
         model.addAttribute("m", m);
-        return maw;
+        return "user/cosasservidor";
     }
-      @RequestMapping("modificarcasos.htm")
-    public ModelAndView modificarcasos( @RequestParam("proveedor") int proveedor,
-                                        @RequestParam("idcasos") int idcasos,
-                                        @RequestParam("fini") String fini,
-                                        @RequestParam("fcie") String fcie,
-                                        @RequestParam("estini") int estini,
-                                        @RequestParam("numcas") String numcas,
-                                        @RequestParam("im") String im,
-                                        @RequestParam("tareacambio") String tareacambio,
+
+    @RequestMapping("modificarcasos.htm")
+    public String modificarcasos(@RequestParam("proveedor") int proveedor,
+            @RequestParam("idcasos") int idcasos,
+            @RequestParam("fini") String fini,
+            @RequestParam("fcie") String fcie,
+            @RequestParam("estini") int estini,
+            @RequestParam("numcas") String numcas,
+            @RequestParam("im") String im,
+            @RequestParam("tareacambio") String tareacambio,
             Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/cosasservidor");
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int m = 8;
-        
-       
-            EtbInvTablaDominios tabladominios = new EtbInvTablaDominios(4);
+
+        EtbInvTablaDominios tabladominios = new EtbInvTablaDominios(4);
         EtbInvCasosProv cas = dao.casosprove(idcasos);
         String cam_tab_descripcion_SM = "1";
         String cam_tab_solicitante_SM = "1";
@@ -478,89 +432,84 @@ public class crearaseguramiento {
 
         if (!cas.getCaspProv().getMarIdMarca().equals(proveedor)) {
             String CamColumna = "SER_HOSTNAME";
-            String CamNawValor =""+ proveedor;
-            String CamValorIni =""+ cas.getCaspProv().getMarIdMarca();
+            String CamNawValor = "" + proveedor;
+            String CamValorIni = "" + cas.getCaspProv().getMarIdMarca();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
-         if (!cas.getCaspFechaApe().equals(fini)) {
+        if (!cas.getCaspFechaApe().equals(fini)) {
             String CamColumna = "SER_HOSTNAME";
-            String CamNawValor =""+ fini;
-            String CamValorIni =""+ cas.getCaspFechaApe();
+            String CamNawValor = "" + fini;
+            String CamValorIni = "" + cas.getCaspFechaApe();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
-          if (!cas.getCaspFechaCie().equals(fcie)) {
+        if (!cas.getCaspFechaCie().equals(fcie)) {
             String CamColumna = "SER_HOSTNAME";
-            String CamNawValor =""+ fcie;
-            String CamValorIni =""+ cas.getCaspFechaCie();
+            String CamNawValor = "" + fcie;
+            String CamValorIni = "" + cas.getCaspFechaCie();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
-           if (!cas.getCaspEstado().getEstcId().equals(estini)) {
+        if (!cas.getCaspEstado().getEstcId().equals(estini)) {
             String CamColumna = "SER_HOSTNAME";
-            String CamNawValor =""+ estini;
-            String CamValorIni =""+ cas.getCaspEstado().getEstcId();
+            String CamNawValor = "" + estini;
+            String CamValorIni = "" + cas.getCaspEstado().getEstcId();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
-            if (!cas.getCaspNumero().equals(numcas)) {
+        if (!cas.getCaspNumero().equals(numcas)) {
             String CamColumna = "SER_HOSTNAME";
-            String CamNawValor =""+ numcas;
-            String CamValorIni =""+ cas.getCaspNumero();
+            String CamNawValor = "" + numcas;
+            String CamValorIni = "" + cas.getCaspNumero();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
-             if (!cas.getCaspIm().equals(im)) {
+        if (!cas.getCaspIm().equals(im)) {
             String CamColumna = "SER_HOSTNAME";
-            String CamNawValor =""+ im;
-            String CamValorIni =""+ cas.getCaspIm();
+            String CamNawValor = "" + im;
+            String CamValorIni = "" + cas.getCaspIm();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
-              EtbInvServidor servi = new EtbInvServidor(cas.getCaspServ1().getSerServer());
-              EtbInvEstadoCasos estini1 = new EtbInvEstadoCasos(estini);
+        EtbInvServidor servi = new EtbInvServidor(cas.getCaspServ1().getSerServer());
+        EtbInvEstadoCasos estini1 = new EtbInvEstadoCasos(estini);
         EtbInvMarca proveedor1 = new EtbInvMarca(proveedor);
-          dao.modificarcasproveedor(proveedor1,idcasos,fini,fcie,estini1,numcas,im ,cas.getFCreacion(),cas.getCaspServ(),servi);
+        dao.modificarcasproveedor(proveedor1, idcasos, fini, fcie, estini1, numcas, im, cas.getFCreacion(),  servi);
         List<EtbInvMarca> ListaMarca = dao.ListaMarca();
         List<EtbInvEstadoCasos> Listaestacasos = dao.Listaestacasos();
         model.addAttribute("ListaMarca", ListaMarca);
         model.addAttribute("cas", cas);
         model.addAttribute("listaEstado", Listaestacasos);
         model.addAttribute("m", m);
-        return maw;
+        return "user/cosasservidor";
     }
-    
+
     //nueva actividad del servidor
-     @RequestMapping("newactivser.htm")
-    public ModelAndView newactivser(@RequestParam("servd") int servd,Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/cosasservidor");
+    @RequestMapping("newactivser.htm")
+    public String newactivser(@RequestParam("servd") int servd, Model model) {
         List<EtbInvTipoActividad> Listatipoactiv = dao.Listatipoactiv();
         model.addAttribute("Listatipoactiv", Listatipoactiv);
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         EtbInvServidor aa = dao.readid(servd);
         int m = 9;
         model.addAttribute("m", m);
         model.addAttribute("serv", aa);
-        return maw;
+        return "user/cosasservidor";
     }
-      @RequestMapping("modactivser.htm")
-    public ModelAndView modactivser(@RequestParam("idact") int idact,Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/cosasservidor");
+
+    @RequestMapping("modactivser.htm")
+    public String modactivser(@RequestParam("idact") int idact, Model model) {
         List<EtbInvTipoActividad> Listatipoactiv = dao.Listatipoactiv();
         model.addAttribute("Listatipoactiv", Listatipoactiv);
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         EtbInvActividad aa = dao.activida(idact);
         int m = 10;
         model.addAttribute("m", m);
         model.addAttribute("acti", aa);
-        return maw;
+        return "user/cosasservidor";
     }
-    
+
     @RequestMapping("/modact.htm")
     public String create(
             @RequestParam("serv") int actServ,
@@ -587,119 +536,145 @@ public class crearaseguramiento {
 
         if (!aa.getActEjecuta().equals(actEjecuta)) {
             String CamColumna = "ACT_EJECUTA";
-            String CamNawValor =""+ actEjecuta;
-            String CamValorIni =""+ aa.getActEjecuta();
+            String CamNawValor = "" + actEjecuta;
+            String CamValorIni = "" + aa.getActEjecuta();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
         if (!aa.getActTarea().equals(actTarea)) {
             String CamColumna = "ACT_TAREA";
-            String CamNawValor =""+ actTarea;
-            String CamValorIni =""+ aa.getActTarea();
+            String CamNawValor = "" + actTarea;
+            String CamValorIni = "" + aa.getActTarea();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
         if (!aa.getActDescripcion().equals(actDescripcion)) {
             String CamColumna = "ACT_DESCRIPCION";
-            String CamNawValor =""+ actDescripcion;
-            String CamValorIni =""+ aa.getActDescripcion();
+            String CamNawValor = "" + actDescripcion;
+            String CamValorIni = "" + aa.getActDescripcion();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
         if (!aa.getActSolicita().equals(actSolicita)) {
             String CamColumna = "ACT_SOLICITA";
-            String CamNawValor =""+ actSolicita;
-            String CamValorIni =""+ aa.getActEjecuta();
+            String CamNawValor = "" + actSolicita;
+            String CamValorIni = "" + aa.getActEjecuta();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
         if (!aa.getActTipo().getTipaId().equals(actTip)) {
             String CamColumna = "ACT_TIPO";
-            String CamNawValor =""+ actTip;
-            String CamValorIni =""+ aa.getActTipo().getTipaId();
+            String CamNawValor = "" + actTip;
+            String CamValorIni = "" + aa.getActTipo().getTipaId();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
         if (!aa.getActFechaIni().equals(actFechaIni)) {
             String CamColumna = "ACT_FECHA_INI";
-            String CamNawValor =""+ actFechaIni;
-            String CamValorIni =""+ aa.getActFechaIni();
+            String CamNawValor = "" + actFechaIni;
+            String CamValorIni = "" + aa.getActFechaIni();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
         if (!aa.getActFechaFin().equals(actFechaFin)) {
             String CamColumna = "ACT_FECHA_FIN";
-            String CamNawValor =""+ actFechaFin;
-            String CamValorIni =""+ aa.getActFechaFin();
+            String CamNawValor = "" + actFechaFin;
+            String CamValorIni = "" + aa.getActFechaFin();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
         //base de datos
-        
+
         EtbInvTipoActividad actTipo = new EtbInvTipoActividad(actTip);
         EtbInvServidor serv1 = new EtbInvServidor(aa.getActServ1().getSerServer());
-        
+
         int m = 2;
         model.addAttribute("m", m);
-        dao.modificaractiv(aa.getActId(),aa.getFCreacion(), aa.getActServ(),serv1, actEjecuta, actTarea, actDescripcion, actSolicita, actTipo, actFechaFin, actFechaIni);
+        dao.modificaractiv(aa.getActId(), aa.getFCreacion(), serv1, actEjecuta, actTarea, actDescripcion, actSolicita, actTipo, actFechaFin, actFechaIni);
         List<EtbInvActividad> ListaActividad = dao.ListaActividad();
         model.addAttribute("listaActividad", ListaActividad);
         return "user/actividades";
 
     }
-    
-    
+
     /// modificar usuario
-     @RequestMapping("modususer.htm")
-    public ModelAndView modususer( @RequestParam("servd") int actServ,Model model) {
-        ModelAndView maw = new ModelAndView();
+    @RequestMapping("modususer.htm")
+    public String modususer(@RequestParam("servd") int actServ, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
         }
-        EtbInvUsuEstado ususEstadoa = new EtbInvUsuEstado(3);
         int m = 11;
-         
-         EtbInvServidor aa = dao.readid(actServ);
-        model.addAttribute("m", m);
-       model.addAttribute("actServ", aa);
-        maw.setViewName("user/cosasservidor");
-        return maw;
-    }
-      @RequestMapping("modusuarios.htm")
-    public ModelAndView modusuarios(@RequestParam("id") Integer email, Model model) {
 
+        EtbInvServidor aa = dao.readid(actServ);
+        model.addAttribute("m", m);
+        model.addAttribute("actServ", aa);
+        return "user/cosasservidor";
+    }
+
+    @RequestMapping("modusuarios.htm")
+    public String modusuarios(@RequestParam("id") Integer email, Model model) {
+        String id = (String) request.getSession().getAttribute("name");
+        if (id == null) {
+            return "index";
+        }
         EtbInvUsuServ a = dao.buscarususerv(email);
         List<EtbInvUsuEstado> Listausuest = dao.Listausuest();
         int m = 12;
-        model.addAttribute("email", email);
+        model.addAttribute("usuer", a);
         model.addAttribute("Listausuest", Listausuest);
-        model.addAttribute("getUsuApell", a.getUsusServ());
-        model.addAttribute("getUsuCorreo", a.getUsusLogin());
         model.addAttribute("m", m);
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/usuarioservidor");
-        String id = (String) request.getSession().getAttribute("name");
-        if (id == null) {
-            maw.setViewName("index");
-            return maw;
-        }
-        return maw;
+
+        return "user/cosasservidor";
     }
-    
+
     @RequestMapping("modiusuario.htm")
-    public String create(@RequestParam("login") String ususLogin,
-            @RequestParam("nombre") String ususNombre,
-            @RequestParam("tarea") String tCambio,
-            @RequestParam("servid") int ususidSer,
-            @RequestParam("administrado") int administrado,Model model) {
+    public String modiusuario(@RequestParam("login") String ususLogin,
+            @RequestParam("nombre") String nombre,
+            @RequestParam("tareacambio") String tareacambio,
+            @RequestParam("estado") int estado,
+            @RequestParam("administrado") int admin,
+            @RequestParam("servid") int email, Model model) {
 
         int m = 0;
         model.addAttribute("m", m);
-        EtbInvServidor aa = dao.readid(ususidSer);
-        String ususServ = aa.getSerSerial();
-        EtbInvUsuEstado ususEstado = new EtbInvUsuEstado(1);
-        EtbInvUsuEstado ususEstadoa = new EtbInvUsuEstado(3);
-        EtbInvServidor ususidServ = new EtbInvServidor(ususidSer);
-        dao.crearususerv(Fecha, ususLogin, ususNombre, ususServ, ususEstadoa, ususidServ,administrado);
-        dao.crearcambioususerv(Fecha, ususLogin, tCambio, ususEstado);
-        List<EtbInvUsuServ> Listaususerv = dao.Listaususerv(ususEstadoa);
-        model.addAttribute("Listaususerv", Listaususerv);
-        return "user/usuarioservidor";
+        EtbInvUsuServ a = dao.buscarususerv(email);
+        EtbInvTablaDominios tabladominios = new EtbInvTablaDominios(39);
+
+        String cam_tab_descripcion_SM = "1";
+        String cam_tab_solicitante_SM = "1";
+        int usuarioetb1 = (int) request.getSession().getAttribute("idusuap");
+        EtbInvUsuarioAp usuarioetb = new EtbInvUsuarioAp(usuarioetb1);
+        dao.llenarbitacora(tabladominios, email, usuarioetb, FechaH, tareacambio, cam_tab_descripcion_SM, cam_tab_solicitante_SM);
+
+        EtbInvCambioTabla camt = dao.idcambiotabla(tabladominios, email, usuarioetb, tareacambio);
+        //    int cambbit = camt.getCamtabID();
+        EtbInvCambioTabla CamIdtabla = new EtbInvCambioTabla(camt.getCamtabID());
+
+        if (!a.getUsusLogin().equals(ususLogin)) {
+            String CamColumna = "USUS_LOGIN";
+            String CamNawValor = "" + ususLogin;
+            String CamValorIni = "" + a.getUsusLogin();
+            dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
+        }
+        if (!a.getUsusNombre().equals(nombre)) {
+            String CamColumna = "USUS_LOGIN";
+            String CamNawValor = "" + nombre;
+            String CamValorIni = "" + a.getUsusNombre();
+            dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
+        }
+        if (!a.getUsusEstado().getUsusEstado().equals(estado)) {
+            String CamColumna = "USUS_LOGIN";
+            String CamNawValor = "" + estado;
+            String CamValorIni = "" + a.getUsusEstado().getUsusEstado();
+            dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
+        }
+        if (!a.getUsusAdm().equals(admin)) {
+            String CamColumna = "USUS_LOGIN";
+            String CamNawValor = "" + admin;
+            String CamValorIni = "" + a.getUsusAdm();
+            dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
+        }
+        EtbInvUsuEstado ususEstado = new EtbInvUsuEstado(estado);
+
+        EtbInvServidor ususidServ = new EtbInvServidor(a.getIdSerServidor().getSerServer());
+        dao.update(a.getFCreacion(), email, ususEstado, ususLogin, nombre, admin, ususidServ);
+        dao.crearcambioususerv(Fecha, ususLogin, tareacambio, ususEstado);
+
+        model.addAttribute("Listaususerv", a);
+        return null;
     }
-    
+
 }

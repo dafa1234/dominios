@@ -50,442 +50,306 @@ public class controljsp {
             fechaActual.get(Calendar.DAY_OF_MONTH));
 
     @RequestMapping("pruebas.htm")
-    public ModelAndView pruebas(Model model) {
-
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("prueba");
+    public String pruebas(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
-        int ususidSer = 1;
-        List<EtbInvMarca> ListaMarca = dao.ListaMarca();
-        List<EtbInvEstado> ListaEstado = dao.ListaEstado();
-        List<EtbInvSisOperativo> Listasisope = dao.Listasisope();
-        List<EtbInvGrupo> Listagrupo = dao.Listagrupo();
-        List<EtbInvCentral> ListaCentral = dao.ListaCentral();
-        List<EtbInvPlataforma> ListaPrataforma = dao.ListaPrataforma();
-        List<EtbInvRolServidor> ListaRolserver = dao.ListaRolserver();
-        List<EtbInvSalon> ListaSalom = dao.ListaSalom();
-        List<EtbInvModelo> ListaModelo = dao.ListaModelo();
-        List<EtbInvCliente> ListaCliente = dao.ListaCliente();
-        model.addAttribute("listaFonos", ListaMarca);
-        model.addAttribute("listaEstado", ListaEstado);
-        model.addAttribute("listaSis", Listasisope);
-        model.addAttribute("listaGrupo", Listagrupo);
-        model.addAttribute("listaCentral", ListaCentral);
-        model.addAttribute("listaPlat", ListaPrataforma);
-        model.addAttribute("listaRol", ListaRolserver);
-        model.addAttribute("listaSalon", ListaSalom);
-        model.addAttribute("listaModelo", ListaModelo);
-        model.addAttribute("listaCliente", ListaCliente);
-
-        EtbInvServidor aa = dao.readid(ususidSer);
-        List<EtbInvServidor> Listaserver = dao.Listaserver();
-        model.addAttribute("Listaserver", Listaserver);
-
-        model.addAttribute("idser", aa.getSerServer());
-        model.addAttribute("serial", aa.getSerSerial());
-        model.addAttribute("hostname", aa.getSerHostname());
-        model.addAttribute("marca", aa.getMarIdMarca());
-        model.addAttribute("modelo", aa.getModIdModelo());
-        model.addAttribute("sisoperativo", aa.getSisIdSisOperativo());
-        model.addAttribute("conexion", aa.getSerConexion());
-        model.addAttribute("estado", aa.getEstIdEstado());
-        model.addAttribute("central", aa.getCenIdCentral());
-        model.addAttribute("salon", aa.getSalIdSalon());
-        model.addAttribute("rack", aa.getSerRack());
-        model.addAttribute("unidad", aa.getSerUnidad());
-        model.addAttribute("grupo", aa.getGruIdGrupo());
-        model.addAttribute("cliente", aa.getCliIdCliente());
-        model.addAttribute("proyecto", aa.getSerProyecto());
-        model.addAttribute("rolserv", aa.getRolIdRolServ());
-        model.addAttribute("plataforma", aa.getPlaIdPlataforma());
-        model.addAttribute("fingreso", aa.getSerFIngreso());
-        model.addAttribute("tingreso", aa.getSerTIngreso());
-        model.addAttribute("npfisicos", aa.getSerNoProcFisico());
-        model.addAttribute("foradcompartida", aa.getSerTareaAdCompartida());
-        model.addAttribute("adcompartida", aa.getSerAdCompartida());
-        model.addAttribute("administrada", aa.getSerAdministrado());
-        model.addAttribute("cores", aa.getSerCores());
-        model.addAttribute("mem", aa.getServMem());
-        model.addAttribute("discoC", aa.getServDiscoC());
-        return maw;
+     
+        
+        return "prueba";
     }
 
     @RequestMapping("prueb.htm")
-    public ModelAndView pr(Model model) {
- ModelAndView maw = new ModelAndView();
+    public String pr(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
-int ususidSer =1;
-        maw.setViewName("user/newjsp");
-        EtbInvServidor aa = dao.readid(ususidSer);
-        int m = 8;
-        model.addAttribute("m", m);
-        model.addAttribute("servidor", aa);
-        model.addAttribute("direccionamientocoll", aa.getEtbInvDireccionamientoCollection());
-        model.addAttribute("aseguramientocoll", aa.getEtbInvAseguramientoCollection());
-        model.addAttribute("usuarioservidorcoll", aa.getEtbInvUsuServCollection());
-        model.addAttribute("actividadservidorcoll", aa.getEtbInvActividadCollection());
-        model.addAttribute("rutaservidorcoll", aa.getEtbInvRutaCollection());
-        model.addAttribute("casosprovservidorcoll", aa.getEtbInvCasosProvCollection());
-        return maw;
+       
+        return "user/newjsp";
 
     }
 
     //USUARIO AP
     @RequestMapping("buscar.htm")
-    public ModelAndView bus(Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("buscar");
+    public String bus(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         List<EtbInvServidor> Listaserver = dao.Listaserver();
         model.addAttribute("Listaserver", Listaserver);
-        return maw;
+        return "buscar";
     }
 
     //central
     @RequestMapping("ncentral.htm")
-    public ModelAndView nCentral(Model model) {
-        ModelAndView maw = new ModelAndView();
-        int noj = 1;
-        model.addAttribute("noj", noj);
+    public String nCentral(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
-        maw.setViewName("user/objetos");
-        return maw;
+        int noj = 1;
+        model.addAttribute("noj", noj);
+        return "user/objetos";
     }
 //central
 
     @RequestMapping("central.htm")
-    public ModelAndView Central(@RequestParam("central") String Central, Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/objetos");
+    public String Central(@RequestParam("central") String Central, Model model) {
         int noj = 1;
         model.addAttribute("noj", noj);
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         dao.newcentral(Central);
-        return maw;
+        return "user/objetos";
     }
 
     //grupo
     @RequestMapping("ngrupo.htm")
-    public ModelAndView nGrupo(Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String nGrupo(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int noj = 2;
         model.addAttribute("noj", noj);
-        maw.setViewName("user/objetos");
-        return maw;
+        return "user/objetos";
     }
 
     @RequestMapping("grupo.htm")
-    public ModelAndView Grupo(@RequestParam("ngrupo") String Ngrupo, @RequestParam("tgrupo") String Tgrupo, Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String Grupo(@RequestParam("ngrupo") String Ngrupo, @RequestParam("tgrupo") String Tgrupo, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
-        maw.setViewName("user/objetos");
         int noj = 2;
         model.addAttribute("noj", noj);
         dao.newgrupo(Ngrupo, Tgrupo);
-        return maw;
+        return "user/objetos";
     }
 
     //marca
     @RequestMapping("nmarca.htm")
-    public ModelAndView nmarca(Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String nmarca(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int noj = 3;
         model.addAttribute("noj", noj);
-        maw.setViewName("user/objetos");
-        return maw;
+        return "user/objetos";
     }
 
     @RequestMapping("marca.htm")
-    public ModelAndView marca(@RequestParam("nmarca") String nmarca, @RequestParam("usoporte") String usoporte,
+    public String marca(@RequestParam("nmarca") String nmarca, @RequestParam("usoporte") String usoporte,
             @RequestParam("tsoporte") String tsoporte, @RequestParam("minterventor") String minterventor, Model model) {
-        ModelAndView maw = new ModelAndView();
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
-        maw.setViewName("user/objetos");
         int noj = 3;
         model.addAttribute("noj", noj);
         dao.newmarca(nmarca, usoporte, tsoporte, minterventor);
-        return maw;
+        return "user/objetos";
     }
 
     //plataforma
     @RequestMapping("nplataforma.htm")
-    public ModelAndView nplataforma(Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String nplataforma(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int noj = 4;
         model.addAttribute("noj", noj);
-        maw.setViewName("user/objetos");
-        return maw;
+        return "user/objetos";
     }
 
     @RequestMapping("plataforma.htm")
-    public ModelAndView plataforma(@RequestParam("nplataforma") String nplataforma, @RequestParam("aplataforma") int aplataforma1, Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String plataforma(@RequestParam("nplataforma") String nplataforma, @RequestParam("aplataforma") int aplataforma1, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
-        maw.setViewName("user/objetos");
         int noj = 4;
         model.addAttribute("noj", noj);
         EtbInvAdmPlataforma aplataforma = new EtbInvAdmPlataforma(aplataforma1);
         dao.newplataforma(nplataforma, aplataforma);
-        return maw;
+        return "user/objetos";
     }
 
     //rolserv
     @RequestMapping("nrolserv.htm")
-    public ModelAndView nrolserv(Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String nuevorolserv(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int noj = 5;
         model.addAttribute("noj", noj);
-        maw.setViewName("user/objetos");
-        return maw;
+        return "user/objetos";
     }
 
     @RequestMapping("rolserv.htm")
-    public ModelAndView rolserv(@RequestParam("nrol") String nrol, Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String rolserv(@RequestParam("nrol") String nrol, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
-        maw.setViewName("user/objetos");
         int noj = 5;
         model.addAttribute("noj", noj);
         dao.newrol(nrol);
-        return maw;
+        return "user/objetos";
     }
 
     //sisoper
     @RequestMapping("nsisopera.htm")
-    public ModelAndView nsisoper(Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String nsisoper(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int noj = 6;
         model.addAttribute("noj", noj);
-        maw.setViewName("user/objetos");
-        return maw;
+        return "user/objetos";
     }
 
     @RequestMapping("sisopera.htm")
-    public ModelAndView sisoper(@RequestParam("sisdis") int sisdis, @RequestParam("nsis") String nsis, Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String sisoper(@RequestParam("sisdis") int sisdis, @RequestParam("nsis") String nsis, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
-        maw.setViewName("user/objetos");
         int noj = 6;
         model.addAttribute("noj", noj);
         dao.newsisoperativo(sisdis, nsis);
-        return maw;
+        return "user/objetos";
     }
     //estado
 
     @RequestMapping("nestado.htm")
-    public ModelAndView nestado(Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String nestado(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int noj = 7;
         model.addAttribute("noj", noj);
-        maw.setViewName("user/objetos");
-        return maw;
+        return "user/objetos";
     }
 
     @RequestMapping("estado.htm")
-    public ModelAndView estado(@RequestParam("nest") String nest, Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String estado(@RequestParam("nest") String nest, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
-        maw.setViewName("user/objetos");
         int noj = 7;
         model.addAttribute("noj", noj);
         dao.newestado(nest);
-        return maw;
+        return "user/objetos";
     }
     //salon
 
     @RequestMapping("nsalon.htm")
-    public ModelAndView nsalon(Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String nsalon(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int noj = 8;
         List<EtbInvCentral> ListaCentral = dao.ListaCentral();
         model.addAttribute("noj", noj);
         model.addAttribute("listaCentral", ListaCentral);
-        maw.setViewName("user/objetos");
-        return maw;
+        return "user/objetos";
     }
 
     @RequestMapping("salon.htm")
-    public ModelAndView salon(@RequestParam("scen") int scen, @RequestParam("nsal") String nsal, Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String salon(@RequestParam("scen") int scen, @RequestParam("nsal") String nsal, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
-        maw.setViewName("user/objetos");
         int noj = 8;
         model.addAttribute("noj", noj);
         dao.newsalon(scen, nsal);
-        return maw;
+        return "user/objetos";
     }
 
     //modelo
     @RequestMapping("nmodelo.htm")
-    public ModelAndView nmodelo(Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String nmodelo(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int noj = 9;
         List<EtbInvMarca> ListaMarca = dao.ListaMarca();
         model.addAttribute("noj", noj);
         model.addAttribute("listaMarca", ListaMarca);
-        maw.setViewName("user/objetos");
-        return maw;
+        return "user/objetos";
     }
 
     @RequestMapping("modelo.htm")
-    public ModelAndView modelo(@RequestParam("nmar") int nmar, @RequestParam("nmod") String nmod, Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String modelo(@RequestParam("nmar") int nmar, @RequestParam("nmod") String nmod, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
-        maw.setViewName("user/objetos");
         int noj = 9;
         model.addAttribute("noj", noj);
         dao.newmodelo(nmar, nmod);
-        return maw;
+        return "user/objetos";
     }
 
     //cliente
     @RequestMapping("ncliente.htm")
-    public ModelAndView ncliente(Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String ncliente(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int noj = 10;
         model.addAttribute("noj", noj);
-        maw.setViewName("user/objetos");
-        return maw;
+        return "user/objetos";
     }
 
     @RequestMapping("cliente.htm")
-    public ModelAndView cliente(@RequestParam("ncli") String ncli, @RequestParam("ccli") String ccli, Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String cliente(@RequestParam("ncli") String ncli, @RequestParam("ccli") String ccli, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
-        maw.setViewName("user/objetos");
         int noj = 10;
         model.addAttribute("noj", noj);
         dao.newcliente(ncli, ccli);
-        return maw;
+        return "user/objetos";
     }
 
     //ADMINISTRADOR
     @RequestMapping("fono.htm")
-    public ModelAndView fon(Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("fono");
+    public String administrador(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         List<EtbInvServidor> Listaserver = dao.Listaserver();
         model.addAttribute("Listaserver", Listaserver);
-        return maw;
+        return "administrador";
     }
 
     //CERRAR SESION
     @RequestMapping("cerrarsesion.htm")
-    public ModelAndView cer() {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("cerrarsesion");
+    public String cerrarsesion() {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
-        return maw;
+        return "cerrarsesion";
     }
 
     //reporte

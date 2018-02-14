@@ -67,12 +67,14 @@
 
                     <li><a href="<c:url value="/servers.htm"/>">Inventario</a></li>
                     <li><a href="<c:url value="/actividades.htm"/>">Actividades</a></li>
-                    <li><a href="<c:url value="/pruebas.htm"/>">pruebas</a></li>       
+
                     <li><a href="<c:url value="/casosproveedor.htm"/>">Casos Proveedor</a></li>                     
                     <li><a href="<c:url value="/usuarioservidor.htm"/>">Usuarios</a></li>
-                    <li><a href="<c:url value="/prueb.htm"/>">Casfd</a></li>
-                        <%
-                        if (id == 1) {   %>
+
+                    <%
+                        //<li><a href="<c:url value="/pruebas.htm"/>">pruebas</a></li> 
+                        //<li><a href="<c:url value="/prueb.htm"/>">Casfd</a></li>
+                            if (id == 1) {   %>
                     <li><a href="<c:url value="/modificarusuario.htm"/>">Crear Usuario</a></li>
                         <%}%>
                 </ul>

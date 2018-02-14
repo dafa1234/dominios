@@ -453,13 +453,12 @@ public class iniciosecion {
 
     //INSERTAR ACTIVIDAD
     @Transactional(rollbackFor = {ServicioException.class})
-    public void creact(String Fecha, String serHostname, EtbInvServidor serv1, String actEjecuta, String actTarea, String actDescripcion, String actSolicita, EtbInvTipoActividad actTipo, String actFechaFin, String actFechaIni) {
+    public void creact(String Fecha, EtbInvServidor serv1, String actEjecuta, String actTarea, String actDescripcion, String actSolicita, EtbInvTipoActividad actTipo, String actFechaFin, String actFechaIni) {
         EtbInvActividad actividad = new EtbInvActividad();
         actividad.setActDescripcion(actDescripcion);
         actividad.setActEjecuta(actEjecuta);
         actividad.setActFechaFin(actFechaFin);
         actividad.setActFechaIni(actFechaIni);
-        actividad.setActServ(serHostname);
         actividad.setActServ1(serv1);
         actividad.setActSolicita(actSolicita);
         actividad.setActTarea(actTarea);
@@ -527,7 +526,7 @@ public class iniciosecion {
 
     //INSERTAR CASOSPROVEEDOR
     @Transactional(rollbackFor = {ServicioException.class})
-    public void creaproveedor(EtbInvServidor caspserv,String Fecha, EtbInvMarca caspProv, String caspServ, String caspFechaApe, String caspFechaCie, String caspNumero, String caspIm, EtbInvEstadoCasos caspEstado) {
+    public void creaproveedor(EtbInvServidor caspserv,String Fecha, EtbInvMarca caspProv, String caspFechaApe, String caspFechaCie, String caspNumero, String caspIm, EtbInvEstadoCasos caspEstado) {
         EtbInvCasosProv casosprove = new EtbInvCasosProv();
         casosprove.setCaspEstado(caspEstado);
         casosprove.setCaspFechaApe(caspFechaApe);
@@ -535,7 +534,6 @@ public class iniciosecion {
         casosprove.setCaspIm(caspIm);
         casosprove.setCaspNumero(caspNumero);
         casosprove.setCaspProv(caspProv);
-        casosprove.setCaspServ(caspServ);
         casosprove.setFCreacion(Fecha);
         casosprove.setCaspServ1(caspserv);
         em.persist(casosprove);
@@ -543,7 +541,7 @@ public class iniciosecion {
     //INSERTAR USUARIO SERVIDOR
 
     @Transactional(rollbackFor = {ServicioException.class})
-    public void crearususerv(String Fecha, String ususLogin, String ususNombre, String ususServ, EtbInvUsuEstado ususEstadoa, EtbInvServidor ususidServ,int administrado) {
+    public void crearususerv(String Fecha, String ususLogin, String ususNombre,  EtbInvUsuEstado ususEstadoa, EtbInvServidor ususidServ,int administrado) {
         EtbInvUsuServ usuarioserv = new EtbInvUsuServ();
         usuarioserv.setUsusAdm(administrado);
         usuarioserv.setFCreacion(Fecha);
@@ -551,7 +549,6 @@ public class iniciosecion {
         usuarioserv.setUsusEstado(ususEstadoa);
         usuarioserv.setUsusLogin(ususLogin);
         usuarioserv.setUsusNombre(ususNombre);
-        usuarioserv.setUsusServ(ususServ);
         em.persist(usuarioserv);
     }
     //llenarbitacora
@@ -626,7 +623,7 @@ public class iniciosecion {
 
     //actualizar usuario servidor
     @Transactional(rollbackFor = {ServicioException.class})
-    public EtbInvUsuServ update(String Fechas, Integer email, EtbInvUsuEstado ususEstado, String ususLogin, String nombre, String servidor, Integer admin, EtbInvServidor ususidServ) {
+    public EtbInvUsuServ update(String Fechas, Integer email, EtbInvUsuEstado ususEstado, String ususLogin, String nombre, Integer admin, EtbInvServidor ususidServ) {
         EtbInvUsuServ ususer = new EtbInvUsuServ();
         ususer.setUsusId(email);
         ususer.setFCreacion(Fechas);
@@ -635,7 +632,6 @@ public class iniciosecion {
         ususer.setIdSerServidor(ususidServ);
         ususer.setUsusLogin(ususLogin);
         ususer.setUsusNombre(nombre);
-        ususer.setUsusServ(servidor);
         return em.merge(ususer);
 
     }
@@ -676,9 +672,8 @@ public class iniciosecion {
 
     //insertar direccionamiento
     @Transactional(rollbackFor = {ServicioException.class})
-    public void direccionamiento(String dirDirServ, String dirIp, String dirVlan, String dirSwitch, String dirPuerto, EtbInvServidor idSer, EtbInvTip dirTipo) {
+    public void direccionamiento(String dirIp, String dirVlan, String dirSwitch, String dirPuerto, EtbInvServidor idSer, EtbInvTip dirTipo) {
         EtbInvDireccionamiento direccionamiento = new EtbInvDireccionamiento();
-        direccionamiento.setDirDirServ(dirDirServ);
         direccionamiento.setDirIp(dirIp);
         direccionamiento.setDirPuerto(dirPuerto);
         direccionamiento.setDirSwitch(dirSwitch);
@@ -689,9 +684,8 @@ public class iniciosecion {
     }
         //insertar direccionamiento
     @Transactional(rollbackFor = {ServicioException.class})
-    public void direccionamientoedite(int iddirIp, String dirDirServ, String dirIp, String dirVlan, String dirSwitch, String dirPuerto, EtbInvServidor idSer, EtbInvTip dirTipo) {
+    public void direccionamientoedite(int iddirIp,  String dirIp, String dirVlan, String dirSwitch, String dirPuerto, EtbInvServidor idSer, EtbInvTip dirTipo) {
         EtbInvDireccionamiento direccionamiento = new EtbInvDireccionamiento();
-        direccionamiento.setDirDirServ(dirDirServ);
         direccionamiento.setDirIp(dirIp);
         direccionamiento.setDirPuerto(dirPuerto);
         direccionamiento.setDirSwitch(dirSwitch);
@@ -724,7 +718,7 @@ public class iniciosecion {
     }
     //modificar casos proveedor
      @Transactional(rollbackFor = {ServicioException.class})
-    public void modificarcasproveedor(EtbInvMarca proveedor1, int idcasos, String fini, String fcie, EtbInvEstadoCasos estini1, String numcas, String im, String fCreacion, String caspServ, EtbInvServidor servi) {
+    public void modificarcasproveedor(EtbInvMarca proveedor1, int idcasos, String fini, String fcie, EtbInvEstadoCasos estini1, String numcas, String im, String fCreacion,EtbInvServidor servi) {
         EtbInvCasosProv casosprove = new EtbInvCasosProv();
         casosprove.setCaspId(idcasos);
         casosprove.setCaspEstado(estini1);
@@ -733,21 +727,19 @@ public class iniciosecion {
         casosprove.setCaspIm(im);
         casosprove.setCaspNumero(numcas);
         casosprove.setCaspProv(proveedor1);
-        casosprove.setCaspServ(caspServ);
         casosprove.setFCreacion(fCreacion);
         casosprove.setCaspServ1(servi);
         em.merge(casosprove);
     }
      //modificar ACTIVIDAD
     @Transactional(rollbackFor = {ServicioException.class})
-    public void modificaractiv(Integer actId,String Fecha, String serHostname, EtbInvServidor serv1, String actEjecuta, String actTarea, String actDescripcion, String actSolicita, EtbInvTipoActividad actTipo, String actFechaFin, String actFechaIni) {
+    public void modificaractiv(Integer actId,String Fecha, EtbInvServidor serv1, String actEjecuta, String actTarea, String actDescripcion, String actSolicita, EtbInvTipoActividad actTipo, String actFechaFin, String actFechaIni) {
         EtbInvActividad actividad = new EtbInvActividad();
         actividad.setActId(actId);
         actividad.setActDescripcion(actDescripcion);
         actividad.setActEjecuta(actEjecuta);
         actividad.setActFechaFin(actFechaFin);
         actividad.setActFechaIni(actFechaIni);
-        actividad.setActServ(serHostname);
         actividad.setActServ1(serv1);
         actividad.setActSolicita(actSolicita);
         actividad.setActTarea(actTarea);
@@ -845,6 +837,8 @@ public class iniciosecion {
         em.persist(cliente);
     }
 
+   
+    
  
 
 }

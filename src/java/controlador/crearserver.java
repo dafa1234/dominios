@@ -110,25 +110,21 @@ public class crearserver {
     //SERVIDORES
 
     @RequestMapping("servers.htm")
-    public ModelAndView server(Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/servers");
+    public String server(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int m = 0;
         model.addAttribute("m", m);
         List<EtbInvServidor> Listaserver = dao.Listaserver();
         model.addAttribute("listaServer", Listaserver);
-        return maw;
+        return "user/servers";
     }
 
 // formulario agregar servidor
     @RequestMapping("aserver.htm")
-    public ModelAndView agser(Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String agser(Model model) {
         int m = 1;
         List<EtbInvMarca> ListaMarca = dao.ListaMarca();
         List<EtbInvEstado> ListaEstado = dao.ListaEstado();
@@ -151,42 +147,34 @@ public class crearserver {
         model.addAttribute("listaModelo", ListaModelo);
         model.addAttribute("listaCliente", ListaCliente);
         model.addAttribute("m", m);
-        maw.setViewName("user/servers");
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
-        return maw;
+        return "user/servers";
     }
 
     // detalle servidor
     @RequestMapping("TdServ.htm")
-    public ModelAndView tdserver(@RequestParam("tdserv") Integer ususidSer, Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String tdserver(@RequestParam("tdserv") Integer ususidSer, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
-
-        maw.setViewName("user/servers");
         EtbInvServidor aa = dao.readid(ususidSer);
         int m = 8;
         model.addAttribute("m", m);
         model.addAttribute("servidor", aa);
-        return maw;
+        return "user/servers";
 
     }
 
     // modificar servidor
     @RequestMapping("modificarservidor.htm")
-    public ModelAndView modificarservidor(@RequestParam("tdserv") Integer ususidSer, Model model) {
-        ModelAndView maw = new ModelAndView();
+    public String modificarservidor(@RequestParam("tdserv") Integer ususidSer, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         List<EtbInvEstado> ListaEstado = dao.ListaEstado();
         List<EtbInvSisOperativo> Listasisope = dao.Listasisope();
@@ -204,12 +192,11 @@ public class crearserver {
         model.addAttribute("listaRol", ListaRolserver);
         model.addAttribute("listaSalon", ListaSalom);
         model.addAttribute("listaCliente", ListaCliente);
-        maw.setViewName("user/cosasservidor");
         EtbInvServidor aa = dao.readid(ususidSer);
         int m = 2;
         model.addAttribute("m", m);
         model.addAttribute("servidor", aa);
-        return maw;
+        return "user/cosasservidor";
 
     }
 

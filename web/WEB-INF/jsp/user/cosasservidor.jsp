@@ -14,6 +14,8 @@
 
                 if (m == 0) {
             %> 
+           <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>actividades</div>
             <div class="flex-caption">
                 <div class="box-bottom">
                     <div class=" panel-heading"><h2>agregar aseguramiento</h2></div>
@@ -54,10 +56,12 @@
                     </div>
                 </center>
             </div>
+           </div>
             <%}
                 if (m == 6) {
             %> 
-
+<div class="panel panel-primary">
+                <div class=" panel-heading"><h2>actividades</div>
             <div class="box-bottom">
                 <div class=" panel-heading"><h2>modificar aseguramiento </h2></div>
                 <a  role="button" href="<c:url value="/aseguramiento.htm"/>">volver</a> 
@@ -96,7 +100,7 @@
 
                 </div>
             </center>
-
+</div>
             <%
                 }
                 if (m == 1) {
@@ -114,8 +118,7 @@
 
                                     <label class="control-label">SERVIDOR</label>
                                     <input   name="idSer1" type="hidden" id="inputEmail"   required value="${requestScope.servip}" ><p class="form-control" >${requestScope.servipname}</p><br/>
-                                    <input   name="dirDirServ" type="hidden" id="inputEmail" class="form-control" value="${requestScope.servipname}" placeholder="dirDirServ" required >
-                                    <label class="control-label">IP</label>
+                                      <label class="control-label">IP</label>
                                     <input   name="dirIp" type="text" id="inputEmail" class="form-control" placeholder="dirIp" required ><br/>
 
                                     <label class="control-label">VLAN</label>
@@ -153,6 +156,7 @@
 
                 </div>
             </div>
+
             <%
                 }
                 if (m == 3) {
@@ -172,7 +176,6 @@
                                     <label class="control-label">SERVIDOR</label>
                                     <input   name="iddirIp" type="hidden" id="inputEmail"   required value="${requestScope.servip.dirId}" >
                                     <input   name="idSer1" type="hidden" id="inputEmail"   required value="${requestScope.servip.idSer.serServer}" ><p class="form-control" >${requestScope.servip.idSer.serHostname}</p><br/>
-                                    <input   name="dirDirServ" type="hidden" id="inputEmail" class="form-control" value="${requestScope.servip.idSer.serHostname}" placeholder="dirDirServ" required >
                                     <label class="control-label">IP</label>
                                     <input   name="dirIp" type="text" id="inputEmail" class="form-control" value="${requestScope.servip.dirIp}" placeholder="dirIp" required ><br/>
 
@@ -208,9 +211,9 @@
                             </div>
                         </div>
                     </form>
-
                 </div>
             </div>
+                                        
             <%
                 }
                 if (m == 4) {
@@ -294,13 +297,12 @@
 
                 </div>
             </div>
-
-
-
             <%
                 }
                 if (m == 2) {
             %>
+            <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>Editar Servidor</div>
             <form id="forminicio" action="modificarserv.htm" method="Post">
                 <div class="card mb-3">
                     <div class="card-header">
@@ -492,10 +494,13 @@
                 </div>
 
             </form>
+            </div>
             <%
                 }
                 if (m == 7) {
             %>
+            <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>casos proveedor</div>
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/caprov.htm"/>">volver</a> 
             </div> 
@@ -535,12 +540,14 @@
                     <!-- End # DIV Form -->
                 </div>
             </center>
-
+            </div>
 
             <%
                 }
                 if (m == 8) {
             %>
+          <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>actividades</div>
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/caprov.htm"/>">volverm</a> 
             </div> 
@@ -581,10 +588,13 @@
                     <!-- End # DIV Form -->
                 </div>
             </center>
+          </div>
             <%
                 }
                 if (m == 9) {
             %>
+          <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>actividades</div>
             <center>
                 <!-- Begin # Login Form -->
                 <form action="act.htm" method="Post">
@@ -636,10 +646,13 @@
 
                 </form>
             </center>
+          </div>
             <%
                 }
                 if (m == 10) {
             %>
+           <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>actividades</div>
             <center>
                 modoificar actividad
                 <!-- Begin # Login Form -->
@@ -694,12 +707,13 @@
 
                 </form>
             </center>
-
+           </div>
             <%
                 }
                 if (m == 11) {
             %>          
-
+<div class="panel panel-primary">
+                <div class=" panel-heading"><h2>actividades</div>
             <h2>Agregar nuevo usuario servidor</h2>
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/usuarioservidor.htm"/>">volver</a>
@@ -732,43 +746,54 @@
                     <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: red">ingresar</button>
                 </div>                    
             </form>   
+</div>
             <%
                 }
                 if (m == 12) {
             %>          
-
-            <h2>modificar nuevo usuario servidor</h2>
+<div class="panel panel-primary">
+                <div class=" panel-heading"><h2>modificar nuevo usuario servidor</h2></div>
             <div class="box-bottom">
-                <a  role="button" href="<c:url value="/usuarioservidor.htm"/>">volver</a>
+                <a  role="button" href="<c:url value="/modiusuario.htm"/>">volver</a>
             </div>
             <form id="forminicio" action="modiusuario.htm" method="Post">
                 <table class="table table-bordered" id="ataTable" width="100%" cellspacing="0">            
                     <tr>                           
                         <th>login</th>
                         <th>nombre</th>
-                        <th>tarea</th>
+                        <th>estado</th>
                         <th>aministrado</th> 
-                        <th>servidor</th>                 
+                        <th>servidor</th>  
+                        <th>tarea cambio</th>
                     </tr>
                     <tr>
-                        <td> <input  name="login" type="text"  id="inputPassword" class="form-control" placeholder="login" required>  </td>
-                        <td> <input  name="nombre" type="text"  id="inputPassword" class="form-control" placeholder="nombre usuario" required>  </td>
-                        <td> <input  name="tarea" type="text"  id="inputPassword" class="form-control" placeholder="tarea" required>  </td>   
+                        <td> <input  name="login" type="text" value="${requestScope.usuer.ususLogin}" id="inputPassword" class="form-control" placeholder="login" required>  </td>
+                        <td> <input  name="nombre" type="text" value="${requestScope.usuer.ususNombre}" id="inputPassword" class="form-control" placeholder="nombre usuario" required>  </td>
+                        <td> 
+                          <select name="estado" class="form-control" required>
+                                    <option value="${requestScope.usuer.ususEstado.ususEstado}">${requestScope.usuer.ususEstado.estuEstado}</option>
+                                    <c:forEach var="f" items="${requestScope.Listausuest}">
+                                        <option value="${f.ususEstado}">${f.estuEstado}</option>
+                                    </c:forEach>
+                                </select><br/><br/>
+                        </td>   
                         <td> <select name="administrado" class="form-control" required>
-                                <option value="">Administracion </option>
+                                <option value="${requestScope.usuer.ususAdm}">${requestScope.usuer.ususAdm} </option>
                                 <option value="1">SI</option> 
                                 <option value="0">NO</option>                                                  
                             </select>  </td> 
-                        <td>   <input  name="servid" type="hidden" value="${requestScope.actServ.serServer}"  id="inputPassword" class="form-control" placeholder="tarea" required>
+                        <td>   <input  name="servid" type="hidden" value="${requestScope.usuer.ususId}"  id="inputPassword" class="form-control" placeholder="tarea" required>
 
-                            <p class="form-control" > ${requestScope.actServ.serSerial}</p>
-                        </td>                            
+                            <p class="form-control" > ${requestScope.usuer.idSerServidor.serSerial}</p>
+                        </td>   
+                         <td> <input  name="tareacambio" type="text" id="inputPassword" class="form-control" placeholder="tarea cambio" required>  </td>
                     </tr>
                 </table>                     
                 <div>
                     <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: red">ingresar</button>
                 </div>                    
             </form>   
+</div>
             <%
                 }
             %>  

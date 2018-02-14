@@ -39,38 +39,31 @@ public class crearactividad {
     //ACTIVIDADES
 
     @RequestMapping("actividades.htm")
-    public ModelAndView news(Model model) {
-
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/actividades");
+    public String news(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int m = 2;
         model.addAttribute("m", m);
         List<EtbInvActividad> ListaActividad = dao.ListaActividad();
         model.addAttribute("listaActividad", ListaActividad);
-        return maw;
+        return "user/actividades";
     }
 
     @RequestMapping("newactiv.htm")
-    public ModelAndView newactiv(Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/actividades");
+    public String newactiv(Model model) {
         List<EtbInvTipoActividad> Listatipoactiv = dao.Listatipoactiv();
         model.addAttribute("Listatipoactiv", Listatipoactiv);
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         List<EtbInvServidor> Listaserver = dao.Listaserver();
         model.addAttribute("listaServer", Listaserver);
         int m = 1;
         model.addAttribute("m", m);
-        return maw;
+        return "user/actividades";
     }
 
     //@RequestMapping(method = RequestMethod.POST)
@@ -97,7 +90,7 @@ public class crearactividad {
                 fechaActual.get(Calendar.DAY_OF_MONTH));
         int m = 2;
         model.addAttribute("m", m);
-        dao.creact(Fecha, aa.getSerHostname(),serv1, actEjecuta, actTarea, actDescripcion, actSolicita, actTipo, actFechaFin, actFechaIni);
+        dao.creact(Fecha,serv1, actEjecuta, actTarea, actDescripcion, actSolicita, actTipo, actFechaFin, actFechaIni);
         List<EtbInvActividad> ListaActividad = dao.ListaActividad();
         model.addAttribute("listaActividad", ListaActividad);
         return "user/actividades";

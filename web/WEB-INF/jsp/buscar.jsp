@@ -9,14 +9,16 @@
 
         <%@include file="/WEB-INF/plantilla/header.jsp" %>
         <div class="content-wrapper">
-
+                  <br/><br/>
+<div class="panel panel-primary">
+                <div class=" panel-heading"><h2>informacion general</h2></div> 
             <center>
 
 
                 <br/><br/>
                 <h2>informacion general</h2>
             </center>
-            <br/><br/>
+      
         
             <div class="card mb-3">
                 <div class="card-header">
@@ -70,6 +72,7 @@
                 <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
             </div>
         </div>
+            </div>
         <%@include file="/WEB-INF/plantilla/foter.jsp" %>
     </body>
 </html>

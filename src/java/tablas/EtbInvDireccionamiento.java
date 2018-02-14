@@ -30,7 +30,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "EtbInvDireccionamiento.findAll", query = "SELECT e FROM EtbInvDireccionamiento e")
     , @NamedQuery(name = "EtbInvDireccionamiento.findByDirId", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.dirId = :dirId")
-    , @NamedQuery(name = "EtbInvDireccionamiento.findByDirDirServ", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.dirDirServ = :dirDirServ")
     , @NamedQuery(name = "EtbInvDireccionamiento.findByDirIp", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.dirIp = :dirIp")
     , @NamedQuery(name = "EtbInvDireccionamiento.findByDirVlan", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.dirVlan = :dirVlan")
     , @NamedQuery(name = "EtbInvDireccionamiento.findByDirSwitch", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.dirSwitch = :dirSwitch")
@@ -43,9 +42,6 @@ public class EtbInvDireccionamiento implements Serializable {
     @Basic(optional = false)
     @Column(name = "DIR_ID")
     private Integer dirId;
-    @Size(max = 255)
-    @Column(name = "DIR_DIR_SERV")
-    private String dirDirServ;
     @Size(max = 255)
     @Column(name = "DIR_IP")
     private String dirIp;
@@ -78,14 +74,6 @@ public class EtbInvDireccionamiento implements Serializable {
 
     public void setDirId(Integer dirId) {
         this.dirId = dirId;
-    }
-
-    public String getDirDirServ() {
-        return dirDirServ;
-    }
-
-    public void setDirDirServ(String dirDirServ) {
-        this.dirDirServ = dirDirServ;
     }
 
     public String getDirIp() {

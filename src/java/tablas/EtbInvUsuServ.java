@@ -33,7 +33,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "EtbInvUsuServ.findByUsusId", query = "SELECT e FROM EtbInvUsuServ e WHERE e.ususId = :ususId")
     , @NamedQuery(name = "EtbInvUsuServ.findByUsusLogin", query = "SELECT e FROM EtbInvUsuServ e WHERE e.ususLogin = :ususLogin")
     , @NamedQuery(name = "EtbInvUsuServ.findByUsusNombre", query = "SELECT e FROM EtbInvUsuServ e WHERE e.ususNombre = :ususNombre")
-    , @NamedQuery(name = "EtbInvUsuServ.findByUsusServ", query = "SELECT e FROM EtbInvUsuServ e WHERE e.ususServ = :ususServ")
     , @NamedQuery(name = "EtbInvUsuServ.findByUsusAdm", query = "SELECT e FROM EtbInvUsuServ e WHERE e.ususAdm = :ususAdm")
     , @NamedQuery(name = "EtbInvUsuServ.findByFCreacion", query = "SELECT e FROM EtbInvUsuServ e WHERE e.fCreacion = :fCreacion")})
 public class EtbInvUsuServ implements Serializable {
@@ -50,9 +49,6 @@ public class EtbInvUsuServ implements Serializable {
     @Size(max = 255)
     @Column(name = "USUS_NOMBRE")
     private String ususNombre;
-    @Size(max = 20)
-    @Column(name = "USUS_SERV")
-    private String ususServ;
     @Column(name = "USUS_ADM")
     private Integer ususAdm;
     @Basic(optional = false)
@@ -101,14 +97,6 @@ public class EtbInvUsuServ implements Serializable {
 
     public void setUsusNombre(String ususNombre) {
         this.ususNombre = ususNombre;
-    }
-
-    public String getUsusServ() {
-        return ususServ;
-    }
-
-    public void setUsusServ(String ususServ) {
-        this.ususServ = ususServ;
     }
 
     public Integer getUsusAdm() {

@@ -69,30 +69,23 @@ public class crearcontratos {
     //CONTRATOS
 
     @RequestMapping("contratos.htm")
-    public ModelAndView con(Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/contratos");
+    public String con(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int m = 2;
         model.addAttribute("m", m);
         List<EtbInvContrato> ListaContra = dao.ListaContra();
         model.addAttribute("listaContra", ListaContra);
-
-        return maw;
+        return "user/contratos";
     }
 
     @RequestMapping("newcont.htm")
-    public ModelAndView newcont(Model model) {
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/contratos");
+    public String newcont(Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
         int m = 1;
         List<EtbInvEstadoCont> Listaestacont = dao.Listaestacont();
@@ -102,6 +95,6 @@ public class crearcontratos {
         model.addAttribute("listamarcas", ListaMarca);
         model.addAttribute("listacont", Listacont);
         model.addAttribute("m", m);
-        return maw;
+        return "user/contratos";
     }
 }

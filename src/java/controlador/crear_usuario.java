@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import tablas.EtbInvUsuarioAp;
 
 /**
@@ -80,18 +79,13 @@ public class crear_usuario {
     }
    //MODIFICAR USUARIOS
     @RequestMapping("modificarusuario.htm")
-    public ModelAndView mouser(Model model) throws UnknownHostException {
-
-        ModelAndView maw = new ModelAndView();
-        maw.setViewName("user/modificarusuario");
+    public String mouser(Model model) throws UnknownHostException {
         String id = (String) request.getSession().getAttribute("name");
         String usuetb = (String) request.getSession().getAttribute("usuetb");
         int per = (int) request.getSession().getAttribute("ID");
         if (id == null) {
-            maw.setViewName("index");
-            return maw;
+            return "index";
         }
-
         if (per != 1) {
             InetAddress inetAddress = InetAddress.getLocalHost();
             String ip = inetAddress.getHostAddress();
@@ -99,10 +93,9 @@ public class crear_usuario {
             String acc = "acceso proivido para el usuario" + usuetb + ".";
             dao.ACCPROI(Fecha, usuetb, ip, url, acc);
             model.addAttribute("errorr", acc);
-            maw.setViewName("error");
-            return maw;
+            return "error";
         }
-        return maw;
+        return "user/modificarusuario";
     }
 
     private static boolean findADETB(java.lang.String username) {

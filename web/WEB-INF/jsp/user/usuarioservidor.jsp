@@ -11,6 +11,8 @@
                 Integer m = (Integer) request.getAttribute("m");
                 if (m == 1) {
             %>
+            <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>Editar Servidor</div> 
             <h2>Agregar nuevo usuario servidor</h2>
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/usuarioservidor.htm"/>">volver</a>
@@ -46,10 +48,12 @@
                     <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: red">ingresar</button>
                 </div>                    
             </form>   
-
+            </div>
             <%   }
                 if (m == 4) {%>
-            <h2>modificar usuarios servidor</h2>
+           <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>Editar Servidor</div> 
+                <h2>modificar usuarios servidor</h2>
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/usuarioservidor.htm"/>">volver</a>
             </div>
@@ -78,10 +82,13 @@
                     </div>
                 </div>
             </form>  
+           </div>
             <%
                 }
                 if (m == 2) {
             %>
+          <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>Editar Servidor</div> 
             <h2>detalles de usuarios de servidor</h2>
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/usuarioservidor.htm"/>">volver</a>
@@ -135,11 +142,14 @@
 
                     </tbody>
                 </table>  
-            </div>                      
+            </div>     
+          </div>
             <%
                 }
                 if (m == 3) {%>
-            <h2>lista de usuarios de servidores</h2>
+         <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>Editar Servidor</div> 
+                <h2>lista de usuarios de servidores</h2>
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/usuarioservidor.htm"/>">volver</a>
             </div>
@@ -161,7 +171,7 @@
                                     <th>usuario nombre</th>
                                     <th>usuario estado</th>                        
                                     <th>usuario hostname</th>
-                                    <th>usuario serial</th>
+                                 
                                     <th>usuario admin</th>
                                 </tr>
                             </thead>
@@ -175,7 +185,7 @@
                                         <td>${f.ususNombre}</td>
                                         <td>${f.ususEstado.estuEstado}</td>
                                         <td>${f.idSerServidor.serHostname}</td>
-                                        <td>${f.ususServ}</td>
+                                    
                                         <td>${f.ususAdm}</td>
                                     </tr>
                                 </c:forEach>  
@@ -192,19 +202,31 @@
                     e.preventDefault();
                 });
             </script>
+         </div>
             <%}
                 if (m == 0) {
             %>
+          <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>Editar Servidor</div> 
             <h2>lista de usuarios de servidores</h2>
-            <div class="box-bottom">
+                  <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                       <div class="box-bottom">
                 <a  role="button" href="<c:url value="/usuarioos.htm"/>">agregar</a>
             </div>
-            <div class="flex-caption">
-                <h3>Bienvenido</h3> 
-                <div class="box-bottom">
+                    </div>
+                    <div class="col-md-3">
+                        <div class="flex-caption">
+                         <div class="box-bottom">
                     <a  role="button" data-toggle="modal" data-target="#login-modal">REPORTE</a>
                 </div>
-            </div>        
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+ 
+                   
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fa fa-table"></i> Data Table usuario</div>
@@ -218,7 +240,6 @@
                                     <th>usuario nombre</th>
                                     <th>usuario estado</th>                        
                                     <th>usuario hostname</th>
-                                    <th>usuario serial</th>
                                     <th>usuario admin</th>
                                     <th>modificar</th>
                                     <th>detalle</th>
@@ -230,8 +251,7 @@
                                     <th>usuario login</th>
                                     <th>usuario nombre</th>
                                     <th>usuario estado</th>                         
-                                    <th>usuario hostname</th>
-                                    <th>usuario serial</th>
+                                    <th>usuario hostname</th>                              
                                     <th>usuario admin</th>
                                     <th>modificar</th>
                                     <th>detalle</th>
@@ -247,13 +267,13 @@
                                         <td>${f.ususNombre}</td>
                                         <td>${f.ususEstado.estuEstado}</td>
                                         <td>${f.idSerServidor.serHostname}</td>
-                                        <td>${f.ususServ}</td>
+                                        
                                         <td>${f.ususAdm}</td>
                                         <td> 
                                             <form id="forminicio" action="usuarios.htm" method="Post">
                                                 <input  name="id" type="hidden" value="${f.ususId}">
                                                 <div>
-                                                    <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: red">modificar</button>
+                                                    <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="button45 button46">modificar</button>
                                                 </div>
                                             </form>
 
@@ -263,7 +283,7 @@
                                                 <input  name="id" type="hidden" value="${f.ususId}">
                                                 <input  name="usu" type="hidden" value="${f.ususLogin}">
                                                 <div>
-                                                    <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: red">detalle</button>
+                                                    <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar"class="button45 button46">detalle</button>
                                                 </div>
                                             </form>
 
@@ -277,6 +297,61 @@
                 </div>
                 <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
             </div> 
+          </div>
+                     <%
+                }
+                if (m == 5) {
+            %>          
+<div class="panel panel-primary">
+                <div class=" panel-heading"><h2>modificar nuevo usuario servidor</h2></div>
+            <div class="box-bottom">
+                <a  role="button" href="<c:url value="/modiusuario.htm"/>">volver</a>
+            </div>
+            <form id="forminicio" action="modiusuario.htm" method="Post">
+                <table class="table table-bordered" id="ataTable" width="100%" cellspacing="0">            
+                    <tr>                           
+                        <th>login</th>
+                        <th>nombre</th>
+                        <th>estado</th>
+                        <th>aministrado</th> 
+                        <th>servidor</th>  
+                        <th>tarea cambio</th>
+                    </tr>
+                    <tr>
+                        <td> <input  name="login" type="text" value="${requestScope.usuer.ususLogin}" id="inputPassword" class="form-control" placeholder="login" required>  </td>
+                        <td> <input  name="nombre" type="text" value="${requestScope.usuer.ususNombre}" id="inputPassword" class="form-control" placeholder="nombre usuario" required>  </td>
+                        <td> 
+                          <select name="estado" class="form-control" required>
+                                    <option value="${requestScope.usuer.ususEstado.ususEstado}">${requestScope.usuer.ususEstado.estuEstado}</option>
+                                    <c:forEach var="f" items="${requestScope.Listausuest}">
+                                        <option value="${f.ususEstado}">${f.estuEstado}</option>
+                                    </c:forEach>
+                                </select><br/><br/>
+                        </td>   
+                        <td> <select name="administrado" class="form-control" required>
+                                <option value="${requestScope.usuer.ususAdm}">${requestScope.usuer.ususAdm} </option>
+                                <option value="1">SI</option> 
+                                <option value="0">NO</option>                                                  
+                            </select>  </td> 
+                        <td>   
+                              <input  name="servid" type="hidden" value="${requestScope.usuer.ususId}"  id="inputPassword" class="form-control" placeholder="tarea" required>
+                            <select name="servid1" class="form-control" required>
+                                <option value="${requestScope.usuer.idSerServidor.serServer}">${requestScope.usuer.idSerServidor.serSerial}</option>
+                                <c:forEach var="f" items="${requestScope.Listaserver}">
+                                    <option value="${f.serServer}">${f.serSerial}   -    ${f.serHostname}</option>
+                                </c:forEach>
+                            </select>
+                        
+                           
+                        </td>   
+                         <td> <input  name="tareacambio" type="text" id="inputPassword" class="form-control" placeholder="tarea cambio" required>  </td>
+                    </tr>
+                </table>                     
+                <div>
+                    <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: red">ingresar</button>
+                </div>                    
+            </form>   
+</div>
             <%
                 }
             %>

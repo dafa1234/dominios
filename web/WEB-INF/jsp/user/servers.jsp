@@ -19,17 +19,12 @@
             <%
                 if (m == 1) {
             %>
-            <div class="box-bottom">
-                <a  role="button" href="<c:url value="/servers.htm"/>">volver z</a> 
-
-            </div>
-            <center>
-                <!-- Begin # Login Form -->
-
-                <!-- End # DIV Form -->
-            </center>
             <div class="panel panel-primary">
                 <div class=" panel-heading"><h2>Agregar Inventario</h2></div>
+            <div class="box-bottom">
+                <a  role="button" href="<c:url value="/servers.htm"/>">volver z</a> 
+            </div>           
+            
                 <div class="panel-body">
                     <form  action="creat.htm" method="Post">   
                         <div class="row">
@@ -173,13 +168,11 @@
                 }
                 if (m == 8) {
             %>
+              <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>Detalle Servidor</h2></div>
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/servers.htm"/>">volver</a> 
             </div>
-
-
-            <div class="panel panel-primary">
-                <div class=" panel-heading"><h2>Detalle Servidor</h2></div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-3">
@@ -544,8 +537,8 @@
                                                 <td>${f.actFechaIni}</td>
                                                 <td>${f.actFechaFin}</td>
                                                 <td>${f.actDescripcion}</td>
-                                                <td>${f.actServ}</td>
- <td>
+                                                <td>${f.actServ1.serSerial}</td>
+                                                <td>
                                                     <form id="forminicio" action="modactivser.htm" method="Post">
                                                         <input  name="idact" type="hidden" value="${f.actId}">
 
@@ -561,7 +554,7 @@
                             </div>
                         </div>
                         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                         <form id="forminicio" action="newactivser.htm" method="Post">
+                        <form id="forminicio" action="modususer.htm" method="Post">
                             <input  name="servd" type="hidden" value="${requestScope.servidor.serServer}">
                             <div>
                                 <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" 
@@ -582,8 +575,7 @@
                                             <th>usuario login</th>
                                             <th>usuario nombre</th>
                                             <th>usuario estado</th>                        
-                                            <th>usuario hostname</th>
-                                            <th>usuario serial</th>
+                                            <th>usuario hostname</th>                                          
                                             <th>usuario admin</th>
                                             <th>modificar</th>
                                             <th>detalle</th>
@@ -599,11 +591,10 @@
                                                 <td>${f.ususLogin}</td>
                                                 <td>${f.ususNombre}</td>
                                                 <td>${f.ususEstado.estuEstado}</td>
-                                                <td>${f.idSerServidor.serHostname}</td>
-                                                <td>${f.ususServ}</td>
+                                                <td>${f.idSerServidor.serHostname}</td>                                               
                                                 <td>${f.ususAdm}</td>
                                                 <td> 
-                                                    <form id="forminicio" action="usuarios.htm" method="Post">
+                                                    <form id="forminicio" action="modusuarios.htm" method="Post">
                                                         <input  name="id" type="hidden" value="${f.ususId}">
                                                         <div>
                                                             <button  type="submit" class="button45 button46" title="Presione para ingresar">modificar</button>
@@ -627,7 +618,7 @@
                             </div>
                         </div>
                         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                         <form id="forminicio" action="modususer.htm" method="Post">
+                        <form id="forminicio" action="modususer.htm" method="Post">
                             <input  name="servd" type="hidden" value="${requestScope.servidor.serServer}">
                             <div>
                                 <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" 
@@ -753,6 +744,8 @@
                 }
                 if (m == 3) {
             %>
+              <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>Detalle Servidor</h2></div>
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/servers.htm"/>">volver</a> 
             </div>
@@ -805,13 +798,13 @@
             </div>
 
             <script>
-                                $("#btnExport").click(function (e) {
-                                    window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#serv').html() + name));
-                                    e.preventDefault();
-                                });
+                            $("#btnExport").click(function (e) {
+                                window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#serv').html() + name));
+                                e.preventDefault();
+                            });
             </script>
             <!-- fin de tabla-->                   
-            <!-- Begin # DIV Form -->
+            <!-- Begin # DIV Form --></div>
             <%}
             %>
             <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">

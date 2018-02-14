@@ -18,9 +18,9 @@
             <%
                 if (noj == 1) {
             %>
-            <div class="flex-caption">
-                <h3>Nueva Central</h3>              
-            </div>       
+            <div class="panel panel-primary">
+                <div class=" panel-heading"><h3>Nueva Central</h3></div> 
+       
             <center>
                 <!-- Begin # Login Form -->
                 <form  action="central.htm" method="Post">                            
@@ -39,13 +39,14 @@
                 </form>
                 <!-- End # DIV Form -->                   
             </center>
+            </div>
             <%
                 }
                 if (noj == 2) {
             %>
-            <div class="flex-caption">
-                <h3>Nuevo Grupo</h3>              
-            </div>             
+           <div class="panel panel-primary">
+                <div class=" panel-heading"><h3>Nuevo Grupo</h3> </div> 
+                      
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/Grupo.htm"/>">volver</a> 
 
@@ -74,13 +75,14 @@
                 </form>
                 <!-- End # DIV Form -->                   
             </center>
+           </div>
             <%
                 }
                 if (noj == 3) {
             %>
-            <div class="flex-caption">
-                <h3>Nueva Marca</h3>              
-            </div>          
+            <div class="panel panel-primary">
+                <div class=" panel-heading"><h3>Nueva Marca</h3></div> 
+               
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/Marca.htm"/>">volver</a> 
 
@@ -115,13 +117,14 @@
                 </form>
                 <!-- End # DIV Form -->                   
             </center>
+            </div>
             <%
                 }
                 if (noj == 4) {
             %>
-            <div class="flex-caption">
-                <h3>Nueva plataforma</h3>              
-            </div>           
+            <div class="panel panel-primary">
+                <div class=" panel-heading"><h3>Nueva plataforma</h3></div> 
+                  
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/Plataforma.htm"/>">volver</a> 
 
@@ -150,13 +153,14 @@
                 </form>
                 <!-- End # DIV Form -->                   
             </center>
+            </div>
             <%
                 }
                 if (noj == 5) {
             %>
-            <div class="flex-caption">
-                <h3>Nuevo Rol Servidor</h3>              
-            </div>             
+         <div class="panel panel-primary">
+                <div class=" panel-heading"> <h3>Nuevo Rol Servidor</h3> </div> 
+                       
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/Rolserv.htm"/>">volver</a> 
 
@@ -183,13 +187,14 @@
                 </form>
                 <!-- End # DIV Form -->                   
             </center>
+         </div>
             <%
                 }
                 if (noj == 6) {
             %>
-            <div class="flex-caption">
-                <h3>Nuevo Sistema Operativo</h3>              
-            </div>             
+           <div class="panel panel-primary">
+                <div class=" panel-heading"> <h3>Nuevo Sistema Operativo</h3></div> 
+                 
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/Sisopera.htm"/>">volver</a>                
             </div>
@@ -217,13 +222,14 @@
                 </form>
                 <!-- End # DIV Form -->                   
             </center>
+           </div>
             <%
                 }
                 if (noj == 7) {
             %>
-            <div class="flex-caption">
-                <h3>Nuevo Estado</h3>              
-            </div>             
+           <div class="panel panel-primary">
+                <div class=" panel-heading">  <h3>Nuevo Estado</h3> </div> 
+                      
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/Sisopera.htm"/>">volver</a>                
             </div>
@@ -249,13 +255,14 @@
                 </form>
                 <!-- End # DIV Form -->                   
             </center>
+           </div>
             <%
                 }
                 if (noj == 8) {
             %>
-            <div class="flex-caption">
-                <h3>Nuevo Salon o DataCenter</h3>              
-            </div>             
+              <div class="panel panel-primary">
+                <div class=" panel-heading"> <h3>Nuevo Salon o DataCenter</h3></div> 
+                    
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/Sisopera.htm"/>">volver</a>                
             </div>
@@ -288,13 +295,14 @@
                 </form>
                 <!-- End # DIV Form -->                   
             </center>
+              </div>
             <%
                 }
                 if (noj == 9) {
             %>
-            <div class="flex-caption">
-                <h3>Nuevo modelo</h3>              
-            </div>             
+             <div class="panel panel-primary">
+                <div class=" panel-heading">  <h3>Nuevo modelo</h3> </div> 
+                       
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/modelo.htm"/>">volver</a>                
             </div>
@@ -327,13 +335,14 @@
                 </form>
                 <!-- End # DIV Form -->                   
             </center>
+             </div>
             <%
                 }
                 if (noj == 10) {
             %>
-            <div class="flex-caption">
-                <h3>Nuevo Cliente</h3>              
-            </div>             
+            <div class="panel panel-primary">
+                <div class=" panel-heading"><h3>Nuevo Cliente</h3></div> 
+                        
             <div class="box-bottom">
                 <a  role="button" href="<c:url value="/Cliente.htm"/>">volver</a>                
             </div>
@@ -361,6 +370,7 @@
                 </form>
                 <!-- End # DIV Form -->                   
             </center>
+            </div>
             <%}
             %>
 

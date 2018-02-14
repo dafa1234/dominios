@@ -31,7 +31,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "EtbInvCasosProv.findAll", query = "SELECT e FROM EtbInvCasosProv e")
     , @NamedQuery(name = "EtbInvCasosProv.findByCaspId", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspId = :caspId")
-    , @NamedQuery(name = "EtbInvCasosProv.findByCaspServ", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspServ = :caspServ")
     , @NamedQuery(name = "EtbInvCasosProv.findByCaspFechaApe", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspFechaApe = :caspFechaApe")
     , @NamedQuery(name = "EtbInvCasosProv.findByCaspFechaCie", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspFechaCie = :caspFechaCie")
     , @NamedQuery(name = "EtbInvCasosProv.findByCaspNumero", query = "SELECT e FROM EtbInvCasosProv e WHERE e.caspNumero = :caspNumero")
@@ -45,9 +44,6 @@ public class EtbInvCasosProv implements Serializable {
     @Basic(optional = false)
     @Column(name = "CASP_ID")
     private Integer caspId;
-    @Size(max = 255)
-    @Column(name = "CASP_SERV")
-    private String caspServ;
     @Size(max = 20)
     @Column(name = "CASP_FECHA_APE")
     private String caspFechaApe;
@@ -93,14 +89,6 @@ public class EtbInvCasosProv implements Serializable {
 
     public void setCaspId(Integer caspId) {
         this.caspId = caspId;
-    }
-
-    public String getCaspServ() {
-        return caspServ;
-    }
-
-    public void setCaspServ(String caspServ) {
-        this.caspServ = caspServ;
     }
 
     public String getCaspFechaApe() {
