@@ -12,9 +12,7 @@
         <%@include file="/WEB-INF/plantilla/header.jsp" %>
         <div class="content-wrapper">
             </br></br>
-            <div class="flex-caption">
-                <h3>tabla de actividades</h3> 
-            </div>
+       
             <%
                 Integer m = (Integer) request.getAttribute("m");
 
@@ -27,61 +25,57 @@
                 </div>              
                 <!-- Begin # DIV Form -->
 
-                <center>
-                    <!-- Begin # Login Form -->
-                    <form action="act.htm" method="Post">
-
-                        <table>
-                            <tr>
-
-                                <td>                              
-                                    <select name="tipo" class="form-control" required>
-                                        <option value="">tipo</option>
-                                        <c:forEach var="f" items="${requestScope.Listatipoactiv}">
-                                            <option value="${f.tipaId}">${f.tipaNombre}</option>
-                                        </c:forEach>
-                                    </select><br/><br/>
-                                </td>
-                                <td> 
-                                    <select name="serv" class="form-control" required>
-                                        <option value="">servidor</option>
-                                        <c:forEach var="f" items="${requestScope.listaServer}">
-                                            <option value="${f.serServer}">${f.serHostname}</option>
-                                        </c:forEach>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input  name="eje" type="text" id="inputPassword" class="form-control" placeholder="ejecuta" required><br/><br/>
-                                </td>
-
-                                <td>    
-                                    <input  name="fini" type="text" id="Fecha_Inicio" class="form-control" placeholder="fecha inicio" required><br/><br/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>       
-                                    <input   name="tarea" type="text" id="inputEmail" class="form-control" placeholder="tarea" required autofocus class="nav nav-pills nav-stacked"><br/><br/>
-                                </td>
-
-                                <td>     <textarea  name="desc" type="text" id="inputPassword" class="form-control" placeholder="descripcion" required></textarea><br/><br/></td>
-                            </tr>
-                            <tr>
-                                <td>     <input  name="ffin" type="text" id="Fecha_Fin" class="form-control" placeholder="fecha fin" required><br/><br/></td>
-
-                                <td>      <input   name="sol" type="text" id="inputEmail" class="form-control" placeholder="solicita" required autofocus class="nav nav-pills nav-stacked"><br/><br/></td>
-                            </tr>                             
-                        </table>
-
-
-                        <div>
-                            <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: red">INGRESAR</button>
+                <!-- Begin # Login Form -->
+                <form action="act.htm" method="Post">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-5">
+                            <label class="control-label">tipo actividad</label>
+                            <select name="tipo" class="form-control" required>
+                                <option value="">tipo</option>
+                                <c:forEach var="f" items="${requestScope.Listatipoactiv}">
+                                    <option value="${f.tipaId}">${f.tipaNombre}</option>
+                                </c:forEach>
+                            </select><br/><br/>
+                            <label class="control-label">servidor actividad</label>
+                            <select name="serv" class="form-control" required>
+                                <option value="">servidor</option>
+                                <c:forEach var="f" items="${requestScope.listaServer}">
+                                    <option value="${f.serServer}">${f.serHostname}</option>
+                                </c:forEach>
+                            </select><br/><br/>
+                            <label class="control-label">ejecuta actividads</label>
+                            <input  name="eje" type="text" id="inputPassword" class="form-control" placeholder="ejecuta" required><br/><br/>
+                            <label class="control-label">fecha inicio</label>
+                            <input  name="fini" type="text" id="Fecha_Inicio" class="form-control" placeholder="fecha inicio" required><br/><br/>
                         </div>
+                        <div class="col-md-5">
+                            <label class="control-label">tarea actividads</label>
+                            <input   name="tarea" type="text" id="inputEmail" class="form-control" placeholder="tarea" required autofocus class="nav nav-pills nav-stacked"><br/><br/>
+                            <label class="control-label">descripcion actividads</label>
+                            <textarea  name="desc" type="text" id="inputPassword" class="form-control" placeholder="descripcion" required></textarea><br/><br/></td>
+                            <label class="control-label">fecha fin</label>
+                            <input  name="ffin" type="text" id="Fecha_Fin" class="form-control" placeholder="fecha fin" required><br/><br/></td>
+                            <label class="control-label">solicita actividads</label>
+                            <input   name="sol" type="text" id="inputEmail" class="form-control" placeholder="solicita" required autofocus class="nav nav-pills nav-stacked"><br/><br/></td>
+
+                        </div>
+                    <div class="col-md-1"></div></div>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <div><center>
+                                    <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" 
+                                            class="btn btn-success btn-lg "  >INGRESAR</button>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
 
 
-                    </form>
-                </center>
+                </form>
+
 
             </div>
 
@@ -150,7 +144,7 @@
                                             <td>${f.actDescripcion}</td>
                                             <td>${f.actServ1.serSerial}</td>
                                             <td>
-                                                <form id="forminicio" action="modactivser.htm" method="Post">
+                                                <form id="forminicio" action="modacti.htm" method="Post">
                                                     <input  name="idact" type="hidden" value="${f.actId}">
 
                                                     <div>
@@ -224,6 +218,75 @@
                         e.preventDefault();
                     });
                 </script>
+            </div>
+
+            <%
+                }
+                if (m == 10) {
+            %>
+            <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>modoificar actividad</div>
+
+
+                <!-- Begin # Login Form -->
+                <form action="modactivi.htm" method="Post">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <label class="control-label">Tarea Cambio:</label> <input   name="tareacambio" type="text" id="inputEmail" class="form-control" placeholder="tarea cambio"  required>
+                            <br/><br/></div>
+                        <div class="col-md-4"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-5">
+                            <label class="control-label">tipo actividad</label>
+                            <select name="tipo" class="form-control" required>
+                                <option value="${requestScope.acti.actTipo.tipaId}">${requestScope.acti.actTipo.tipaNombre}</option>
+                                <c:forEach var="f" items="${requestScope.Listatipoactiv}">
+                                    <option value="${f.tipaId}">${f.tipaNombre}</option>
+                                </c:forEach>
+                            </select><br/><br/>
+
+                            <input   name="serv" type="hidden" id="inputEmail"   required value="${requestScope.acti.actId}" >
+                            <label class="control-label">servidor actividad</label>
+                            <select name="servdor" class="form-control" required>
+                                <option value="${requestScope.acti.actServ1.serServer}">${requestScope.acti.actServ1.serHostname}</option>
+                                <c:forEach var="f" items="${requestScope.listaServer}">
+                                    <option value="${f.serServer}">${f.serHostname}</option>
+                                </c:forEach>
+                            </select><br/><br/>
+                            <label class="control-label">ejecuta actividad</label>
+                            <input  name="eje" type="text" id="inputPassword" value="${requestScope.acti.actEjecuta}" class="form-control" placeholder="ejecuta" required><br/><br/>
+                            <label class="control-label">fecha inicio</label>
+                            <input  name="fini" type="text" id="Fecha_Inicio" value="${requestScope.acti.actFechaIni}" class="form-control" placeholder="fecha inicio" required><br/><br/>
+                        </div>   <div class="col-md-5">
+                            <label class="control-label">Tarea actividad</label>
+                            <input   name="tarea" type="text" id="inputEmail" value="${requestScope.acti.actTarea}" class="form-control" placeholder="tarea" required autofocus class="nav nav-pills nav-stacked"><br/><br/>
+                            <label class="control-label">descripcion actividad</label>
+                            <textarea  name="desc" type="text" id="inputPassword" value="${requestScope.acti.actDescripcion}" class="form-control" placeholder="descripcion" required>${requestScope.acti.actDescripcion}</textarea><br/><br/></td>
+                            <label class="control-label">fecha fin</label>   
+                            <input  name="ffin" type="text" id="Fecha_Fin" class="form-control" value="${requestScope.acti.actFechaFin}" placeholder="fecha fin" required><br/><br/></td>
+                            <label class="control-label">solicita actividads</label>
+                            <input   name="sol" type="text" id="inputEmail" class="form-control" value="${requestScope.acti.actSolicita}" placeholder="solicita" required autofocus class="nav nav-pills nav-stacked"><br/><br/></td>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>         
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <div><center>
+                                    <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" 
+                                            class="btn btn-success btn-lg "  >INGRESAR</button>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+
+
+                </form>
+
             </div>
             <%}
             %>

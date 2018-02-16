@@ -107,6 +107,8 @@ public class EtbInvServidor implements Serializable {
     private Integer servMem;
     @Column(name = "SERV_DISCO_C")
     private Integer servDiscoC;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "croSerial")
+    private Collection<EtbInvCronogramaMto> etbInvCronogramaMtoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSer")
     private Collection<EtbInvDireccionamiento> etbInvDireccionamientoCollection;
     @OneToMany(mappedBy = "aseServidor")
@@ -292,6 +294,15 @@ public class EtbInvServidor implements Serializable {
 
     public void setServDiscoC(Integer servDiscoC) {
         this.servDiscoC = servDiscoC;
+    }
+
+    @XmlTransient
+    public Collection<EtbInvCronogramaMto> getEtbInvCronogramaMtoCollection() {
+        return etbInvCronogramaMtoCollection;
+    }
+
+    public void setEtbInvCronogramaMtoCollection(Collection<EtbInvCronogramaMto> etbInvCronogramaMtoCollection) {
+        this.etbInvCronogramaMtoCollection = etbInvCronogramaMtoCollection;
     }
 
     @XmlTransient

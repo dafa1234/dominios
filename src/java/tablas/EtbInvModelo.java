@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,7 +34,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "EtbInvModelo.findAll", query = "SELECT e FROM EtbInvModelo e")
     , @NamedQuery(name = "EtbInvModelo.findByModIdModelo", query = "SELECT e FROM EtbInvModelo e WHERE e.modIdModelo = :modIdModelo")
-    , @NamedQuery(name = "EtbInvModelo.findByMarIdMarca", query = "SELECT e FROM EtbInvModelo e WHERE e.marIdMarca = :marIdMarca")
     , @NamedQuery(name = "EtbInvModelo.findByModNomModelo", query = "SELECT e FROM EtbInvModelo e WHERE e.modNomModelo = :modNomModelo")})
 public class EtbInvModelo implements Serializable {
 
@@ -42,13 +43,14 @@ public class EtbInvModelo implements Serializable {
     @Basic(optional = false)
     @Column(name = "MOD_ID_MODELO")
     private Integer modIdModelo;
-    @Column(name = "MAR_ID_MARCA")
-    private Integer marIdMarca;
     @Size(max = 25)
     @Column(name = "MOD_NOM_MODELO")
     private String modNomModelo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "modIdModelo")
     private Collection<EtbInvServidor> etbInvServidorCollection;
+    @JoinColumn(name = "MAR_ID_MARCA", referencedColumnName = "MAR_ID_MARCA")
+    @ManyToOne
+    private EtbInvMarca marIdMarca;
 
     public EtbInvModelo() {
     }
@@ -63,14 +65,6 @@ public class EtbInvModelo implements Serializable {
 
     public void setModIdModelo(Integer modIdModelo) {
         this.modIdModelo = modIdModelo;
-    }
-
-    public Integer getMarIdMarca() {
-        return marIdMarca;
-    }
-
-    public void setMarIdMarca(Integer marIdMarca) {
-        this.marIdMarca = marIdMarca;
     }
 
     public String getModNomModelo() {
@@ -88,6 +82,14 @@ public class EtbInvModelo implements Serializable {
 
     public void setEtbInvServidorCollection(Collection<EtbInvServidor> etbInvServidorCollection) {
         this.etbInvServidorCollection = etbInvServidorCollection;
+    }
+
+    public EtbInvMarca getMarIdMarca() {
+        return marIdMarca;
+    }
+
+    public void setMarIdMarca(EtbInvMarca marIdMarca) {
+        this.marIdMarca = marIdMarca;
     }
 
     @Override

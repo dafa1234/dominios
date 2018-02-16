@@ -70,6 +70,8 @@ public class EtbInvMarca implements Serializable {
     private Collection<EtbInvServidor> etbInvServidorCollection;
     @OneToMany(mappedBy = "caspProv")
     private Collection<EtbInvCasosProv> etbInvCasosProvCollection;
+    @OneToMany(mappedBy = "marIdMarca")
+    private Collection<EtbInvModelo> etbInvModeloCollection;
 
     public EtbInvMarca() {
     }
@@ -151,6 +153,15 @@ public class EtbInvMarca implements Serializable {
 
     public void setEtbInvCasosProvCollection(Collection<EtbInvCasosProv> etbInvCasosProvCollection) {
         this.etbInvCasosProvCollection = etbInvCasosProvCollection;
+    }
+
+    @XmlTransient
+    public Collection<EtbInvModelo> getEtbInvModeloCollection() {
+        return etbInvModeloCollection;
+    }
+
+    public void setEtbInvModeloCollection(Collection<EtbInvModelo> etbInvModeloCollection) {
+        this.etbInvModeloCollection = etbInvModeloCollection;
     }
 
     @Override

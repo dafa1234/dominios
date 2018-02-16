@@ -255,3 +255,12 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function () {
+        $('#Fecha_Prox').pickadate({
+            format: 'yyyy-mm-dd',
+            formatSubmit: 'yyyy-mm-dd',
+            hiddenName: true
+        });
+    });
+</script>

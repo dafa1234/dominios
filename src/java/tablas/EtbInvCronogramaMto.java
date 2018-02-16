@@ -32,7 +32,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "EtbInvCronogramaMto.findAll", query = "SELECT e FROM EtbInvCronogramaMto e")
     , @NamedQuery(name = "EtbInvCronogramaMto.findByCroId", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croId = :croId")
-    , @NamedQuery(name = "EtbInvCronogramaMto.findByCroSerial", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croSerial = :croSerial")
     , @NamedQuery(name = "EtbInvCronogramaMto.findByCroFechaIni", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croFechaIni = :croFechaIni")
     , @NamedQuery(name = "EtbInvCronogramaMto.findByCroFechaProx", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croFechaProx = :croFechaProx")
     , @NamedQuery(name = "EtbInvCronogramaMto.findByCroFechaFin", query = "SELECT e FROM EtbInvCronogramaMto e WHERE e.croFechaFin = :croFechaFin")
@@ -47,9 +46,6 @@ public class EtbInvCronogramaMto implements Serializable {
     @Basic(optional = false)
     @Column(name = "CRO_ID")
     private Integer croId;
-    @Size(max = 255)
-    @Column(name = "CRO_SERIAL")
-    private String croSerial;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -82,6 +78,9 @@ public class EtbInvCronogramaMto implements Serializable {
     @JoinColumn(name = "CRO_ESTADO", referencedColumnName = "ESTM_ID")
     @ManyToOne
     private EtbInvEstadoMto croEstado;
+    @JoinColumn(name = "CRO_SERIAL", referencedColumnName = "ser_server")
+    @ManyToOne(optional = false)
+    private EtbInvServidor croSerial;
 
     public EtbInvCronogramaMto() {
     }
@@ -102,14 +101,6 @@ public class EtbInvCronogramaMto implements Serializable {
 
     public void setCroId(Integer croId) {
         this.croId = croId;
-    }
-
-    public String getCroSerial() {
-        return croSerial;
-    }
-
-    public void setCroSerial(String croSerial) {
-        this.croSerial = croSerial;
     }
 
     public String getCroFechaIni() {
@@ -182,6 +173,14 @@ public class EtbInvCronogramaMto implements Serializable {
 
     public void setCroEstado(EtbInvEstadoMto croEstado) {
         this.croEstado = croEstado;
+    }
+
+    public EtbInvServidor getCroSerial() {
+        return croSerial;
+    }
+
+    public void setCroSerial(EtbInvServidor croSerial) {
+        this.croSerial = croSerial;
     }
 
     @Override

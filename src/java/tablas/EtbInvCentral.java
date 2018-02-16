@@ -44,6 +44,8 @@ public class EtbInvCentral implements Serializable {
     @Size(max = 25)
     @Column(name = "CEN_NOMBRE")
     private String cenNombre;
+    @OneToMany(mappedBy = "salCentral")
+    private Collection<EtbInvSalon> etbInvSalonCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cenIdCentral")
     private Collection<EtbInvServidor> etbInvServidorCollection;
 
@@ -68,6 +70,15 @@ public class EtbInvCentral implements Serializable {
 
     public void setCenNombre(String cenNombre) {
         this.cenNombre = cenNombre;
+    }
+
+    @XmlTransient
+    public Collection<EtbInvSalon> getEtbInvSalonCollection() {
+        return etbInvSalonCollection;
+    }
+
+    public void setEtbInvSalonCollection(Collection<EtbInvSalon> etbInvSalonCollection) {
+        this.etbInvSalonCollection = etbInvSalonCollection;
     }
 
     @XmlTransient

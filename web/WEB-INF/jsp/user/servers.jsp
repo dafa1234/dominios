@@ -626,6 +626,61 @@
                             </div>
                         </form>
                     </div> </div> 
+                            <div class="tab">
+                     <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fa fa-table"></i> Data Table cronograma</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                                <thead>
+                                    <TR>
+                                        <th>ID</th>
+                                        <th>SERIAL</th>
+                                        <th>PROYECTO</th>
+                                        <th>FECHA INICIO</th>
+                                        <th>FECHA PROX</th>
+                                        <th>FECHA FIN</th>
+                                        <th>FECHA COMBIO FIN</th>
+                                        <th>EJECUTA</th>
+                                        <th>ESTADO</th>
+                                        <th>OBSERVACION</th>
+                                        <th>modificar</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>        
+                                    <c:forEach var="f" items="${requestScope.servidor.etbInvCronogramaMtoCollection}">
+                                        <tr>
+                                            <td>${f.croId}</td>
+                                            <td>${f.croSerial.serHostname}</td>
+                                            <td>${f.croProyecto.proTitulo}</td>
+                                            <td>${f.croFechaIni}</td>
+                                            <td>${f.croFechaProx}</td>
+                                            <td>${f.croFechaFin}</td>
+                                            <td>${f.croCambioFin}</td>
+                                            <td>${f.croEjecuta}</td>
+                                            <td>${f.croEstado.estmEstado}</td>
+                                            <td>${f.croObservacion}</td>
+                                            <td>
+                                                <form id="forminicio" action="cronogramamod.htm" method="Post">
+                                                    <input  name="idcron" type="hidden" value="${f.croId}">
+
+                                                    <div>
+                                                        <button  type="submit" class="button45 button46" title="Presione para ingresar">modificar</button>
+                                                    </div>
+                                                </form></td>
+
+                                        </tr>
+                                    </c:forEach>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                </div> </div> 
 
                 <div style="text-align:center;margin-top:40px;">
                     <span class="step"></span>
@@ -633,6 +688,7 @@
                     <span class="step"></span>     
                     <span class="step"></span>
                     <span class="step"></span> 
+                    <span class="step"></span>
                 </div>
             </div>
 

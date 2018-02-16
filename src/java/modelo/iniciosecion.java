@@ -155,6 +155,34 @@ public class iniciosecion {
         }
 
     }
+       @Transactional(rollbackFor = {ServicioException.class})
+    public EtbInvCronogramaMto cronograma(int ususidSer) throws SecurityException {
+        String sql = "select aa from EtbInvCronogramaMto aa where  aa.croId = :ususidSer ";
+
+        Query q = em.createQuery(sql);
+        q.setParameter("ususidSer", ususidSer);
+
+        try {
+            return (EtbInvCronogramaMto) q.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+      @Transactional(rollbackFor = {ServicioException.class})
+    public EtbInvContrato contratos(int ususidSer) throws SecurityException {
+        String sql = "select aa from EtbInvContrato aa where  aa.contId = :ususidSer ";
+
+        Query q = em.createQuery(sql);
+        q.setParameter("ususidSer", ususidSer);
+
+        try {
+            return (EtbInvContrato) q.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
     public List Lisreporte1(String F_Inicio, String F_Fin) {
         String sql = "select na from EtbInvServidor na where na.serFIngreso between :F_Inicio and :F_Fin";
         Query q = em.createQuery(sql);
@@ -512,7 +540,7 @@ public class iniciosecion {
 
     //INSERTAR CRONOGRAMA
     @Transactional(rollbackFor = {ServicioException.class})
-    public void creacrono(String Fecha, EtbInvProyecto croProyecto, String croFechaIni, String croSerial, String croEjecuta, String croCambioFin, EtbInvEstadoMto croEstado) {
+    public void creacrono(String Fecha, EtbInvProyecto croProyecto, String croFechaIni, EtbInvServidor croSerial, String croEjecuta, String croCambioFin, EtbInvEstadoMto croEstado, String fprox, String ffin, String observacion) {
         EtbInvCronogramaMto cronograma = new EtbInvCronogramaMto();
         cronograma.setCroCambioFin(croCambioFin);
         cronograma.setCroEjecuta(croEjecuta);
@@ -521,6 +549,9 @@ public class iniciosecion {
         cronograma.setCroProyecto(croProyecto);
         cronograma.setCroSerial(croSerial);
         cronograma.setFCreacion(Fecha);
+        cronograma.setCroFechaFin(ffin);
+        cronograma.setCroFechaProx(fprox);
+        cronograma.setCroObservacion(observacion);
         em.persist(cronograma);
     }
 
@@ -748,6 +779,39 @@ public class iniciosecion {
         em.merge(actividad);
     }
     
+    //modificar CRONOGRAMA
+    @Transactional(rollbackFor = {ServicioException.class})
+    public void modificarcrono(int idcro, String Fecha, EtbInvProyecto croProyecto, String croFechaIni, EtbInvServidor croSerial, String croEjecuta, String croCambioFin, EtbInvEstadoMto croEstado, String fprox, String ffin, String observacion) {
+        EtbInvCronogramaMto cronograma = new EtbInvCronogramaMto();
+        cronograma.setCroId(idcro);
+        cronograma.setCroCambioFin(croCambioFin);
+        cronograma.setCroEjecuta(croEjecuta);
+        cronograma.setCroEstado(croEstado);
+        cronograma.setCroFechaIni(croFechaIni);
+        cronograma.setCroProyecto(croProyecto);
+        cronograma.setCroSerial(croSerial);
+        cronograma.setFCreacion(Fecha);
+        cronograma.setCroFechaFin(ffin);
+        cronograma.setCroFechaProx(fprox);
+        cronograma.setCroObservacion(observacion);
+        em.merge(cronograma);
+    }
+    //modificar contrato
+        @Transactional(rollbackFor = {ServicioException.class})
+    public void modicont(int idcont,String Fecha, EtbInvMarca contProv, EtbInvTipoCont contTipo, String contFechaIni, String contFechaFin, String contNum, EtbInvEstadoCont contEstado, String contLogin, String contDescrip) {
+        EtbInvContrato contrato = new EtbInvContrato();
+        contrato.setContId(idcont);
+        contrato.setContDescrip(contDescrip);
+        contrato.setContEstado(contEstado);
+        contrato.setContFechaFin(contFechaFin);
+        contrato.setContFechaIni(contFechaIni);
+        contrato.setContLogin(contLogin);
+        contrato.setContNum(contNum);
+        contrato.setContProv(contProv);
+        contrato.setContTipo(contTipo);
+        contrato.setFCreacion(Fecha);
+        em.merge(contrato);
+    }
     //insertar central
     @Transactional(rollbackFor = {ServicioException.class})
     public void newcentral(String Central) {
@@ -812,7 +876,7 @@ public class iniciosecion {
 
     //insertar sisoperativo
     @Transactional(rollbackFor = {ServicioException.class})
-    public void newsalon(int scen, String nsal) {
+    public void newsalon(EtbInvCentral scen, String nsal) {
         EtbInvSalon salon = new EtbInvSalon();
         salon.setSalCentral(scen);
         salon.setSalNombre(nsal);
@@ -821,7 +885,7 @@ public class iniciosecion {
 
     //insertar sisoperativo
     @Transactional(rollbackFor = {ServicioException.class})
-    public void newmodelo(int nmar, String nmod) {
+    public void newmodelo(EtbInvMarca nmar, String nmod) {
         EtbInvModelo modelo = new EtbInvModelo();
         modelo.setMarIdMarca(nmar);
         modelo.setModNomModelo(nmod);
@@ -836,6 +900,8 @@ public class iniciosecion {
         cliente.setCliNombre(ncli);
         em.persist(cliente);
     }
+
+
 
    
     

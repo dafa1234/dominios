@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,7 +34,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "EtbInvSalon.findAll", query = "SELECT e FROM EtbInvSalon e")
     , @NamedQuery(name = "EtbInvSalon.findBySalIdSalon", query = "SELECT e FROM EtbInvSalon e WHERE e.salIdSalon = :salIdSalon")
-    , @NamedQuery(name = "EtbInvSalon.findBySalCentral", query = "SELECT e FROM EtbInvSalon e WHERE e.salCentral = :salCentral")
     , @NamedQuery(name = "EtbInvSalon.findBySalNombre", query = "SELECT e FROM EtbInvSalon e WHERE e.salNombre = :salNombre")})
 public class EtbInvSalon implements Serializable {
 
@@ -42,11 +43,12 @@ public class EtbInvSalon implements Serializable {
     @Basic(optional = false)
     @Column(name = "SAL_ID_SALON")
     private Integer salIdSalon;
-    @Column(name = "SAL_CENTRAL")
-    private Integer salCentral;
     @Size(max = 25)
     @Column(name = "SAL_NOMBRE")
     private String salNombre;
+    @JoinColumn(name = "SAL_CENTRAL", referencedColumnName = "CEN_ID_CENTRAL")
+    @ManyToOne
+    private EtbInvCentral salCentral;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "salIdSalon")
     private Collection<EtbInvServidor> etbInvServidorCollection;
 
@@ -65,20 +67,20 @@ public class EtbInvSalon implements Serializable {
         this.salIdSalon = salIdSalon;
     }
 
-    public Integer getSalCentral() {
-        return salCentral;
-    }
-
-    public void setSalCentral(Integer salCentral) {
-        this.salCentral = salCentral;
-    }
-
     public String getSalNombre() {
         return salNombre;
     }
 
     public void setSalNombre(String salNombre) {
         this.salNombre = salNombre;
+    }
+
+    public EtbInvCentral getSalCentral() {
+        return salCentral;
+    }
+
+    public void setSalCentral(EtbInvCentral salCentral) {
+        this.salCentral = salCentral;
     }
 
     @XmlTransient

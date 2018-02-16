@@ -6,59 +6,67 @@
         <%@include file="/WEB-INF/plantilla/header.jsp" %>
         <div class="content-wrapper">
             </br></br>
-            <div class="flex-caption">
-                <h3>tabla de casos proveedor</h3> 
 
-            </div>
             <%
                 Integer m = (Integer) request.getAttribute("m");
 
                 if (m == 1) {
             %>     
             <div class="panel panel-primary">
-                <div class=" panel-heading"><h2>Editar Servidor</div>
+                <div class=" panel-heading"><h2>crear caasos prooveedor</div>
                 <div class="box-bottom">
                     <a  role="button" href="<c:url value="/casosproveedor.htm"/>">volver</a> 
                 </div> 
-                <center>
-                    <!-- Begin # DIV Form -->
-                    <div id="div-forms" >
-                        <!-- Begin # Login Form -->
-                        <form id="forminicio" action="caprov.htm" method="Post">                                                                   
-                            <select name="proveedor" class="form-control" required>
-                                <option value="">proveedor</option>
-                                <c:forEach var="f" items="${requestScope.ListaMarca}">
-                                    <option value="${f.marIdMarca}">${f.marNomMarca}</option>
-                                </c:forEach>
-                            </select><br/><br/>
 
-                            <select name="servidor" class="form-control" required>
-                                <option value="">servidor</option>
-                                <c:forEach var="f" items="${requestScope.listaServer}">
-                                    <option value="${f.serServer}">${f.serHostname}</option>
-                                </c:forEach>
-                            </select><br/><br/>
-                            <input  name="fini" type="text" id="Fecha_Inicio" class="form-control" placeholder="fecha apertura" required><br/><br/>
+                <!-- Begin # DIV Form -->
+                <div id="div-forms" >
+                    <!-- Begin # Login Form -->
+                    <form id="forminicio" action="caprov.htm" method="Post">      
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5">
+                                <label class="control-label">proveedor</label>
+                                <select name="proveedor" class="form-control" required>
+                                    <option value="">proveedor</option>
+                                    <c:forEach var="f" items="${requestScope.ListaMarca}">
+                                        <option value="${f.marIdMarca}">${f.marNomMarca}</option>
+                                    </c:forEach>
+                                </select><br/><br/>
+                                <label class="control-label">servidor</label>
+                                <select name="servidor" class="form-control" required>
+                                    <option value="">servidor</option>
+                                    <c:forEach var="f" items="${requestScope.listaServer}">
+                                        <option value="${f.serServer}">${f.serHostname}</option>
+                                    </c:forEach>
+                                </select><br/><br/>
+                                <label class="control-label">fecha inicio</label>
+                                <input  name="fini" type="text" id="Fecha_Inicio" class="form-control" placeholder="fecha apertura" required><br/><br/>
+                            
+                                <label class="control-label">fecha fin</label>
+                                <input  name="fcie" type="text" id="Fecha_Fin" class="form-control" placeholder="fecha cierre" required><br/><br/>
+                                </div>
+                            <div class="col-md-5">
+                                <label class="control-label">estado proveedor</label>
+                                <select name="estini" class="form-control" required>
+                                    <option value="">estado inicial</option>
+                                    <c:forEach var="f" items="${requestScope.listaEstado}">
+                                        <option value="${f.estcId}">${f.estcEstado}</option>
+                                    </c:forEach>
+                                </select><br/><br/>
+                                <label class="control-label">numero de casos</label>
+                                <input   name="numcas" type="text" id="inputEmail" class="form-control" placeholder="numero caso"  required><br/><br/>
+                                <label class="control-label">IM</label>
+                                <input   name="im" type="text" id="inputEmail" class="form-control" placeholder="im" required ><br/><br/><br/>
+                                <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" 
+                                                class="btn btn-success btn-lg "  >INGRESAR</button>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                                      
+                    </form>
+                    <!-- End # DIV Form -->
+                </div>
 
-                            <input  name="fcie" type="text" id="Fecha_Fin" class="form-control" placeholder="fecha cierre" required><br/><br/>
-
-                            <select name="estini" class="form-control" required>
-                                <option value="">estado inicial</option>
-                                <c:forEach var="f" items="${requestScope.listaEstado}">
-                                    <option value="${f.estcId}">${f.estcEstado}</option>
-                                </c:forEach>
-                            </select><br/><br/>
-                            <input   name="numcas" type="text" id="inputEmail" class="form-control" placeholder="numero caso"  required><br/><br/>
-
-                            <input   name="im" type="text" id="inputEmail" class="form-control" placeholder="im" required ><br/><br/>
-
-                            <div>
-                                <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: red">INGRESAR</button>
-                            </div>                    
-                        </form>
-                        <!-- End # DIV Form -->
-                    </div>
-                </center>
             </div>
 
             <%}
@@ -125,14 +133,14 @@
                                             <td>${f.caspNumero}</td>
                                             <td>${f.caspIm}</td>
                                             <td>${f.caspEstado.estcEstado}</td>
-                                             <td>
-                                                    <form id="forminicio" action="casosmodifi.htm" method="Post">
-                                                        <input  name="caspId" type="hidden" value="${f.caspId}">
+                                            <td>
+                                                <form id="forminicio" action="casosmodifi.htm" method="Post">
+                                                    <input  name="caspId" type="hidden" value="${f.caspId}">
 
-                                                        <div>
-                                                            <button  type="submit" class="button45 button46" title="Presione para ingresar">modificar</button>
-                                                        </div>
-                                                    </form></td>
+                                                    <div>
+                                                        <button  type="submit" class="button45 button46" title="Presione para ingresar">modificar</button>
+                                                    </div>
+                                                </form></td>
                                         </tr>
                                     </c:forEach>
 
@@ -200,60 +208,80 @@
                     });
                 </script>
             </div>
-                      <%
+            <%
                 }
                 if (m == 7) {
             %>
-             <div class="panel panel-primary">
+            <div class="panel panel-primary">
                 <div class=" panel-heading"><h2>modificar casos proveedor</div>
-            <div class="box-bottom">
-                <a  role="button" href="<c:url value="/caprov.htm"/>">volverm</a> 
-            </div> 
-            <center>
+                <div class="box-bottom">
+                    <a  role="button" href="<c:url value="/caprov.htm"/>">volverm</a> 
+                </div> 
+
                 <!-- Begin # DIV Form -->
                 <div id="div-forms" >
                     <!-- Begin # Login Form -->
-                    <form id="forminicio" action="modificarcasosprove.htm" method="Post">                                                                   
-                        <select name="proveedor" class="form-control" required>
-                            <option value="${requestScope.cas.caspProv.marIdMarca}">${requestScope.cas.caspProv.marNomMarca}</option>
-                            <c:forEach var="f" items="${requestScope.ListaMarca}">
-                                <option value="${f.marIdMarca}">${f.marNomMarca}</option>
-                            </c:forEach>
-                        </select><br/><br/>
+                    <form id="forminicio" action="modificarcasosprove.htm" method="Post">   
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5">
+                                <label class="control-label">proveedor</label>
+                                <select name="proveedor" class="form-control" required>
+                                    <option value="${requestScope.cas.caspProv.marIdMarca}">${requestScope.cas.caspProv.marNomMarca}</option>
+                                    <c:forEach var="f" items="${requestScope.ListaMarca}">
+                                        <option value="${f.marIdMarca}">${f.marNomMarca}</option>
+                                    </c:forEach>
+                                </select><br/><br/>
 
 
-                        <input   name="idcasos" type="hidden" id="inputEmail"   required value="${requestScope.cas.caspId}" >
-                        
-                        <select name="servidor" class="form-control" required>
-                                <option value="${requestScope.cas.caspServ1.serServer}">${requestScope.cas.caspServ1.serSerial}</option>
-                                <c:forEach var="f" items="${requestScope.listaServer}">
-                                    <option value="${f.serServer}">${f.serHostname}</option>
-                                </c:forEach>
-                            </select><br/><br/>
-                        <input  name="fini" type="text" id="Fecha_Inicio" value="${requestScope.cas.caspFechaApe}" class="form-control" placeholder="fecha apertura" required><br/><br/>
-
-                        <input  name="fcie" type="text" id="Fecha_Fin" value="${requestScope.cas.caspFechaCie}" class="form-control" placeholder="fecha cierre" required><br/><br/>
-
-                        <select name="estini" class="form-control" required>
-                            <option value="${requestScope.cas.caspEstado.estcId}">${requestScope.cas.caspEstado.estcEstado}</option>
-                            <c:forEach var="f" items="${requestScope.listaEstado}">
-                                <option value="${f.estcId}">${f.estcEstado}</option>
-                            </c:forEach>
-                        </select><br/><br/>
-                        <input   name="numcas" type="text" id="inputEmail" value="${requestScope.cas.caspNumero}" class="form-control" placeholder="numero caso"  required><br/><br/>
-
-                        <input   name="im" type="text" id="inputEmail" value="${requestScope.cas.caspIm}" class="form-control" placeholder="im" required ><br/><br/>
-                        <input   name="tareacambio" type="text" id="inputEmail"  class="form-control" placeholder="tarea caMBIO" required ><br/><br/>
-
-                        <div>
-                            <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" class="box-bottom_blue" style="color: red">INGRESAR</button>
-                        </div>                    
+                                <input   name="idcasos" type="hidden" id="inputEmail"   required value="${requestScope.cas.caspId}" >
+                                <label class="control-label">servidor</label>
+                                <select name="servidor" class="form-control" required>
+                                    <option value="${requestScope.cas.caspServ1.serServer}">${requestScope.cas.caspServ1.serSerial}</option>
+                                    <c:forEach var="f" items="${requestScope.listaServer}">
+                                        <option value="${f.serServer}">${f.serHostname}</option>
+                                    </c:forEach>
+                                </select><br/><br/>
+                                <label class="control-label">fecha inicio</label>
+                                <input  name="fini" type="text" id="Fecha_Inicio" value="${requestScope.cas.caspFechaApe}" class="form-control" placeholder="fecha apertura" required><br/><br/>
+                                <label class="control-label">fecha cierre</label>
+                                <input  name="fcie" type="text" id="Fecha_Fin" value="${requestScope.cas.caspFechaCie}" class="form-control" placeholder="fecha cierre" required><br/><br/>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="control-label">estado proveedor</label>
+                                <select name="estini" class="form-control" required>
+                                    <option value="${requestScope.cas.caspEstado.estcId}">${requestScope.cas.caspEstado.estcEstado}</option>
+                                    <c:forEach var="f" items="${requestScope.listaEstado}">
+                                        <option value="${f.estcId}">${f.estcEstado}</option>
+                                    </c:forEach>
+                                </select><br/><br/>
+                                <label class="control-label">numero de casos</label>
+                                <input   name="numcas" type="text" id="inputEmail" value="${requestScope.cas.caspNumero}" class="form-control" placeholder="numero caso"  required><br/><br/>
+                                <label class="control-label">IM</label>
+                                <input   name="im" type="text" id="inputEmail" value="${requestScope.cas.caspIm}" class="form-control" placeholder="im" required ><br/><br/>
+                                <label class="control-label">tarrea cambio</label>
+                                <input   name="tareacambio" type="text" id="inputEmail"  class="form-control" placeholder="tarea caMBIO" required ><br/><br/>
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <div><center>
+                                        <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" 
+                                                class="btn btn-success btn-lg "  >INGRESAR</button>
+                                    </center>
+                                </div>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>               
                     </form>
                     <!-- End # DIV Form -->
                 </div>
-            </center>
-          </div>
-                    
+
+            </div>
+
             <%}
             %>
             <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">

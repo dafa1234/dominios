@@ -55,8 +55,7 @@ public class controljsp {
         if (id == null) {
             return "index";
         }
-     
-        
+
         return "prueba";
     }
 
@@ -66,7 +65,7 @@ public class controljsp {
         if (id == null) {
             return "index";
         }
-       
+
         return "user/newjsp";
 
     }
@@ -91,6 +90,8 @@ public class controljsp {
             return "index";
         }
         int noj = 1;
+        List<EtbInvCentral> ListaCentral = dao.ListaCentral();
+        model.addAttribute("listaCentral", ListaCentral);
         model.addAttribute("noj", noj);
         return "user/objetos";
     }
@@ -105,6 +106,8 @@ public class controljsp {
             return "index";
         }
         dao.newcentral(Central);
+        List<EtbInvCentral> ListaCentral = dao.ListaCentral();
+        model.addAttribute("listaCentral", ListaCentral);
         return "user/objetos";
     }
 
@@ -116,6 +119,8 @@ public class controljsp {
             return "index";
         }
         int noj = 2;
+        List<EtbInvGrupo> Listagrupo = dao.Listagrupo();
+        model.addAttribute("listaGrupo", Listagrupo);
         model.addAttribute("noj", noj);
         return "user/objetos";
     }
@@ -129,6 +134,8 @@ public class controljsp {
         int noj = 2;
         model.addAttribute("noj", noj);
         dao.newgrupo(Ngrupo, Tgrupo);
+        List<EtbInvGrupo> Listagrupo = dao.Listagrupo();
+        model.addAttribute("listaGrupo", Listagrupo);
         return "user/objetos";
     }
 
@@ -140,6 +147,8 @@ public class controljsp {
             return "index";
         }
         int noj = 3;
+        List<EtbInvMarca> ListaMarca = dao.ListaMarca();
+        model.addAttribute("listaFonos", ListaMarca);
         model.addAttribute("noj", noj);
         return "user/objetos";
     }
@@ -154,6 +163,8 @@ public class controljsp {
         int noj = 3;
         model.addAttribute("noj", noj);
         dao.newmarca(nmarca, usoporte, tsoporte, minterventor);
+        List<EtbInvMarca> ListaMarca = dao.ListaMarca();
+        model.addAttribute("listaFonos", ListaMarca);
         return "user/objetos";
     }
 
@@ -165,6 +176,8 @@ public class controljsp {
             return "index";
         }
         int noj = 4;
+        List<EtbInvPlataforma> ListaPrataforma = dao.ListaPrataforma();
+        model.addAttribute("listaPlat", ListaPrataforma);
         model.addAttribute("noj", noj);
         return "user/objetos";
     }
@@ -179,6 +192,8 @@ public class controljsp {
         model.addAttribute("noj", noj);
         EtbInvAdmPlataforma aplataforma = new EtbInvAdmPlataforma(aplataforma1);
         dao.newplataforma(nplataforma, aplataforma);
+        List<EtbInvPlataforma> ListaPrataforma = dao.ListaPrataforma();
+        model.addAttribute("listaPlat", ListaPrataforma);
         return "user/objetos";
     }
 
@@ -190,6 +205,8 @@ public class controljsp {
             return "index";
         }
         int noj = 5;
+        List<EtbInvRolServidor> ListaRolserver = dao.ListaRolserver();
+        model.addAttribute("listaRol", ListaRolserver);
         model.addAttribute("noj", noj);
         return "user/objetos";
     }
@@ -203,6 +220,8 @@ public class controljsp {
         int noj = 5;
         model.addAttribute("noj", noj);
         dao.newrol(nrol);
+        List<EtbInvRolServidor> ListaRolserver = dao.ListaRolserver();
+        model.addAttribute("listaRol", ListaRolserver);
         return "user/objetos";
     }
 
@@ -214,6 +233,8 @@ public class controljsp {
             return "index";
         }
         int noj = 6;
+        List<EtbInvSisOperativo> Listasisope = dao.Listasisope();
+        model.addAttribute("listaSis", Listasisope);
         model.addAttribute("noj", noj);
         return "user/objetos";
     }
@@ -227,6 +248,8 @@ public class controljsp {
         int noj = 6;
         model.addAttribute("noj", noj);
         dao.newsisoperativo(sisdis, nsis);
+        List<EtbInvSisOperativo> Listasisope = dao.Listasisope();
+        model.addAttribute("listaSis", Listasisope);
         return "user/objetos";
     }
     //estado
@@ -238,6 +261,8 @@ public class controljsp {
             return "index";
         }
         int noj = 7;
+        List<EtbInvEstado> ListaEstado = dao.ListaEstado();
+        model.addAttribute("listaEstado", ListaEstado);
         model.addAttribute("noj", noj);
         return "user/objetos";
     }
@@ -251,6 +276,8 @@ public class controljsp {
         int noj = 7;
         model.addAttribute("noj", noj);
         dao.newestado(nest);
+        List<EtbInvEstado> ListaEstado = dao.ListaEstado();
+        model.addAttribute("listaEstado", ListaEstado);
         return "user/objetos";
     }
     //salon
@@ -262,6 +289,8 @@ public class controljsp {
             return "index";
         }
         int noj = 8;
+        List<EtbInvSalon> ListaSalom = dao.ListaSalom();
+        model.addAttribute("listaSalon", ListaSalom);
         List<EtbInvCentral> ListaCentral = dao.ListaCentral();
         model.addAttribute("noj", noj);
         model.addAttribute("listaCentral", ListaCentral);
@@ -269,13 +298,18 @@ public class controljsp {
     }
 
     @RequestMapping("salon.htm")
-    public String salon(@RequestParam("scen") int scen, @RequestParam("nsal") String nsal, Model model) {
+    public String salon(@RequestParam("scen") int scen1, @RequestParam("nsal") String nsal, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
             return "index";
         }
         int noj = 8;
+        EtbInvCentral scen = new EtbInvCentral(scen1);
+        List<EtbInvSalon> ListaSalom = dao.ListaSalom();
+        model.addAttribute("listaSalon", ListaSalom);
+        List<EtbInvCentral> ListaCentral = dao.ListaCentral();
         model.addAttribute("noj", noj);
+        model.addAttribute("listaCentral", ListaCentral);
         dao.newsalon(scen, nsal);
         return "user/objetos";
     }
@@ -289,19 +323,26 @@ public class controljsp {
         }
         int noj = 9;
         List<EtbInvMarca> ListaMarca = dao.ListaMarca();
+        List<EtbInvModelo> ListaModelo = dao.ListaModelo();
         model.addAttribute("noj", noj);
+        model.addAttribute("listaModelo", ListaModelo);
         model.addAttribute("listaMarca", ListaMarca);
         return "user/objetos";
     }
 
     @RequestMapping("modelo.htm")
-    public String modelo(@RequestParam("nmar") int nmar, @RequestParam("nmod") String nmod, Model model) {
+    public String modelo(@RequestParam("nmar") int nmar1, @RequestParam("nmod") String nmod, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
             return "index";
         }
         int noj = 9;
+        EtbInvMarca nmar = new EtbInvMarca(nmar1);
+       List<EtbInvMarca> ListaMarca = dao.ListaMarca();
+        List<EtbInvModelo> ListaModelo = dao.ListaModelo();
         model.addAttribute("noj", noj);
+        model.addAttribute("listaModelo", ListaModelo);
+        model.addAttribute("listaMarca", ListaMarca);
         dao.newmodelo(nmar, nmod);
         return "user/objetos";
     }
@@ -314,6 +355,8 @@ public class controljsp {
             return "index";
         }
         int noj = 10;
+        List<EtbInvCliente> ListaCliente = dao.ListaCliente();
+        model.addAttribute("listaCliente", ListaCliente);
         model.addAttribute("noj", noj);
         return "user/objetos";
     }
@@ -327,6 +370,8 @@ public class controljsp {
         int noj = 10;
         model.addAttribute("noj", noj);
         dao.newcliente(ncli, ccli);
+        List<EtbInvCliente> ListaCliente = dao.ListaCliente();
+        model.addAttribute("listaCliente", ListaCliente);
         return "user/objetos";
     }
 
