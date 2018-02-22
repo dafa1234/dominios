@@ -16,7 +16,7 @@
 
 
                 <br/><br/>
-                <h2>informacion general</h2>
+              
             </center>
       
         

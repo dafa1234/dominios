@@ -56,11 +56,63 @@
                     </div>
                 </form>   
             </div>
+<%
+         }
+                if (m == 6) {
+            %>
+
+   <div class="panel panel-primary">
+                <div class=" panel-heading"><h2>Agregar usuarios masivos</h2></div> 
+                <form id="forminicio" action="agragarusuariosmasivos.htm" method="Post">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <label class="control-label">administrado</label>
+                            <select name="administrado" class="form-control" required>
+                                <option value="">Administracion </option>
+                                <option value="1">SI</option> 
+                                <option value="0">NO</option>                                                  
+                            </select>
+                            <br/>
+                            <label class="control-label">servidor</label>
+                            <select name="servid" class="form-control" required>
+                                <option value="">servidor</option>
+                                <c:forEach var="f" items="${requestScope.Listaserver}">
+                                    <option value="${f.serServer}">${f.serSerial}   -    ${f.serHostname}</option>
+                                </c:forEach>
+                            </select>
+                            <br/><br/>
+
+                            Bienvenido a la Creación de Usuarios 
+                     
+                      
+                            Tenga en cuenta lo siguiente:<br />
+                            <br />
+                            <li>Transforme el archivo de manera que se parezca a la información de ejemplo en el 
+                                TextBox de Ejemplo</li>
+                            <li>En el TextBox de ejemplo primero va el usuario de etb, luego el nombre del usuario. </li>
+                            <li>Coloque el separador como en el ejemplo(;).</li>                            
+                      
+                            <Textarea class="form-control">usuarioetb;nombre</Textarea>
+                                    <br>
+                                    
+                                        <Textarea name="usuariosmultiples" ID="TBUsuarios" runat="server" Columns="100" MaxLength="2000" 
+                                                Rows="25" TextMode="MultiLine" CssClass="login" 
+                                                ToolTip="TextBox de Trabajo" class="form-control"></Textarea>
+                                         </div>
+                                         <div class="col-md-1"></div>
+                    
+                </div>
+                                    <button type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" 
+                                    class="btn btn-success btn-lg "  >INGRESAR</button> 
+                         </form>
+                      </div>
+                        
             <%   }
                 if (m == 4) {%>
             <div class="panel panel-primary">
-                <div class=" panel-heading"><h2>Editar Servidor</div> 
-                <h2>modificar usuarios servidor</h2>
+                <div class=" panel-heading"> <h2>modificar usuarios servidor2</h2></div> 
+               
                 <div class="box-bottom">
                     <a  role="button" href="<c:url value="/usuarioservidor.htm"/>">volver</a>
                 </div>
@@ -95,8 +147,8 @@
                 if (m == 2) {
             %>
             <div class="panel panel-primary">
-                <div class=" panel-heading"><h2>Editar Servidor</div> 
-                <h2>detalles de usuarios de servidor</h2>
+                <div class=" panel-heading"><h2>detalles de usuarios de servidor</h2></div> 
+                
                 <div class="box-bottom">
                     <a  role="button" href="<c:url value="/usuarioservidor.htm"/>">volver</a>
                 </div>
@@ -155,8 +207,8 @@
                 }
                 if (m == 3) {%>
             <div class="panel panel-primary">
-                <div class=" panel-heading"><h2>Editar Servidor</div> 
-                <h2>lista de usuarios de servidores</h2>
+                <div class=" panel-heading"><h2>lista reporte de usuarios de servidores</h2></div> 
+                
                 <div class="box-bottom">
                     <a  role="button" href="<c:url value="/usuarioservidor.htm"/>">volver</a>
                 </div>
@@ -230,7 +282,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <div class="box-bottom">
+                            <a  role="button" href="<c:url value="/usuariosmas.htm"/>">agregar usuarios multiples</a>
+                        </div>
+                        </div>
                 </div>
 
 

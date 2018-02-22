@@ -292,7 +292,7 @@
                             <i class="fa fa-table"></i>descripccion id</div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTabl" width="100%" cellspacing="0">            
+                                <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">            
                                     <thead>
                                         <tr>
 
@@ -370,7 +370,7 @@
                                                 <td>${f.rutSerial}</td>                                           
                                                 <td>${f.rutRuta}</td>
                                                 <td>${f.rutFecha}</td>
-                                                <td>${f.rutSerial1.serHostname}</td>
+                                                <td>${f.rutSerial.serHostname}</td>
                                                 <td>
                                                     <form id="forminicio" action="rutamod.htm" method="Post">
                                                         <input  name="serv" type="hidden" value="${f.rutId}">
@@ -537,7 +537,7 @@
                                                 <td>${f.actFechaIni}</td>
                                                 <td>${f.actFechaFin}</td>
                                                 <td>${f.actDescripcion}</td>
-                                                <td>${f.actServ1.serSerial}</td>
+                                                <td>${f.actServ.serSerial}</td>
                                                 <td>
                                                     <form id="forminicio" action="modactivser.htm" method="Post">
                                                         <input  name="idact" type="hidden" value="${f.actId}">

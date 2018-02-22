@@ -13,9 +13,7 @@
         <%@include file="/WEB-INF/plantilla/header.jsp" %>
         <div class="content-wrapper">
             </br></br>      
-            <div class="flex-caption">
-                <h3>tabla de contratos</h3> 
-            </div>
+    
             <%
                 Integer m = (Integer) request.getAttribute("m");
 

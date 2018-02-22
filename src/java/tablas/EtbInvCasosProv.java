@@ -67,9 +67,9 @@ public class EtbInvCasosProv implements Serializable {
     @JoinColumn(name = "CASP_ESTADO", referencedColumnName = "ESTC_ID")
     @ManyToOne
     private EtbInvEstadoCasos caspEstado;
-    @JoinColumn(name = "CASP_SERV1", referencedColumnName = "ser_server")
+    @JoinColumn(name = "CASP_SERV", referencedColumnName = "ser_server")
     @ManyToOne(optional = false)
-    private EtbInvServidor caspServ1;
+    private EtbInvServidor caspServ;
 
     public EtbInvCasosProv() {
     }
@@ -147,12 +147,12 @@ public class EtbInvCasosProv implements Serializable {
         this.caspEstado = caspEstado;
     }
 
-    public EtbInvServidor getCaspServ1() {
-        return caspServ1;
+    public EtbInvServidor getCaspServ() {
+        return caspServ;
     }
 
-    public void setCaspServ1(EtbInvServidor caspServ1) {
-        this.caspServ1 = caspServ1;
+    public void setCaspServ(EtbInvServidor caspServ) {
+        this.caspServ = caspServ;
     }
 
     @Override

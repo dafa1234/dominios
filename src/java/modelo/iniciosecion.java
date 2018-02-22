@@ -487,7 +487,7 @@ public class iniciosecion {
         actividad.setActEjecuta(actEjecuta);
         actividad.setActFechaFin(actFechaFin);
         actividad.setActFechaIni(actFechaIni);
-        actividad.setActServ1(serv1);
+        actividad.setActServ(serv1);
         actividad.setActSolicita(actSolicita);
         actividad.setActTarea(actTarea);
         actividad.setActTipo(actTipo);
@@ -566,7 +566,7 @@ public class iniciosecion {
         casosprove.setCaspNumero(caspNumero);
         casosprove.setCaspProv(caspProv);
         casosprove.setFCreacion(Fecha);
-        casosprove.setCaspServ1(caspserv);
+        casosprove.setCaspServ(caspserv);
         em.persist(casosprove);
     }
     //INSERTAR USUARIO SERVIDOR
@@ -728,23 +728,21 @@ public class iniciosecion {
     }
 //insertar rutas
     @Transactional(rollbackFor = {ServicioException.class})
-    public void agragarrutas(String FechaH,String rutaser,EtbInvServidor idSer,String idSerna) {
+    public void agragarrutas(String FechaH,String rutaser,EtbInvServidor idSer) {
         EtbInvRuta rutas = new EtbInvRuta();
         rutas.setRutFecha(FechaH);
         rutas.setRutRuta(rutaser);
-        rutas.setRutSerial(idSerna);
-        rutas.setRutSerial1(idSer);
+        rutas.setRutSerial(idSer);
         em.persist(rutas);
     }
     //modificar rutas
     @Transactional(rollbackFor = {ServicioException.class})
-    public void editarrutas( int idrutas,String FechaH,String rutaser,EtbInvServidor idSer,String idSerna) {
+    public void editarrutas( int idrutas,String FechaH,String rutaser,EtbInvServidor idSer) {
         EtbInvRuta rutas = new EtbInvRuta();
         rutas.setRutId(idrutas);
         rutas.setRutFecha(FechaH);
         rutas.setRutRuta(rutaser);
-        rutas.setRutSerial(idSerna);
-        rutas.setRutSerial1(idSer);
+        rutas.setRutSerial(idSer);
         em.merge(rutas);
     }
     //modificar casos proveedor
@@ -759,7 +757,7 @@ public class iniciosecion {
         casosprove.setCaspNumero(numcas);
         casosprove.setCaspProv(proveedor1);
         casosprove.setFCreacion(fCreacion);
-        casosprove.setCaspServ1(servi);
+        casosprove.setCaspServ(servi);
         em.merge(casosprove);
     }
      //modificar ACTIVIDAD
@@ -771,7 +769,7 @@ public class iniciosecion {
         actividad.setActEjecuta(actEjecuta);
         actividad.setActFechaFin(actFechaFin);
         actividad.setActFechaIni(actFechaIni);
-        actividad.setActServ1(serv1);
+        actividad.setActServ(serv1);
         actividad.setActSolicita(actSolicita);
         actividad.setActTarea(actTarea);
         actividad.setActTipo(actTipo);

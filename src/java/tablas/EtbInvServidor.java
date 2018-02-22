@@ -113,7 +113,7 @@ public class EtbInvServidor implements Serializable {
     private Collection<EtbInvDireccionamiento> etbInvDireccionamientoCollection;
     @OneToMany(mappedBy = "aseServidor")
     private Collection<EtbInvAseguramiento> etbInvAseguramientoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "actServ1")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "actServ")
     private Collection<EtbInvActividad> etbInvActividadCollection;
     @JoinColumn(name = "SIS_ID_SIS_OPERATIVO", referencedColumnName = "SIS_ID_SIS_OPERATIVO")
     @ManyToOne(optional = false)
@@ -145,9 +145,9 @@ public class EtbInvServidor implements Serializable {
     @JoinColumn(name = "PLA_ID_PLATAFORMA", referencedColumnName = "PLA_ID_PLATAFORMA")
     @ManyToOne(optional = false)
     private EtbInvPlataforma plaIdPlataforma;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "caspServ1")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "caspServ")
     private Collection<EtbInvCasosProv> etbInvCasosProvCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rutSerial1")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rutSerial")
     private Collection<EtbInvRuta> etbInvRutaCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSerServidor")
     private Collection<EtbInvUsuServ> etbInvUsuServCollection;

@@ -15,10 +15,10 @@
                 if (m == 0) {
             %> 
            <div class="panel panel-primary">
-                <div class=" panel-heading"><h2>actividades</div>
+                <div class=" panel-heading"><h2>agregar aseguramiento</h2></div>
             <div class="flex-caption">
                 <div class="box-bottom">
-                    <div class=" panel-heading"><h2>agregar aseguramiento</h2></div>
+                    
                     <a  role="button" href="<c:url value="/aseguramiento.htm"/>">volver</a> 
                 </div>       
                 <center>
@@ -26,7 +26,7 @@
                     <div id="div-forms" >
 
                         <!-- Begin # Login Form -->
-                        <form id="forminicio" action="aseg.htm" method="Post">
+                        <form id="forminicio" action="aseg.htm"  method="Post">
                             <table>
                                 <tr>
                                     <td>
@@ -40,7 +40,9 @@
                                     <td>  <input  name="fini" type="text"   id="Fecha_Inicio" class="form-control" placeholder="fecha inicio" required></br><br/></td>
                                 </tr><tr>
 
-                                    <td>    <input   name="plantilla" type="file" id="inputEmail" class="form-control" placeholder="PLANTILLA" required ><br/><br/></td>
+                                    <td>    <input   name="plantilla" type="file"  size=60 class="form-control" required ><br/><br/></td>
+                                    <td>    <input   name="plantillan" type="text" placeholder="escriba la ubicacion del archivo"  class="form-control" required ><br/><br/></td>
+                                     
                                 </tr>
                             </table>
 
@@ -61,9 +63,9 @@
                 if (m == 6) {
             %> 
 <div class="panel panel-primary">
-                <div class=" panel-heading"><h2>actividades</div>
-            <div class="box-bottom">
                 <div class=" panel-heading"><h2>modificar aseguramiento </h2></div>
+            <div class="box-bottom">
+               
                 <a  role="button" href="<c:url value="/aseguramiento.htm"/>">volver</a> 
             </div>       
             <center>
@@ -230,7 +232,6 @@
 
 
                                     <label class="control-label">SERVIDOR</label>
-                                    <input   name="idSerna" type="hidden" id="inputEmail" value="${requestScope.servipname}" >
                                     <input   name="idSer1" type="hidden" id="inputEmail" value="${requestScope.servip}" ><p class="form-control" >${requestScope.servipname}</p><br/>          
                                     <label class="control-label">RUTA</label>                                  
                                     <textarea  name="rutaser" type="text" id="inputPassword" class="form-control" placeholder="escriba la ruta" required></textarea>
@@ -269,7 +270,6 @@
                                     <label class="control-label">SERVIDOR</label>
                                     <input   name="rutasId" type="hidden" id="inputEmail"   required value="${requestScope.rutas.rutId}" >
                                     <input   name="rutaIdser" type="hidden" id="inputEmail"   required value="${requestScope.rutas.rutSerial1.serServer}" >
-                                    <input   name="rutahosser" type="hidden" id="inputEmail"   required value="${requestScope.rutas.rutSerial1.serSerial}" >
                                     <p class="form-control" >${requestScope.rutas.rutSerial1.serSerial}</p><br/>
                                     <label class="control-label">fecha</label>
                                     <input   name="rutaF" type="hidden" id="inputEmail" class="form-control" value="${requestScope.rutas.rutFecha}" placeholder="dirVlan" required >

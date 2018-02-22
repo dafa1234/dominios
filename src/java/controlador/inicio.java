@@ -45,6 +45,7 @@ public class inicio {
         }
 
         EtbInvUsuarioAp a = dao.readByRutJPQL(email);
+
         HttpSession sesion = request.getSession(true);
 
         if (a == null) {
@@ -72,7 +73,9 @@ public class inicio {
             if (findADETB(email) && authADETB(email, pass)) {
 
                 HttpSession objsession = request.getSession();
+
                 String Correo_recibido = (consultarParametroETB(email, parametro_Correo));
+
                 objsession.setAttribute("Correo_recibido", Correo_recibido);
 
                 List<EtbInvServidor> results = dao.Listaserver();
@@ -82,14 +85,17 @@ public class inicio {
                     model.addAttribute("Listaserver", results);
                     return "buscar";
                 } else {
+
                     model.addAttribute("Listaserver", results);
-                    return "fono";
+                    return "administrador";
                 }
             } else {
+
                 sesion.setAttribute("error2", "no se encontro en la base de datos de la app");
                 return "error";
             }
         } else {
+
             sesion.setAttribute("error3", "no se encontro en la base de datos de etb");
             return "error";
         }

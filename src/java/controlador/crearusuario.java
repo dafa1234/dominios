@@ -168,6 +168,22 @@ public class crearusuario {
         model.addAttribute("Listaususerv", Listaususerv);
         return "user/usuarioservidor";
     }
+     @RequestMapping("usuariosmas.htm")
+    public String usuariosmas(Model model) {
+        String id = (String) request.getSession().getAttribute("name");
+        if (id == null) {
+            return "index";
+        }
+        EtbInvUsuEstado ususEstadoa = new EtbInvUsuEstado(3);
+        List<EtbInvUsuServ> Listaususerv = dao.Listaususerv(ususEstadoa);
+        List<EtbInvServidor> Listaserver = dao.Listaserver();
+        
+        int m = 6;
+        model.addAttribute("Listaserver", Listaserver);
+        model.addAttribute("m", m);
+        model.addAttribute("Listaususerv", Listaususerv);
+        return "user/usuarioservidor";
+    }
     @RequestMapping("modiusuario1.htm")
     public String modiusuario(@RequestParam("login") String ususLogin,
             @RequestParam("nombre") String nombre,

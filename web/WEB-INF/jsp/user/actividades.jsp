@@ -142,7 +142,7 @@
                                             <td>${f.actFechaIni}</td>
                                             <td>${f.actFechaFin}</td>
                                             <td>${f.actDescripcion}</td>
-                                            <td>${f.actServ1.serSerial}</td>
+                                            <td>${f.actServ.serSerial}</td>
                                             <td>
                                                 <form id="forminicio" action="modacti.htm" method="Post">
                                                     <input  name="idact" type="hidden" value="${f.actId}">
@@ -251,7 +251,7 @@
                             <input   name="serv" type="hidden" id="inputEmail"   required value="${requestScope.acti.actId}" >
                             <label class="control-label">servidor actividad</label>
                             <select name="servdor" class="form-control" required>
-                                <option value="${requestScope.acti.actServ1.serServer}">${requestScope.acti.actServ1.serHostname}</option>
+                                <option value="${requestScope.acti.actServ.serServer}">${requestScope.acti.actServ.serHostname}</option>
                                 <c:forEach var="f" items="${requestScope.listaServer}">
                                     <option value="${f.serServer}">${f.serHostname}</option>
                                 </c:forEach>

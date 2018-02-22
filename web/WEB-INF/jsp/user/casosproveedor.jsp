@@ -127,7 +127,7 @@
                                         <tr>
                                             <td>${f.caspId}</td>
                                             <td>${f.caspProv.marNomMarca}</td>
-                                            <td>${f.caspServ1.serHostname}</td>
+                                            <td>${f.caspServ.serHostname}</td>
                                             <td>${f.caspFechaApe}</td>
                                             <td>${f.caspFechaCie}</td>
                                             <td>${f.caspNumero}</td>
@@ -237,7 +237,7 @@
                                 <input   name="idcasos" type="hidden" id="inputEmail"   required value="${requestScope.cas.caspId}" >
                                 <label class="control-label">servidor</label>
                                 <select name="servidor" class="form-control" required>
-                                    <option value="${requestScope.cas.caspServ1.serServer}">${requestScope.cas.caspServ1.serSerial}</option>
+                                    <option value="${requestScope.cas.caspServ.serServer}">${requestScope.cas.caspServ.serSerial}</option>
                                     <c:forEach var="f" items="${requestScope.listaServer}">
                                         <option value="${f.serServer}">${f.serHostname}</option>
                                     </c:forEach>

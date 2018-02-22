@@ -154,10 +154,10 @@ public class crearcasosproveedor {
         //    int cambbit = camt.getCamtabID();
         EtbInvCambioTabla CamIdtabla = new EtbInvCambioTabla(camt.getCamtabID());
 
-        if (!cas.getCaspServ1().getSerServer().equals(servidor)) {
+        if (!cas.getCaspServ().getSerServer().equals(servidor)) {
             String CamColumna = "CASP_SERV1";
             String CamNawValor = "" + servidor;
-            String CamValorIni = "" + cas.getCaspServ1().getSerServer();
+            String CamValorIni = "" + cas.getCaspServ().getSerServer();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
         if (!cas.getCaspProv().getMarIdMarca().equals(proveedor)) {

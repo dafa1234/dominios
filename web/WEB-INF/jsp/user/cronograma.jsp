@@ -90,7 +90,7 @@
             <%}
                 if (m == 2) {%>
             <div class="panel panel-primary">
-                <div class=" panel-heading"><h2>Editar Servidor</div>  
+                <div class=" panel-heading"><h2>cronograma mto</h2></div>  
                 <div class="row">
                     <div class="col-md-3"></div>
                     <div class="col-md-3">
@@ -181,7 +181,7 @@
             <%}
                 if (m == 3) {%>
             <div class="panel panel-primary">
-                <div class=" panel-heading"><h2>Editar Servidor</div>  
+                <div class=" panel-heading"><h2>reporte cronograma mto</h2></div>  
                 <h3>REPORTE</h3>
                 <div class="box-bottom">
                     <a  role="button" href="<c:url value="/cronograma.htm"/>">volver</a> 
@@ -246,7 +246,7 @@
                 if (m == 4) {
             %>
             <div class="panel panel-primary">
-                <div class=" panel-heading"><h2>modificar cronograma</div>
+                <div class=" panel-heading"><h2>modificar cronograma</h2></div>
                 <!-- Begin # DIV Form -->
                 <div class="box-bottom">
                     <a  role="button" href="<c:url value="/cronograma.htm"/>">volver</a> 

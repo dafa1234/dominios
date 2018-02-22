@@ -31,7 +31,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "EtbInvRuta.findAll", query = "SELECT e FROM EtbInvRuta e")
     , @NamedQuery(name = "EtbInvRuta.findByRutId", query = "SELECT e FROM EtbInvRuta e WHERE e.rutId = :rutId")
-    , @NamedQuery(name = "EtbInvRuta.findByRutSerial", query = "SELECT e FROM EtbInvRuta e WHERE e.rutSerial = :rutSerial")
     , @NamedQuery(name = "EtbInvRuta.findByRutRuta", query = "SELECT e FROM EtbInvRuta e WHERE e.rutRuta = :rutRuta")
     , @NamedQuery(name = "EtbInvRuta.findByRutFecha", query = "SELECT e FROM EtbInvRuta e WHERE e.rutFecha = :rutFecha")})
 public class EtbInvRuta implements Serializable {
@@ -44,11 +43,6 @@ public class EtbInvRuta implements Serializable {
     private Integer rutId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "RUT_SERIAL")
-    private String rutSerial;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 8000)
     @Column(name = "RUT_RUTA")
     private String rutRuta;
@@ -57,9 +51,9 @@ public class EtbInvRuta implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "RUT_FECHA")
     private String rutFecha;
-    @JoinColumn(name = "RUT_SERIAL1", referencedColumnName = "ser_server")
+    @JoinColumn(name = "RUT_SERIAL", referencedColumnName = "ser_server")
     @ManyToOne(optional = false)
-    private EtbInvServidor rutSerial1;
+    private EtbInvServidor rutSerial;
 
     public EtbInvRuta() {
     }
@@ -68,9 +62,8 @@ public class EtbInvRuta implements Serializable {
         this.rutId = rutId;
     }
 
-    public EtbInvRuta(Integer rutId, String rutSerial, String rutRuta, String rutFecha) {
+    public EtbInvRuta(Integer rutId, String rutRuta, String rutFecha) {
         this.rutId = rutId;
-        this.rutSerial = rutSerial;
         this.rutRuta = rutRuta;
         this.rutFecha = rutFecha;
     }
@@ -81,14 +74,6 @@ public class EtbInvRuta implements Serializable {
 
     public void setRutId(Integer rutId) {
         this.rutId = rutId;
-    }
-
-    public String getRutSerial() {
-        return rutSerial;
-    }
-
-    public void setRutSerial(String rutSerial) {
-        this.rutSerial = rutSerial;
     }
 
     public String getRutRuta() {
@@ -107,12 +92,12 @@ public class EtbInvRuta implements Serializable {
         this.rutFecha = rutFecha;
     }
 
-    public EtbInvServidor getRutSerial1() {
-        return rutSerial1;
+    public EtbInvServidor getRutSerial() {
+        return rutSerial;
     }
 
-    public void setRutSerial1(EtbInvServidor rutSerial1) {
-        this.rutSerial1 = rutSerial1;
+    public void setRutSerial(EtbInvServidor rutSerial) {
+        this.rutSerial = rutSerial;
     }
 
     @Override

@@ -5,6 +5,14 @@
  */
 package controlador;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import static java.lang.System.out;
 import java.util.Calendar;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +23,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import tablas.EtbInvActividad;
 import tablas.EtbInvAseguramiento;
 import tablas.EtbInvCambioTabla;
@@ -75,11 +82,32 @@ public class crearaseguramiento {
             @RequestParam("servidor") int aseServido,
             @RequestParam("eje") String aseEjecuta,
             @RequestParam("tarea") String aseTarea,
-            @RequestParam("plantilla") String actTipo,
+            @RequestParam("plantilla") File plantillas,
+            @RequestParam("plantillan") String plantillan,
             @RequestParam("fini") String aseFecha,
-            Model model) throws ServicioException {
+            Model model) throws ServicioException, FileNotFoundException, IOException {
         int aseplantilla = 1;
         int m = 3;
+
+        System.out.println("controlador.crearaseguramiento.createaseguram(1)" +plantillas);
+      
+        
+        String ruta = "\\NetBeansProjects\\Pruebas\\dominios_1.2\\web\\plantillas\\"+plantillas;
+        FileOutputStream fos = new FileOutputStream(ruta);
+
+        File origen = new File(plantillan);
+        File destino = new File(ruta);
+        InputStream in = new FileInputStream(origen);
+        OutputStream out = new FileOutputStream(destino);
+        byte[] buf = new byte[1024];
+        int len;
+
+        while ((len = in.read(buf)) > 0) {
+            out.write(buf, 0, len);
+        }
+        in.close();
+        out.close();
+    
         model.addAttribute("m", m);
         EtbInvServidor aseServidor = new EtbInvServidor(aseServido);
         dao.crease(Fecha, aseTarea, aseServidor, aseEjecuta, aseFecha, aseplantilla);
@@ -226,7 +254,7 @@ public class crearaseguramiento {
     public String direccionamientomodificar(
             @RequestParam("tareacambio") String tareacambio,
             @RequestParam("iddirIp") int iddirIp,
-            @RequestParam("idSer1") int idSer1,           
+            @RequestParam("idSer1") int idSer1,
             @RequestParam("dirIp") String dirIp,
             @RequestParam("dirVlan") String dirVlan,
             @RequestParam("dirSwitch") String dirSwitch,
@@ -304,14 +332,14 @@ public class crearaseguramiento {
     }
 
     @RequestMapping("rutaagregar.htm")
-    public String rutasagregar(@RequestParam("idSer1") int idSer1, @RequestParam("rutaser") String rutaser, @RequestParam("idSerna") String idSerna, Model model) {
+    public String rutasagregar(@RequestParam("idSer1") int idSer1, @RequestParam("rutaser") String rutaser, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
             return "index";
         }
         EtbInvServidor idSer = new EtbInvServidor(idSer1);
 
-        dao.agragarrutas(FechaH, rutaser, idSer, idSerna);
+        dao.agragarrutas(FechaH, rutaser, idSer);
 
         int m = 4;
 
@@ -338,7 +366,6 @@ public class crearaseguramiento {
     @RequestMapping("rutadificar.htm")
     public String rutasmod(@RequestParam("rutasId") int rutasId,
             @RequestParam("rutaIdser") int rutaIdser,
-            @RequestParam("rutahosser") String rutahosser,
             @RequestParam("rutaF") String rutaF,
             @RequestParam("tareacambio") String tareacambio,
             @RequestParam("rutaser") String rutaser, Model model) {
@@ -362,7 +389,7 @@ public class crearaseguramiento {
             String CamValorIni = rutas.getRutRuta();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
-        dao.editarrutas(rutasId, FechaH, rutaser, idSer, rutahosser);
+        dao.editarrutas(rutasId, FechaH, rutaser, idSer);
         int m = 5;
         model.addAttribute("rutas", rutas);
         model.addAttribute("m", m);
@@ -466,10 +493,10 @@ public class crearaseguramiento {
             String CamValorIni = "" + cas.getCaspIm();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
-        EtbInvServidor servi = new EtbInvServidor(cas.getCaspServ1().getSerServer());
+        EtbInvServidor servi = new EtbInvServidor(cas.getCaspServ().getSerServer());
         EtbInvEstadoCasos estini1 = new EtbInvEstadoCasos(estini);
         EtbInvMarca proveedor1 = new EtbInvMarca(proveedor);
-        dao.modificarcasproveedor(proveedor1, idcasos, fini, fcie, estini1, numcas, im, cas.getFCreacion(),  servi);
+        dao.modificarcasproveedor(proveedor1, idcasos, fini, fcie, estini1, numcas, im, cas.getFCreacion(), servi);
         List<EtbInvMarca> ListaMarca = dao.ListaMarca();
         List<EtbInvEstadoCasos> Listaestacasos = dao.Listaestacasos();
         model.addAttribute("ListaMarca", ListaMarca);
@@ -579,7 +606,7 @@ public class crearaseguramiento {
         //base de datos
 
         EtbInvTipoActividad actTipo = new EtbInvTipoActividad(actTip);
-        EtbInvServidor serv1 = new EtbInvServidor(aa.getActServ1().getSerServer());
+        EtbInvServidor serv1 = new EtbInvServidor(aa.getActServ().getSerServer());
 
         int m = 2;
         model.addAttribute("m", m);
@@ -675,6 +702,10 @@ public class crearaseguramiento {
 
         model.addAttribute("Listaususerv", a);
         return null;
+    }
+
+    private byte[] texto() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

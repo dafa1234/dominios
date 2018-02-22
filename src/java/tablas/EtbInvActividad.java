@@ -85,9 +85,9 @@ public class EtbInvActividad implements Serializable {
     @JoinColumn(name = "ACT_TIPO", referencedColumnName = "TIPA_ID")
     @ManyToOne
     private EtbInvTipoActividad actTipo;
-    @JoinColumn(name = "ACT_SERV1", referencedColumnName = "ser_server")
+    @JoinColumn(name = "ACT_SERV", referencedColumnName = "ser_server")
     @ManyToOne(optional = false)
-    private EtbInvServidor actServ1;
+    private EtbInvServidor actServ;
 
     public EtbInvActividad() {
     }
@@ -179,12 +179,12 @@ public class EtbInvActividad implements Serializable {
         this.actTipo = actTipo;
     }
 
-    public EtbInvServidor getActServ1() {
-        return actServ1;
+    public EtbInvServidor getActServ() {
+        return actServ;
     }
 
-    public void setActServ1(EtbInvServidor actServ1) {
-        this.actServ1 = actServ1;
+    public void setActServ(EtbInvServidor actServ) {
+        this.actServ = actServ;
     }
 
     @Override

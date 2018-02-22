@@ -144,10 +144,10 @@ public class crearactividad {
         EtbInvCambioTabla camt = dao.idcambiotabla(tabladominios, actServ, usuarioetb, tareacambio);
         //    int cambbit = camt.getCamtabID();
         EtbInvCambioTabla CamIdtabla = new EtbInvCambioTabla(camt.getCamtabID());
-        if (!aa.getActServ1().getSerServer().equals(servdor)) {
+        if (!aa.getActServ().getSerServer().equals(servdor)) {
             String CamColumna = "ACT_SERV1";
             String CamNawValor = "" + servdor;
-            String CamValorIni = "" + aa.getActServ1().getSerServer();
+            String CamValorIni = "" + aa.getActServ().getSerServer();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
         if (!aa.getActEjecuta().equals(actEjecuta)) {
