@@ -48,7 +48,11 @@ public class controljsp {
             fechaActual.get(Calendar.YEAR),
             fechaActual.get(Calendar.MONTH) + 1,
             fechaActual.get(Calendar.DAY_OF_MONTH));
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
     @RequestMapping("pruebas.htm")
     public String pruebas(Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -58,7 +62,11 @@ public class controljsp {
 
         return "prueba";
     }
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
     @RequestMapping("prueb.htm")
     public String pr(Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -69,7 +77,11 @@ public class controljsp {
         return "user/newjsp";
 
     }
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
     //USUARIO AP
     @RequestMapping("buscar.htm")
     public String bus(Model model) {
@@ -81,7 +93,11 @@ public class controljsp {
         model.addAttribute("Listaserver", Listaserver);
         return "buscar";
     }
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
     //central
     @RequestMapping("ncentral.htm")
     public String nCentral(Model model) {
@@ -95,6 +111,12 @@ public class controljsp {
         model.addAttribute("noj", noj);
         return "user/objetos";
     }
+    /**
+     * 
+     * @param Central
+     * @param model
+     * @return 
+     */
 //central
 
     @RequestMapping("central.htm")
@@ -110,7 +132,11 @@ public class controljsp {
         model.addAttribute("listaCentral", ListaCentral);
         return "user/objetos";
     }
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
     //grupo
     @RequestMapping("ngrupo.htm")
     public String nGrupo(Model model) {
@@ -124,7 +150,13 @@ public class controljsp {
         model.addAttribute("noj", noj);
         return "user/objetos";
     }
-
+/**
+ * 
+ * @param Ngrupo
+ * @param Tgrupo
+ * @param model
+ * @return 
+ */
     @RequestMapping("grupo.htm")
     public String Grupo(@RequestParam("ngrupo") String Ngrupo, @RequestParam("tgrupo") String Tgrupo, Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -138,7 +170,11 @@ public class controljsp {
         model.addAttribute("listaGrupo", Listagrupo);
         return "user/objetos";
     }
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
     //marca
     @RequestMapping("nmarca.htm")
     public String nmarca(Model model) {
@@ -152,7 +188,15 @@ public class controljsp {
         model.addAttribute("noj", noj);
         return "user/objetos";
     }
-
+/**
+ * 
+ * @param nmarca
+ * @param usoporte
+ * @param tsoporte
+ * @param minterventor
+ * @param model
+ * @return 
+ */
     @RequestMapping("marca.htm")
     public String marca(@RequestParam("nmarca") String nmarca, @RequestParam("usoporte") String usoporte,
             @RequestParam("tsoporte") String tsoporte, @RequestParam("minterventor") String minterventor, Model model) {
@@ -167,7 +211,11 @@ public class controljsp {
         model.addAttribute("listaFonos", ListaMarca);
         return "user/objetos";
     }
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
     //plataforma
     @RequestMapping("nplataforma.htm")
     public String nplataforma(Model model) {
@@ -176,12 +224,20 @@ public class controljsp {
             return "index";
         }
         int noj = 4;
+        List<EtbInvAdmPlataforma> listaAdmPlataforma = dao.listaAdmPlataforma();
+        model.addAttribute("listaAdmPlataforma", listaAdmPlataforma);
         List<EtbInvPlataforma> ListaPrataforma = dao.ListaPrataforma();
         model.addAttribute("listaPlat", ListaPrataforma);
         model.addAttribute("noj", noj);
         return "user/objetos";
     }
-
+/**
+ * 
+ * @param nplataforma
+ * @param aplataforma1
+ * @param model
+ * @return 
+ */
     @RequestMapping("plataforma.htm")
     public String plataforma(@RequestParam("nplataforma") String nplataforma, @RequestParam("aplataforma") int aplataforma1, Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -196,7 +252,11 @@ public class controljsp {
         model.addAttribute("listaPlat", ListaPrataforma);
         return "user/objetos";
     }
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
     //rolserv
     @RequestMapping("nrolserv.htm")
     public String nuevorolserv(Model model) {
@@ -210,7 +270,12 @@ public class controljsp {
         model.addAttribute("noj", noj);
         return "user/objetos";
     }
-
+/**
+ * 
+ * @param nrol
+ * @param model
+ * @return 
+ */
     @RequestMapping("rolserv.htm")
     public String rolserv(@RequestParam("nrol") String nrol, Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -224,7 +289,12 @@ public class controljsp {
         model.addAttribute("listaRol", ListaRolserver);
         return "user/objetos";
     }
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
+    
     //sisoper
     @RequestMapping("nsisopera.htm")
     public String nsisoper(Model model) {
@@ -238,7 +308,13 @@ public class controljsp {
         model.addAttribute("noj", noj);
         return "user/objetos";
     }
-
+/**
+ * 
+ * @param sisdis
+ * @param nsis
+ * @param model
+ * @return 
+ */
     @RequestMapping("sisopera.htm")
     public String sisoper(@RequestParam("sisdis") int sisdis, @RequestParam("nsis") String nsis, Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -252,6 +328,11 @@ public class controljsp {
         model.addAttribute("listaSis", Listasisope);
         return "user/objetos";
     }
+    /**
+     * 
+     * @param model
+     * @return 
+     */
     //estado
 
     @RequestMapping("nestado.htm")
@@ -266,7 +347,12 @@ public class controljsp {
         model.addAttribute("noj", noj);
         return "user/objetos";
     }
-
+/**
+ * 
+ * @param nest
+ * @param model
+ * @return 
+ */
     @RequestMapping("estado.htm")
     public String estado(@RequestParam("nest") String nest, Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -280,6 +366,11 @@ public class controljsp {
         model.addAttribute("listaEstado", ListaEstado);
         return "user/objetos";
     }
+    /**
+     * 
+     * @param model
+     * @return 
+     */
     //salon
 
     @RequestMapping("nsalon.htm")
@@ -296,7 +387,13 @@ public class controljsp {
         model.addAttribute("listaCentral", ListaCentral);
         return "user/objetos";
     }
-
+/**
+ * 
+ * @param scen1
+ * @param nsal
+ * @param model
+ * @return 
+ */
     @RequestMapping("salon.htm")
     public String salon(@RequestParam("scen") int scen1, @RequestParam("nsal") String nsal, Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -313,7 +410,11 @@ public class controljsp {
         dao.newsalon(scen, nsal);
         return "user/objetos";
     }
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
     //modelo
     @RequestMapping("nmodelo.htm")
     public String nmodelo(Model model) {
@@ -329,7 +430,13 @@ public class controljsp {
         model.addAttribute("listaMarca", ListaMarca);
         return "user/objetos";
     }
-
+/**
+ * 
+ * @param nmar1
+ * @param nmod
+ * @param model
+ * @return 
+ */
     @RequestMapping("modelo.htm")
     public String modelo(@RequestParam("nmar") int nmar1, @RequestParam("nmod") String nmod, Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -346,7 +453,11 @@ public class controljsp {
         dao.newmodelo(nmar, nmod);
         return "user/objetos";
     }
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
     //cliente
     @RequestMapping("ncliente.htm")
     public String ncliente(Model model) {
@@ -360,7 +471,13 @@ public class controljsp {
         model.addAttribute("noj", noj);
         return "user/objetos";
     }
-
+/**
+ * 
+ * @param ncli
+ * @param ccli
+ * @param model
+ * @return 
+ */
     @RequestMapping("cliente.htm")
     public String cliente(@RequestParam("ncli") String ncli, @RequestParam("ccli") String ccli, Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -374,7 +491,52 @@ public class controljsp {
         model.addAttribute("listaCliente", ListaCliente);
         return "user/objetos";
     }
-
+    /**
+     * 
+     * @param model
+     * @return 
+     */
+     //administrador plataforma
+    @RequestMapping("nadminiplataforma.htm")
+    public String nadminiplataforma(Model model) {
+        String id = (String) request.getSession().getAttribute("name");
+        if (id == null) {
+            return "index";
+        }
+        int noj = 11;
+        List<EtbInvAdmPlataforma> listaAdmPlataforma = dao.listaAdmPlataforma();
+        model.addAttribute("listaAdmi", listaAdmPlataforma);
+        model.addAttribute("noj", noj);
+        return "user/objetos";
+    }
+/**
+ * 
+ * @param nombre
+ * @param telefono
+ * @param area
+ * @param correo
+ * @param model
+ * @return 
+ */
+    @RequestMapping("administradorpla.htm")
+    public String administradorpla(@RequestParam("nombre") String nombre, @RequestParam("telefono") String telefono,
+                                   @RequestParam("area") String area,@RequestParam("correo") String correo,Model model) {
+        String id = (String) request.getSession().getAttribute("name");
+        if (id == null) {
+            return "index";
+        }
+        int noj = 11;
+        model.addAttribute("noj", noj);
+        dao.newadminispla(area,  correo, nombre,  telefono);
+         List<EtbInvAdmPlataforma> listaAdmPlataforma = dao.listaAdmPlataforma();
+        model.addAttribute("listaAdmi", listaAdmPlataforma);
+        return "user/objetos";
+    }
+/**
+ * 
+ * @param model
+ * @return 
+ */
     //ADMINISTRADOR
     @RequestMapping("fono.htm")
     public String administrador(Model model) {
@@ -386,7 +548,10 @@ public class controljsp {
         model.addAttribute("Listaserver", Listaserver);
         return "administrador";
     }
-
+/**
+ * 
+ * @return 
+ */
     //CERRAR SESION
     @RequestMapping("cerrarsesion.htm")
     public String cerrarsesion() {
@@ -396,7 +561,17 @@ public class controljsp {
         }
         return "cerrarsesion";
     }
-
+/**
+ * 
+ * @param F_Inicio
+ * @param F_Fin
+ * @param F
+ * @param model
+ * @return
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws SQLException 
+ */
     //reporte
     @RequestMapping("serversreport.htm")
     public ModelAndView serverreport(@RequestParam("F_Inicio") String F_Inicio, @RequestParam("F_Fin") String F_Fin, @RequestParam("F") int F, Model model) throws FileNotFoundException, IOException, SQLException {

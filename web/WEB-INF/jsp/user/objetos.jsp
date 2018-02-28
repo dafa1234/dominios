@@ -223,8 +223,12 @@
                                 <br/>
                                 <input   name="nplataforma" type="text" id="inputEmail" class="form-control" placeholder="nombre Plataforma" required autofocus class="nav nav-pills nav-stacked"><br/><br/>
 
-                                <input   name="aplataforma" type="text" id="inputEmail" class="form-control" placeholder="Administrador Plataforma" required autofocus class="nav nav-pills nav-stacked"><br/><br/>
-
+                                <select name="aplataforma" class="form-control">
+                                    <option value="">administrador</option>
+                                    <c:forEach var="f" items="${requestScope.listaAdmPlataforma}">
+                                        <option value="${f.admId}">${f.admNombre}</option>
+                                    </c:forEach>
+                                </select>  <br/>
                                 <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" 
                                         class="btn btn-success btn-lg "  >INGRESAR</button>
                             </form>
@@ -435,7 +439,7 @@
                                     <c:forEach var="f" items="${requestScope.listaCentral}">
                                         <option value="${f.cenIdCentral}">${f.cenNombre}</option>
                                     </c:forEach>
-                                </select>
+                                </select><br/><br/>
                                 <input name="nsal" type="text"  class="form-control" placeholder="Nombre Salon" required autofocus ><br/><br/>
 
                                 <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" 
@@ -550,6 +554,69 @@
                                 <br/>
                                 <input name="ncli" type="text"  class="form-control" placeholder="Nombre Cliente" required autofocus ><br/><br/>
                                 <input name="ccli" type="text"  class="form-control" placeholder="Contacto Cliente" required autofocus ><br/><br/>
+                                <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" 
+                                        class="btn btn-success btn-lg "  >INGRESAR</button>
+                            </form>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <!-- Begin # Login Form -->
+
+                    <!-- End # DIV Form -->                   
+                </center>
+            </div>
+            <%
+                }
+                if (noj == 11) {
+            %>
+            <div class="panel panel-primary">
+                <div class=" panel-heading"><h3>Nuevo administrador plataforma</h3></div> 
+
+                <div class="box-bottom">
+                    <a  role="button" href="<c:url value="/Cliente.htm"/>">volver</a>                
+                </div>
+                <center>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-5">
+                            <div class="card-body">
+                                <table class="table table-bordered" id="dataTable" cellspacing="0"> 
+                                    <thead>
+                                        <tr>
+                                            <th>                                        
+                                                nombre
+                                            </th>
+                                            <th>                                        
+                                                telefono
+                                            </th>
+                                            <th>                                        
+                                                area
+                                            </th>
+                                            <th>                                        
+                                                correo
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="f" items="${requestScope.listaAdmi}">
+                                            <tr>
+                                                <td> ╝ ${f.admNombre}</td>
+                                                <td> ╝ ${f.admTelefono}</td>
+                                                <td> ╝ ${f.admArea}</td>
+                                                <td> ╝ ${f.admCorreo}</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-5">                           
+                            <form  action="administradorpla.htm" method="Post">                            
+                                <br/>
+                                <input name="nombre" type="text"  class="form-control" placeholder="Nombre administrador" required autofocus ><br/><br/>
+                                <input name="telefono" type="text"  class="form-control" placeholder="telefono administrador" required autofocus ><br/><br/>
+                                <input name="area" type="text"  class="form-control" placeholder="area administrador" required autofocus ><br/><br/>
+                                <input name="correo" type="text"  class="form-control" placeholder="correo administrador" required autofocus ><br/><br/>
                                 <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" 
                                         class="btn btn-success btn-lg "  >INGRESAR</button>
                             </form>

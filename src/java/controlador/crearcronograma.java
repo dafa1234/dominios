@@ -15,9 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import tablas.EtbInvCambioTabla;
-import tablas.EtbInvCasosProv;
 import tablas.EtbInvCronogramaMto;
 import tablas.EtbInvEstadoMto;
 import tablas.EtbInvMarca;
@@ -47,7 +45,22 @@ public class crearcronograma {
             fechaActualH.get(Calendar.HOUR),
             fechaActualH.get(Calendar.MINUTE),
             fechaActualH.get(Calendar.SECOND));
-    @RequestMapping("/crono.htm")
+/**
+ * 
+ * @param croProyect
+ * @param croSerial
+ * @param croFechaIni
+ * @param croEstad
+ * @param croEjecuta
+ * @param croCambioFin
+ * @param fprox
+ * @param ffin
+ * @param observacion
+ * @param model
+ * @return
+ * @throws ServicioException 
+ */   
+ @RequestMapping("/crono.htm")
     public String createcronograma(
             @RequestParam("proyecto") Integer croProyect,
             @RequestParam("servidor") int croSerial,
@@ -75,6 +88,11 @@ public class crearcronograma {
         return "user/cronograma";
 
     }
+    /**
+     * 
+     * @param model
+     * @return 
+     */
     //CRONOGRAMA
 
     @RequestMapping("cronograma.htm")
@@ -89,7 +107,11 @@ public class crearcronograma {
         model.addAttribute("listaCrono", ListaCrono);
         return "user/cronograma";
     }
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
     @RequestMapping("newcrono.htm")
     public String newcrono(Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -110,7 +132,11 @@ public class crearcronograma {
         model.addAttribute("m", m);
         return "user/cronograma";
     }
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
     @RequestMapping("newaseg.htm")
     public String newaseg(Model model) {
         List<EtbInvServidor> Listaserver = dao.Listaserver();
@@ -123,22 +149,38 @@ public class crearcronograma {
         model.addAttribute("m", m);
         return "user/aseguramiento";
     }
-    
+    /**
+     * 
+     * @param croProyect
+     * @param croSerial
+     * @param croFechaIni
+     * @param croEstad
+     * @param croEjecuta
+     * @param croCambioFin
+     * @param fprox
+     * @param ffin
+     * @param observacion
+     * @param tareacambio
+     * @param idcro
+     * @param model
+     * @return
+     * @throws ServicioException 
+     */
     
     ///modificar cronograma
         @RequestMapping("modcrono.htm")
     public String modificarcronograma(
-            @RequestParam("proyecto") Integer croProyect,
+            @RequestParam("proyecto") int croProyect,
             @RequestParam("servidor") int croSerial,
             @RequestParam("fini") String croFechaIni,
-            @RequestParam("estini") Integer croEstad,
+            @RequestParam("estini") int croEstad,
             @RequestParam("ejecuta") String croEjecuta,
             @RequestParam("cambio") String croCambioFin,
             @RequestParam("fprox") String fprox,
             @RequestParam("ffin") String ffin,
             @RequestParam("observacion") String observacion,
-            @RequestParam("idcro") int idcro,
             @RequestParam("tareacambio") String tareacambio,
+            @RequestParam("idcro") int idcro,          
             Model model) throws ServicioException {
        
        
@@ -153,7 +195,21 @@ public class crearcronograma {
         EtbInvCambioTabla camt = dao.idcambiotabla(tabladominios, idcro, usuarioetb, tareacambio);
         //    int cambbit = camt.getCamtabID();
         EtbInvCambioTabla CamIdtabla = new EtbInvCambioTabla(camt.getCamtabID());
-
+            if (cronograma.getCroObservacion() == null) {
+                if (observacion != null) {
+                    String CamColumna = "CRO_OBSERVACION";
+                    String CamNawValor = "" + observacion;
+                    String CamValorIni = "";
+                    dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
+                }
+            } else {
+                if (!cronograma.getCroObservacion().equals(observacion)) {
+                    String CamColumna = "CRO_OBSERVACION";
+                    String CamNawValor = "" + observacion;
+                    String CamValorIni = "" + cronograma.getCroObservacion();
+                    dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
+                }
+            }
         if (!cronograma.getCroProyecto().getProId().equals(croProyect)) {
             String CamColumna = "CRO_PROYECTO";
             String CamNawValor = "" + croProyect;
@@ -202,12 +258,7 @@ public class crearcronograma {
             String CamValorIni = "" + cronograma.getCroFechaFin();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
-                if (!cronograma.getCroObservacion().equals(observacion)) {
-            String CamColumna = "CRO_OBSERVACION";
-            String CamNawValor = "" + observacion;
-            String CamValorIni = "" + cronograma.getCroObservacion();
-            dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
-        }
+          
         EtbInvProyecto croProyecto = new EtbInvProyecto(croProyect);
         EtbInvEstadoMto croEstado = new EtbInvEstadoMto(croEstad);
          EtbInvServidor croSerial1 = new EtbInvServidor(croSerial);
@@ -219,6 +270,12 @@ public class crearcronograma {
         return "user/cronograma";
 
     }
+    /**
+     * 
+     * @param idcron
+     * @param model
+     * @return 
+     */
     //CRONOGRAMA
 
     @RequestMapping("cronogramamod.htm")

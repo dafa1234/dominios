@@ -12,7 +12,7 @@
         <%@include file="/WEB-INF/plantilla/header.jsp" %>
         <div class="content-wrapper">
             </br></br>
-       
+
             <%
                 Integer m = (Integer) request.getAttribute("m");
 
@@ -21,7 +21,7 @@
             <div class="panel panel-primary">
                 <div class=" panel-heading"><h2>Agregar actividad</h2></div>
                 <div class="box-bottom">
-                    <a  role="button" href="<c:url value="/actividades.htm"/>">volver</a> 
+                    <a  role="button" class="btn btn-success btn-lg "  href="<c:url value="/actividades.htm"/>">volver</a> 
                 </div>              
                 <!-- Begin # DIV Form -->
 
@@ -60,7 +60,7 @@
                             <input   name="sol" type="text" id="inputEmail" class="form-control" placeholder="solicita" required autofocus class="nav nav-pills nav-stacked"><br/><br/></td>
 
                         </div>
-                    <div class="col-md-1"></div></div>
+                        <div class="col-md-1"></div></div>
                     <div class="row">
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
@@ -87,13 +87,13 @@
                     <div class="col-md-3"></div>
                     <div class="col-md-3">
                         <div class="box-bottom">
-                            <a  role="button" href="<c:url value="/newactiv.htm"/>">agregar</a> 
+                            <a  role="button"  href="<c:url value="/newactiv.htm"/>">agregar</a> 
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="flex-caption">
                             <div class="box-bottom">
-                                <a  role="button" data-toggle="modal" data-target="#login-modal">REPORTE</a>
+                                <a  role="button"  data-toggle="modal" data-target="#login-modal">REPORTE</a>
                             </div> 
                         </div>
                     </div>
@@ -167,11 +167,11 @@
             <div class="panel panel-primary">
                 <div class=" panel-heading"><h2>reporte actividades</h2></div>
                 <div class="box-bottom">
-                    <a  role="button" href="<c:url value="/actividades.htm"/>">volver</a> 
+                    <a  role="button" class="btn btn-success btn-lg "  href="<c:url value="/actividades.htm"/>">volver</a> 
                 </div>   
                 <table>
                     <tr>
-                        <td><input type="button" id="btnExport" value="Descargar a Excel "/></td>
+                        <td><input type="button" class="btn btn-success btn-lg "  id="btnExport" value="Descargar a Excel "/></td>
                     </tr>
                 </table>
                 <div id="activi" class="card mb-3">
@@ -226,7 +226,9 @@
             %>
             <div class="panel panel-primary">
                 <div class=" panel-heading"><h2>modoificar actividad</div>
-
+                <div class="box-bottom">
+                    <a  role="button" class="btn btn-success btn-lg "  href="<c:url value="/actividades.htm"/>">volver</a> 
+                </div>  
 
                 <!-- Begin # Login Form -->
                 <form action="modactivi.htm" method="Post">

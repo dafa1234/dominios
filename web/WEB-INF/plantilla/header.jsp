@@ -49,15 +49,17 @@
                     <li><a href="<c:url value="/nsalon.htm"/>">Agregar Salon</a></li>
                     <li><a href="<c:url value="/nmodelo.htm"/>">Agregar Modelo</a></li>
                     <li><a href="<c:url value="/ncliente.htm"/>">Agregar Cliemte</a></li>
-
+                    <li><a href="<c:url value="/nadminiplataforma.htm"/>">Agregar administrador plataforma</a></li>
                 </ul>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                <a class="nav-link" href="#">
-                    <i class="fa fa-fw fa-table"></i>
-                    <span class="nav-link-text">Tables</span>
-                </a>
-            </li>
+            <%
+                // <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+                //<a class="nav-link" href="#">
+                //  <i class="fa fa-fw fa-table"></i>
+                //<span class="nav-link-text">Tables</span>
+                //</a>
+                // </li>
+            %>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Actividades Operativas">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-wrench"></i>
@@ -74,7 +76,7 @@
                     <%
                         //<li><a href="<c:url value="/pruebas.htm"/>">pruebas</a></li> 
                         //<li><a href="<c:url value="/prueb.htm"/>">Casfd</a></li>
-                            if (id == 1) {   %>
+                        if (id == 1) {   %>
                     <li><a href="<c:url value="/modificarusuario.htm"/>">Crear Usuario</a></li>
                         <%}%>
                 </ul>

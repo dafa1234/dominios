@@ -12,7 +12,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import static java.lang.System.out;
 import java.util.Calendar;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -27,14 +26,18 @@ import tablas.EtbInvActividad;
 import tablas.EtbInvAseguramiento;
 import tablas.EtbInvCambioTabla;
 import tablas.EtbInvCasosProv;
+import tablas.EtbInvCronogramaMto;
 import tablas.EtbInvDireccionamiento;
 import tablas.EtbInvEstadoCasos;
+import tablas.EtbInvEstadoMto;
 import tablas.EtbInvMarca;
+import tablas.EtbInvProyecto;
 import tablas.EtbInvRuta;
 import tablas.EtbInvServidor;
 import tablas.EtbInvTablaDominios;
 import tablas.EtbInvTip;
 import tablas.EtbInvTipoActividad;
+import tablas.EtbInvTipoCont;
 import tablas.EtbInvUsuEstado;
 import tablas.EtbInvUsuServ;
 import tablas.EtbInvUsuarioAp;
@@ -44,7 +47,6 @@ import tablas.EtbInvUsuarioAp;
  * @author diegfraa
  */
 @Controller
-
 public class crearaseguramiento {
 
     @Autowired
@@ -64,19 +66,22 @@ public class crearaseguramiento {
             fechaActualH.get(Calendar.HOUR),
             fechaActualH.get(Calendar.MINUTE),
             fechaActualH.get(Calendar.SECOND));
-
-    //ASEGURAMIENTO servidor
-    @RequestMapping("aseguramiento.htm")
-    public String nuev(@RequestParam("idservase") int idservo, Model model) {
-        String id = (String) request.getSession().getAttribute("name");
-        if (id == null) {
-            return "index";
-        }
-        int m = 2;
-        model.addAttribute("m", m);
-        return "user/cosasservidor";
-    }
-
+    /**
+     *
+     * CREAR ASEGURAMIENTO SERVIDOR
+     *
+     * @param aseServido
+     * @param aseEjecuta
+     * @param aseTarea
+     * @param plantillas
+     * @param plantillan
+     * @param aseFecha
+     * @param model
+     * @return
+     * @throws ServicioException
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     @RequestMapping("aseg.htm")
     public String createaseguram(
             @RequestParam("servidor") int aseServido,
@@ -87,14 +92,8 @@ public class crearaseguramiento {
             @RequestParam("fini") String aseFecha,
             Model model) throws ServicioException, FileNotFoundException, IOException {
         int aseplantilla = 1;
-        int m = 3;
-
-        System.out.println("controlador.crearaseguramiento.createaseguram(1)" +plantillas);
-      
-        
-        String ruta = "\\NetBeansProjects\\Pruebas\\dominios_1.2\\web\\plantillas\\"+plantillas;
+        String ruta = "\\NetBeansProjects\\Pruebas\\dominios_1.2\\web\\plantillas\\" + plantillas;
         FileOutputStream fos = new FileOutputStream(ruta);
-
         File origen = new File(plantillan);
         File destino = new File(ruta);
         InputStream in = new FileInputStream(origen);
@@ -107,7 +106,9 @@ public class crearaseguramiento {
         }
         in.close();
         out.close();
-    
+        int m = 8;
+        EtbInvServidor aa = dao.readid(aseServido);
+        model.addAttribute("servidor", aa);
         model.addAttribute("m", m);
         EtbInvServidor aseServidor = new EtbInvServidor(aseServido);
         dao.crease(Fecha, aseTarea, aseServidor, aseEjecuta, aseFecha, aseplantilla);
@@ -115,17 +116,33 @@ public class crearaseguramiento {
 
     }
 
+    /**
+     * este nos dirige al agregar un nuevo
+     * aseguramiento del servidor
+     * @param serv
+     * @param model
+     * @return
+     * @throws ServicioException
+     */
     @RequestMapping("asegseerv.htm")
     public String aseguramiento(
             @RequestParam("serv") int serv,
             Model model) throws ServicioException {
         int m = 0;
+        EtbInvServidor aa = dao.readid(serv);
         model.addAttribute("m", m);
-        model.addAttribute("serv", serv);
+        model.addAttribute("serv", aa);
         return "user/cosasservidor";
 
     }
 
+    /**
+     * este nos dirige al modificar el aseguramiento
+     * @param serv
+     * @param model
+     * @return
+     * @throws ServicioException
+     */
     @RequestMapping("asergmod.htm")
     public String aseguramientomod(
             @RequestParam("serv") int serv,
@@ -138,6 +155,16 @@ public class crearaseguramiento {
 
     }
 
+    /**
+     *modificar aseguramiento
+     * @param idasegu
+     * @param fini
+     * @param plantilla
+     * @param tareacambio
+     * @param model
+     * @return
+     * @throws ServicioException
+     */
     @RequestMapping("asegmod.htm")
     public String modificaraseguram(
             @RequestParam("idasegu") int idasegu,
@@ -148,7 +175,7 @@ public class crearaseguramiento {
         EtbInvTablaDominios tabladominios = new EtbInvTablaDominios(3);
         EtbInvAseguramiento aseguramiento = dao.aseguramiento(idasegu);
         int aseplantilla = 1;
-        int m = 3;
+
         String cam_tab_descripcion_SM = "1";
         String cam_tab_solicitante_SM = "1";
         int usuarioetb1 = (int) request.getSession().getAttribute("idusuap");
@@ -171,32 +198,22 @@ public class crearaseguramiento {
             String CamValorIni = "" + aseguramiento.getAsePlantilla();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
+        int m = 8;
+        EtbInvServidor aa = dao.readid(aseguramiento.getAseServidor().getSerServer());
+        model.addAttribute("servidor", aa);
         model.addAttribute("m", m);
         EtbInvServidor aseServidor = new EtbInvServidor(aseguramiento.getAseServidor().getSerServer());
         dao.modiase(idasegu, aseguramiento.getFCreacion(), aseguramiento.getAseTarea(), aseServidor, aseguramiento.getAseEjecuta(), fini, aseplantilla);
         return "user/servers";
 
     }
-
-    //usuario servior
-    @RequestMapping("usuarioservidor2.htm")
-    public String usupo(@RequestParam("tdserv") Integer email7, Model model) {
-        String id = (String) request.getSession().getAttribute("name");
-        if (id == null) {
-            return "index";
-        }
-        int m = 5;
-        EtbInvServidor email = new EtbInvServidor(email7);
-        List<EtbInvServidor> Listaserver = dao.Listaserver();
-        List<EtbInvUsuServ> Listaususerv = dao.Listaususervre(email);
-        List<EtbInvUsuEstado> Listausuest = dao.Listausuest();
-        model.addAttribute("Listaserver", Listaserver);
-        model.addAttribute("Listaususerv", Listaususerv);
-        model.addAttribute("Listausuest", Listausuest);
-        model.addAttribute("m", m);
-        return "user/cosasservidor";
-    }
-
+    /**
+     *este nos dirige a ingresar direccionamiento
+     * @param serv
+     * @param servname
+     * @param model
+     * @return
+     */
     //direccionamiento servidor
     @RequestMapping("direccionamiento.htm")
     public String direccionamiento(@RequestParam("serv") int serv, @RequestParam("servname") String servname, Model model) {
@@ -213,6 +230,17 @@ public class crearaseguramiento {
         return "user/cosasservidor";
     }
 
+    /**
+     *aqui agregamos ip o direccionamiento
+     * @param dirIp
+     * @param dirVlan
+     * @param dirSwitch
+     * @param dirPuerto
+     * @param idSer1
+     * @param dirTipo1
+     * @param model
+     * @return
+     */
     @RequestMapping("direccionamientoagregar.htm")
     public String direccionamientoingresar(
             @RequestParam("dirIp") String dirIp,
@@ -225,14 +253,22 @@ public class crearaseguramiento {
         if (id == null) {
             return "index";
         }
-        int m = 0;
+        int m = 8;
+        EtbInvServidor aa = dao.readid(idSer1);
         EtbInvServidor idSer = new EtbInvServidor(idSer1);
         EtbInvTip dirTipo = new EtbInvTip(dirTipo1);
-        dao.direccionamiento(dirIp, dirVlan, dirSwitch, dirPuerto, idSer, dirTipo);
+        dao.direccionamiento(Fecha, dirIp, dirVlan, dirSwitch, dirPuerto, idSer, dirTipo);
         model.addAttribute("m", m);
+        model.addAttribute("servidor", aa);
         return "user/servers";
     }
 
+    /**
+     *aqui dirigimos a modificar ip o direccionamiento
+     * @param IdIp
+     * @param model
+     * @return
+     */
     //direccionamiento servidor
     @RequestMapping("direccionamientomod.htm")
     public String direccionamientomod(@RequestParam("serv") int IdIp, Model model) {
@@ -249,6 +285,19 @@ public class crearaseguramiento {
         return "user/cosasservidor";
     }
 
+    /**
+     *aqui modificamos ip o direccionamiento
+     * @param tareacambio
+     * @param iddirIp
+     * @param idSer1
+     * @param dirIp
+     * @param dirVlan
+     * @param dirSwitch
+     * @param dirPuerto
+     * @param dirTipo1
+     * @param model
+     * @return
+     */
     //modificaer direccionamiento 
     @RequestMapping("direccionamientomodificar.htm")
     public String direccionamientomodificar(
@@ -307,14 +356,23 @@ public class crearaseguramiento {
             String CamValorIni = "" + dirTipo1;
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
-        int m = 0;
+        int m = 8;
+        EtbInvServidor aa = dao.readid(idSer1);
         EtbInvServidor idSer = new EtbInvServidor(idSer1);
         EtbInvTip dirTipo = new EtbInvTip(dirTipo1);
-        dao.direccionamientoedite(iddirIp, dirIp, dirVlan, dirSwitch, dirPuerto, idSer, dirTipo);
+        dao.direccionamientoedite(Fecha, iddirIp, dirIp, dirVlan, dirSwitch, dirPuerto, idSer, dirTipo);
         model.addAttribute("m", m);
+        model.addAttribute("servidor", aa);
         return "user/servers";
     }
 
+    /**
+     * aqui dirigimos a agregar rutas
+     * @param serv
+     * @param servname
+     * @param model
+     * @return
+     */
     //ruta servidor
     @RequestMapping("rutas.htm")
     public String rutas(@RequestParam("serv") int serv, @RequestParam("servname") String servname, Model model) {
@@ -331,6 +389,13 @@ public class crearaseguramiento {
         return "user/cosasservidor";
     }
 
+    /**
+     *aqui agregamos rutas
+     * @param idSer1
+     * @param rutaser
+     * @param model
+     * @return
+     */
     @RequestMapping("rutaagregar.htm")
     public String rutasagregar(@RequestParam("idSer1") int idSer1, @RequestParam("rutaser") String rutaser, Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -338,16 +403,21 @@ public class crearaseguramiento {
             return "index";
         }
         EtbInvServidor idSer = new EtbInvServidor(idSer1);
-
         dao.agragarrutas(FechaH, rutaser, idSer);
-
-        int m = 4;
-
+        int m = 8;
+        EtbInvServidor aa = dao.readid(idSer1);
+        model.addAttribute("servidor", aa);
         model.addAttribute("m", m);
-        return "user/cosasservidor";
+        return "user/servers";
     }
     //mod servidor
 
+    /**
+     *aqui dirigimos a mopdificar rutas
+     * @param serv
+     * @param model
+     * @return
+     */
     @RequestMapping("rutamod.htm")
     public String rutasmod(@RequestParam("serv") int serv,
             Model model) {
@@ -363,6 +433,16 @@ public class crearaseguramiento {
     }
     //modificar ruta servidor
 
+    /**
+     *aqui modificamos rutas
+     * @param rutasId
+     * @param rutaIdser
+     * @param rutaF
+     * @param tareacambio
+     * @param rutaser
+     * @param model
+     * @return
+     */
     @RequestMapping("rutadificar.htm")
     public String rutasmod(@RequestParam("rutasId") int rutasId,
             @RequestParam("rutaIdser") int rutaIdser,
@@ -390,12 +470,20 @@ public class crearaseguramiento {
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
         dao.editarrutas(rutasId, FechaH, rutaser, idSer);
-        int m = 5;
+        int m = 8;
+        EtbInvServidor aa = dao.readid(rutaIdser);
+        model.addAttribute("servidor", aa);
         model.addAttribute("rutas", rutas);
         model.addAttribute("m", m);
-        return "user/cosasservidor";
+        return "user/servers";
     }
 
+    /**
+     *aqui dirigimos a agregar casos proveedor
+     * @param casosserv
+     * @param model
+     * @return
+     */
     @RequestMapping("newcasosserv.htm")
     public String newcasosserv(@RequestParam("casosserv") int casosserv, Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -403,15 +491,59 @@ public class crearaseguramiento {
             return "index";
         }
         int m = 7;
+        EtbInvServidor aa = dao.readid(casosserv);
         List<EtbInvMarca> ListaMarca = dao.ListaMarca();
         List<EtbInvEstadoCasos> Listaestacasos = dao.Listaestacasos();
         model.addAttribute("ListaMarca", ListaMarca);
-        model.addAttribute("casosserv", casosserv);
+        model.addAttribute("casosserv", aa);
         model.addAttribute("listaEstado", Listaestacasos);
         model.addAttribute("m", m);
         return "user/cosasservidor";
     }
+    /**
+     * 
+     * @param caspPro
+     * @param caspServ1
+     * @param caspFechaApe
+     * @param caspFechaCie
+     * @param caspEstad
+     * @param caspNumero
+     * @param caspIm
+     * @param model
+     * @return
+     * @throws ServicioException 
+     */
+     @RequestMapping("caprovs.htm")
+    public String createss(
+            @RequestParam("proveedor") Integer caspPro,
+            @RequestParam("servidor") int caspServ1,
+            @RequestParam("fini") String caspFechaApe,
+            @RequestParam("fcie") String caspFechaCie,
+            @RequestParam("estini") Integer caspEstad,
+            @RequestParam("numcas") String caspNumero,
+            @RequestParam("im") String caspIm,
+            Model model) throws ServicioException {
+        int m = 8;
+        EtbInvServidor a = dao.readid(caspServ1);
+        model.addAttribute("servidor", a);
+        model.addAttribute("m", m);
+        //base de datos
+        EtbInvServidor caspserv = new EtbInvServidor(caspServ1);
+        EtbInvEstadoCasos caspEstado = new EtbInvEstadoCasos(caspEstad);
+        EtbInvMarca caspProv = new EtbInvMarca(caspPro);
+        dao.creaproveedor(caspserv,Fecha, caspProv,caspFechaApe, caspFechaCie, caspNumero, caspIm, caspEstado);
+        List<EtbInvCasosProv> Listaproveedor = dao.Listaproveedor();
+        model.addAttribute("Listaproveedor", Listaproveedor);
+        return "user/servers";
 
+    }
+
+    /**
+     *aqui dirigimos a modificar casos proveedor
+     * @param casosserv
+     * @param model
+     * @return
+     */
     @RequestMapping("casosmod.htm")
     public String newcasosserv1(@RequestParam("caspId") int casosserv, Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -429,6 +561,19 @@ public class crearaseguramiento {
         return "user/cosasservidor";
     }
 
+    /**
+     *aqui modificamos  casos proveedor
+     * @param proveedor
+     * @param idcasos
+     * @param fini
+     * @param fcie
+     * @param estini
+     * @param numcas
+     * @param im
+     * @param tareacambio
+     * @param model
+     * @return
+     */
     @RequestMapping("modificarcasos.htm")
     public String modificarcasos(@RequestParam("proveedor") int proveedor,
             @RequestParam("idcasos") int idcasos,
@@ -493,6 +638,9 @@ public class crearaseguramiento {
             String CamValorIni = "" + cas.getCaspIm();
             dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
         }
+
+        EtbInvServidor aa = dao.readid(cas.getCaspServ().getSerServer());
+        model.addAttribute("servidor", aa);
         EtbInvServidor servi = new EtbInvServidor(cas.getCaspServ().getSerServer());
         EtbInvEstadoCasos estini1 = new EtbInvEstadoCasos(estini);
         EtbInvMarca proveedor1 = new EtbInvMarca(proveedor);
@@ -503,9 +651,15 @@ public class crearaseguramiento {
         model.addAttribute("cas", cas);
         model.addAttribute("listaEstado", Listaestacasos);
         model.addAttribute("m", m);
-        return "user/cosasservidor";
+        return "user/servers";
     }
 
+    /**
+     *aqui dirige a agregar nueva actividad
+     * @param servd
+     * @param model
+     * @return
+     */
     //nueva actividad del servidor
     @RequestMapping("newactivser.htm")
     public String newactivser(@RequestParam("servd") int servd, Model model) {
@@ -521,7 +675,52 @@ public class crearaseguramiento {
         model.addAttribute("serv", aa);
         return "user/cosasservidor";
     }
+    /**
+     * 
+     * @param actServ
+     * @param actEjecuta
+     * @param actTarea
+     * @param actDescripcion
+     * @param actSolicita
+     * @param actTip
+     * @param actFechaIni
+     * @param actFechaFin
+     * @param model
+     * @return
+     * @throws ServicioException 
+     */
+   @RequestMapping("acts.htm")
+    public String creates(
+            @RequestParam("serv") int actServ,
+            @RequestParam("eje") String actEjecuta,
+            @RequestParam("tarea") String actTarea,
+            @RequestParam("desc") String actDescripcion,
+            @RequestParam("sol") String actSolicita,
+            @RequestParam("tipo") Integer actTip,
+            @RequestParam("fini") String actFechaIni,
+            @RequestParam("ffin") String actFechaFin,
+            Model model) throws ServicioException {
 
+        //base de datos
+        EtbInvServidor aa = dao.readid(actServ);
+        EtbInvTipoActividad actTipo = new EtbInvTipoActividad(actTip);
+        EtbInvServidor serv1 = new EtbInvServidor(aa.getSerServer());
+        int m = 8;
+        EtbInvServidor a = dao.readid(actServ);
+        model.addAttribute("servidor", a);
+        model.addAttribute("m", m);
+        dao.creact(Fecha, serv1, actEjecuta, actTarea, actDescripcion, actSolicita, actTipo, actFechaFin, actFechaIni);
+        List<EtbInvActividad> ListaActividad = dao.ListaActividad();
+        model.addAttribute("listaActividad", ListaActividad);
+        return "user/servers";
+
+    }
+    /**
+     *aqui dirige a modificar actividad
+     * @param idact
+     * @param model
+     * @return
+     */
     @RequestMapping("modactivser.htm")
     public String modactivser(@RequestParam("idact") int idact, Model model) {
         List<EtbInvTipoActividad> Listatipoactiv = dao.Listatipoactiv();
@@ -537,6 +736,21 @@ public class crearaseguramiento {
         return "user/cosasservidor";
     }
 
+    /**
+     * aqui modifica actividad
+     * @param actServ
+     * @param actEjecuta
+     * @param actTarea
+     * @param actDescripcion
+     * @param actSolicita
+     * @param actTip
+     * @param actFechaIni
+     * @param actFechaFin
+     * @param tareacambio
+     * @param model
+     * @return
+     * @throws ServicioException
+     */
     @RequestMapping("/modact.htm")
     public String create(
             @RequestParam("serv") int actServ,
@@ -608,18 +822,26 @@ public class crearaseguramiento {
         EtbInvTipoActividad actTipo = new EtbInvTipoActividad(actTip);
         EtbInvServidor serv1 = new EtbInvServidor(aa.getActServ().getSerServer());
 
-        int m = 2;
+        int m = 8;
+        EtbInvServidor a = dao.readid(aa.getActServ().getSerServer());
+        model.addAttribute("servidor", a);
         model.addAttribute("m", m);
         dao.modificaractiv(aa.getActId(), aa.getFCreacion(), serv1, actEjecuta, actTarea, actDescripcion, actSolicita, actTipo, actFechaFin, actFechaIni);
         List<EtbInvActividad> ListaActividad = dao.ListaActividad();
         model.addAttribute("listaActividad", ListaActividad);
-        return "user/actividades";
+        return "user/servers";
 
     }
 
+    /**
+     *aqui dirige a agregar usuario servidor
+     * @param actServ
+     * @param model
+     * @return
+     */
     /// modificar usuario
     @RequestMapping("modususer.htm")
-    public String modususer(@RequestParam("servd") int actServ, Model model) {
+    public String createus(@RequestParam("servd") int actServ, Model model) {
         String id = (String) request.getSession().getAttribute("name");
         if (id == null) {
         }
@@ -630,7 +852,43 @@ public class crearaseguramiento {
         model.addAttribute("actServ", aa);
         return "user/cosasservidor";
     }
+    /**
+     * aqui crea usuarios servidor
+     * @param ususLogin
+     * @param ususNombre
+     * @param tCambio
+     * @param ususidSer
+     * @param administrado
+     * @param model
+     * @return 
+     */
+    @RequestMapping("usuarioa.htm")
+    public String createu(@RequestParam("login") String ususLogin,
+            @RequestParam("nombre") String ususNombre,
+            @RequestParam("tarea") String tCambio,
+            @RequestParam("servid") int ususidSer,
+            @RequestParam("administrado") int administrado, Model model) {
 
+        int m = 8;
+        model.addAttribute("m", m);
+        EtbInvServidor aa = dao.readid(ususidSer);
+        EtbInvUsuEstado ususEstado = new EtbInvUsuEstado(1);
+        EtbInvUsuEstado ususEstadoa = new EtbInvUsuEstado(3);
+        EtbInvServidor ususidServ = new EtbInvServidor(ususidSer);
+        dao.crearususerv(Fecha, ususLogin, ususNombre, ususEstadoa, ususidServ, administrado);
+        dao.crearcambioususerv(Fecha, ususLogin, tCambio, ususEstado);
+        List<EtbInvUsuServ> Listaususerv = dao.Listaususerv(ususEstadoa);
+        model.addAttribute("Listaususerv", Listaususerv);       
+        model.addAttribute("servidor", aa);
+        return "user/servers";
+    }
+
+    /**
+     *aqui dirige a modificar usuarios servidor
+     * @param email
+     * @param model
+     * @return
+     */
     @RequestMapping("modusuarios.htm")
     public String modusuarios(@RequestParam("id") Integer email, Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -647,6 +905,17 @@ public class crearaseguramiento {
         return "user/cosasservidor";
     }
 
+    /**
+     *aqui modifica usuarios
+     * @param ususLogin
+     * @param nombre
+     * @param tareacambio
+     * @param estado
+     * @param admin
+     * @param email
+     * @param model
+     * @return
+     */
     @RequestMapping("modiusuario.htm")
     public String modiusuario(@RequestParam("login") String ususLogin,
             @RequestParam("nombre") String nombre,
@@ -655,8 +924,6 @@ public class crearaseguramiento {
             @RequestParam("administrado") int admin,
             @RequestParam("servid") int email, Model model) {
 
-        int m = 0;
-        model.addAttribute("m", m);
         EtbInvUsuServ a = dao.buscarususerv(email);
         EtbInvTablaDominios tabladominios = new EtbInvTablaDominios(39);
 
@@ -699,13 +966,235 @@ public class crearaseguramiento {
         EtbInvServidor ususidServ = new EtbInvServidor(a.getIdSerServidor().getSerServer());
         dao.update(a.getFCreacion(), email, ususEstado, ususLogin, nombre, admin, ususidServ);
         dao.crearcambioususerv(Fecha, ususLogin, tareacambio, ususEstado);
-
+        int m = 8;
+        model.addAttribute("m", m);
+        EtbInvServidor aa = dao.readid(a.getIdSerServidor().getSerServer());
+        model.addAttribute("servidor", aa);
         model.addAttribute("Listaususerv", a);
-        return null;
+        return "user/servers";
     }
 
-    private byte[] texto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     *aqui agrega cronogramas
+     * @param croProyect
+     * @param croSerial
+     * @param croFechaIni
+     * @param croEstad
+     * @param croEjecuta
+     * @param croCambioFin
+     * @param fprox
+     * @param ffin
+     * @param observacion
+     * @param model
+     * @return
+     * @throws ServicioException
+     */
+    ///cronograma
+    @RequestMapping("crono1.htm")
+    public String createcronograma(
+            @RequestParam("proyecto") Integer croProyect,
+            @RequestParam("servidor") int croSerial,
+            @RequestParam("fini") String croFechaIni,
+            @RequestParam("estini") Integer croEstad,
+            @RequestParam("ejecuta") String croEjecuta,
+            @RequestParam("cambio") String croCambioFin,
+            @RequestParam("fprox") String fprox,
+            @RequestParam("ffin") String ffin,
+            @RequestParam("observacion") String observacion,
+            Model model) throws ServicioException {
+        EtbInvProyecto croProyecto = new EtbInvProyecto(croProyect);
+        EtbInvEstadoMto croEstado = new EtbInvEstadoMto(croEstad);
+        EtbInvServidor croSerial1 = new EtbInvServidor(croSerial);
+        dao.creacrono(Fecha, croProyecto, croFechaIni, croSerial1, croEjecuta, croCambioFin, croEstado, fprox, ffin, observacion);
+        int m = 8;
+        EtbInvServidor aa = dao.readid(croSerial);
+        model.addAttribute("servidor", aa);
+        model.addAttribute("m", m);
+        List<EtbInvCronogramaMto> ListaCrono = dao.ListaCrono();
+        model.addAttribute("listaCrono", ListaCrono);
+        return "user/servers";
+
+    }
+
+    /**
+     *aqui dirige a agregar cronograma
+     * @param actServ
+     * @param model
+     * @return
+     */
+    @RequestMapping("newcrono1.htm")
+    public String newcrono(@RequestParam("servd") int actServ, Model model) {
+        String id = (String) request.getSession().getAttribute("name");
+        if (id == null) {
+            return "index";
+        }
+        int m = 14;
+        EtbInvServidor aa = dao.readid(actServ);
+
+        model.addAttribute("croServ", aa);
+        List<EtbInvProyecto> ListaProyecto = dao.ListaProyecto();
+        List<EtbInvServidor> Listaserver = dao.Listaserver();
+        List<EtbInvEstadoMto> Listaestamto = dao.Listaestamto();
+        List<EtbInvMarca> ListaMarca = dao.ListaMarca();
+        List<EtbInvTipoCont> Listacont = dao.Listacont();
+        model.addAttribute("ListaProyecto", ListaProyecto);
+        model.addAttribute("listaFonos", Listaserver);
+        model.addAttribute("listaEstado", Listaestamto);
+        model.addAttribute("listamarcas", ListaMarca);
+        model.addAttribute("listacont", Listacont);
+        model.addAttribute("m", m);
+        return "user/cosasservidor";
+    }
+
+    /**
+     *aqui dirige a modificar cronograma
+     * @param idcron
+     * @param model
+     * @return
+     */
+    @RequestMapping("cronogramamod1.htm")
+    public String cromod(@RequestParam("idcron") Integer idcron, Model model) {
+        String id = (String) request.getSession().getAttribute("name");
+        if (id == null) {
+            return "index";
+        }
+        int m = 13;
+        List<EtbInvProyecto> ListaProyecto = dao.ListaProyecto();
+        List<EtbInvServidor> Listaserver = dao.Listaserver();
+        List<EtbInvEstadoMto> Listaestamto = dao.Listaestamto();
+        List<EtbInvMarca> ListaMarca = dao.ListaMarca();
+        List<EtbInvTipoCont> Listacont = dao.Listacont();
+        model.addAttribute("ListaProyecto", ListaProyecto);
+        model.addAttribute("listaFonos", Listaserver);
+        model.addAttribute("listaEstado", Listaestamto);
+        model.addAttribute("listamarcas", ListaMarca);
+        model.addAttribute("listacont", Listacont);
+        model.addAttribute("m", m);
+        EtbInvCronogramaMto cronograma = dao.cronograma(idcron);
+        model.addAttribute("crono", cronograma);
+        return "user/cosasservidor";
+    }
+
+    /**
+     *aqui modifica cronograma
+     * @param croProyect
+     * @param croSerial
+     * @param croFechaIni
+     * @param croEstad
+     * @param croEjecuta
+     * @param croCambioFin
+     * @param fprox
+     * @param ffin
+     * @param observacion
+     * @param idcro
+     * @param tareacambio
+     * @param model
+     * @return
+     * @throws ServicioException
+     */
+    @RequestMapping("modcrono1.htm")
+    public String modificarcronograma1(
+            @RequestParam("proyecto") Integer croProyect,
+            @RequestParam("servidor") int croSerial,
+            @RequestParam("fini") String croFechaIni,
+            @RequestParam("estini") Integer croEstad,
+            @RequestParam("ejecuta") String croEjecuta,
+            @RequestParam("cambio") String croCambioFin,
+            @RequestParam("fprox") String fprox,
+            @RequestParam("ffin") String ffin,
+            @RequestParam("observacion") String observacion,
+            @RequestParam("idcro") int idcro,
+            @RequestParam("tareacambio") String tareacambio,
+            Model model) throws ServicioException {
+        System.out.println("controlador.crearaseguramiento.modificarcronograma()");
+
+        EtbInvTablaDominios tabladominios = new EtbInvTablaDominios(8);
+        EtbInvCronogramaMto cronograma = dao.cronograma(idcro);
+        String cam_tab_descripcion_SM = "1";
+        String cam_tab_solicitante_SM = "1";
+        int usuarioetb1 = (int) request.getSession().getAttribute("idusuap");
+        EtbInvUsuarioAp usuarioetb = new EtbInvUsuarioAp(usuarioetb1);
+        dao.llenarbitacora(tabladominios, idcro, usuarioetb, FechaH, tareacambio, cam_tab_descripcion_SM, cam_tab_solicitante_SM);
+
+        EtbInvCambioTabla camt = dao.idcambiotabla(tabladominios, idcro, usuarioetb, tareacambio);
+        //    int cambbit = camt.getCamtabID();
+        EtbInvCambioTabla CamIdtabla = new EtbInvCambioTabla(camt.getCamtabID());
+
+        if (!cronograma.getCroProyecto().getProId().equals(croProyect)) {
+            String CamColumna = "CRO_PROYECTO";
+            String CamNawValor = "" + croProyect;
+            String CamValorIni = "" + cronograma.getCroProyecto().getProId();
+            dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
+        }
+        if (!cronograma.getCroSerial().getSerServer().equals(croSerial)) {
+            String CamColumna = "CRO_SERIAL";
+            String CamNawValor = "" + croSerial;
+            String CamValorIni = "" + cronograma.getCroSerial().getSerServer();
+            dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
+        }
+        if (!cronograma.getCroFechaIni().equals(croFechaIni)) {
+            String CamColumna = "CRO_FECHA_INI";
+            String CamNawValor = "" + croFechaIni;
+            String CamValorIni = "" + cronograma.getCroFechaIni();
+            dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
+        }
+        if (!cronograma.getCroEstado().getEstmId().equals(croEstad)) {
+            String CamColumna = "CRO_ESTADO";
+            String CamNawValor = "" + croEstad;
+            String CamValorIni = "" + cronograma.getCroEstado().getEstmId();
+            dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
+        }
+        if (!cronograma.getCroEjecuta().equals(croEjecuta)) {
+            String CamColumna = "CRO_EJECUTA";
+            String CamNawValor = "" + croEjecuta;
+            String CamValorIni = "" + cronograma.getCroEjecuta();
+            dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
+        }
+        if (!cronograma.getCroCambioFin().equals(croCambioFin)) {
+            String CamColumna = "CRO_CAMBIO_FIN";
+            String CamNawValor = "" + croCambioFin;
+            String CamValorIni = "" + cronograma.getCroCambioFin();
+            dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
+        }
+        if (!cronograma.getCroFechaProx().equals(fprox)) {
+            String CamColumna = "CRO_FECHA_PROX";
+            String CamNawValor = "" + fprox;
+            String CamValorIni = "" + cronograma.getCroFechaProx();
+            dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
+        }
+        if (!cronograma.getCroFechaFin().equals(ffin)) {
+            String CamColumna = "CRO_FECHA_FIN";
+            String CamNawValor = "" + ffin;
+            String CamValorIni = "" + cronograma.getCroFechaFin();
+            dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
+        }
+        if (cronograma.getCroObservacion() == null) {
+            if (observacion != null) {
+                String CamColumna = "CRO_OBSERVACION";
+                String CamNawValor = "" + observacion;
+                String CamValorIni = "";
+                dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
+            }
+        } else {
+            if (!cronograma.getCroObservacion().equals(observacion)) {
+                String CamColumna = "CRO_OBSERVACION";
+                String CamNawValor = "" + observacion;
+                String CamValorIni = "" + cronograma.getCroObservacion();
+                dao.llenarbitacoradetalle(CamColumna, CamNawValor, CamValorIni, CamIdtabla);
+            }
+        }
+        EtbInvProyecto croProyecto = new EtbInvProyecto(croProyect);
+        EtbInvEstadoMto croEstado = new EtbInvEstadoMto(croEstad);
+        EtbInvServidor croSerial1 = new EtbInvServidor(croSerial);
+        dao.modificarcrono(idcro, cronograma.getFCreacion(), croProyecto, croFechaIni, croSerial1, croEjecuta, croCambioFin, croEstado, fprox, ffin, observacion);
+        int m = 8;
+        EtbInvServidor aa = dao.readid(croSerial);
+        model.addAttribute("servidor", aa);
+        model.addAttribute("m", m);
+        List<EtbInvCronogramaMto> ListaCrono = dao.ListaCrono();
+        model.addAttribute("listaCrono", ListaCrono);
+        return "user/servers";
+
     }
 
 }

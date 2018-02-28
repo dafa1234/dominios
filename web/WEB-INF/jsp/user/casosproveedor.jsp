@@ -13,7 +13,7 @@
                 if (m == 1) {
             %>     
             <div class="panel panel-primary">
-                <div class=" panel-heading"><h2>crear caasos prooveedor</div>
+                <div class=" panel-heading"><h2>crear casos proveedor</div>
                 <div class="box-bottom">
                     <a  role="button" href="<c:url value="/casosproveedor.htm"/>">volver</a> 
                 </div> 
@@ -160,7 +160,7 @@
                 </div> 
                 <table>
                     <tr>
-                        <td><input type="button" id="btnExport" value="Descargar a Excel "/></td>
+                        <td><input type="button" class="btn btn-success btn-lg " id="btnExport" value="Descargar a Excel "/></td>
                     </tr>
                 </table>
                 <div id="casosprov" class="card mb-3">
@@ -187,7 +187,7 @@
                                         <tr>
                                             <td>${f.caspId}</td>
                                             <td>${f.caspProv.marNomMarca}</td>
-                                            <td>${f.caspServ}</td>
+                                            <td>${f.caspServ.serSerial}</td>
                                             <td>${f.caspFechaApe}</td>
                                             <td>${f.caspFechaCie}</td>
                                             <td>${f.caspNumero}</td>
@@ -215,7 +215,7 @@
             <div class="panel panel-primary">
                 <div class=" panel-heading"><h2>modificar casos proveedor</div>
                 <div class="box-bottom">
-                    <a  role="button" href="<c:url value="/caprov.htm"/>">volverm</a> 
+                    <a  role="button" href="<c:url value="/casosproveedor.htm"/>">volver</a> 
                 </div> 
 
                 <!-- Begin # DIV Form -->

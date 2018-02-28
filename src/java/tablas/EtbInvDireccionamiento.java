@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -33,7 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "EtbInvDireccionamiento.findByDirIp", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.dirIp = :dirIp")
     , @NamedQuery(name = "EtbInvDireccionamiento.findByDirVlan", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.dirVlan = :dirVlan")
     , @NamedQuery(name = "EtbInvDireccionamiento.findByDirSwitch", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.dirSwitch = :dirSwitch")
-    , @NamedQuery(name = "EtbInvDireccionamiento.findByDirPuerto", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.dirPuerto = :dirPuerto")})
+    , @NamedQuery(name = "EtbInvDireccionamiento.findByDirPuerto", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.dirPuerto = :dirPuerto")
+    , @NamedQuery(name = "EtbInvDireccionamiento.findByFcreacion", query = "SELECT e FROM EtbInvDireccionamiento e WHERE e.fcreacion = :fcreacion")})
 public class EtbInvDireccionamiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,6 +56,11 @@ public class EtbInvDireccionamiento implements Serializable {
     @Size(max = 255)
     @Column(name = "DIR_PUERTO")
     private String dirPuerto;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "F_creacion")
+    private String fcreacion;
     @JoinColumn(name = "DIR_TIPO", referencedColumnName = "TIP_ID_IP")
     @ManyToOne
     private EtbInvTip dirTipo;
@@ -66,6 +73,11 @@ public class EtbInvDireccionamiento implements Serializable {
 
     public EtbInvDireccionamiento(Integer dirId) {
         this.dirId = dirId;
+    }
+
+    public EtbInvDireccionamiento(Integer dirId, String fcreacion) {
+        this.dirId = dirId;
+        this.fcreacion = fcreacion;
     }
 
     public Integer getDirId() {
@@ -106,6 +118,14 @@ public class EtbInvDireccionamiento implements Serializable {
 
     public void setDirPuerto(String dirPuerto) {
         this.dirPuerto = dirPuerto;
+    }
+
+    public String getFcreacion() {
+        return fcreacion;
+    }
+
+    public void setFcreacion(String fcreacion) {
+        this.fcreacion = fcreacion;
     }
 
     public EtbInvTip getDirTipo() {

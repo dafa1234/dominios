@@ -18,7 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 
 public class cerrar {
-
+/**
+ * aqui se cierran las sesiones
+ * @param request
+ * @param response
+ * @return 
+ */
     @RequestMapping("/cerrar.htm")
     public String mostrarAlumno(HttpServletRequest request, HttpServletResponse response) {
         HttpSession sesionCerrada = request.getSession();

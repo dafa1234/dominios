@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import tablas.EtbInvCambioTabla;
 import tablas.EtbInvCasosProv;
 import tablas.EtbInvEstadoCasos;
@@ -44,7 +43,20 @@ public class crearcasosproveedor {
             fechaActualH.get(Calendar.HOUR),
             fechaActualH.get(Calendar.MINUTE),
             fechaActualH.get(Calendar.SECOND));
-    @RequestMapping("/caprov.htm")
+ /**
+  * 
+  * @param caspPro
+  * @param caspServ1
+  * @param caspFechaApe
+  * @param caspFechaCie
+  * @param caspEstad
+  * @param caspNumero
+  * @param caspIm
+  * @param model
+  * @return
+  * @throws ServicioException 
+  */   
+ @RequestMapping("/caprov.htm")
     public String create(
             @RequestParam("proveedor") Integer caspPro,
             @RequestParam("servidor") int caspServ1,
@@ -72,6 +84,11 @@ public class crearcasosproveedor {
         return "user/casosproveedor";
 
     }
+    /**
+     * 
+     * @param model
+     * @return 
+     */
     //CASOS PROVEEDOR
 
     @RequestMapping("casosproveedor.htm")
@@ -86,7 +103,11 @@ public class crearcasosproveedor {
         model.addAttribute("Listaproveedor", Listaproveedor);
         return "user/casosproveedor";
     }
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
     @RequestMapping("newcasos.htm")
     public String newcasos(Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -105,6 +126,12 @@ public class crearcasosproveedor {
         model.addAttribute("m", m);
         return "user/casosproveedor";
     }
+    /**
+     * 
+     * @param casosserv
+     * @param model
+     * @return 
+     */
     //modificar casos proveedor
        @RequestMapping("casosmodifi.htm")
     public String modcasosprov(@RequestParam("caspId") int casosserv, Model model) {
@@ -124,6 +151,20 @@ public class crearcasosproveedor {
         model.addAttribute("m", m);
         return "user/casosproveedor";
     }
+    /**
+     * 
+     * @param proveedor
+     * @param idcasos
+     * @param servidor
+     * @param fini
+     * @param fcie
+     * @param estini
+     * @param numcas
+     * @param im
+     * @param tareacambio
+     * @param model
+     * @return 
+     */
   @RequestMapping("modificarcasosprove.htm")
     public String modificarcasos(@RequestParam("proveedor") int proveedor,
             @RequestParam("idcasos") int idcasos,
@@ -140,7 +181,7 @@ public class crearcasosproveedor {
             return "index";
         }
         
-        int m = 7;
+        int m = 2;
 
         EtbInvTablaDominios tabladominios = new EtbInvTablaDominios(4);
         EtbInvCasosProv cas = dao.casosprove(idcasos);
@@ -202,6 +243,8 @@ public class crearcasosproveedor {
         dao.modificarcasproveedor(proveedor1, idcasos, fini, fcie, estini1, numcas, im, cas.getFCreacion(), servi);
         List<EtbInvMarca> ListaMarca = dao.ListaMarca();
         List<EtbInvEstadoCasos> Listaestacasos = dao.Listaestacasos();
+        List<EtbInvCasosProv> Listaproveedor = dao.Listaproveedor();
+        model.addAttribute("Listaproveedor", Listaproveedor);
         model.addAttribute("ListaMarca", ListaMarca);
         model.addAttribute("cas", cas);
         model.addAttribute("listaEstado", Listaestacasos);

@@ -182,13 +182,13 @@
                 if (m == 3) {%>
             <div class="panel panel-primary">
                 <div class=" panel-heading"><h2>reporte cronograma mto</h2></div>  
-                <h3>REPORTE</h3>
+             
                 <div class="box-bottom">
                     <a  role="button" href="<c:url value="/cronograma.htm"/>">volver</a> 
                 </div>
                 <table>
                     <tr>
-                        <td><input type="button" id="btnExport" value="Descargar a Excel "/></td>
+                        <td><input type="button" class="btn btn-success btn-lg "  id="btnExport" value="Descargar a Excel "/></td>
                     </tr>
                 </table>
                 <div id="cronog" class="card mb-3">
@@ -307,7 +307,7 @@
                                 <label class="control-label">cambio</label>
                                 <textarea   name="cambio" type="text" id="inputEmail" value="${requestScope.crono.croCambioFin}"  class="form-control" placeholder="cambio"  required>${requestScope.crono.croCambioFin}</textarea><br/><br/>
                                 <label class="control-label">abservacion</label>
-                                <textarea   name="observacion" type="text" id="inputEmail" value="${requestScope.crono.croObservacion}"  class="form-control" placeholder="observacion"  required>${requestScope.crono.croObservacion}</textarea><br/><br/>
+                                <textarea   name="observacion" type="text" id="inputEmail" value="${requestScope.crono.croObservacion}"  class="form-control" placeholder="observacion"  >${requestScope.crono.croObservacion}</textarea><br/><br/>
                             </div> 
                         </div> 
                         <div class="row">
@@ -321,14 +321,11 @@
                             </div>
                             <div class="col-md-4"></div>
                         </div>
-
-
                     </form>
                 </div>
-
-
             </div>
-            <%}
+            <% 
+            }
             %>
             <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog">

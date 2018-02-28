@@ -30,12 +30,23 @@ public class inicio {
 
     @Autowired
     private iniciosecion dao;
-
+/**
+ * 
+ * @return 
+ */
     @RequestMapping(method = RequestMethod.GET)
     public String mostrarAlumno() {
         return "index";
     }
-
+/**
+ * 
+ * @param email
+ * @param pass
+ * @param model
+ * @param request
+ * @param response
+ * @return 
+ */
     @RequestMapping(method = RequestMethod.POST)
     public String mostrarAlumno(
             @RequestParam("email") String email, @RequestParam("pass") String pass,

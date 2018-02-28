@@ -45,7 +45,21 @@ Calendar fechaActualH = Calendar.getInstance();
             fechaActualH.get(Calendar.HOUR),
             fechaActualH.get(Calendar.MINUTE),
             fechaActualH.get(Calendar.SECOND));
-    @RequestMapping("/contr.htm")
+/**
+ * 
+ * @param contPro
+ * @param contTip
+ * @param contFechaIni
+ * @param contFechaFin
+ * @param contNum
+ * @param contEstad
+ * @param contLogin
+ * @param contDescrip
+ * @param model
+ * @return
+ * @throws ServicioException 
+ */   
+ @RequestMapping("/contr.htm")
     public String create(
             @RequestParam("proveedor") Integer contPro,
             @RequestParam("ticon") Integer contTip,
@@ -72,6 +86,11 @@ Calendar fechaActualH = Calendar.getInstance();
         return "user/contratos";
 
     }
+    /**
+     * 
+     * @param model
+     * @return 
+     */
     //CONTRATOS
 
     @RequestMapping("contratos.htm")
@@ -86,7 +105,11 @@ Calendar fechaActualH = Calendar.getInstance();
         model.addAttribute("listaContra", ListaContra);
         return "user/contratos";
     }
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
     @RequestMapping("newcont.htm")
     public String newcont(Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -103,7 +126,12 @@ Calendar fechaActualH = Calendar.getInstance();
         model.addAttribute("m", m);
         return "user/contratos";
     }
-    
+    /**
+     * 
+     * @param idcont
+     * @param model
+     * @return 
+     */
     ///modificar contrato
       @RequestMapping("modcont.htm")
     public String modcont( @RequestParam("idcont") Integer idcont,Model model) {
@@ -123,6 +151,22 @@ Calendar fechaActualH = Calendar.getInstance();
         model.addAttribute("m", m);
         return "user/contratos";
     }
+    /**
+     * 
+     * @param contPro
+     * @param contTip
+     * @param contFechaIni
+     * @param contFechaFin
+     * @param contNum
+     * @param contEstad
+     * @param contLogin
+     * @param contDescrip
+     * @param idcont
+     * @param tareacambio
+     * @param model
+     * @return
+     * @throws ServicioException 
+     */
       @RequestMapping("contramod.htm")
     public String modificarcontrato(
             @RequestParam("proveedor") Integer contPro,

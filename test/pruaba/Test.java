@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Scanner;
 
 /**
  *
@@ -21,11 +22,12 @@ public class Test {
     /**
      * @param args the command line arguments
      */
+  
     public static void main(String[] args) throws IOException {
     String ruta = "\\NetBeansProjects\\Pruebas\\dominios_1.2\\web\\plantillas\\Doc6.docx";
     FileOutputStream fos=new FileOutputStream(ruta);
     
-    File origen = new File("E:\\data\\D\\info\\Downloads\\cosas\\LA1_Identities_production_(week 2).docx");
+    File origen = new File("\\Documents\\PRANTILLA\\DiegoDominios.docx");        
         File destino = new File(ruta);
         InputStream in = new FileInputStream(origen);
         OutputStream out = new FileOutputStream(destino);
@@ -38,7 +40,7 @@ public class Test {
         in.close();
         out.close();
     }
-    
+//    
 //     public static void main(String[] args) {
 // 
 //        try(FileOutputStream fos=new FileOutputStream("D:\\fichero_bin.ddr")){

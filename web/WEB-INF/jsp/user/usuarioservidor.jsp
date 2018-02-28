@@ -63,6 +63,9 @@
 
    <div class="panel panel-primary">
                 <div class=" panel-heading"><h2>Agregar usuarios masivos</h2></div> 
+                 <div class="box-bottom">
+                    <a  role="button" href="<c:url value="/usuarioservidor.htm"/>">volver</a>
+                </div>
                 <form id="forminicio" action="agragarusuariosmasivos.htm" method="Post">
                     <div class="row">
                         <div class="col-md-1"></div>
@@ -113,10 +116,10 @@
             <div class="panel panel-primary">
                 <div class=" panel-heading"> <h2>modificar usuarios servidor2</h2></div> 
                
-                <div class="box-bottom">
+                 <div class="box-bottom">
                     <a  role="button" href="<c:url value="/usuarioservidor.htm"/>">volver</a>
                 </div>
-                <form id="forminicio" action="modificar.htm" method="Post">
+                <form id="forminicio" action="modificar1.htm" method="Post">
                     <div class="modal-body" >  
 
                         <span>usuario</span>:
@@ -149,33 +152,33 @@
             <div class="panel panel-primary">
                 <div class=" panel-heading"><h2>detalles de usuarios de servidor</h2></div> 
                 
-                <div class="box-bottom">
+               <div class="box-bottom">
                     <a  role="button" href="<c:url value="/usuarioservidor.htm"/>">volver</a>
                 </div>
                 <div class="card mb-3">
                     <table class="table table-bordered"  width="100%" cellspacing="0">
                         <tr> 
                             <th><span>usuario</span>:</th> 
-                            <td><label >${ ususLogin}</label><br/><br/></td>
+                            <td><label >${usuario.ususLogin}</label><br/><br/></td>
                         </tr>
                         <tr>
                             <th><span>nombre</span>:</th>
-                            <td><label >${ ususNombre}</label><br/><br/></td>
+                            <td><label >${ usuario.ususNombre}</label><br/><br/></td>
                         </tr>         
 
                         <tr>
                             <th><span>estado</span>:</th>
-                            <td><label >${ ususEstado}</label><br/><br/></td>
+                            <td><label >${ usuario.ususEstado.estuEstado}</label><br/><br/></td>
                         </tr>
 
                         <tr>
                             <th><span>admin</span>:</th>
-                            <td><label >${ ususAdm}</label><br/><br/></td>
+                            <td><label >${ usuario.ususAdm}</label><br/><br/></td>
                         </tr>
 
                         <tr>
                             <th><span>serial</span>:</th>
-                            <td><label >${ ususServ}</label><br/><br/></td>
+                            <td><label >${ usuario.idSerServidor.serHostname}</label><br/><br/></td>
                         </tr>               
                     </table>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">            
@@ -209,12 +212,12 @@
             <div class="panel panel-primary">
                 <div class=" panel-heading"><h2>lista reporte de usuarios de servidores</h2></div> 
                 
-                <div class="box-bottom">
+                 <div class="box-bottom">
                     <a  role="button" href="<c:url value="/usuarioservidor.htm"/>">volver</a>
                 </div>
                 <table>
                     <tr>
-                        <td><input type="button" id="btnExport" value="Descargar a Excel "/></td>
+                        <td><input type="button" class="btn btn-success btn-lg "  id="btnExport" value="Descargar a Excel "/></td>
                     </tr>
                 </table>
                 <div id="usuarioservidor" class="card mb-3">
@@ -230,7 +233,6 @@
                                         <th>usuario nombre</th>
                                         <th>usuario estado</th>                        
                                         <th>usuario hostname</th>
-
                                         <th>usuario admin</th>
                                     </tr>
                                 </thead>
@@ -244,7 +246,6 @@
                                             <td>${f.ususNombre}</td>
                                             <td>${f.ususEstado.estuEstado}</td>
                                             <td>${f.idSerServidor.serHostname}</td>
-
                                             <td>${f.ususAdm}</td>
                                         </tr>
                                     </c:forEach>  
@@ -330,7 +331,6 @@
                                             <td>${f.ususNombre}</td>
                                             <td>${f.ususEstado.estuEstado}</td>
                                             <td>${f.idSerServidor.serHostname}</td>
-
                                             <td>${f.ususAdm}</td>
                                             <td> 
                                                 <form id="forminicio" action="usuarios.htm" method="Post">
@@ -366,11 +366,11 @@
                 if (m == 5) {
             %>          
             <div class="panel panel-primary">
-                <div class=" panel-heading"><h2>modificar nuevo usuario servidor</h2></div>
-                <div class="box-bottom">
-                    <a  role="button" href="<c:url value="/modiusuario.htm"/>">volver</a>
+                <div class=" panel-heading"><h2>modificar usuario servidor</h2></div>
+                 <div class="box-bottom">
+                    <a  role="button" href="<c:url value="/usuarioservidor.htm"/>">volver</a>
                 </div>
-                <form id="forminicio" action="modiusuario.htm" method="Post">
+                <form id="forminicio" action="modiusuario1.htm" method="Post">
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-5">

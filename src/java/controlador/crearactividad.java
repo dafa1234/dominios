@@ -43,7 +43,11 @@ public class crearactividad {
             fechaActualH.get(Calendar.HOUR),
             fechaActualH.get(Calendar.MINUTE),
             fechaActualH.get(Calendar.SECOND));
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
     @RequestMapping("actividades.htm")
     public String news(Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -56,7 +60,11 @@ public class crearactividad {
         model.addAttribute("listaActividad", ListaActividad);
         return "user/actividades";
     }
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
     @RequestMapping("newactiv.htm")
     public String newactiv(Model model) {
         List<EtbInvTipoActividad> Listatipoactiv = dao.Listatipoactiv();
@@ -71,7 +79,20 @@ public class crearactividad {
         model.addAttribute("m", m);
         return "user/actividades";
     }
-
+/**
+ * 
+ * @param actServ
+ * @param actEjecuta
+ * @param actTarea
+ * @param actDescripcion
+ * @param actSolicita
+ * @param actTip
+ * @param actFechaIni
+ * @param actFechaFin
+ * @param model
+ * @return
+ * @throws ServicioException 
+ */
     //@RequestMapping(method = RequestMethod.POST)
     @RequestMapping("/act.htm")
     public String create(
@@ -102,7 +123,12 @@ public class crearactividad {
         return "user/actividades";
 
     }
-
+/**
+ * 
+ * @param idact
+ * @param model
+ * @return 
+ */
     @RequestMapping("modacti.htm")
     public String modactivser(@RequestParam("idact") int idact, Model model) {
         List<EtbInvTipoActividad> Listatipoactiv = dao.Listatipoactiv();
@@ -119,7 +145,22 @@ public class crearactividad {
         model.addAttribute("acti", aa);
         return "user/actividades";
     }
-
+/**
+ * 
+ * @param actServ
+ * @param servdor
+ * @param actEjecuta
+ * @param actTarea
+ * @param actDescripcion
+ * @param actSolicita
+ * @param actTip
+ * @param actFechaIni
+ * @param actFechaFin
+ * @param tareacambio
+ * @param model
+ * @return
+ * @throws ServicioException 
+ */
     @RequestMapping("modactivi.htm")
     public String create(
             @RequestParam("serv") int actServ,

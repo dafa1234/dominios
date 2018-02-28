@@ -8,6 +8,7 @@ package controlador;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import modelo.iniciosecion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import tablas.EtbInvServidor;
 import tablas.EtbInvUsuEstado;
+import tablas.EtbInvUsuServ;
 
 /**
  *
@@ -33,7 +35,14 @@ public class usuariosmasivos {
             fechaActual.get(Calendar.YEAR),
             fechaActual.get(Calendar.MONTH) + 1,
             fechaActual.get(Calendar.DAY_OF_MONTH));
-
+/**
+ * 
+ * @param usuariosmultiples
+ * @param administrado
+ * @param ususidServ1
+ * @param model
+ * @return 
+ */
     @RequestMapping("agragarusuariosmasivos.htm")
     public String nuev23(@RequestParam("usuariosmultiples") String usuariosmultiples,
             @RequestParam("administrado") int administrado,
@@ -64,27 +73,19 @@ public class usuariosmasivos {
             dao.crearususerv(Fecha, login, nombre, ususEstadoa, ususidServ, administrado);
             System.out.println("controlador.usuariosmasivos.nuev()");
         }
-        int m = 1;
+      
+        List<EtbInvUsuServ> Listaususerv = dao.Listaususerv(ususEstadoa);
+        model.addAttribute("Listaususerv", Listaususerv);
+        int m = 0;
         model.addAttribute("m", m);
         return "user/usuarioservidor";
     }
 
-    protected ArrayList CargarAtributos(String[] atributos) {
-        ArrayList ArmarAtributos = new ArrayList();
-
-        for (int i = 0; i < atributos.length; i++) {
-            System.out.println("i:" + i + ":" + atributos[i]);
-//            if (i == 0) {
-//                ArmarAtributos.add(new String[]{"usuarioetb", atributos[i]});
-//            } else if (i == 1) {
-//                ArmarAtributos.add(new String[]{"nombre", atributos[i]});
-//            }
-
-        }
-
-        return ArmarAtributos;
-    }
-
+/**
+ * 
+ * @param usuariosmultiples
+ * @return 
+ */
     private ArrayList ResponseCeldas(String usuariosmultiples) {
         ArrayList filas = new ArrayList();
         ArrayList celdas = new ArrayList();
@@ -100,7 +101,11 @@ public class usuariosmasivos {
 
         return celdas;
     }
-
+/**
+ * 
+ * @param usuariosmultiples
+ * @return 
+ */
     private ArrayList ResponseFilas(String usuariosmultiples) {
         ArrayList arrayList = new ArrayList();
         ArrayList respuesta = new ArrayList();
@@ -119,7 +124,11 @@ public class usuariosmasivos {
 
         return respuesta;
     }
-
+/**
+ * 
+ * @param usuariosmultiples
+ * @return 
+ */
     private ArrayList ResponseArchivo(String usuariosmultiples) {
         ArrayList lista = new ArrayList();
 

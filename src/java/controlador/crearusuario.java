@@ -47,7 +47,17 @@ public class crearusuario {
             fechaActualH.get(Calendar.HOUR),
             fechaActualH.get(Calendar.MINUTE),
             fechaActualH.get(Calendar.SECOND));
-    @RequestMapping("/usuario.htm")
+  /**
+   * 
+   * @param ususLogin
+   * @param ususNombre
+   * @param tCambio
+   * @param ususidSer
+   * @param administrado
+   * @param model
+   * @return 
+   */
+    @RequestMapping("usuario.htm")
     public String create(@RequestParam("login") String ususLogin,
             @RequestParam("nombre") String ususNombre,
             @RequestParam("tarea") String tCambio,
@@ -66,6 +76,11 @@ public class crearusuario {
         model.addAttribute("Listaususerv", Listaususerv);
         return "user/usuarioservidor";
     }
+    /**
+     * 
+     * @param model
+     * @return 
+     */
     //USUARIOS SERVIDOR
 
     @RequestMapping("usuarioservidor.htm")
@@ -76,26 +91,26 @@ public class crearusuario {
         }
         int m = 0;
         EtbInvUsuEstado ususEstadoa = new EtbInvUsuEstado(3);
-        List<EtbInvServidor> Listaserver = dao.Listaserver();
         List<EtbInvUsuServ> Listaususerv = dao.Listaususerv(ususEstadoa);
-        List<EtbInvUsuEstado> Listausuest = dao.Listausuest();
-        model.addAttribute("Listaserver", Listaserver);
         model.addAttribute("Listaususerv", Listaususerv);
-        model.addAttribute("Listausuest", Listausuest);
         model.addAttribute("m", m);
         return "user/usuarioservidor";
     }
-
+/**
+ * 
+ * @param email
+ * @param usu
+ * @param model
+ * @return 
+ */
     @RequestMapping("detalle.htm")
     public String detalle(@RequestParam("id") Integer email, @RequestParam("usu") String usu, Model model) {
 
         List<EtbInvCamusuServ> ListaDetalle = dao.ListaDetalle(usu);
         EtbInvUsuServ a = dao.buscarususerv(email);
         int m = 2;
-        model.addAttribute("ususLogin", a.getUsusLogin());
-        model.addAttribute("ususNombre", a.getUsusNombre());
-        model.addAttribute("ususAdm", a.getUsusAdm());
-        model.addAttribute("ususEstado", a.getUsusEstado().getEstuEstado());
+        model.addAttribute("usuario", a);
+       
         model.addAttribute("m", m);
         model.addAttribute("ListaDetalle", ListaDetalle);
         String id = (String) request.getSession().getAttribute("name");
@@ -104,7 +119,12 @@ public class crearusuario {
         }
         return "user/usuarioservidor";
     }
-
+/**
+ * 
+ * @param email
+ * @param model
+ * @return 
+ */
     @RequestMapping("usuarios.htm")
     public String usuarios(@RequestParam("id") Integer email, Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -123,7 +143,14 @@ public class crearusuario {
         model.addAttribute("usuer", a);
         return "user/usuarioservidor";
     }
-
+/**
+ * 
+ * @param email
+ * @param tCambio
+ * @param ususEstad
+ * @param model
+ * @return 
+ */
     @RequestMapping("modificar.htm")
     public String usuarios3(@RequestParam("id") Integer email,
             @RequestParam("tarea") String tCambio,
@@ -151,7 +178,11 @@ public class crearusuario {
         model.addAttribute("m", m);
         return "user/usuarioservidor";
     }
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
     @RequestMapping("usuarioos.htm")
     public String usuarios2(Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -168,6 +199,11 @@ public class crearusuario {
         model.addAttribute("Listaususerv", Listaususerv);
         return "user/usuarioservidor";
     }
+    /**
+     * 
+     * @param model
+     * @return 
+     */
      @RequestMapping("usuariosmas.htm")
     public String usuariosmas(Model model) {
         String id = (String) request.getSession().getAttribute("name");
@@ -184,6 +220,18 @@ public class crearusuario {
         model.addAttribute("Listaususerv", Listaususerv);
         return "user/usuarioservidor";
     }
+    /**
+     * 
+     * @param ususLogin
+     * @param nombre
+     * @param tareacambio
+     * @param estado
+     * @param admin
+     * @param email
+     * @param servid1
+     * @param model
+     * @return 
+     */
     @RequestMapping("modiusuario1.htm")
     public String modiusuario(@RequestParam("login") String ususLogin,
             @RequestParam("nombre") String nombre,
@@ -242,9 +290,11 @@ if (!a.getIdSerServidor().getSerServer().equals(servid1)) {
         EtbInvServidor ususidServ = new EtbInvServidor(servid1);
         dao.update(a.getFCreacion(), email, ususEstado, ususLogin, nombre, admin, ususidServ);
         dao.crearcambioususerv(Fecha, ususLogin, tareacambio, ususEstado);
-
-        model.addAttribute("Listaususerv", a);
-       model.addAttribute("m", m);
+        EtbInvUsuEstado ususEstadoa = new EtbInvUsuEstado(3);
+        List<EtbInvUsuServ> Listaususerv = dao.Listaususerv(ususEstadoa);
+        model.addAttribute("Listaususerv", Listaususerv);
+     
+        model.addAttribute("m", m);
         return "user/usuarioservidor";
     }
 }

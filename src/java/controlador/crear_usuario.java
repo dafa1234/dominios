@@ -33,12 +33,14 @@ public class crear_usuario {
             fechaActual.get(Calendar.YEAR),
             fechaActual.get(Calendar.MONTH) + 1,
             fechaActual.get(Calendar.DAY_OF_MONTH));
-//    @RequestMapping(method = RequestMethod.GET)
-//    public String mostrarAlumno() {
-//        return "index";
-//    }
-
-   // @RequestMapping(method = RequestMethod.POST)
+/**
+ * 
+ * @param email
+ * @param per
+ * @param dom
+ * @param model
+ * @return 
+ */
     @RequestMapping("/newuser.htm")
     public String create(
             @RequestParam("usu") String email,
@@ -77,6 +79,12 @@ public class crear_usuario {
         return "user/modificarusuario";
 
     }
+    /**
+     * 
+     * @param model
+     * @return
+     * @throws UnknownHostException 
+     */
    //MODIFICAR USUARIOS
     @RequestMapping("modificarusuario.htm")
     public String mouser(Model model) throws UnknownHostException {
@@ -97,19 +105,33 @@ public class crear_usuario {
         }
         return "user/modificarusuario";
     }
-
+/**
+ * 
+ * @param username
+ * @return 
+ */
     private static boolean findADETB(java.lang.String username) {
         co.net.etb.autenticar.Consulta service = new co.net.etb.autenticar.Consulta();
         co.net.etb.autenticar.ConsultaSoap port = service.getConsultaSoap();
         return port.findADETB(username);
     }
-
+/**
+ * 
+ * @param login
+ * @param parametro
+ * @return 
+ */
     private static String consultarParametroETB(java.lang.String login, java.lang.String parametro) {
         co.net.etb.autenticar.Consulta service = new co.net.etb.autenticar.Consulta();
         co.net.etb.autenticar.ConsultaSoap port = service.getConsultaSoap();
         return port.consultarParametroETB(login, parametro);
     }
-
+/**
+ * 
+ * @param username
+ * @param pwd
+ * @return 
+ */
     private static boolean authADETB(java.lang.String username, java.lang.String pwd) {
         co.net.etb.autenticar.Consulta service = new co.net.etb.autenticar.Consulta();
         co.net.etb.autenticar.ConsultaSoap port = service.getConsultaSoap();

@@ -183,7 +183,7 @@
                 </div>
                 <table>
                     <tr>
-                        <td><input type="button" id="btnExport" value="Descargar a Excel "/></td>
+                        <td><input type="button" class="btn btn-success btn-lg "  id="btnExport" value="Descargar a Excel "/></td>
                     </tr>
                 </table>
                 <div id="contratos" class="card mb-3">

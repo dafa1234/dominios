@@ -21,10 +21,10 @@
             %>
             <div class="panel panel-primary">
                 <div class=" panel-heading"><h2>Agregar Inventario</h2></div>
-            <div class="box-bottom">
-                <a  role="button" href="<c:url value="/servers.htm"/>">volver z</a> 
-            </div>           
-            
+                <div class="box-bottom">
+                    <a  role="button" href="<c:url value="/servers.htm"/>">volver</a> 
+                </div>           
+
                 <div class="panel-body">
                     <form  action="creat.htm" method="Post">   
                         <div class="row">
@@ -168,11 +168,11 @@
                 }
                 if (m == 8) {
             %>
-              <div class="panel panel-primary">
+            <div class="panel panel-primary">
                 <div class=" panel-heading"><h2>Detalle Servidor</h2></div>
-            <div class="box-bottom">
-                <a  role="button" href="<c:url value="/servers.htm"/>">volver</a> 
-            </div>
+                <div class="box-bottom">
+                    <a  role="button" href="<c:url value="/servers.htm"/>">volver</a> 
+                </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-3">
@@ -289,7 +289,7 @@
                 <div class="tab">
                     <div class="card mb-3">
                         <div class="card-header">
-                            <i class="fa fa-table"></i>descripccion id</div>
+                            <i class="fa fa-table"></i>descripccion ip</div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">            
@@ -352,8 +352,7 @@
                                     <thead>
                                         <tr>
 
-                                            <th>Id</th>
-                                            <th>Serial</th>
+                                            <th>Id</th>                                           
                                             <th>Ruta</th>
                                             <th>Fecha</th>
                                             <th>Serial</th>
@@ -366,8 +365,7 @@
                                     <tbody>        
                                         <c:forEach var="f" items="${requestScope.servidor.etbInvRutaCollection}">
                                             <tr>
-                                                <td>${f.rutId}</td>
-                                                <td>${f.rutSerial}</td>                                           
+                                                <td>${f.rutId}</td>                                                                                          
                                                 <td>${f.rutRuta}</td>
                                                 <td>${f.rutFecha}</td>
                                                 <td>${f.rutSerial.serHostname}</td>
@@ -554,7 +552,7 @@
                             </div>
                         </div>
                         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                        <form id="forminicio" action="modususer.htm" method="Post">
+                        <form id="forminicio" action="newactivser.htm" method="Post">
                             <input  name="servd" type="hidden" value="${requestScope.servidor.serServer}">
                             <div>
                                 <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" 
@@ -626,61 +624,68 @@
                             </div>
                         </form>
                     </div> </div> 
-                            <div class="tab">
-                     <div class="card mb-3">
-                    <div class="card-header">
-                        <i class="fa fa-table"></i> Data Table cronograma</div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <div class="tab">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fa fa-table"></i> Data Table cronograma</div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
-                                <thead>
-                                    <TR>
-                                        <th>ID</th>
-                                        <th>SERIAL</th>
-                                        <th>PROYECTO</th>
-                                        <th>FECHA INICIO</th>
-                                        <th>FECHA PROX</th>
-                                        <th>FECHA FIN</th>
-                                        <th>FECHA COMBIO FIN</th>
-                                        <th>EJECUTA</th>
-                                        <th>ESTADO</th>
-                                        <th>OBSERVACION</th>
-                                        <th>modificar</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>        
-                                    <c:forEach var="f" items="${requestScope.servidor.etbInvCronogramaMtoCollection}">
-                                        <tr>
-                                            <td>${f.croId}</td>
-                                            <td>${f.croSerial.serHostname}</td>
-                                            <td>${f.croProyecto.proTitulo}</td>
-                                            <td>${f.croFechaIni}</td>
-                                            <td>${f.croFechaProx}</td>
-                                            <td>${f.croFechaFin}</td>
-                                            <td>${f.croCambioFin}</td>
-                                            <td>${f.croEjecuta}</td>
-                                            <td>${f.croEstado.estmEstado}</td>
-                                            <td>${f.croObservacion}</td>
-                                            <td>
-                                                <form id="forminicio" action="cronogramamod.htm" method="Post">
-                                                    <input  name="idcron" type="hidden" value="${f.croId}">
-
-                                                    <div>
-                                                        <button  type="submit" class="button45 button46" title="Presione para ingresar">modificar</button>
-                                                    </div>
-                                                </form></td>
-
+                                    <thead>
+                                        <TR>
+                                            <th>ID</th>
+                                            <th>SERIAL</th>
+                                            <th>PROYECTO</th>
+                                            <th>FECHA INICIO</th>
+                                            <th>FECHA PROX</th>
+                                            <th>FECHA FIN</th>
+                                            <th>FECHA COMBIO FIN</th>
+                                            <th>EJECUTA</th>
+                                            <th>ESTADO</th>
+                                            <th>OBSERVACION</th>
+                                            <th>modificar</th>
                                         </tr>
-                                    </c:forEach>
+                                    </thead>
 
-                                </tbody>
-                            </table>
+                                    <tbody>        
+                                        <c:forEach var="f" items="${requestScope.servidor.etbInvCronogramaMtoCollection}">
+                                            <tr>
+                                                <td>${f.croId}</td>
+                                                <td>${f.croSerial.serHostname}</td>
+                                                <td>${f.croProyecto.proTitulo}</td>
+                                                <td>${f.croFechaIni}</td>
+                                                <td>${f.croFechaProx}</td>
+                                                <td>${f.croFechaFin}</td>
+                                                <td>${f.croCambioFin}</td>
+                                                <td>${f.croEjecuta}</td>
+                                                <td>${f.croEstado.estmEstado}</td>
+                                                <td>${f.croObservacion}</td>
+                                                <td>
+                                                    <form id="forminicio" action="cronogramamod1.htm" method="Post">
+                                                        <input  name="idcron" type="hidden" value="${f.croId}">
+
+                                                        <div>
+                                                            <button  type="submit" class="button45 button46" title="Presione para ingresar">modificar</button>
+                                                        </div>
+                                                    </form></td>
+
+                                            </tr>
+                                        </c:forEach>
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                </div> </div> 
+                        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                        <form id="forminicio" action="newcrono1.htm" method="Post">
+                            <input  name="servd" type="hidden" value="${requestScope.servidor.serServer}">
+                            <div>
+                                <button id="btniniciar" type="submit"  data-toggle="tooltip" data-placement="top" title="Presione para ingresar" 
+                                        class="btn btn-success btn-lg "  >INGRESAR Cronograma</button>
+                            </div>
+                        </form>
+                    </div> </div> 
 
                 <div style="text-align:center;margin-top:40px;">
                     <span class="step"></span>
@@ -730,27 +735,21 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>TblServSerial</th>
-                                                <th>TblServHostName</th>
-
-                                                <th>TblClienteNombre</th>
-
-                                                <th>TblEstadoEstado</th>
-                                                <th>modificar</th>
-
+                                                <th>Serial</th>
+                                                <th>HostName</th>
+                                                <th>Cliente Nombre</th>
+                                                <th>Estado Servidor</th>
+                                                <th>Modificar</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>TblServSerial</th>
-                                                <th>TblServHostName</th>
-
-                                                <th>TblClienteNombre</th>
-
-                                                <th>TblEstadoEstado</th>
-                                                <th>modificar</th>
-
+                                                <th>Serial</th>
+                                                <th>HostName</th>
+                                                <th>Cliente Nombre</th>
+                                                <th>Estado Servidor</th>
+                                                <th>Modificar</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>        
@@ -800,69 +799,69 @@
                 }
                 if (m == 3) {
             %>
-              <div class="panel panel-primary">
+            <div class="panel panel-primary">
                 <div class=" panel-heading"><h2>Detalle Servidor</h2></div>
-            <div class="box-bottom">
-                <a  role="button" href="<c:url value="/servers.htm"/>">volver</a> 
-            </div>
-            <table>
-                <tr>
-                    <td><input type="button" id="btnExport" value="Descargar a Excel "/></td>
-                </tr>
-            </table>
-            <div id="serv" class="card mb-3">
-                <div class="card-header">
-                    <h3><i class="fa fa-table"></i>${titulo}</h3> </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered"  width="100%" cellspacing="0">            
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>TblServSerial</th>
-                                    <th>TblServHostName</th>
-                                    <th>TblMarcaMarca</th>
-                                    <th>TblModeloModelo</th>
-                                    <th>TblClienteNombre</th>
-                                    <th>TblSoNombre</th>
-                                    <th>TblGrupoNombre</th>
-                                    <th>TblEstadoEstado</th>
-                                    <td>estIdEstadoestEstado</td>  
-
-                                </tr>
-                            </thead>
-
-                            <tbody>        
-                                <c:forEach var="f" items="${requestScope.listreporte}">
+                 <div class="box-bottom">
+                    <a  role="button" href="<c:url value="/servers.htm"/>">volver</a> 
+                </div> 
+                <table>
+                    <tr>
+                        <td><input type="button" class="btn btn-success btn-lg "   id="btnExport" value="Descargar a Excel "/></td>
+                    </tr>
+                </table>
+                <div id="serv" class="card mb-3">
+                    <div class="card-header">
+                        <h3><i class="fa fa-table"></i>${titulo}</h3> </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered"  width="100%" cellspacing="0">            
+                                <thead>
                                     <tr>
-                                        <td>${f.serServer}</td>
-                                        <td>${f.serSerial}</td>
-                                        <td>${f.serHostname}</td>
-                                        <td>${f.marIdMarca.marNomMarca}</td>
-                                        <td>${f.modIdModelo.modNomModelo}</td>
-                                        <td>${f.cliIdCliente.cliNombre}</td>
-                                        <td>${f.sisIdSisOperativo.sisNombre}</td>
-                                        <td>${f.gruIdGrupo.gruNomGrupo}</td>
-                                        <td>${f.estIdEstado.estEstado}</td>  
-                                        <td>${f.serFIngreso}</td>  
+                                        <th>ID</th>
+                                        <th>Serial</th>
+                                        <th>HostName</th>
+                                        <th>Marca</th>
+                                        <th>Modelo</th>
+                                        <th>Cliente Nombre</th>
+                                        <th>Sistema Operativo</th>
+                                        <th>Grupo Nombre</th>
+                                        <th>Estado</th>
+                                        <th>Tarea Ingreso</th>  
+
                                     </tr>
-                                </c:forEach>     
-                            </tbody>
-                        </table>
+                                </thead>
+
+                                <tbody>        
+                                    <c:forEach var="f" items="${requestScope.listreporte}">
+                                        <tr>
+                                            <td>${f.serServer}</td>
+                                            <td>${f.serSerial}</td>
+                                            <td>${f.serHostname}</td>
+                                            <td>${f.marIdMarca.marNomMarca}</td>
+                                            <td>${f.modIdModelo.modNomModelo}</td>
+                                            <td>${f.cliIdCliente.cliNombre}</td>
+                                            <td>${f.sisIdSisOperativo.sisNombre}</td>
+                                            <td>${f.gruIdGrupo.gruNomGrupo}</td>
+                                            <td>${f.estIdEstado.estEstado}</td>  
+                                            <td>${f.serTIngreso}</td>  
+                                        </tr>
+                                    </c:forEach>     
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <script>
-                            $("#btnExport").click(function (e) {
-                                window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#serv').html() + name));
-                                e.preventDefault();
-                            });
-            </script>
-            <!-- fin de tabla-->                   
-            <!-- Begin # DIV Form --></div>
-            <%}
-            %>
+                <script>
+                                $("#btnExport").click(function (e) {
+                                    window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#serv').html() + name));
+                                    e.preventDefault();
+                                });
+                </script>
+                <!-- fin de tabla-->                   
+                <!-- Begin # DIV Form --></div>
+                <%}
+                %>
             <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog">
                     <div class="modal-content" style="background: #20a4cb">

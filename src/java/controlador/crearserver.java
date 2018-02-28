@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import tablas.EtbInvCambioTabla;
 import tablas.EtbInvCentral;
 import tablas.EtbInvCliente;
@@ -57,7 +56,36 @@ public class crearserver {
             fechaActualH.get(Calendar.HOUR),
             fechaActualH.get(Calendar.MINUTE),
             fechaActualH.get(Calendar.SECOND));
-
+/**
+ * 
+ * @param serSerial
+ * @param marIdMarc
+ * @param estIdEstad
+ * @param sisoperativo
+ * @param serHostname
+ * @param modIdModel
+ * @param grupo
+ * @param serNoProcFisico
+ * @param serCores
+ * @param serConexion
+ * @param cenIdCentra
+ * @param salIdSalo
+ * @param serRack
+ * @param serUnidad
+ * @param plaIdPlataform
+ * @param serProyecto
+ * @param cliIdClient
+ * @param serAdministrado
+ * @param rolIdRolSer
+ * @param serForAdCompartida
+ * @param serTIngreso
+ * @param servMem
+ * @param servDiscoC
+ * @param SER_AD_COMPARTIDA
+ * @param model
+ * @return
+ * @throws ServicioException 
+ */
     //para ingresar servidores
     @RequestMapping("/creat.htm")
     public String create(
@@ -107,6 +135,11 @@ public class crearserver {
         return "user/servers";
 
     }
+    /**
+     * 
+     * @param model
+     * @return 
+     */
     //SERVIDORES
 
     @RequestMapping("servers.htm")
@@ -121,7 +154,11 @@ public class crearserver {
         model.addAttribute("listaServer", Listaserver);
         return "user/servers";
     }
-
+/**
+ * 
+ * @param model
+ * @return 
+ */
 // formulario agregar servidor
     @RequestMapping("aserver.htm")
     public String agser(Model model) {
@@ -153,7 +190,12 @@ public class crearserver {
         }
         return "user/servers";
     }
-
+/**
+ * 
+ * @param ususidSer
+ * @param model
+ * @return 
+ */
     // detalle servidor
     @RequestMapping("TdServ.htm")
     public String tdserver(@RequestParam("tdserv") Integer ususidSer, Model model) {
@@ -168,7 +210,12 @@ public class crearserver {
         return "user/servers";
 
     }
-
+/**
+ * 
+ * @param ususidSer
+ * @param model
+ * @return 
+ */
     // modificar servidor
     @RequestMapping("modificarservidor.htm")
     public String modificarservidor(@RequestParam("tdserv") Integer ususidSer, Model model) {
@@ -199,7 +246,33 @@ public class crearserver {
         return "user/cosasservidor";
 
     }
-
+/**
+ * 
+ * @param idservidor
+ * @param hostnameservidor
+ * @param sisopreaservidor
+ * @param conexionservidor
+ * @param estadoservidor
+ * @param centralservidor
+ * @param salonservidor
+ * @param rackservidor
+ * @param unidadservidor
+ * @param gruposervidor
+ * @param clienteservidor
+ * @param proyectoservidor
+ * @param rolservidor
+ * @param plataformaservidor
+ * @param Nprocesosservidor
+ * @param adcompservidor
+ * @param admiservidor
+ * @param coresservidor
+ * @param memservidor
+ * @param discocservidor
+ * @param tareacambio
+ * @param model
+ * @return
+ * @throws ServicioException 
+ */
     //modificar servidor
     @RequestMapping("/modificarserv.htm")
     public String create(
