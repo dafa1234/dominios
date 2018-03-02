@@ -21,6 +21,7 @@ import tablas.EtbInvUsuEstado;
 import tablas.EtbInvUsuServ;
 
 /**
+ * en este controlador creamos usuarios masiva mente
  *
  * @author diegfraa
  */
@@ -35,20 +36,21 @@ public class usuariosmasivos {
             fechaActual.get(Calendar.YEAR),
             fechaActual.get(Calendar.MONTH) + 1,
             fechaActual.get(Calendar.DAY_OF_MONTH));
-/**
- * 
- * @param usuariosmultiples
- * @param administrado
- * @param ususidServ1
- * @param model
- * @return 
- */
+
+    /**
+     *
+     * @param usuariosmultiples
+     * @param administrado
+     * @param ususidServ1
+     * @param model
+     * @return
+     */
     @RequestMapping("agragarusuariosmasivos.htm")
     public String nuev23(@RequestParam("usuariosmultiples") String usuariosmultiples,
             @RequestParam("administrado") int administrado,
             @RequestParam("servid") int ususidServ1, Model model) {
         System.out.println(usuariosmultiples);
-        
+
         System.out.println("controlador.usuariosmasivos.nuev()");
         EtbInvUsuEstado ususEstadoa = new EtbInvUsuEstado(3);
         EtbInvServidor ususidServ = new EtbInvServidor(ususidServ1);
@@ -57,8 +59,7 @@ public class usuariosmasivos {
         Cambio = ResponseCeldas(usuariosmultiples);
         System.out.println("controlador.usuariosmasivos.nuev(1)");
         System.out.println("Tam|" + Cambio.size());
-        
-        
+
         for (Iterator it = Cambio.iterator(); it.hasNext();) {
             String[] tem = (String[]) it.next();
             System.out.println("tem|" + tem.length);
@@ -73,7 +74,7 @@ public class usuariosmasivos {
             dao.crearususerv(Fecha, login, nombre, ususEstadoa, ususidServ, administrado);
             System.out.println("controlador.usuariosmasivos.nuev()");
         }
-      
+
         List<EtbInvUsuServ> Listaususerv = dao.Listaususerv(ususEstadoa);
         model.addAttribute("Listaususerv", Listaususerv);
         int m = 0;
@@ -81,11 +82,11 @@ public class usuariosmasivos {
         return "user/usuarioservidor";
     }
 
-/**
- * 
- * @param usuariosmultiples
- * @return 
- */
+    /**
+     *
+     * @param usuariosmultiples
+     * @return
+     */
     private ArrayList ResponseCeldas(String usuariosmultiples) {
         ArrayList filas = new ArrayList();
         ArrayList celdas = new ArrayList();
@@ -95,47 +96,46 @@ public class usuariosmasivos {
         for (Iterator it = filas.iterator(); it.hasNext();) {
             String tem = (String) it.next();
             String[] ArraySplit = tem.split(";");
-            System.out.println("String[]|" + ArraySplit[0] + "ArraySplit[1]|" + ArraySplit[1]);            
+            System.out.println("String[]|" + ArraySplit[0] + "ArraySplit[1]|" + ArraySplit[1]);
             celdas.add(ArraySplit);
         }
 
         return celdas;
     }
-/**
- * 
- * @param usuariosmultiples
- * @return 
- */
+
+    /**
+     *
+     * @param usuariosmultiples
+     * @return
+     */
     private ArrayList ResponseFilas(String usuariosmultiples) {
         ArrayList arrayList = new ArrayList();
         ArrayList respuesta = new ArrayList();
         arrayList = ResponseArchivo(usuariosmultiples);
 
         System.out.println("arrayListT|" + arrayList.size());
-        
+
         for (Iterator it = arrayList.iterator(); it.hasNext();) {
             String[] tem = (String[]) it.next();
             System.out.println("String[]" + tem);
             for (int i = 0; i < tem.length; i++) {
                 respuesta.add(tem[i]);
-                System.out.println("respuesta|" +tem[i]);
+                System.out.println("respuesta|" + tem[i]);
             }
         }
 
         return respuesta;
     }
-/**
- * 
- * @param usuariosmultiples
- * @return 
- */
+
+    /**
+     *
+     * @param usuariosmultiples
+     * @return
+     */
     private ArrayList ResponseArchivo(String usuariosmultiples) {
         ArrayList lista = new ArrayList();
 
         String[] fila = usuariosmultiples.split("\r\n");
-        System.out.println("fila1|" + fila[0]);
-        System.out.println("fila2|" + fila[1]);
-        System.out.println("fila2|" + fila[2]);
         lista.add(fila);
 
         return lista;

@@ -66,6 +66,7 @@ public class crearaseguramiento {
             fechaActualH.get(Calendar.HOUR),
             fechaActualH.get(Calendar.MINUTE),
             fechaActualH.get(Calendar.SECOND));
+
     /**
      *
      * CREAR ASEGURAMIENTO SERVIDOR
@@ -117,8 +118,8 @@ public class crearaseguramiento {
     }
 
     /**
-     * este nos dirige al agregar un nuevo
-     * aseguramiento del servidor
+     * este nos dirige al agregar un nuevo aseguramiento del servidor
+     *
      * @param serv
      * @param model
      * @return
@@ -138,6 +139,7 @@ public class crearaseguramiento {
 
     /**
      * este nos dirige al modificar el aseguramiento
+     *
      * @param serv
      * @param model
      * @return
@@ -156,7 +158,9 @@ public class crearaseguramiento {
     }
 
     /**
-     *modificar aseguramiento
+     * modificaraseguram aqui modificamos los aseguramientos modificar
+     * aseguramiento
+     *
      * @param idasegu
      * @param fini
      * @param plantilla
@@ -207,8 +211,10 @@ public class crearaseguramiento {
         return "user/servers";
 
     }
+
     /**
-     *este nos dirige a ingresar direccionamiento
+     * este nos dirige a ingresar direccionamiento
+     *
      * @param serv
      * @param servname
      * @param model
@@ -231,7 +237,8 @@ public class crearaseguramiento {
     }
 
     /**
-     *aqui agregamos ip o direccionamiento
+     * aqui agregamos ip o direccionamiento
+     *
      * @param dirIp
      * @param dirVlan
      * @param dirSwitch
@@ -264,7 +271,8 @@ public class crearaseguramiento {
     }
 
     /**
-     *aqui dirigimos a modificar ip o direccionamiento
+     * aqui dirigimos a modificar ip o direccionamiento
+     *
      * @param IdIp
      * @param model
      * @return
@@ -286,7 +294,8 @@ public class crearaseguramiento {
     }
 
     /**
-     *aqui modificamos ip o direccionamiento
+     * aqui modificamos ip o direccionamiento
+     *
      * @param tareacambio
      * @param iddirIp
      * @param idSer1
@@ -368,6 +377,7 @@ public class crearaseguramiento {
 
     /**
      * aqui dirigimos a agregar rutas
+     *
      * @param serv
      * @param servname
      * @param model
@@ -390,7 +400,8 @@ public class crearaseguramiento {
     }
 
     /**
-     *aqui agregamos rutas
+     * aqui agregamos rutas
+     *
      * @param idSer1
      * @param rutaser
      * @param model
@@ -413,7 +424,8 @@ public class crearaseguramiento {
     //mod servidor
 
     /**
-     *aqui dirigimos a mopdificar rutas
+     * aqui dirigimos a mopdificar rutas
+     *
      * @param serv
      * @param model
      * @return
@@ -434,7 +446,8 @@ public class crearaseguramiento {
     //modificar ruta servidor
 
     /**
-     *aqui modificamos rutas
+     * aqui modificamos rutas
+     *
      * @param rutasId
      * @param rutaIdser
      * @param rutaF
@@ -479,7 +492,8 @@ public class crearaseguramiento {
     }
 
     /**
-     *aqui dirigimos a agregar casos proveedor
+     * aqui dirigimos a agregar casos proveedor
+     *
      * @param casosserv
      * @param model
      * @return
@@ -500,8 +514,10 @@ public class crearaseguramiento {
         model.addAttribute("m", m);
         return "user/cosasservidor";
     }
+
     /**
-     * 
+     * aqui creamos casos proveedor
+     *
      * @param caspPro
      * @param caspServ1
      * @param caspFechaApe
@@ -511,9 +527,9 @@ public class crearaseguramiento {
      * @param caspIm
      * @param model
      * @return
-     * @throws ServicioException 
+     * @throws ServicioException
      */
-     @RequestMapping("caprovs.htm")
+    @RequestMapping("caprovs.htm")
     public String createss(
             @RequestParam("proveedor") Integer caspPro,
             @RequestParam("servidor") int caspServ1,
@@ -531,7 +547,7 @@ public class crearaseguramiento {
         EtbInvServidor caspserv = new EtbInvServidor(caspServ1);
         EtbInvEstadoCasos caspEstado = new EtbInvEstadoCasos(caspEstad);
         EtbInvMarca caspProv = new EtbInvMarca(caspPro);
-        dao.creaproveedor(caspserv,Fecha, caspProv,caspFechaApe, caspFechaCie, caspNumero, caspIm, caspEstado);
+        dao.creaproveedor(caspserv, Fecha, caspProv, caspFechaApe, caspFechaCie, caspNumero, caspIm, caspEstado);
         List<EtbInvCasosProv> Listaproveedor = dao.Listaproveedor();
         model.addAttribute("Listaproveedor", Listaproveedor);
         return "user/servers";
@@ -539,7 +555,8 @@ public class crearaseguramiento {
     }
 
     /**
-     *aqui dirigimos a modificar casos proveedor
+     * aqui dirigimos a modificar casos proveedor
+     *
      * @param casosserv
      * @param model
      * @return
@@ -562,7 +579,8 @@ public class crearaseguramiento {
     }
 
     /**
-     *aqui modificamos  casos proveedor
+     * aqui modificamos casos proveedor
+     *
      * @param proveedor
      * @param idcasos
      * @param fini
@@ -655,7 +673,8 @@ public class crearaseguramiento {
     }
 
     /**
-     *aqui dirige a agregar nueva actividad
+     * aqui dirige a agregar nueva actividad
+     *
      * @param servd
      * @param model
      * @return
@@ -675,8 +694,9 @@ public class crearaseguramiento {
         model.addAttribute("serv", aa);
         return "user/cosasservidor";
     }
+
     /**
-     * 
+     *
      * @param actServ
      * @param actEjecuta
      * @param actTarea
@@ -687,9 +707,9 @@ public class crearaseguramiento {
      * @param actFechaFin
      * @param model
      * @return
-     * @throws ServicioException 
+     * @throws ServicioException
      */
-   @RequestMapping("acts.htm")
+    @RequestMapping("acts.htm")
     public String creates(
             @RequestParam("serv") int actServ,
             @RequestParam("eje") String actEjecuta,
@@ -715,8 +735,10 @@ public class crearaseguramiento {
         return "user/servers";
 
     }
+
     /**
-     *aqui dirige a modificar actividad
+     * aqui dirige a modificar actividad
+     *
      * @param idact
      * @param model
      * @return
@@ -738,6 +760,7 @@ public class crearaseguramiento {
 
     /**
      * aqui modifica actividad
+     *
      * @param actServ
      * @param actEjecuta
      * @param actTarea
@@ -834,7 +857,8 @@ public class crearaseguramiento {
     }
 
     /**
-     *aqui dirige a agregar usuario servidor
+     * aqui dirige a agregar usuario servidor
+     *
      * @param actServ
      * @param model
      * @return
@@ -852,15 +876,17 @@ public class crearaseguramiento {
         model.addAttribute("actServ", aa);
         return "user/cosasservidor";
     }
+
     /**
      * aqui crea usuarios servidor
+     *
      * @param ususLogin
      * @param ususNombre
      * @param tCambio
      * @param ususidSer
      * @param administrado
      * @param model
-     * @return 
+     * @return
      */
     @RequestMapping("usuarioa.htm")
     public String createu(@RequestParam("login") String ususLogin,
@@ -878,13 +904,14 @@ public class crearaseguramiento {
         dao.crearususerv(Fecha, ususLogin, ususNombre, ususEstadoa, ususidServ, administrado);
         dao.crearcambioususerv(Fecha, ususLogin, tCambio, ususEstado);
         List<EtbInvUsuServ> Listaususerv = dao.Listaususerv(ususEstadoa);
-        model.addAttribute("Listaususerv", Listaususerv);       
+        model.addAttribute("Listaususerv", Listaususerv);
         model.addAttribute("servidor", aa);
         return "user/servers";
     }
 
     /**
-     *aqui dirige a modificar usuarios servidor
+     * aqui dirige a modificar usuarios servidor
+     *
      * @param email
      * @param model
      * @return
@@ -906,7 +933,8 @@ public class crearaseguramiento {
     }
 
     /**
-     *aqui modifica usuarios
+     * aqui modifica usuarios
+     *
      * @param ususLogin
      * @param nombre
      * @param tareacambio
@@ -975,7 +1003,8 @@ public class crearaseguramiento {
     }
 
     /**
-     *aqui agrega cronogramas
+     * aqui agrega cronogramas
+     *
      * @param croProyect
      * @param croSerial
      * @param croFechaIni
@@ -1017,7 +1046,8 @@ public class crearaseguramiento {
     }
 
     /**
-     *aqui dirige a agregar cronograma
+     * aqui dirige a agregar cronograma
+     *
      * @param actServ
      * @param model
      * @return
@@ -1047,7 +1077,8 @@ public class crearaseguramiento {
     }
 
     /**
-     *aqui dirige a modificar cronograma
+     * aqui dirige a modificar cronograma
+     *
      * @param idcron
      * @param model
      * @return
@@ -1076,7 +1107,8 @@ public class crearaseguramiento {
     }
 
     /**
-     *aqui modifica cronograma
+     * aqui modifica cronograma
+     *
      * @param croProyect
      * @param croSerial
      * @param croFechaIni

@@ -9,10 +9,9 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -31,19 +30,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "EtbInvRuta.findAll", query = "SELECT e FROM EtbInvRuta e")
     , @NamedQuery(name = "EtbInvRuta.findByRutId", query = "SELECT e FROM EtbInvRuta e WHERE e.rutId = :rutId")
-    , @NamedQuery(name = "EtbInvRuta.findByRutRuta", query = "SELECT e FROM EtbInvRuta e WHERE e.rutRuta = :rutRuta")
     , @NamedQuery(name = "EtbInvRuta.findByRutFecha", query = "SELECT e FROM EtbInvRuta e WHERE e.rutFecha = :rutFecha")})
 public class EtbInvRuta implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "RUT_ID")
-    private Integer rutId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 8000)
+    @Column(name = "RUT_ID")
+    private Integer rutId;
+    @Lob
+    @Size(max = 16777215)
     @Column(name = "RUT_RUTA")
     private String rutRuta;
     @Basic(optional = false)
@@ -62,9 +59,8 @@ public class EtbInvRuta implements Serializable {
         this.rutId = rutId;
     }
 
-    public EtbInvRuta(Integer rutId, String rutRuta, String rutFecha) {
+    public EtbInvRuta(Integer rutId, String rutFecha) {
         this.rutId = rutId;
-        this.rutRuta = rutRuta;
         this.rutFecha = rutFecha;
     }
 

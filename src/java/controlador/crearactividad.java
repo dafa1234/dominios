@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import tablas.EtbInvActividad;
 import tablas.EtbInvCambioTabla;
 import tablas.EtbInvServidor;
@@ -44,7 +43,7 @@ public class crearactividad {
             fechaActualH.get(Calendar.MINUTE),
             fechaActualH.get(Calendar.SECOND));
 /**
- * 
+ * news nos direcciona a una vista donde nos calga una lista con todas las actividades
  * @param model
  * @return 
  */
@@ -61,7 +60,7 @@ public class crearactividad {
         return "user/actividades";
     }
 /**
- * 
+ * newactiv nos direcciona a un formulario para crear una nueva actividad 
  * @param model
  * @return 
  */
@@ -80,7 +79,7 @@ public class crearactividad {
         return "user/actividades";
     }
 /**
- * 
+ * create aqui agregamos una nueva actividad
  * @param actServ
  * @param actEjecuta
  * @param actTarea
@@ -94,7 +93,7 @@ public class crearactividad {
  * @throws ServicioException 
  */
     //@RequestMapping(method = RequestMethod.POST)
-    @RequestMapping("/act.htm")
+    @RequestMapping("act.htm")
     public String create(
             @RequestParam("serv") int actServ,
             @RequestParam("eje") String actEjecuta,
@@ -124,7 +123,7 @@ public class crearactividad {
 
     }
 /**
- * 
+ * modactivser este nos direcciona a un formulario para poder modificar una actividad
  * @param idact
  * @param model
  * @return 
@@ -146,7 +145,7 @@ public class crearactividad {
         return "user/actividades";
     }
 /**
- * 
+ * create aqui modificamos la actividad
  * @param actServ
  * @param servdor
  * @param actEjecuta

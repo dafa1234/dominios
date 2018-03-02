@@ -39,7 +39,7 @@ public class inicio {
         return "index";
     }
 /**
- * 
+ * aqui iniciamos sesion
  * @param email
  * @param pass
  * @param model

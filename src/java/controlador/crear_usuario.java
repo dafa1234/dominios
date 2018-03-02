@@ -23,18 +23,21 @@ import tablas.EtbInvUsuarioAp;
  */
 @Controller
 public class crear_usuario {
+//para conectarnos con el modelo (@Autowired private iniciosecion dao;)
+
 
     @Autowired
     private iniciosecion dao;
      @Autowired
     private HttpServletRequest request;
+     //Calendar es un codigo que nos rescata la fecha actual
     Calendar fechaActual = Calendar.getInstance();
     String Fecha = String.format("%04d-%02d-%02d",
             fechaActual.get(Calendar.YEAR),
             fechaActual.get(Calendar.MONTH) + 1,
             fechaActual.get(Calendar.DAY_OF_MONTH));
 /**
- * 
+ * en create creamos un nuevo usuario para la apricacion
  * @param email
  * @param per
  * @param dom
@@ -80,12 +83,12 @@ public class crear_usuario {
 
     }
     /**
-     * 
+     * en mouser nos direcciona a un formulario para ingresar un nuevo usuario de la apricacion
      * @param model
      * @return
      * @throws UnknownHostException 
      */
-   //MODIFICAR USUARIOS
+   
     @RequestMapping("modificarusuario.htm")
     public String mouser(Model model) throws UnknownHostException {
         String id = (String) request.getSession().getAttribute("name");
@@ -106,7 +109,7 @@ public class crear_usuario {
         return "user/modificarusuario";
     }
 /**
- * 
+ * para conectar con el directorio corporativo
  * @param username
  * @return 
  */
@@ -116,7 +119,7 @@ public class crear_usuario {
         return port.findADETB(username);
     }
 /**
- * 
+ * para conectar con el directorio corporativo
  * @param login
  * @param parametro
  * @return 
@@ -127,7 +130,7 @@ public class crear_usuario {
         return port.consultarParametroETB(login, parametro);
     }
 /**
- * 
+ * para conectar con el directorio corporativo
  * @param username
  * @param pwd
  * @return 

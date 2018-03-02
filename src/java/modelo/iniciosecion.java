@@ -58,38 +58,45 @@ public class iniciosecion {
     private EntityManager em;
 
     /**
+     * en readByRutJPQL comsultamos a la tabla EtbInvUsuarioAp para saber si el
+     * usuario existe o no, y llamar todos los datos de este usuario.
      *
-     * @param email
+     * @param usuEtb
      * @return
      * @throws SecurityException
      */
     @Transactional(rollbackFor = {ServicioException.class})
-    public EtbInvUsuarioAp readByRutJPQL(String email) throws SecurityException {
-        String sql = "select a from EtbInvUsuarioAp a where  a.usuEtb = :email ";
-
+    public EtbInvUsuarioAp readByRutJPQL(String usuEtb) throws SecurityException {
+        //en el  (String sql) creamos una comsulta de tipo sql para consulta en las tablas
+        String sql = "select a from EtbInvUsuarioAp a where  a.usuEtb = :usuEtb ";
+        //en el (Query q) tomamos el String ya creado y pormedio del (em.createQuery) enviamos la consulta la cualnos devuelbe la 
+        //informacion y la guarda en (Query q).
         Query q = em.createQuery(sql);
-        q.setParameter("email", email);
+        //por medio de (q.setParameter) tomamos el (String usuEtb) para poder introdusirlo en la consulta 
+        q.setParameter("usuEtb", usuEtb);
 
         try {
             return (EtbInvUsuarioAp) q.getSingleResult();
         } catch (Exception e) {
             return null;
         }
-
+        //es igual en todos los public que utilizan el (Query) de (EntityManager)
     }
 
     /**
+     * en readid consultamos la tabla EtbInvServidor para llamar la informacion
+     * del servidor segun el id (IdServidor)
      *
-     * @param ususidSer
+     * @param IdServidor
      * @return
      * @throws SecurityException
      */
     @Transactional(rollbackFor = {ServicioException.class})
-    public EtbInvServidor readid(int ususidSer) throws SecurityException {
-        String sql = "select aa from EtbInvServidor aa where  aa.serServer = :ususidSer ";
+    public EtbInvServidor readid(int IdServidor) throws SecurityException {
+        String sql = "select aa from EtbInvServidor aa where  aa.serServer = :IdServidor ";
 
         Query q = em.createQuery(sql);
-        q.setParameter("ususidSer", ususidSer);
+        q.setParameter("IdServidor", IdServidor);
 
         try {
             return (EtbInvServidor) q.getSingleResult();
@@ -100,17 +107,20 @@ public class iniciosecion {
     }
 
     /**
+     * en buscarususerv consultamos la tabla EtbInvUsuServ para llamar
+     * informacion de los usuarios de un servidor por medio del Id
+     * (Idususervidor)
      *
-     * @param email
+     * @param Idususervidor
      * @return
      * @throws SecurityException
      */
     @Transactional(rollbackFor = {ServicioException.class})
-    public EtbInvUsuServ buscarususerv(Integer email) throws SecurityException {
-        String sql = "select a from EtbInvUsuServ a where  a.ususId = :email ";
+    public EtbInvUsuServ buscarususerv(Integer Idususervidor) throws SecurityException {
+        String sql = "select a from EtbInvUsuServ a where  a.ususId = :Idususervidor ";
 
         Query q = em.createQuery(sql);
-        q.setParameter("email", email);
+        q.setParameter("Idususervidor", Idususervidor);
 
         try {
             return (EtbInvUsuServ) q.getSingleResult();
@@ -120,17 +130,19 @@ public class iniciosecion {
     }
 
     /**
+     * en rutas consultamos la tabla EtbInvRuta para llamar informacion de una
+     * ruta por medio del ID (IdRuta)
      *
-     * @param email
+     * @param IdRuta
      * @return
      * @throws SecurityException
      */
     @Transactional(rollbackFor = {ServicioException.class})
-    public EtbInvRuta rutas(Integer email) throws SecurityException {
-        String sql = "select a from EtbInvRuta a where  a.rutId = :email ";
+    public EtbInvRuta rutas(Integer IdRuta) throws SecurityException {
+        String sql = "select a from EtbInvRuta a where  a.rutId = :IdRuta ";
 
         Query q = em.createQuery(sql);
-        q.setParameter("email", email);
+        q.setParameter("IdRuta", IdRuta);
 
         try {
             return (EtbInvRuta) q.getSingleResult();
@@ -140,17 +152,19 @@ public class iniciosecion {
     }
 
     /**
+     * en aseguramiento consultamos la tabla EtbInvAseguramiento para llamar
+     * informacion de un aseguramiento por medio del ID (IdAseguramiento)
      *
-     * @param ususidSer
+     * @param IdAseguramiento
      * @return
      * @throws SecurityException
      */
     @Transactional(rollbackFor = {ServicioException.class})
-    public EtbInvAseguramiento aseguramiento(int ususidSer) throws SecurityException {
-        String sql = "select aa from EtbInvAseguramiento aa where  aa.aseId = :ususidSer ";
+    public EtbInvAseguramiento aseguramiento(int IdAseguramiento) throws SecurityException {
+        String sql = "select aa from EtbInvAseguramiento aa where  aa.aseId = :IdAseguramiento ";
 
         Query q = em.createQuery(sql);
-        q.setParameter("ususidSer", ususidSer);
+        q.setParameter("IdAseguramiento", IdAseguramiento);
 
         try {
             return (EtbInvAseguramiento) q.getSingleResult();
@@ -161,17 +175,19 @@ public class iniciosecion {
     }
 
     /**
+     * en casosprove consultamos la tabla EtbInvCasosProv para llamar
+     * informacion de un caso por medio del ID (IdAseguramiento)
      *
-     * @param ususidSer
+     * @param IdCasosProveedor
      * @return
      * @throws SecurityException
      */
     @Transactional(rollbackFor = {ServicioException.class})
-    public EtbInvCasosProv casosprove(int ususidSer) throws SecurityException {
-        String sql = "select aa from EtbInvCasosProv aa where  aa.caspId = :ususidSer ";
+    public EtbInvCasosProv casosprove(int IdCasosProveedor) throws SecurityException {
+        String sql = "select aa from EtbInvCasosProv aa where  aa.caspId = :IdCasosProveedor ";
 
         Query q = em.createQuery(sql);
-        q.setParameter("ususidSer", ususidSer);
+        q.setParameter("IdCasosProveedor", IdCasosProveedor);
 
         try {
             return (EtbInvCasosProv) q.getSingleResult();
@@ -182,17 +198,19 @@ public class iniciosecion {
     }
 
     /**
+     * en activida consultamos la tabla EtbInvActividad para llamar informacion
+     * de una actividad por medio del ID (IdActividad)
      *
-     * @param ususidSer
+     * @param IdActividad
      * @return
      * @throws SecurityException
      */
     @Transactional(rollbackFor = {ServicioException.class})
-    public EtbInvActividad activida(int ususidSer) throws SecurityException {
-        String sql = "select aa from EtbInvActividad aa where  aa.actId = :ususidSer ";
+    public EtbInvActividad activida(int IdActividad) throws SecurityException {
+        String sql = "select aa from EtbInvActividad aa where  aa.actId = :IdActividad ";
 
         Query q = em.createQuery(sql);
-        q.setParameter("ususidSer", ususidSer);
+        q.setParameter("IdActividad", IdActividad);
 
         try {
             return (EtbInvActividad) q.getSingleResult();
@@ -203,17 +221,19 @@ public class iniciosecion {
     }
 
     /**
+     * en cronograma consultamos la tabla EtbInvCronogramaMto para llamar
+     * informacion de un cronograma por medio del ID (IdCronograma)
      *
-     * @param ususidSer
+     * @param IdCronograma
      * @return
      * @throws SecurityException
      */
     @Transactional(rollbackFor = {ServicioException.class})
-    public EtbInvCronogramaMto cronograma(int ususidSer) throws SecurityException {
-        String sql = "select aa from EtbInvCronogramaMto aa where  aa.croId = :ususidSer ";
+    public EtbInvCronogramaMto cronograma(int IdCronograma) throws SecurityException {
+        String sql = "select aa from EtbInvCronogramaMto aa where  aa.croId = :IdCronograma ";
 
         Query q = em.createQuery(sql);
-        q.setParameter("ususidSer", ususidSer);
+        q.setParameter("IdCronograma", IdCronograma);
 
         try {
             return (EtbInvCronogramaMto) q.getSingleResult();
@@ -224,17 +244,19 @@ public class iniciosecion {
     }
 
     /**
+     * en contratos consultamos la tabla EtbInvContrato para llamar informacion
+     * de un contrato por medio del ID (IdContratos)
      *
-     * @param ususidSer
+     * @param IdContratos
      * @return
      * @throws SecurityException
      */
     @Transactional(rollbackFor = {ServicioException.class})
-    public EtbInvContrato contratos(int ususidSer) throws SecurityException {
-        String sql = "select aa from EtbInvContrato aa where  aa.contId = :ususidSer ";
+    public EtbInvContrato contratos(int IdContratos) throws SecurityException {
+        String sql = "select aa from EtbInvContrato aa where  aa.contId = :IdContratos ";
 
         Query q = em.createQuery(sql);
-        q.setParameter("ususidSer", ususidSer);
+        q.setParameter("IdContratos", IdContratos);
 
         try {
             return (EtbInvContrato) q.getSingleResult();
@@ -245,6 +267,9 @@ public class iniciosecion {
     }
 
     /**
+     * en Lisreporte1 por medio de los (String F_Inicio, String F_Fin)
+     * consultamos en la tabla EtbInvServidor las filas creadas entre estas
+     * fechas
      *
      * @param F_Inicio
      * @param F_Fin
@@ -259,6 +284,9 @@ public class iniciosecion {
     }
 
     /**
+     * en Lisreporte2 por medio de los (String F_Inicio, String F_Fin)
+     * consultamos en la tabla EtbInvUsuServ las filas creadas entre estas
+     * fechas
      *
      * @param F_Inicio
      * @param F_Fin
@@ -273,6 +301,9 @@ public class iniciosecion {
     }
 
     /**
+     * en Lisreporte3 por medio de los (String F_Inicio, String F_Fin)
+     * consultamos en la tabla EtbInvCronogramaMto las filas creadas entre estas
+     * fechas
      *
      * @param F_Inicio
      * @param F_Fin
@@ -287,6 +318,9 @@ public class iniciosecion {
     }
 
     /**
+     * en Lisreporte4 por medio de los (String F_Inicio, String F_Fin)
+     * consultamos en la tabla EtbInvContrato las filas creadas entre estas
+     * fechas
      *
      * @param F_Inicio
      * @param F_Fin
@@ -301,6 +335,9 @@ public class iniciosecion {
     }
 
     /**
+     * en Lisreporte5 por medio de los (String F_Inicio, String F_Fin)
+     * consultamos en la tabla EtbInvAseguramiento las filas creadas entre estas
+     * fechas
      *
      * @param F_Inicio
      * @param F_Fin
@@ -315,6 +352,9 @@ public class iniciosecion {
     }
 
     /**
+     * en Lisreporte6 por medio de los (String F_Inicio, String F_Fin)
+     * consultamos en la tabla EtbInvActividad las filas creadas entre estas
+     * fechas
      *
      * @param F_Inicio
      * @param F_Fin
@@ -329,6 +369,9 @@ public class iniciosecion {
     }
 
     /**
+     * en Lisreporte7 por medio de los (String F_Inicio, String F_Fin)
+     * consultamos en la tabla EtbInvCasosProv las filas creadas entre estas
+     * fechas
      *
      * @param F_Inicio
      * @param F_Fin
@@ -343,27 +386,16 @@ public class iniciosecion {
     }
 
     /**
+     * en readByRut consultamos la tabla EtbInvGrupo para llamar informacion de
+     * un grupo por medio del ID (Idgrup)
      *
-     * @param fechaN
-     * @param fechaF
+     * @param Idgrup
      * @return
      */
-    public List<EtbInvServidor> Listaservera(String fechaN, String fechaF) {
-        String sql = "Select n from EtbInvServidor n where fecha =:fechaF  :fechaN";
+    public EtbInvGrupo readByRut(Integer Idgrup) {
+        String sql = "select nn from EtbInvGrupo nn where  nn.gruIdGrupo = :Idgrup";
         Query q = em.createQuery(sql);
-        q.setParameter("gruIdGrupo", fechaN).setParameter("gruIdGrupo", fechaF);
-        return q.getResultList();
-    }
-
-    /**
-     *
-     * @param grup
-     * @return
-     */
-    public EtbInvGrupo readByRut(Integer grup) {
-        String sql = "select nn from EtbInvGrupo nn where  nn.gruIdGrupo = :gruIdGrupo";
-        Query q = em.createQuery(sql);
-        q.setParameter("gruIdGrupo", grup);
+        q.setParameter("Idgrup", Idgrup);
         try {
             return (EtbInvGrupo) q.getSingleResult();
         } catch (Exception e) {
@@ -372,6 +404,8 @@ public class iniciosecion {
     }
 
     /**
+     * en ipmod consultamos la tabla EtbInvDireccionamiento para llamar
+     * informacion de una IP por medio del ID (IdIP)
      *
      * @param IdIP
      * @return
@@ -388,29 +422,23 @@ public class iniciosecion {
     }
 
     /**
+     * en ListaDetalle consultamos la tabla EtbInvCamusuServ por medio del
+     * (String usuario) para traer la lista de los cambios echos a ese usuario
      *
+     * @param usuario
      * @return
      */
-    public List<EtbInvMarca> ListaMarca() {
-        String sql = "Select n from EtbInvMarca n";
+    public List<EtbInvCamusuServ> ListaDetalle(String usuario) {
+        String sql = "Select n from EtbInvCamusuServ n where n.usuCambio= :usuario";
         Query q = em.createQuery(sql);
+        q.setParameter("usuario", usuario);
         return q.getResultList();
     }
 
     /**
-     *
-     * @param usu
-     * @return
-     */
-    public List<EtbInvCamusuServ> ListaDetalle(String usu) {
-        String sql = "Select n from EtbInvCamusuServ n where n.usuCambio= :gruIdGrupo";
-        Query q = em.createQuery(sql);
-        q.setParameter("gruIdGrupo", usu);
-        return q.getResultList();
-
-    }
-
-    /**
+     * en idcambiotabla consultamos la tabla EtbInvCambioTabla por medio de los
+     * campos (EtbInvTablaDominios tabladominios, int idservidor,
+     * EtbInvUsuarioAp usuarioetb, String camtabSM) para traer la informacion
      *
      * @param tabladominios
      * @param idservidor
@@ -433,6 +461,20 @@ public class iniciosecion {
     }
 
     /**
+     * en ListaMarca traemos una lista con toda la informacion de la tabla
+     * EtbInvMarca
+     *
+     * @return
+     */
+    public List<EtbInvMarca> ListaMarca() {
+        String sql = "Select n from EtbInvMarca n";
+        Query q = em.createQuery(sql);
+        return q.getResultList();
+    }
+
+    /**
+     * en Listaserver traemos una lista con toda la informacion de la tabla
+     * EtbInvServidor
      *
      * @return
      */
@@ -443,6 +485,8 @@ public class iniciosecion {
     }
 
     /**
+     * en ListaEstado traemos una lista con toda la informacion de la tabla
+     * EtbInvEstado
      *
      * @return
      */
@@ -453,6 +497,8 @@ public class iniciosecion {
     }
 
     /**
+     * en ListaModelo traemos una lista con toda la informacion de la tabla
+     * EtbInvModelo
      *
      * @return
      */
@@ -463,6 +509,8 @@ public class iniciosecion {
     }
 
     /**
+     * en ListaCliente traemos una lista con toda la informacion de la tabla
+     * EtbInvCliente
      *
      * @return
      */
@@ -473,6 +521,8 @@ public class iniciosecion {
     }
 
     /**
+     * en Listasisope traemos una lista con toda la informacion de la tabla
+     * EtbInvSisOperativo
      *
      * @return
      */
@@ -483,6 +533,8 @@ public class iniciosecion {
     }
 
     /**
+     * en Listagrupo traemos una lista con toda la informacion de la tabla
+     * EtbInvGrupo
      *
      * @return
      */
@@ -493,6 +545,8 @@ public class iniciosecion {
     }
 
     /**
+     * en ListaCentral traemos una lista con toda la informacion de la tabla
+     * EtbInvCentral
      *
      * @return
      */
@@ -503,6 +557,8 @@ public class iniciosecion {
     }
 
     /**
+     * en ListaPrataforma traemos una lista con toda la informacion de la tabla
+     * EtbInvPlataforma
      *
      * @return
      */
@@ -513,6 +569,8 @@ public class iniciosecion {
     }
 
     /**
+     * en ListaRolserver traemos una lista con toda la informacion de la tabla
+     * EtbInvRolServidor
      *
      * @return
      */
@@ -523,6 +581,8 @@ public class iniciosecion {
     }
 
     /**
+     * en ListaSalom traemos una lista con toda la informacion de la tabla
+     * EtbInvSalon
      *
      * @return
      */
@@ -533,6 +593,8 @@ public class iniciosecion {
     }
 
     /**
+     * en ListaActividad traemos una lista con toda la informacion de la tabla
+     * EtbInvActividad
      *
      * @return
      */
@@ -543,6 +605,8 @@ public class iniciosecion {
     }
 
     /**
+     * en ListaContra traemos una lista con toda la informacion de la tabla
+     * EtbInvContrato
      *
      * @return
      */
@@ -553,6 +617,8 @@ public class iniciosecion {
     }
 
     /**
+     * en ListaCrono traemos una lista con toda la informacion de la tabla
+     * EtbInvCronogramaMto
      *
      * @return
      */
@@ -563,6 +629,8 @@ public class iniciosecion {
     }
 
     /**
+     * en ListaProyecto traemos una lista con toda la informacion de la tabla
+     * EtbInvProyecto
      *
      * @return
      */
@@ -573,6 +641,8 @@ public class iniciosecion {
     }
 
     /**
+     * en Listacont traemos una lista con toda la informacion de la tabla
+     * EtbInvTipoCont
      *
      * @return
      */
@@ -583,6 +653,8 @@ public class iniciosecion {
     }
 
     /**
+     * en Listaproveedor traemos una lista con toda la informacion de la tabla
+     * EtbInvCasosProv
      *
      * @return
      */
@@ -593,6 +665,9 @@ public class iniciosecion {
     }
 
     /**
+     * en Listaususerv consultamos la tabla EtbInvUsuServ por medio de
+     * estado(EtbInvUsuEstado ususEstadoa) para crear una lista con esta
+     * iformacion
      *
      * @param ususEstadoa
      * @return
@@ -605,18 +680,23 @@ public class iniciosecion {
     }
 
     /**
+     * en Listaususervre consultamos la tabla EtbInvUsuServ por medio de
+     * idservidor(EtbInvServidor idservidor) para crear una lista con esta
+     * iformacion
      *
-     * @param email
+     * @param idservidor
      * @return
      */
-    public List<EtbInvUsuServ> Listaususervre(EtbInvServidor email) {
-        String sql = "Select n from EtbInvUsuServ n where n.idSerServidor= :email";
+    public List<EtbInvUsuServ> Listaususervre(EtbInvServidor idservidor) {
+        String sql = "Select n from EtbInvUsuServ n where n.idSerServidor= :idservidor";
         Query q = em.createQuery(sql);
-        q.setParameter("email", email);
+        q.setParameter("idservidor", idservidor);
         return q.getResultList();
     }
 
     /**
+     * en Listausuest traemos una lista con toda la informacion de la tabla
+     * EtbInvUsuEstado
      *
      * @return
      */
@@ -627,6 +707,8 @@ public class iniciosecion {
     }
 
     /**
+     * en Listaestacont traemos una lista con toda la informacion de la tabla
+     * EtbInvEstadoCont
      *
      * @return
      */
@@ -637,6 +719,8 @@ public class iniciosecion {
     }
 
     /**
+     * en Listaestamto traemos una lista con toda la informacion de la tabla
+     * EtbInvEstadoMto
      *
      * @return
      */
@@ -647,6 +731,8 @@ public class iniciosecion {
     }
 
     /**
+     * en Listaestacasos traemos una lista con toda la informacion de la tabla
+     * EtbInvEstadoCasos
      *
      * @return
      */
@@ -657,6 +743,8 @@ public class iniciosecion {
     }
 
     /**
+     * en Listatipoactiv traemos una lista con toda la informacion de la tabla
+     * EtbInvTipoActividad
      *
      * @return
      */
@@ -667,6 +755,8 @@ public class iniciosecion {
     }
 
     /**
+     * en Listatipoip traemos una lista con toda la informacion de la tabla
+     * EtbInvTip
      *
      * @return
      */
@@ -677,6 +767,8 @@ public class iniciosecion {
     }
 
     /**
+     * en listaAdmPlataforma traemos una lista con toda la informacion de la
+     * tabla EtbInvAdmPlataforma
      *
      * @return
      */
@@ -688,6 +780,7 @@ public class iniciosecion {
 
     /////////////////////////////////
     /**
+     * en create creamos un nuevo servidor
      *
      * @param SER_AD_COMPARTIDA
      * @param Fecha
@@ -721,6 +814,7 @@ public class iniciosecion {
             EtbInvSalon salIdSalon, EtbInvCliente cliIdCliente, EtbInvRolServidor rolIdRolServ, EtbInvPlataforma plaIdPlataforma, String serForAdCompartida, int serAdministrado,
             int serCores, String serTIngreso, String serUnidad, String serProyecto, String serRack, Integer serNoProcFisico, EtbInvEstado estIdEstado, EtbInvSisOperativo sisIdSisOperativo,
             EtbInvGrupo gruIdGrupo, Integer servMem, Integer servDiscoC) {
+        // creamos un matris definiendo la tabla en la que vamos a ingresar los datos (EtbInvServidor servidor = new EtbInvServidor();)
         EtbInvServidor servidor = new EtbInvServidor();
         servidor.setSerFIngreso(Fecha);
         servidor.setSerSerial(serSerial);
@@ -747,11 +841,13 @@ public class iniciosecion {
         servidor.setServMem(servMem);
         servidor.setServDiscoC(servDiscoC);
         servidor.setSerAdCompartida(SER_AD_COMPARTIDA);
-
+        //tomamos la matris (servidor) y por medio de (em.persist) creamos el nuevo servidor 
         em.persist(servidor);
+        // es igual en todos los public en los que usamos (em.persist) que hace parte  del (EntityManager)
     }
 
     /**
+     * en creact creamos un nueva actividad
      *
      * @param Fecha
      * @param serv1
@@ -780,6 +876,7 @@ public class iniciosecion {
     }
 
     /**
+     * en crease creamos un nuevo aseguramiento
      *
      * @param Fecha
      * @param aseTarea
@@ -789,7 +886,6 @@ public class iniciosecion {
      * @param aseplantilla
      */
     //INSERTAR ASEGURAMIENTO
-
     @Transactional(rollbackFor = {ServicioException.class})
     public void crease(String Fecha, String aseTarea, EtbInvServidor aseServidor, String aseEjecuta, String aseFecha, int aseplantilla) {
         EtbInvAseguramiento aseguramiento = new EtbInvAseguramiento();
@@ -803,7 +899,7 @@ public class iniciosecion {
     }
 
     /**
-     * //modificar ASEGURAMIENTO
+     * //modificar ASEGURAMIENTO en modiase modificamos un aseguramiento
      *
      * @param idasegu
      * @param fCreacion
@@ -815,6 +911,7 @@ public class iniciosecion {
      */
     @Transactional(rollbackFor = {ServicioException.class})
     public void modiase(int idasegu, String fCreacion, String aseTarea, EtbInvServidor aseServidor, String aseEjecuta, String fini, int aseplantilla) {
+        // creamos un matris definiendo la tabla en la que vamos a editar los datos (EtbInvAseguramiento aseguramiento = new EtbInvAseguramiento();)
         EtbInvAseguramiento aseguramiento = new EtbInvAseguramiento();
         aseguramiento.setAseId(idasegu);
         aseguramiento.setAseEjecuta(aseEjecuta);
@@ -823,10 +920,13 @@ public class iniciosecion {
         aseguramiento.setAseTarea(aseTarea);
         aseguramiento.setFCreacion(fCreacion);
         aseguramiento.setAsePlantilla(aseplantilla);
+        //para poder usar (em.merge) debemos llenar todos los datos de la tabla  paara que la editada se haga bien d otra forma van a quedar en blanco
         em.merge(aseguramiento);
+        // es igual en todos los public en los que usamos (em.merge) que hace parte  del (EntityManager)
     }
 
     /**
+     * en creacont creamos un nuevo contrato
      *
      * @param Fecha
      * @param contProv
@@ -839,7 +939,6 @@ public class iniciosecion {
      * @param contDescrip
      */
     //INSERTAR CONTRATO
-
     @Transactional(rollbackFor = {ServicioException.class})
     public void creacont(String Fecha, EtbInvMarca contProv, EtbInvTipoCont contTipo, String contFechaIni, String contFechaFin, String contNum, EtbInvEstadoCont contEstado, String contLogin, String contDescrip) {
         EtbInvContrato contrato = new EtbInvContrato();
@@ -856,6 +955,7 @@ public class iniciosecion {
     }
 
     /**
+     * en creacrono creamos un nuevo cronograma
      *
      * @param Fecha
      * @param croProyecto
@@ -886,6 +986,7 @@ public class iniciosecion {
     }
 
     /**
+     * en creaproveedor creamos un nuevo caso de proveedor
      *
      * @param caspserv
      * @param Fecha
@@ -912,6 +1013,7 @@ public class iniciosecion {
     }
 
     /**
+     * en crearususerv creamos un nuevo usuario de servidor
      *
      * @param Fecha
      * @param ususLogin
@@ -921,7 +1023,6 @@ public class iniciosecion {
      * @param administrado
      */
     //INSERTAR USUARIO SERVIDOR
-
     @Transactional(rollbackFor = {ServicioException.class})
     public void crearususerv(String Fecha, String ususLogin, String ususNombre, EtbInvUsuEstado ususEstadoa, EtbInvServidor ususidServ, int administrado) {
         EtbInvUsuServ usuarioserv = new EtbInvUsuServ();
@@ -935,6 +1036,7 @@ public class iniciosecion {
     }
 
     /**
+     * en llenarbitacora creamos una nueva bitacora
      *
      * @param tabladominios
      * @param idservidor
@@ -945,7 +1047,6 @@ public class iniciosecion {
      * @param cam_tab_solicitante_SM
      */
     //llenarbitacora
-
     @Transactional(rollbackFor = {ServicioException.class})
     public void llenarbitacora(EtbInvTablaDominios tabladominios, int idservidor, EtbInvUsuarioAp usuarioetb, String FechaH, String cam_tab_SM, String cam_tab_descripcion_SM, String cam_tab_solicitante_SM) {
         EtbInvCambioTabla cambiotab = new EtbInvCambioTabla();
@@ -960,6 +1061,7 @@ public class iniciosecion {
     }
 
     /**
+     * en llenarbitacoradetalle creamos un nuevo detalle de bitacora
      *
      * @param CamColumna
      * @param CamNawValor
@@ -967,7 +1069,6 @@ public class iniciosecion {
      * @param CamIdtabla
      */
     //llenarbitacora
-
     @Transactional(rollbackFor = {ServicioException.class})
     public void llenarbitacoradetalle(String CamColumna, String CamNawValor, String CamValorIni, EtbInvCambioTabla CamIdtabla) {
         EtbInvDetalleCambioTabla cambiotabdet = new EtbInvDetalleCambioTabla();
@@ -979,6 +1080,7 @@ public class iniciosecion {
     }
 
     /**
+     * un ACCPROI registramos un acceso prohibido
      *
      * @param Fecha
      * @param usuetb
@@ -999,6 +1101,8 @@ public class iniciosecion {
     }
 
     /**
+     * en crearcambioususerv registramo los cambios realisado al usuario de un
+     * servidor
      *
      * @param Fecha
      * @param ususLogin
@@ -1006,7 +1110,6 @@ public class iniciosecion {
      * @param ususEstado
      */
     //INSERTAR USUARIO SERVIDOR
-
     @Transactional(rollbackFor = {ServicioException.class})
     public void crearcambioususerv(String Fecha, String ususLogin, String tCambio, EtbInvUsuEstado ususEstado) {
         EtbInvCamusuServ cambiousuario = new EtbInvCamusuServ();
@@ -1018,6 +1121,7 @@ public class iniciosecion {
     }
 
     /**
+     * en crearusuarioapp creamos un nuevo usuario para la apricacion
      *
      * @param per
      * @param nombre_recibido
@@ -1035,7 +1139,6 @@ public class iniciosecion {
      * @param telefono_ofici_recibido
      */
     //INSERTAR USUARIO APLICACION
-
     @Transactional(rollbackFor = {ServicioException.class})
     public void crearusuarioapp(int per, String nombre_recibido, String apellido_recibido, String Correo_recibido, String estado, int dom, String Codigo_Etb_Recibido, String usuario_recibido, String telefono_recibido, String Empresa_recibido, String Cargo_recibido, String Direccion_Recibido, String Cedula_Recibido, String telefono_ofici_recibido) {
         EtbInvUsuarioAp usuarioapi = new EtbInvUsuarioAp();
@@ -1057,6 +1160,7 @@ public class iniciosecion {
     }
 
     /**
+     * en update editamos usuario de servidor
      *
      * @param Fechas
      * @param email
@@ -1083,6 +1187,7 @@ public class iniciosecion {
     }
 
     /**
+     * en updateservidor editamos un servidor
      *
      * @param idservidor
      * @param serialservidor
@@ -1147,6 +1252,7 @@ public class iniciosecion {
     }
 
     /**
+     * en direccionamiento creamos un nuevo direcionamiento
      *
      * @param Fecha
      * @param dirIp
@@ -1171,6 +1277,7 @@ public class iniciosecion {
     }
 
     /**
+     * en direccionamientoedite editamos el direccionamiento
      *
      * @param Fecha
      * @param iddirIp
@@ -1197,6 +1304,7 @@ public class iniciosecion {
     }
 
     /**
+     * en agragarrutas agregamos una nueva ruta
      *
      * @param FechaH
      * @param rutaser
@@ -1213,6 +1321,7 @@ public class iniciosecion {
     }
 
     /**
+     * en editarrutas editamos las rutas
      *
      * @param idrutas
      * @param FechaH
@@ -1231,6 +1340,7 @@ public class iniciosecion {
     }
 
     /**
+     * en modificarcasproveedor editamos los casos de proovedor
      *
      * @param proveedor1
      * @param idcasos
@@ -1259,6 +1369,7 @@ public class iniciosecion {
     }
 
     /**
+     * en modificaractiv modificamos la actividad
      *
      * @param actId
      * @param Fecha
@@ -1289,6 +1400,7 @@ public class iniciosecion {
     }
 
     /**
+     * en modificarcrono modificamos los cronogramas
      *
      * @param idcro
      * @param Fecha
@@ -1321,6 +1433,7 @@ public class iniciosecion {
     }
 
     /**
+     * en modicont modificamos los contratos
      *
      * @param idcont
      * @param Fecha
@@ -1351,6 +1464,7 @@ public class iniciosecion {
     }
 
     /**
+     * en newcentral creamos una central
      *
      * @param Central
      */
@@ -1363,6 +1477,7 @@ public class iniciosecion {
     }
 
     /**
+     * en newgrupo ingresamos un nuevo grupo
      *
      * @param Ngrupo
      * @param Tgrupo
@@ -1377,6 +1492,7 @@ public class iniciosecion {
     }
 
     /**
+     * en newmarca ingresamos una nueva marca
      *
      * @param nmarca
      * @param usoporte
@@ -1395,6 +1511,7 @@ public class iniciosecion {
     }
 
     /**
+     * en newplataforma ingresamos una nueva plataforma
      *
      * @param nplataforma
      * @param aplataforma
@@ -1409,11 +1526,11 @@ public class iniciosecion {
     }
 
     /**
+     * en newrol ingresamos un nuevo rol
      *
      * @param nrol
      */
     //insertar rol
-
     @Transactional(rollbackFor = {ServicioException.class})
     public void newrol(String nrol) {
         EtbInvRolServidor rolser = new EtbInvRolServidor();
@@ -1422,6 +1539,7 @@ public class iniciosecion {
     }
 
     /**
+     * en newsisoperativo ingresamos un nuevo sistema opreativo
      *
      * @param sisdis
      * @param nsis
@@ -1436,6 +1554,7 @@ public class iniciosecion {
     }
 
     /**
+     * en newestado ingresamos un nuevo estado
      *
      * @param nest
      */
@@ -1448,6 +1567,7 @@ public class iniciosecion {
     }
 
     /**
+     * en newsalon ingresamos un nuevo salon
      *
      * @param scen
      * @param nsal
@@ -1462,6 +1582,7 @@ public class iniciosecion {
     }
 
     /**
+     * en newmodelo ingresamos un nuevo modelo
      *
      * @param nmar
      * @param nmod
@@ -1476,6 +1597,7 @@ public class iniciosecion {
     }
 
     /**
+     * en newcliente ingresamos un uevo cliente
      *
      * @param ncli
      * @param ccli
@@ -1490,6 +1612,7 @@ public class iniciosecion {
     }
 
     /**
+     * en newadminispla ingresamos un nuevo administrador de plataforma
      *
      * @param area
      * @param correo

@@ -68,9 +68,7 @@ public class EtbInvServidor implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "SER_HOSTNAME")
     private String serHostname;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "SER_CONEXION")
     private String serConexion;
     @Size(max = 30)
@@ -113,7 +111,7 @@ public class EtbInvServidor implements Serializable {
     private Collection<EtbInvDireccionamiento> etbInvDireccionamientoCollection;
     @OneToMany(mappedBy = "aseServidor")
     private Collection<EtbInvAseguramiento> etbInvAseguramientoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "actServ")
+    @OneToMany(mappedBy = "actServ")
     private Collection<EtbInvActividad> etbInvActividadCollection;
     @JoinColumn(name = "SIS_ID_SIS_OPERATIVO", referencedColumnName = "SIS_ID_SIS_OPERATIVO")
     @ManyToOne(optional = false)
@@ -159,11 +157,10 @@ public class EtbInvServidor implements Serializable {
         this.serServer = serServer;
     }
 
-    public EtbInvServidor(Integer serServer, String serSerial, String serHostname, String serConexion, int serAdCompartida, int serAdministrado) {
+    public EtbInvServidor(Integer serServer, String serSerial, String serHostname, int serAdCompartida, int serAdministrado) {
         this.serServer = serServer;
         this.serSerial = serSerial;
         this.serHostname = serHostname;
-        this.serConexion = serConexion;
         this.serAdCompartida = serAdCompartida;
         this.serAdministrado = serAdministrado;
     }

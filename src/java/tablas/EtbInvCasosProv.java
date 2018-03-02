@@ -61,12 +61,12 @@ public class EtbInvCasosProv implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "F_Creacion")
     private String fCreacion;
-    @JoinColumn(name = "CASP_PROV", referencedColumnName = "MAR_ID_MARCA")
-    @ManyToOne
-    private EtbInvMarca caspProv;
     @JoinColumn(name = "CASP_ESTADO", referencedColumnName = "ESTC_ID")
     @ManyToOne
     private EtbInvEstadoCasos caspEstado;
+    @JoinColumn(name = "CASP_PROV", referencedColumnName = "MAR_ID_MARCA")
+    @ManyToOne
+    private EtbInvMarca caspProv;
     @JoinColumn(name = "CASP_SERV", referencedColumnName = "ser_server")
     @ManyToOne(optional = false)
     private EtbInvServidor caspServ;
@@ -131,20 +131,20 @@ public class EtbInvCasosProv implements Serializable {
         this.fCreacion = fCreacion;
     }
 
-    public EtbInvMarca getCaspProv() {
-        return caspProv;
-    }
-
-    public void setCaspProv(EtbInvMarca caspProv) {
-        this.caspProv = caspProv;
-    }
-
     public EtbInvEstadoCasos getCaspEstado() {
         return caspEstado;
     }
 
     public void setCaspEstado(EtbInvEstadoCasos caspEstado) {
         this.caspEstado = caspEstado;
+    }
+
+    public EtbInvMarca getCaspProv() {
+        return caspProv;
+    }
+
+    public void setCaspProv(EtbInvMarca caspProv) {
+        this.caspProv = caspProv;
     }
 
     public EtbInvServidor getCaspServ() {

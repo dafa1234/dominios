@@ -38,7 +38,7 @@ import tablas.EtbInvSisOperativo;
 @Controller
 
 public class controljsp {
-
+// utilizando el private conectamos con la clase iniciosecion 
     @Autowired
     private iniciosecion dao;
     @Autowired
@@ -49,7 +49,7 @@ public class controljsp {
             fechaActual.get(Calendar.MONTH) + 1,
             fechaActual.get(Calendar.DAY_OF_MONTH));
 /**
- * 
+ * este es un controlador de pruebas
  * @param model
  * @return 
  */
@@ -63,7 +63,7 @@ public class controljsp {
         return "prueba";
     }
 /**
- * 
+ * este es un controlador de pruebas
  * @param model
  * @return 
  */
@@ -78,7 +78,7 @@ public class controljsp {
 
     }
 /**
- * 
+ * en bus nos direciona al inicio de usuario
  * @param model
  * @return 
  */
@@ -89,12 +89,14 @@ public class controljsp {
         if (id == null) {
             return "index";
         }
+        //por medio del ( dao.Listaserver()) nos devuelbe la lista de los servidore
         List<EtbInvServidor> Listaserver = dao.Listaserver();
+        //utilizando (List<EtbInvServidor> Listaserver) y enviamos la informacion ppor medio (model.addAttribute)
         model.addAttribute("Listaserver", Listaserver);
         return "buscar";
     }
 /**
- * 
+ * nCentral nos direciona al formulario para crear una nueva central
  * @param model
  * @return 
  */
@@ -105,6 +107,7 @@ public class controljsp {
         if (id == null) {
             return "index";
         }
+        
         int noj = 1;
         List<EtbInvCentral> ListaCentral = dao.ListaCentral();
         model.addAttribute("listaCentral", ListaCentral);
@@ -112,7 +115,7 @@ public class controljsp {
         return "user/objetos";
     }
     /**
-     * 
+     * en Central se ingresa la nueva Central
      * @param Central
      * @param model
      * @return 
@@ -127,13 +130,14 @@ public class controljsp {
         if (id == null) {
             return "index";
         }
+        //por medio de (dao.newcentral(Central)) ingresamos una nueva central
         dao.newcentral(Central);
         List<EtbInvCentral> ListaCentral = dao.ListaCentral();
         model.addAttribute("listaCentral", ListaCentral);
         return "user/objetos";
     }
 /**
- * 
+ * nGrupo nos direciona al formulario para crear una nueva grupo
  * @param model
  * @return 
  */
@@ -151,7 +155,7 @@ public class controljsp {
         return "user/objetos";
     }
 /**
- * 
+ * en Grupo se ingresa la nueva Grupo
  * @param Ngrupo
  * @param Tgrupo
  * @param model
@@ -171,7 +175,7 @@ public class controljsp {
         return "user/objetos";
     }
 /**
- * 
+ * nmarca nos direciona al formulario para crear una nueva marca
  * @param model
  * @return 
  */
@@ -189,7 +193,7 @@ public class controljsp {
         return "user/objetos";
     }
 /**
- * 
+ * en marca se ingresa la nueva marca
  * @param nmarca
  * @param usoporte
  * @param tsoporte
@@ -212,7 +216,7 @@ public class controljsp {
         return "user/objetos";
     }
 /**
- * 
+ * nplataforma nos direciona al formulario para crear una nueva plataforma
  * @param model
  * @return 
  */
@@ -232,7 +236,7 @@ public class controljsp {
         return "user/objetos";
     }
 /**
- * 
+ * en plataforma se ingresa la nueva plataforma
  * @param nplataforma
  * @param aplataforma1
  * @param model
@@ -253,7 +257,7 @@ public class controljsp {
         return "user/objetos";
     }
 /**
- * 
+ * nrolserv nos direciona al formulario para crear un nuevo rol de servidor
  * @param model
  * @return 
  */
@@ -271,7 +275,7 @@ public class controljsp {
         return "user/objetos";
     }
 /**
- * 
+ * en rolserv se ingresa la nueva rol
  * @param nrol
  * @param model
  * @return 
@@ -290,7 +294,7 @@ public class controljsp {
         return "user/objetos";
     }
 /**
- * 
+ * nsisopera nos direciona al formulario para crear un nuevo sistema operativo
  * @param model
  * @return 
  */
@@ -309,7 +313,7 @@ public class controljsp {
         return "user/objetos";
     }
 /**
- * 
+ * en sisoper se ingresa la nueva sistema operativo
  * @param sisdis
  * @param nsis
  * @param model
@@ -329,7 +333,7 @@ public class controljsp {
         return "user/objetos";
     }
     /**
-     * 
+     * nestado nos direciona al formulario para crear un nuevo estado
      * @param model
      * @return 
      */
@@ -348,7 +352,7 @@ public class controljsp {
         return "user/objetos";
     }
 /**
- * 
+ * en estado se ingresa la nueva estado
  * @param nest
  * @param model
  * @return 
@@ -367,7 +371,7 @@ public class controljsp {
         return "user/objetos";
     }
     /**
-     * 
+     * nsalon nos direciona al formulario para crear un nuevo salon
      * @param model
      * @return 
      */
@@ -388,7 +392,7 @@ public class controljsp {
         return "user/objetos";
     }
 /**
- * 
+ * en salon se ingresa la nueva salon
  * @param scen1
  * @param nsal
  * @param model
@@ -411,7 +415,7 @@ public class controljsp {
         return "user/objetos";
     }
 /**
- * 
+ * nmodelo nos direciona al formulario para crear un nuevo modelo
  * @param model
  * @return 
  */
@@ -431,7 +435,7 @@ public class controljsp {
         return "user/objetos";
     }
 /**
- * 
+ * en modelo se ingresa la nueva modelo
  * @param nmar1
  * @param nmod
  * @param model
@@ -454,7 +458,7 @@ public class controljsp {
         return "user/objetos";
     }
 /**
- * 
+ * ncliente nos direciona al formulario para crear un nuev cliente
  * @param model
  * @return 
  */
@@ -472,7 +476,7 @@ public class controljsp {
         return "user/objetos";
     }
 /**
- * 
+ * en cliente se ingresa la nueva cliente
  * @param ncli
  * @param ccli
  * @param model
@@ -492,7 +496,7 @@ public class controljsp {
         return "user/objetos";
     }
     /**
-     * 
+     * nadminiplataforma nos direciona al formulario para crear un nuevo administrador de plataforma
      * @param model
      * @return 
      */
@@ -510,7 +514,7 @@ public class controljsp {
         return "user/objetos";
     }
 /**
- * 
+ * en administradorpla se ingresa la nueva administrador plataforma
  * @param nombre
  * @param telefono
  * @param area
@@ -533,7 +537,7 @@ public class controljsp {
         return "user/objetos";
     }
 /**
- * 
+ * administrador nos direcciona al inicio de administrador
  * @param model
  * @return 
  */
@@ -549,7 +553,7 @@ public class controljsp {
         return "administrador";
     }
 /**
- * 
+ * cerrarsesion nos direcciona al jsp de cerrar sesion
  * @return 
  */
     //CERRAR SESION
@@ -562,7 +566,8 @@ public class controljsp {
         return "cerrarsesion";
     }
 /**
- * 
+ * en serverreport nos envia al iniciosecion.java para buscar en las diferentes tablas
+ * segun la informacion de los parametros y crear los reportes sesgun la tabla y la fecha
  * @param F_Inicio
  * @param F_Fin
  * @param F
@@ -583,6 +588,8 @@ public class controljsp {
             return maw;
         }
         int m = 3;
+        // en este if segun la informacion que traiga (@RequestParam("F") int F) entrara a uno de los prosesos
+        //y este creara el reporte segun la tabla y las fecha estabresidas
         if (F == 1) {
             maw.setViewName("user/servers");
             model.addAttribute("m", m);

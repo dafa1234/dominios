@@ -57,7 +57,7 @@ public class crearserver {
             fechaActualH.get(Calendar.MINUTE),
             fechaActualH.get(Calendar.SECOND));
 /**
- * 
+ * aqui agregamos servidor
  * @param serSerial
  * @param marIdMarc
  * @param estIdEstad
@@ -136,7 +136,7 @@ public class crearserver {
 
     }
     /**
-     * 
+     * aqui dirigimos a lista de servidores
      * @param model
      * @return 
      */
@@ -155,7 +155,7 @@ public class crearserver {
         return "user/servers";
     }
 /**
- * 
+ * aqui dirigimos al formulario de agregar servidores
  * @param model
  * @return 
  */
@@ -191,7 +191,7 @@ public class crearserver {
         return "user/servers";
     }
 /**
- * 
+ * aqui dirigimos a la lista de detalle de servidor
  * @param ususidSer
  * @param model
  * @return 
@@ -211,7 +211,7 @@ public class crearserver {
 
     }
 /**
- * 
+ * aqui dirigimos al formulario de modificar servidor
  * @param ususidSer
  * @param model
  * @return 
@@ -247,7 +247,7 @@ public class crearserver {
 
     }
 /**
- * 
+ * aqui modificamos servidor
  * @param idservidor
  * @param hostnameservidor
  * @param sisopreaservidor

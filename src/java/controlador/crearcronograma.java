@@ -46,7 +46,7 @@ public class crearcronograma {
             fechaActualH.get(Calendar.MINUTE),
             fechaActualH.get(Calendar.SECOND));
 /**
- * 
+ * aqui creamos cronogramas
  * @param croProyect
  * @param croSerial
  * @param croFechaIni
@@ -89,7 +89,7 @@ public class crearcronograma {
 
     }
     /**
-     * 
+     * aqui direccionamos a la lista de cronogramas
      * @param model
      * @return 
      */
@@ -108,7 +108,7 @@ public class crearcronograma {
         return "user/cronograma";
     }
 /**
- * 
+ * aqui dirigimos al formulario para agregar cronograma
  * @param model
  * @return 
  */
@@ -132,25 +132,25 @@ public class crearcronograma {
         model.addAttribute("m", m);
         return "user/cronograma";
     }
-/**
- * 
- * @param model
- * @return 
- */
-    @RequestMapping("newaseg.htm")
-    public String newaseg(Model model) {
-        List<EtbInvServidor> Listaserver = dao.Listaserver();
-        String id = (String) request.getSession().getAttribute("name");
-        if (id == null) {
-            return "index";
-        }
-        model.addAttribute("listaServer", Listaserver);
-        int m = 1;
-        model.addAttribute("m", m);
-        return "user/aseguramiento";
-    }
+///**
+// * 
+// * @param model
+// * @return 
+// */
+//    @RequestMapping("newaseg.htm")
+//    public String newaseg(Model model) {
+//        List<EtbInvServidor> Listaserver = dao.Listaserver();
+//        String id = (String) request.getSession().getAttribute("name");
+//        if (id == null) {
+//            return "index";
+//        }
+//        model.addAttribute("listaServer", Listaserver);
+//        int m = 1;
+//        model.addAttribute("m", m);
+//        return "user/aseguramiento";
+//    }
     /**
-     * 
+     * aqui modificamos  cronograma
      * @param croProyect
      * @param croSerial
      * @param croFechaIni
@@ -271,7 +271,7 @@ public class crearcronograma {
 
     }
     /**
-     * 
+     * aqui dirigimos al formulario modificar ccronograma
      * @param idcron
      * @param model
      * @return 

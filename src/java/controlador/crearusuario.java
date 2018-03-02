@@ -48,7 +48,7 @@ public class crearusuario {
             fechaActualH.get(Calendar.MINUTE),
             fechaActualH.get(Calendar.SECOND));
   /**
-   * 
+   * aqui agregamos usuario de servidor
    * @param ususLogin
    * @param ususNombre
    * @param tCambio
@@ -77,7 +77,7 @@ public class crearusuario {
         return "user/usuarioservidor";
     }
     /**
-     * 
+     * aqui dirigimos a lista de usuarios del servidor
      * @param model
      * @return 
      */
@@ -97,7 +97,7 @@ public class crearusuario {
         return "user/usuarioservidor";
     }
 /**
- * 
+ * aqui dirigimos a los detalles del servidor
  * @param email
  * @param usu
  * @param model
@@ -120,7 +120,7 @@ public class crearusuario {
         return "user/usuarioservidor";
     }
 /**
- * 
+ * aqui dirigimos al formulario de modificar usuarios
  * @param email
  * @param model
  * @return 
@@ -144,7 +144,7 @@ public class crearusuario {
         return "user/usuarioservidor";
     }
 /**
- * 
+ * esta era una prueba de modificar usuarios
  * @param email
  * @param tCambio
  * @param ususEstad
@@ -179,7 +179,7 @@ public class crearusuario {
         return "user/usuarioservidor";
     }
 /**
- * 
+ * aqui direccionamos a agregar usuarios servidor
  * @param model
  * @return 
  */
@@ -200,7 +200,7 @@ public class crearusuario {
         return "user/usuarioservidor";
     }
     /**
-     * 
+     * aqui direccionamos a agregar usuarios masivos de servidor
      * @param model
      * @return 
      */
@@ -221,7 +221,7 @@ public class crearusuario {
         return "user/usuarioservidor";
     }
     /**
-     * 
+     * aqui modificamos usuarios de servidor
      * @param ususLogin
      * @param nombre
      * @param tareacambio

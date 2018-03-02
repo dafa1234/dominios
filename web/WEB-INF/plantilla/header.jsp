@@ -99,29 +99,26 @@
                     <span class="nav-link-text">usuario</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseMulti">
+                    <center>
                     <li>
-                        <p>nombre usuario: ${name}</p>
+                        <p style="color: #ffffff"> ○ nombre usuario:<br> ${name}</p>
                     </li>
                     <li>
-                        <p>apellido usuario: ${apell}</p>
-                    </li>
-
-                    <li>
-                        <p>correo db: ${correo}</p>
+                        <p style="color: #ffffff"> ○ apellido usuario: ${apell}</p>
                     </li>
 
                     <li>
-                        <p>usuario registrado: ${usuario}</p>
+                        <p style="color: #ffffff"> ○ correo db: ${correo}</p>
                     </li>
+
                     <li>
-                        <p>usuario db etb: ${Correo_recibido}</p>
+                        <p style="color: #ffffff"> ○ usuario db etb: ${usuario}</p>
                     </li>
+
                     <li>
-                        <p>numero: ${ID}</p>
+                        <p style="color: #ffffff"> ○ fecha: ${fecha}</p>
                     </li>
-                    <li>
-                        <p>fecha: ${fecha}</p>
-                    </li>
+                    </center>
                 </ul>
             </li>        
         </ul>

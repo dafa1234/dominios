@@ -44,7 +44,7 @@ public class crearcasosproveedor {
             fechaActualH.get(Calendar.MINUTE),
             fechaActualH.get(Calendar.SECOND));
  /**
-  * 
+  * aqui creamos casos proveedor
   * @param caspPro
   * @param caspServ1
   * @param caspFechaApe
@@ -85,7 +85,7 @@ public class crearcasosproveedor {
 
     }
     /**
-     * 
+     * aqui dirigismos a la lista de casos proveedor
      * @param model
      * @return 
      */
@@ -104,7 +104,7 @@ public class crearcasosproveedor {
         return "user/casosproveedor";
     }
 /**
- * 
+ * aqui dirigimos al formulario para agregar casos proveedor
  * @param model
  * @return 
  */
@@ -127,7 +127,7 @@ public class crearcasosproveedor {
         return "user/casosproveedor";
     }
     /**
-     * 
+     * aqui nos dirige al formurari para modificar casos proveedor
      * @param casosserv
      * @param model
      * @return 
@@ -152,7 +152,7 @@ public class crearcasosproveedor {
         return "user/casosproveedor";
     }
     /**
-     * 
+     * aqui modificamos casos proveedor
      * @param proveedor
      * @param idcasos
      * @param servidor

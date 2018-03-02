@@ -46,7 +46,7 @@ Calendar fechaActualH = Calendar.getInstance();
             fechaActualH.get(Calendar.MINUTE),
             fechaActualH.get(Calendar.SECOND));
 /**
- * 
+ * aqui creamos un nuevo contrato
  * @param contPro
  * @param contTip
  * @param contFechaIni
@@ -87,7 +87,7 @@ Calendar fechaActualH = Calendar.getInstance();
 
     }
     /**
-     * 
+     * aqui dirigimos a la lista de todos los contratos
      * @param model
      * @return 
      */
@@ -106,7 +106,7 @@ Calendar fechaActualH = Calendar.getInstance();
         return "user/contratos";
     }
 /**
- * 
+ * aqui dirigimos al formulario de nuevo contrato
  * @param model
  * @return 
  */
@@ -127,7 +127,7 @@ Calendar fechaActualH = Calendar.getInstance();
         return "user/contratos";
     }
     /**
-     * 
+     * aqui dirigimos al formulario de modificar contrato
      * @param idcont
      * @param model
      * @return 
@@ -152,7 +152,7 @@ Calendar fechaActualH = Calendar.getInstance();
         return "user/contratos";
     }
     /**
-     * 
+     * aqui modificamos contratos
      * @param contPro
      * @param contTip
      * @param contFechaIni

@@ -60,10 +60,8 @@ public class EtbInvAseguramiento implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "F_Creacion")
     private String fCreacion;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "ase_plantilla")
-    private int asePlantilla;
+    private Integer asePlantilla;
     @JoinColumn(name = "ASE_SERVIDOR", referencedColumnName = "ser_server")
     @ManyToOne
     private EtbInvServidor aseServidor;
@@ -75,11 +73,10 @@ public class EtbInvAseguramiento implements Serializable {
         this.aseId = aseId;
     }
 
-    public EtbInvAseguramiento(Integer aseId, String aseFecha, String fCreacion, int asePlantilla) {
+    public EtbInvAseguramiento(Integer aseId, String aseFecha, String fCreacion) {
         this.aseId = aseId;
         this.aseFecha = aseFecha;
         this.fCreacion = fCreacion;
-        this.asePlantilla = asePlantilla;
     }
 
     public Integer getAseId() {
@@ -122,11 +119,11 @@ public class EtbInvAseguramiento implements Serializable {
         this.fCreacion = fCreacion;
     }
 
-    public int getAsePlantilla() {
+    public Integer getAsePlantilla() {
         return asePlantilla;
     }
 
-    public void setAsePlantilla(int asePlantilla) {
+    public void setAsePlantilla(Integer asePlantilla) {
         this.asePlantilla = asePlantilla;
     }
 
